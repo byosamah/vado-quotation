@@ -44,6 +44,27 @@ async function readAll() {
   return out;
 }
 
+/* The password is ambient authority. Once a browser has been given it for
+ * this origin it attaches it to anything that reaches the origin, including
+ * a form posted from a page somebody else wrote. Without a check below, an
+ * employee with the tool open in one tab could visit any other site and
+ * have the office's templates overwritten or deleted from under them, with
+ * nothing recording who did it.
+ *
+ * A cross-origin HTML form can only send urlencoded, multipart or plain
+ * text. It cannot send application/json. So insisting on JSON is the whole
+ * defence, and the editor already sends exactly that. The origin check is
+ * the belt to those braces, and costs one header read.
+ *
+ * Reads are left alone: GET changes nothing, and the reply is unreadable
+ * across origins anyway. */
+function sameOrigin(req) {
+  const origin = req.headers.origin;
+  if (!origin) return true;          /* curl, and same-origin form-less posts */
+  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  try { return new URL(origin).host === host; } catch (e) { return false; }
+}
+
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
 
@@ -53,6 +74,13 @@ export default async function handler(req, res) {
     res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ error: 'method not allowed' });
   }
+
+  const ct = String(req.headers['content-type'] || '').split(';')[0].trim();
+  if (ct !== 'application/json')
+    return res.status(415).json({ error: 'content-type must be application/json' });
+
+  if (!sameOrigin(req))
+    return res.status(403).json({ error: 'cross-origin write refused' });
 
   let body = req.body;
   if (typeof body === 'string') {
