@@ -25,7 +25,10 @@ into the blank build and the check reports ~115 phantom "missing {{tag}} /
 extra <value>" failures that read exactly like a regression. Do not clear
 that storage to fix it: it is someone's saved work.
 
-## Rebuilding for the web is two steps
+## Deploying: the build is not copied for you
 
-`python3 html/build_html.py` writes `out/VADO-TFP.html` only.
-`cp out/VADO-TFP.html web/index.html` before deploying.
+`python3 html/build_html.py` writes `out/VADO-TFP.html` only. Copy it to
+`web/index.html`, then push: production builds from GitHub on `main`.
+Read `DEPLOY.md` before changing any Vercel setting. The root directory is
+`web`, and pointing it at the repository root publishes the office bank
+details with no password.
