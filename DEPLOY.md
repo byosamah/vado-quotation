@@ -3,7 +3,22 @@
 The fillable deck is at **https://vado-tfp.vercel.app**, behind a password.
 Employees need no account: any username, and the password.
 
-    cd web && vercel deploy --prod --yes      # after rebuilding index.html
+Production deploys from GitHub. Push to `main` and Vercel builds it:
+
+    python3 html/build_html.py                # rebuild out/VADO-TFP.html
+    cp out/VADO-TFP.html web/index.html       # the build is not copied for you
+    git add -A && git commit && git push
+
+The repository is `byosamah/vado-quotation`, private. It holds the office
+IBAN, the signature images and real client contact details, so it must stay
+private: deleting those files later would not remove them from the history.
+
+The project's **Root Directory is `web`**. Vercel clones the whole
+repository and serves that folder. Set it back and the site would serve the
+repository root, which has no `middleware.js` in it, so the proposal would
+be published with no password at all.
+
+    cd web && vercel deploy --prod --yes      # the old way, still works
 
 `web/` is the whole deployment: `index.html` built by `html/build_html.py`,
 `middleware.js` guarding it, and `api/templates.js` holding the office's
