@@ -1,0 +1,137 @@
+{
+  "_doc": "INVENTED DEMO JOB. Naif Al Qahtani, four-storey investment apartment building, Al Faisaliyah, Dammam. Created 24 AUG 2026 at the user's request to exercise the deck with a project unlike the villa. Every regulatory, location and plot value is made up and is named in `placeholders`, so presend.py blocks the file. Nothing here came from بلدي or a deed.",
+  "fields": {
+    "tfp_number": "260824MKM-RES-APT",
+    "date": "24 AUG 2026",
+    "tfp_dur": "21",
+    "name_title_ar": "المهندس",
+    "firstname_ar": "نايف",
+    "lastname_ar": "القحطاني",
+    "name_title": "Eng.",
+    "firstname": "Naif",
+    "lastname": "Al Qahtani",
+    "phone": "053 887 2100",
+    "email": "naif.qahtani@outlook.com",
+    "project_type_ar": "عمارة سكنية استثمارية",
+    "project_type": "Residential Apartment Building",
+    "city_ar": "الدمام",
+    "city": "Dammam",
+    "district_ar": "الفيصلية",
+    "district": "Al Faisaliyah",
+    "spatialneeds": "auto",
+    "lotarea": "720",
+    "areasource": "الصك",
+    "lotnumber": "94",
+    "districtnumber": "63",
+    "usecode": "س-2-أ سكني",
+    "divtype": "لايوجد",
+    "divdesc": "لايوجد",
+    "landuse": "سكني",
+    "usedesc": "سكني بنسبة 55% من مساحة الارض بارتفاع عدد 4 طوابق بحد اقصى 18 متر",
+    "numberofunits": "ثمان وحدات بالقطعة",
+    "buildingratio": "55%",
+    "minimumelev": "20",
+    "frontsetback": "1/5 عرض الشارع",
+    "sidesetback": "3",
+    "backsetback": "3",
+    "floors": "4",
+    "height": "18 م",
+    "canaddfloor": "نعم",
+    "farratio": "2.2",
+    "ksaarchzone": "عمارة الساحل الشرقي",
+    "ksaarchlevel": "مستوى 3 (معاصر, انتقالي, تقليدي)",
+    "archstyle": "حديث",
+    "coordinates": "26.4207, 50.0888",
+    "nat_address": "FSLA4471, 2208 - 32271",
+    "googlelink": "https://maps.app.goo.gl/xxxxxxxxxxxx",
+    "costnumber": "118,500",
+    "costwritten": "auto",
+    "p1": "25%",
+    "p2": "35%",
+    "p3": "30%",
+    "p4": "10%"
+  },
+  "services": [
+    "concept",
+    "engineering",
+    "permit",
+    "landscape",
+    "interior",
+    "supervision"
+  ],
+  "spatial": {
+    "groups": [
+      {
+        "title_ar": "المساحات الخارجية",
+        "items": [
+          "مواقف 10 سيارات مظللة",
+          "مدخل رئيسي ومدخل خدمة منفصل",
+          "تنسيق حدائق أمامي"
+        ]
+      },
+      {
+        "title_ar": "المساحات الداخلية",
+        "blocks": [
+          {
+            "name_ar": "الدور الأرضي",
+            "contents_ar": "مدخل ولوبي , غرفة حارس , غرفة كهرباء ومضخات , مستودعات الشقق"
+          },
+          {
+            "name_ar": "الدور الأول",
+            "contents_ar": "شقتان (كل شقة: صالة , مطبخ , ثلاث غرف نوم , دورتا مياه)"
+          },
+          {
+            "name_ar": "الدور الثاني",
+            "contents_ar": "شقتان (كل شقة: صالة , مطبخ , ثلاث غرف نوم , دورتا مياه)"
+          },
+          {
+            "name_ar": "الدور الثالث",
+            "contents_ar": "شقتان (كل شقة: صالة , مطبخ , غرفتا نوم , دورتا مياه)"
+          },
+          {
+            "name_ar": "الملحق العلوي",
+            "contents_ar": "غرفة غسيل مشتركة , غرفة نوم الحارس , سطح خدمة"
+          }
+        ]
+      }
+    ]
+  },
+  "durations": {
+    "concept": 10,
+    "concept_drawings": 28,
+    "develop": 10,
+    "technical": 60,
+    "permit": 10,
+    "boq": 18
+  },
+  "map_marker": {
+    "x": 0.52,
+    "y": 0.38
+  },
+  "placeholders": [
+    "lotarea",
+    "lotnumber",
+    "districtnumber",
+    "usecode",
+    "divtype",
+    "divdesc",
+    "landuse",
+    "usedesc",
+    "numberofunits",
+    "buildingratio",
+    "minimumelev",
+    "frontsetback",
+    "sidesetback",
+    "backsetback",
+    "floors",
+    "height",
+    "canaddfloor",
+    "farratio",
+    "ksaarchzone",
+    "ksaarchlevel",
+    "coordinates",
+    "nat_address",
+    "googlelink",
+    "map"
+  ]
+}

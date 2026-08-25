@@ -1,0 +1,265 @@
+===== SLIDE 5 (canvas 756 x 1008 pt) =====
+<sp> 'TextBox 24' x=149.9 y=188.2 w=492.7 h=532.7 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just rtl=1 lnSpc=150.0%] 'المتطلبات المساحية'
+     run 'المتطلبات المساحية' {'sz': 14.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] 'بالإشارة إلى الاجتماع التمهيدي، ونموذج المشروع المستلم من العميل، نورد فيما يلي المتطلبات الفراغية للمشروع:'
+     run 'بالإشارة إلى الاجتماع التمهيدي، ونموذج ا' {'sz': 12.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] 'القطعة رقم (1)'
+     run 'القطعة رقم (1)' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lvl=1 lnSpc=150.0%] 'المساحات الخارجية'
+     run 'المساحات الخارجية' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\tوتشمل:\t\t'
+     (empty run) {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'وتشمل:' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tموقف سيارتين'
+     run '\t\tموقف سيارتين' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tحديقة'
+     run '\t\tحديقة' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tغرفة سائق'
+     run '\t\tغرفة سائق' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lvl=1 lnSpc=150.0%] 'المساحات الداخلية '
+     run 'المساحات الداخلية ' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\tوتشمل:\t\t'
+     (empty run) {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'وتشمل:' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tالدور الأرضي'
+     run '\t\tالدور الأرضي' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] 'جناح الضيافة (مجلس، غرفة طعام، دورة مياه) ,صالة المعيشة , دورة مياه, مطبخ مغلق'
+     run 'جناح الضيافة (مجلس، غرفة طعام، دورة مياه' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tالدور الأول'
+     run '\t\tالدور الأول' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] 'غرفة نوم رئيسية (ماستر)(تشمل غرفة ملابس, دورة مياه) , غرفتا نوم إضافية (تشمل كل منهما غرفة ملابس صغيرة + دورة مياه) '
+     run 'غرفة نوم رئيسية (ماستر)(تشمل غرفة ملابس,' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tالملحق العلوي'
+     run '\t\tالملحق العلوي' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] 'مستودع , غرفة غسيل وكوي الملابس , غرفة نوم العاملة المنزلية '
+     run 'مستودع , غرفة غسيل وكوي الملابس , غرفة ن' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] '* هذه المساحات قابلة للتعديل أو الإلغاء بناءً على محددات قطعة الأرض أو ترتيب الأولويات.'
+     run '* هذه المساحات قابلة للتعديل أو الإلغاء ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+<pic> 'Picture 26' x=0.0 y=16.1 w=168.7 h=112.4 prst=rect image=image4.png
+<pic> 'Picture 27' x=78.1 y=74.0 w=50.8 h=35.5 prst=rect image=image2.png srcRect={'l': '23691', 't': '22115', 'r': '2025'}
+
+===== SLIDE 6 (canvas 756 x 1008 pt) =====
+<sp> 'TextBox 24' x=149.9 y=188.2 w=492.7 h=465.5 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just rtl=1 lnSpc=150.0%] 'تفصيل نطاق العمل'
+     run 'تفصيل نطاق العمل' {'sz': 14.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] 'بالإشارة إلى الاجتماع التمهيدي، والأبحاث والدراسات، فإن تفصيل نطاق العمل كما يلي:'
+     run 'بالإشارة إلى الاجتماع التمهيدي، والأبحاث' {'sz': 12.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] '\t1. المرحلة الأولى:'
+     run '\t1. المرحلة الأولى:' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tالتصميم المعماري '
+     run '\t\tالتصميم المعماري ' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\tتقسم الى:'
+     run '\tتقسم الى:' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tالتصاميم المعمارية المبدئية Concept Design Development:'
+     run '\t\tالتصاميم المعمارية المبدئية ' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'Concept Design Development:' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tيتم في هذه المرحلة إعداد الفكرة التصميمية بشكل يظهر المشروع بصورة متميزة \t\t\t\t(بالتنسيق مع المالك أو من يمثله) والتي تشمل:'
+     run '\t\t\tيتم في هذه المرحلة إعداد الفكرة التصم' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lvl=3 indent=-13.5pt marL=121.5pt lnSpc=150.0% buChar='•'] 'دراسة المتطلبات للمالك من حيث المكونات والمساحات ووضع برنامج المشروع والذي يحقق هذه المتطلبات.'
+     run 'دراسة المتطلبات للمالك من حيث المكونات و' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lvl=3 indent=-13.5pt marL=121.5pt lnSpc=150.0% buChar='•'] 'دراسة التصاميم الخاصة بتوزيع الموقع العام.'
+     run 'دراسة التصاميم الخاصة بتوزيع الموقع العا' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lvl=3 indent=-13.5pt marL=121.5pt lnSpc=150.0% buChar='•'] 'دراسة التصاميم الخاصة بتوزيع المساقط الأفقية للمشروع.'
+     run 'دراسة التصاميم الخاصة بتوزيع المساقط الأ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lvl=3 indent=-13.5pt marL=121.5pt lnSpc=150.0% buChar='•'] 'دراسة التصاميم الخارجية للواجهات وإعداد مناظير خارجية بما يحقق أفضل النتائج. '
+     run 'دراسة التصاميم الخارجية للواجهات وإعداد ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t الحصول على الموافقة المبدئية للمشروع:'
+     run '\t\t الحصول على الموافقة المبدئية للمشروع:' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tيتم في هذه المرحلة إعداد التصاميم الهندسية المبدئية المطلوبة للحصول على \t\t\t\tالموافقة المبدئية للمشروع من البلدية.  '
+     run '\t\t\tيتم في هذه المرحلة إعداد التصاميم اله' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ' \t\t\tتحديد الارتفاعات ونسب البناء و الارتدادات والاستخدامات وخلافه '
+     run ' \t\t\tتحديد الارتفاعات ونسب البناء و الارت' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tوأخذ الموافقة من الامانة .'
+     run '\t\t\tوأخذ الموافقة من الامانة .' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t'
+     (empty run) {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+<pic> 'Picture 26' x=0.0 y=16.1 w=168.7 h=112.4 prst=rect image=image4.png
+<pic> 'Picture 27' x=78.1 y=74.0 w=50.8 h=35.5 prst=rect image=image2.png srcRect={'l': '23691', 't': '22115', 'r': '2025'}
+
+===== SLIDE 7 (canvas 756 x 1008 pt) =====
+<sp> 'TextBox 24' x=149.9 y=188.2 w=492.7 h=732.6 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just rtl=1 lnSpc=150.0%] '2. المرحلة الثانية:'
+     run '2. المرحلة الثانية:' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\tمرحلة إعداد المخططات التنفيذية Technical Drawings:\t'
+     run '\tمرحلة إعداد المخططات التنفيذية ' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'Technical Drawings:' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\tيتم في هذه المرحلة إعداد التصاميم الهندسية التفصيلية لكافة التخصصات الهندسية والتي \tتشمل :\t\t'
+     (empty run) {'sz': 12.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'يتم في هذه المرحلة إعداد التصاميم الهندس' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tالتصميم المعماري Architectural Design'
+     run '\t\tالتصميم المعماري ' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'Architectural Design' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tالتصاميم الخاصة بأعمال الموقع العام'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'التصاميم الخاصة بأعمال الموقع العام' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tالتصميم المعماري؛ ويشمل: المساقط الأفقية / الواجهات / القطاعات'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'التصميم المعماري؛ ويشمل: المساقط الأفقية' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tالتفاصيل المعمارية لأعمال الهيكل والتشطيبات '
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'التفاصيل المعمارية لأعمال الهيكل والتشطي' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lvl=2 lnSpc=150.0%] 'التصميم الإنشائي Structural Design'
+     run 'التصميم الإنشائي ' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'Structural Design' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tتصميم القواعد للمباني وفقاً لتقرير فحص التربة واستخدام النظام المناسب \t\t\t\tحسب طبيعة الأرض.'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'تصميم القواعد للمباني وفقاً لتقرير فحص ا' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'حسب طبيعة الأرض.' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tإعداد التصاميم الخاصة بالهيكل الإنشائي للمباني'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'إعداد التصاميم الخاصة بالهيكل الإنشائي ل' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tإعداد التفاصيل الإنشائية الخاصة بالمباني'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'إعداد التفاصيل الإنشائية الخاصة بالمباني' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lvl=2 lnSpc=150.0%] 'التصميم الميكانيكي Mechanical Design'
+     run 'التصميم الميكانيكي ' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'Mechanical Design' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tشبكة المياه الباردة والساخنة والخزانات '
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'شبكة المياه الباردة والساخنة والخزانات ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tشبكة الصرف الصحي'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'شبكة الصرف الصحي' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tشبكة مكافحة الحريق '
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'شبكة مكافحة الحريق ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tشبكة تصريف مياه الأمطار '
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'شبكة تصريف مياه الأمطار ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tنظام التهوية '
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'نظام التهوية ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tنظام التكييف '
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'نظام التكييف ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tنظام المصاعد (إن وُجد)'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'نظام المصاعد (إن وُجد)' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tنظام الغاز  (إن وُجد)'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'نظام الغاز' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run ' (إن وُجد)' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t التصميم الكهربائي Electrical Design \t'
+     (empty run) {'sz': 12.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run ' التصميم الكهربائي ' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'Electrical Design ' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tتوزيعات أعمال الإنارة ومخارج الكهرباء والتيار المنخفض ومخارج التكييف.'
+     run '\t\t\tتوزيعات أعمال الإنارة ومخارج الكهرباء' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tتمديدات نظام كاميرات المراقبة الأمنية CCTV / IP CAM '
+     run '\t\t\tتمديدات نظام كاميرات المراقبة الأمنية' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'CCTV / IP CAM' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tتمديدات نظام الإنذار من الحريق '
+     run '\t\t\tتمديدات نظام الإنذار من الحريق ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tالمخططات الأحادية لأعمال التيار المنخفض'
+     run '\t\t\tالمخططات الأحادية لأعمال التيار المنخ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tتمديدات شبكة الكابلات والصواعد للمبنى'
+     run '\t\t\tتمديدات شبكة الكابلات والصواعد للمبنى' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tجداول اللوحات والأحمال الخاصة بالمبنى'
+     run '\t\t\tجداول اللوحات والأحمال الخاصة بالمبنى' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tتفصيل غرف الكهرباء وسعة المحولات المستخدمة والتوزيع داخل غرفة العدادات'
+     run '\t\t\tتفصيل غرف الكهرباء وسعة المحولات المس' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tدراسة أفضل الأنظمة البيئية واستخدام العزل الحراري والصوتي.'
+     run '\t\t\tدراسة أفضل الأنظمة البيئية واستخدام ا' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tالحصول على الرخصة النهائية'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'الحصول على الرخصة النهائية' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tيتم تقديم المشروع والحصول على الموافقات من الجهات المساندة (الجهات المعنية \t\t\tلوزارة الشؤون البلدية والإسكان).'
+     run '\t\t\tيتم تقديم المشروع والحصول على الموافق' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tالحصول على رخصة البناء النهائية.'
+     run '\t\t\tالحصول على رخصة البناء النهائية.' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+<pic> 'Picture 26' x=0.0 y=16.1 w=168.7 h=112.4 prst=rect image=image4.png
+<pic> 'Picture 27' x=78.1 y=74.0 w=50.8 h=35.5 prst=rect image=image2.png srcRect={'l': '23691', 't': '22115', 'r': '2025'}
+
+===== SLIDE 10 (canvas 756 x 1008 pt) =====
+<sp> 'TextBox 24' x=104.9 y=188.3 w=519.4 h=259.6 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just rtl=1 lnSpc=150.0%] 'مبادئ التصميم  \tالوظيفية '
+     run 'مبادئ التصميم  \t' {'sz': 14.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'الوظيفية ' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tكفاءة استخدام المساحات '
+     run '\t\t\tكفاءة استخدام المساحات ' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tكفاءة الطاقة '
+     run '\t\t\tكفاءة الطاقة ' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tالاندماج مع الطبيعة (المواد + الإضاءة + المساحات الخضراء + الماء)'
+     run '\t\t\tالاندماج مع الطبيعة (المواد + الإضاءة' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tمشاركة العميل والتعاون '
+     run '\t\t\tمشاركة العميل والتعاون ' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tالتميّز الهندسي'
+     run '\t\t\tالتميّز الهندسي' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] 'الطراز المعماري {{archstyle}} '
+     run 'الطراز ' {'sz': 14.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'المعماري ' {'sz': 14.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run '{{archstyle}} ' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] 'منهجية التصميم'
+     run 'منهجية التصميم' {'sz': 14.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+<grpSp> 'Group 35' x=118.0 y=449.8 w=144.5 h=173.6
+  <sp> 'Isosceles Triangle 38' x=118.0 y=472.2 w=144.5 h=124.6 prst=triangle fill=none line=#3B3838 w=3.0pt
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'TextBox 39' x=61.1 y=514.4 w=151.0 h=21.8 rot=300.0deg prst=rect fill=none
+    bodyPr: wrap=square spAutoFit
+    P[algn=ctr] 'القصد'
+       run 'القصد' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'Cairo', 'cs': 'Cairo'}
+  <sp> 'TextBox 40' x=169.9 y=514.3 w=148.1 h=21.8 rot=60.0deg prst=rect fill=none
+    bodyPr: wrap=square spAutoFit
+    P[algn=ctr] 'الوظيفية'
+       run 'الوظيفية' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'Cairo', 'cs': 'Cairo'}
+  <sp> 'TextBox 41' x=118.0 y=601.6 w=144.5 h=21.8 prst=rect fill=none
+    bodyPr: wrap=square spAutoFit
+    P[algn=ctr] 'الشكل'
+       run 'الشكل' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'Cairo', 'cs': 'Cairo'}
+  <sp> 'TextBox 42' x=118.0 y=545.0 w=144.5 h=21.8 prst=rect fill=none
+    bodyPr: wrap=square spAutoFit
+    P[algn=ctr] 'التصميم'
+       run 'التصميم' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'Cairo', 'cs': 'Cairo'}
+<sp> 'TextBox 36' x=287.7 y=460.2 w=363.4 h=145.6 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just rtl=1 lnSpc=150.0%] 'تُعد الركائز الثلاث للتصميم – القصد، والوظيفة، والشكل – مترابطة وجوهرية لابتكار تصاميم ناجحة وفعّالة. ومن خلال مراعاة كل ركيزة طوال عملية التصميم، بدءًا من التصوّر المبدئي وحتى التنفيذ، يقدم فريق التصميم في شركة الرؤيا للاستشارات الهندسية "فادو VADO"  تصاميم هادفة، تتمحور حول المستخدم، وجذابة بصريًا. يُمكّن تحقيق التوازن بين هذه الركائز من تبنّي منهج شامل ومتكامل في التصميم، مما ينتج عنه مساحات وتجارب ذات مغزى وجمال بصري في آنٍ واحد.'
+     run 'تُعد الركائز الثلاث للتصميم – القصد، وال' {'sz': 11.0, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'VADO' {'sz': 11.0, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run '"  تصاميم هادفة، تتمحور حول المستخدم، وج' {'sz': 11.0, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+<sp> 'TextBox 37' x=103.6 y=643.3 w=547.6 h=205.5 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just rtl=1 lnSpc=150.0%] 'القصد:  تشير إلى الغرض الأساسي والمفهوم الكامن وراء التصميم. وتشمل الأهداف والرؤية والنتائج المرجوة من المشروع. يتطلب التصميم بنيّة واضحة فهم احتياجات العميل، وأهداف المشروع، والسياق الذي سيوجد فيه التصميم.'
+     run 'القصد' {'sz': 11.0, 'b': True, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run ':' {'sz': 11.0, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run ' تشير إلى الغرض الأساسي والمفهوم الكامن ' {'sz': 11.0, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] 'الوظيفة : تركّز على الجوانب العملية وقابلية الاستخدام في التصميم. وتشمل فهم الوظيفة المقصودة للمساحة وتصميمها بطريقة تعزز من أدائها. تأخذ الوظيفة بعين الاعتبار عوامل مثل إمكانيات الموقع، والأُرغونوميا (علم التفاعل البشري مع البيئة)، والكفاءة، والسلامة، وسهولة الاستخدام.'
+     run 'الوظيفة' {'sz': 11.0, 'b': True, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run ' :' {'sz': 11.0, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'تركّز على الجوانب العملية وقابلية الاستخ' {'sz': 11.0, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] 'الشكل : يتعلق بالجوانب الجمالية والتكوين والعناصر البصرية للتصميم. ويشمل الشكل العام، والبنية، وترتيب العناصر التي تُنتج تصميمًا جذّابًا ومتناسقًا بصريًا. يأخذ الشكل في الحسبان مبادئ النسبة، والمقياس، والتوازن، والإيقاع، والتناغم، وتفاعل الضوء والظل. كما يتضمن اختيار المواد والألوان والملمس والتشطيبات التي تعزز التأثير البصري للتصميم.'
+     run 'الشكل ' {'sz': 11.0, 'b': True, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run ':' {'sz': 11.0, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'يتعلق بالجوانب الجمالية والتكوين والعناص' {'sz': 11.0, 'color': '#374151', 'latin': 'Cairo', 'cs': 'Cairo'}
+<pic> 'Picture 32' x=0.0 y=16.1 w=168.7 h=112.4 prst=rect image=image4.png
+<pic> 'Picture 33' x=78.1 y=74.0 w=50.8 h=35.5 prst=rect image=image2.png srcRect={'l': '23691', 't': '22115', 'r': '2025'}
+

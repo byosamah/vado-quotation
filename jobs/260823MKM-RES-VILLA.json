@@ -1,0 +1,109 @@
+{
+  "_doc": "Saud Al Dossary. Residential villa, Ar Rakah, Khobar. Built 23 AUG 2026.\n`placeholders` names fields filled with a stand-in so the page can be reviewed. presend.py blocks on every one of them, so the file cannot be sent until they are replaced and the name is removed from the list.",
+  "fields": {
+    "tfp_number": "260823MKM-RES-VILLA",
+    "date": "23 AUG 2026",
+    "tfp_dur": "14",
+    "name_title_ar": "الأستاذ",
+    "firstname_ar": "سعود",
+    "lastname_ar": "الدوسري",
+    "name_title": "Mr.",
+    "firstname": "Saud",
+    "lastname": "Al Dossary",
+    "phone": "050 333 4455",
+    "email": "saud.d@gmail.com",
+    "project_type_ar": "فيلا سكنية",
+    "project_type": "Residential Villa",
+    "city_ar": "الخبر",
+    "city": "Khobar",
+    "district_ar": "الراكة",
+    "district": "Ar Rakah",
+    "spatialneeds": "auto",
+    "lotarea": "512",
+    "areasource": "الصك",
+    "lotnumber": "27",
+    "districtnumber": "18",
+    "usecode": "س-1-ب سكني",
+    "divtype": "لايوجد",
+    "divdesc": "لايوجد",
+    "landuse": "سكني",
+    "usedesc": "سكني بنسبة 60% من مساحة الارض بارتفاع عدد 2 طابق بحد اقصى 10 متر",
+    "numberofunits": "وحدة واحدة بالقطعة",
+    "buildingratio": "60%",
+    "minimumelev": "20",
+    "frontsetback": "1/5 عرض الشارع",
+    "sidesetback": "2",
+    "backsetback": "2",
+    "floors": "2",
+    "height": "10 م",
+    "archstyle": "معاصر",
+    "costnumber": "45,000",
+    "costwritten": "auto",
+    "p1": "30%",
+    "p2": "30%",
+    "p3": "30%",
+    "p4": "10%",
+    "ksaarchzone": "عمارة الساحل الشرقي",
+    "ksaarchlevel": "مستوى 3 (معاصر, انتقالي, تقليدي)",
+    "canaddfloor": "لا",
+    "farratio": "غير محدد",
+    "coordinates": "26.3010, 50.2083",
+    "nat_address": "RAKA2345, 7639 - 34413",
+    "googlelink": "https://maps.app.goo.gl/xxxxxxxxxxxx"
+  },
+  "services": [
+    "concept",
+    "engineering",
+    "permit"
+  ],
+  "spatial": {
+    "groups": [
+      {
+        "title_ar": "المساحات الخارجية",
+        "items": [
+          "موقف 3 سيارات",
+          "حديقة"
+        ]
+      },
+      {
+        "title_ar": "المساحات الداخلية",
+        "blocks": [
+          {
+            "name_ar": "الدور الأرضي",
+            "contents_ar": "مجلس , صالة معيشة , مطبخ , دورتا مياه"
+          },
+          {
+            "name_ar": "الدور الأول",
+            "contents_ar": "غرفة نوم رئيسية (ماستر) , ثلاث غرف نوم"
+          },
+          {
+            "name_ar": "الملحق العلوي",
+            "contents_ar": "غرفة نوم العاملة المنزلية , غرفة غسيل , مستودع"
+          }
+        ]
+      }
+    ]
+  },
+  "placeholders": [
+    "ksaarchzone",
+    "ksaarchlevel",
+    "canaddfloor",
+    "farratio",
+    "coordinates",
+    "nat_address",
+    "googlelink",
+    "map"
+  ],
+  "map_marker": {
+    "x": 0.41,
+    "y": 0.44
+  },
+  "durations": {
+    "concept": 7,
+    "concept_drawings": 21,
+    "develop": 7,
+    "technical": 45,
+    "permit": 7,
+    "boq": 14
+  }
+}

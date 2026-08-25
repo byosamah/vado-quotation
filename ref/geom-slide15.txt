@@ -1,0 +1,13 @@
+===== SLIDE 15 (canvas 756 x 1008 pt) =====
+<grpSp> 'Group 5' x=30.9 y=0.1 w=21.7 h=167.7
+  <sp> 'Rectangle 3' x=30.9 y=0.1 w=21.7 h=145.8 prst=rect fill=#3B3838 line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'TextBox 36' x=-39.2 y=76.0 w=163.7 h=20.0 rot=270.0deg prst=rect fill=none
+    bodyPr: wrap=square spAutoFit
+    P[algn=r marL=0.0pt marR=0.0pt spcBef=0.0pt spcAft=0.0pt] 'VADO.SA'
+       run 'VADO.SA' {'sz': 10.5, 'spc': 3.0, 'color': 'scheme:bg1', 'latin': 'Aller Display'}
+<sp> 'TextBox 21' x=42.7 y=816.0 w=546.4 h=29.1 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=ctr marL=0.0pt marR=0.0pt spcBef=0.0pt spcAft=0.0pt] 'CREATING VALUABLE SPACES'
+     run 'CREATING VALUABLE SPACES' {'sz': 18.0, 'spc': 6.0, 'color': '#3B3838', 'latin': 'Aller Display'}

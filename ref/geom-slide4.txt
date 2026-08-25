@@ -1,0 +1,304 @@
+===== SLIDE 4 (canvas 756 x 1008 pt) =====
+<grpSp> 'Group 3' x=0.0 y=147.7 w=714.6 h=7.1
+  <cxnSp> 'Straight Connector 5' x=0.0 y=154.9 w=714.5 h=0.0 prst=line line=#F2F1EE w=5.0pt
+  <sp> 'Rectangle 6' x=642.7 y=147.7 w=71.9 h=7.1 flipV prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+<grpSp> 'Group 15' x=635.7 y=250.1 w=141.3 h=17.7 rot=270.0deg
+  <sp> 'Rectangle 16' x=635.7 y=250.1 w=17.7 h=17.7 prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 17' x=653.4 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 18' x=671.1 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 19' x=688.7 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 20' x=706.4 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 21' x=724.1 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 22' x=741.7 y=250.1 w=17.7 h=17.7 prst=rect fill=#DEE0D8 line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 23' x=759.3 y=250.1 w=17.7 h=17.7 prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+<sp> 'TextBox 36' x=406.9 y=896.0 w=283.3 h=26.7 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=r rtl=1] '* المستكشف الجغرافي لأمانة المنطقة الشرقية واشتراطات إنشاء المباني السكنية 2026 م مرجع المعلومات السابقة بحسب تاريخ العرض.'
+     run '* المستكشف الجغرافي لأمانة المنطقة الشرق' {'sz': 8.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<sp> 'Text Box 58' x=374.8 y=96.6 w=307.8 h=53.9 prst=rect fill=none line=none
+  bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+  P[algn=r rtl=1 lnSpc=150.0%] 'عن المشروع '
+     run 'عن المشروع ' {'sz': 28.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'Slide Number Placeholder 11' x=55.0 y=921.7 w=34.6 h=20.3
+  P[algn=ctr] '[FIELD slidenum: 4]'
+<graphicFrame> 'Table 4' x=114.7 y=188.0 w=575.4 h=412.8
+  TABLE cols=[410.3, 20.6, 144.6]
+    row0 h=36.0pt
+      cell[0][0] fill=none gridSpan=2
+        P '{{project_type_ar}}'
+           run '{{project_type_ar}}' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+      cell[0][1] fill=None hMerge
+        P ''
+      cell[0][2] fill=none
+        P 'نوعية المشروع '
+           run 'نوعية المشروع ' {'sz': 14.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+    row1 h=79.2pt
+      cell[1][0] fill=none gridSpan=2
+        P '{{spatialneeds}}'
+           run '{{spatialneeds}}' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+      cell[1][1] fill=None hMerge
+        P ''
+      cell[1][2] fill=none
+        P 'المتطلبات المساحية'
+           run 'المتطلبات المساحية' {'sz': 14.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+    row2 h=36.0pt
+      cell[2][0] fill=none gridSpan=2
+        P '{{lotarea}}    م²  , حسب {{areasource}}'
+           run '{{lotarea}} ' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           (empty run) {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           run 'م' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           run '²' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           run '  , ' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           run 'حسب ' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           run '{{areasource}}' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+      cell[2][1] fill=None hMerge
+        P ''
+      cell[2][2] fill=none
+        P 'مساحة الارض'
+           run 'مساحة الارض' {'sz': 14.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+    row3 h=24.0pt
+      cell[3][0] fill=none gridSpan=2
+        P 'قطعة رقم {{lotnumber}}'
+           run 'قطعة ' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           run 'رقم ' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           run '{{lotnumber}}' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+      cell[3][1] fill=None hMerge
+        P ''
+      cell[3][2] fill=none rowSpan=3
+        P 'تفاصيل القطعة'
+           run 'تفاصيل القطعة' {'sz': 14.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+    row4 h=24.0pt
+      cell[4][0] fill=none gridSpan=2
+        P 'مخطط {{districtnumber}}, {{district_ar}}'
+           run 'مخطط ' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           run '{{districtnumber}}' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           run ', ' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           run '{{district_ar}}' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+      cell[4][1] fill=None hMerge
+        P ''
+      cell[4][2] fill=None vMerge
+        P ''
+    row5 h=24.0pt
+      cell[5][0] fill=none gridSpan=2
+        P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=0.0pt spcAft=0.0pt buNone] '{{city_ar}}, المملكة العربية السعودية'
+           run '{{city_ar}}' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           run ', ' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           run 'المملكة العربية السعودية' {'sz': 14.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+      cell[5][1] fill=None hMerge
+        P ''
+      cell[5][2] fill=None vMerge
+        P ''
+    row6 h=165.6pt
+      cell[6][0] fill=none gridSpan=2
+        P ''
+      cell[6][1] fill=none hMerge
+        P ''
+      cell[6][2] fill=none rowSpan=4
+        P 'الموقع'
+           run 'الموقع' {'sz': 14.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+    row7 h=9.5pt
+      cell[7][0] fill=none marL=0.0 marR=0.0 marT=0.0 marB=0.0
+        P '{{coordinates}}'
+           run '{{coordinates}}' {'sz': 5.0, 'color': '#3B3838', 'latin': 'Aller Light', 'cs': '+mn-cs'}
+      cell[7][1] fill=none rowSpan=3
+        P ''
+      cell[7][2] fill=None vMerge
+        P ''
+    row8 h=7.2pt
+      cell[8][0] fill=none marL=0.0 marR=0.0 marT=0.0 marB=0.0
+        P '{{nat_address}}'
+           run '{{nat_address}}' {'sz': 4.0, 'color': '#776F63', 'latin': 'Cairo', 'cs': 'Cairo'}
+      cell[8][1] fill=none vMerge
+        P ''
+      cell[8][2] fill=None vMerge
+        P ''
+    row9 h=7.2pt
+      cell[9][0] fill=none marL=0.0 marR=0.0 marT=0.0 marB=0.0
+        P '{{googlelink}}'
+           run '{{' {'sz': 4.0, 'color': '#3B3838', 'latin': 'Aller Light', 'cs': '+mn-cs'}
+           run 'googlelink' {'sz': 4.0, 'color': '#3B3838', 'latin': 'Aller Light', 'cs': '+mn-cs'}
+           run '}}' {'sz': 4.0, 'color': '#3B3838', 'latin': 'Aller Light', 'cs': '+mn-cs'}
+      cell[9][1] fill=none vMerge
+        P ''
+      cell[9][2] fill=None vMerge
+        P ''
+<sp> 'TextBox 47' x=142.2 y=616.9 w=548.0 h=24.2 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just rtl=1] 'المحددات التنظيمية'
+     run 'المحددات التنظيمية' {'sz': 14.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<graphicFrame> 'Table 7' x=345.5 y=645.3 w=337.1 h=50.4
+  TABLE cols=[208.7, 128.4]
+    row0 h=49.1pt
+      cell[0][0] fill=none
+        P[algn=r rtl=1 marL=0.0pt] '{{ksaarchzone}}'
+           run '{{ksaarchzone}}' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+        P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=0.0pt spcAft=0.0pt buNone] '{{ksaarchlevel}}'
+           run '{{ksaarchlevel}}' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+        P[algn=r rtl=1 marL=0.0pt] ''
+      cell[0][1] fill=none anchor=ctr
+        P[algn=r rtl=1 marL=0.0pt] 'تصنيف النمط المعماري'
+           run 'تصنيف النمط المعماري' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<graphicFrame> 'Table 39' x=108.6 y=689.2 w=283.3 h=216.0
+  TABLE cols=[163.2, 120.1]
+    row0 h=21.6pt
+      cell[0][0] fill=none
+        P[algn=r rtl=1 marL=0.0pt] '{{buildingratio}}'
+           run '{{buildingratio}}' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[0][1] fill=none
+        P[algn=r rtl=1 marL=0.0pt] 'نسبة البناء'
+           run 'نسبة البناء' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row1 h=21.6pt
+      cell[1][0] fill=none
+        P[algn=r rtl=1 marL=0.0pt] '{{minimumelev}}'
+           run '{{minimumelev}}' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[1][1] fill=none
+        P[algn=r rtl=1 marL=0.0pt] 'الحد الأدنى للواجهة'
+           run 'الحد الأدنى للواجهة' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row2 h=21.6pt
+      cell[2][0] fill=none
+        P[algn=r rtl=1 marL=0.0pt] '{{frontsetback}}'
+           run '{{frontsetback}}' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[2][1] fill=none
+        P[algn=r rtl=1 marL=0.0pt] 'ارتداد الواجهة'
+           run 'ارتداد الواجهة' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row3 h=21.6pt
+      cell[3][0] fill=none
+        P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=0.0pt spcAft=0.0pt buNone] '{{sidesetback}}'
+           run '{{sidesetback}}' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[3][1] fill=none
+        P[algn=r rtl=1 marL=0.0pt] 'ارتداد الجوانب'
+           run 'ارتداد الجوانب' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row4 h=21.6pt
+      cell[4][0] fill=none
+        P[algn=r rtl=1 marL=0.0pt] '{{backsetback}}'
+           run '{{backsetback}}' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[4][1] fill=none
+        P[algn=r rtl=1 marL=0.0pt] 'ارتداد خلفي'
+           run 'ارتداد خلفي' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row5 h=21.6pt
+      cell[5][0] fill=none
+        P[algn=r rtl=1 marL=0.0pt] '{{floors}}'
+           run '{{floors}}' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[5][1] fill=none
+        P[algn=r rtl=1 marL=0.0pt] 'الطوابق'
+           run 'الطوابق' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row6 h=21.6pt
+      cell[6][0] fill=none
+        P[algn=r rtl=1 marL=0.0pt] '{{height}}'
+           run '{{height}}' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[6][1] fill=none
+        P[algn=r rtl=1 marL=0.0pt] 'ارتفاع الطابق'
+           run 'ارتفاع الطابق' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row7 h=21.6pt
+      cell[7][0] fill=none
+        P[algn=r rtl=1 marL=0.0pt] '{{canaddfloor}}'
+           run '{{canaddfloor}}' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[7][1] fill=none
+        P[algn=r rtl=1 marL=0.0pt] 'يمكن اضافة دور'
+           run 'يمكن اضافة دور' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row8 h=21.6pt
+      cell[8][0] fill=none
+        P[algn=r rtl=1 marL=0.0pt] '{{usecode}}'
+           run '{{usecode}}' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[8][1] fill=none
+        P[algn=r rtl=1 marL=0.0pt] 'رمز الاستخدام'
+           run 'رمز الاستخدام' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row9 h=21.6pt
+      cell[9][0] fill=none
+        P[algn=r rtl=1 marL=0.0pt] '{{farratio}}'
+           run '{{farratio}}' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[9][1] fill=none
+        P[algn=r rtl=1 marL=0.0pt] 'معامل كتلة البناء'
+           run 'معامل كتلة البناء' {'sz': 12.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<graphicFrame> 'Table 40' x=410.5 y=689.2 w=268.1 h=194.1
+  TABLE cols=[125.2, 142.9]
+    row0 h=27.6pt
+      cell[0][0] fill=None marL=6.5 marR=6.5 marT=3.3 marB=3.3
+        P 'رمز الاستخدام'
+           run 'رمز الاستخدام' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[0][1] fill=None marL=6.5 marR=6.5 marT=3.3 marB=3.3
+        P[algn=ctr] '{{usecode}}'
+           run '{{usecode}}' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row1 h=27.6pt
+      cell[1][0] fill=None marL=6.5 marR=6.5 marT=3.3 marB=3.3
+        P 'نوع التقسيم'
+           run 'نوع التقسيم' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[1][1] fill=None marL=6.5 marR=6.5 marT=3.3 marB=3.3
+        P[algn=ctr] '{{divtype}}'
+           run '{{divtype}}' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row2 h=27.6pt
+      cell[2][0] fill=None marL=6.5 marR=6.5 marT=3.3 marB=3.3
+        P 'وصف التقسيم'
+           run 'وصف التقسيم' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[2][1] fill=None marL=6.5 marR=6.5 marT=3.3 marB=3.3
+        P[algn=ctr] '{{divdesc}}'
+           run '{{divdesc}}' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row3 h=27.6pt
+      cell[3][0] fill=None marL=6.5 marR=6.5 marT=3.3 marB=3.3
+        P 'الاستخدام لقطعة الأرض'
+           run 'الاستخدام لقطعة الأرض' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[3][1] fill=None marL=6.5 marR=6.5 marT=3.3 marB=3.3
+        P[algn=ctr] '{{landuse}}'
+           run '{{landuse}}' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row4 h=56.1pt
+      cell[4][0] fill=None marL=6.5 marR=6.5 marT=3.3 marB=3.3
+        P 'وصف اشتراط البناء'
+           run 'وصف اشتراط البناء' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[4][1] fill=None marL=6.5 marR=6.5 marT=3.3 marB=3.3
+        P[algn=ctr] '{{usedesc}}'
+           run '{{usedesc}}' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    row5 h=27.6pt
+      cell[5][0] fill=None marL=6.5 marR=6.5 marT=3.3 marB=3.3
+        P 'عدد الوحدات'
+           run 'عدد الوحدات' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      cell[5][1] fill=None marL=6.5 marR=6.5 marT=3.3 marB=3.3
+        P[algn=ctr] '{{numberofunits}}'
+           run '{{numberofunits}}' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<grpSp> 'Group 45' x=55.4 y=916.1 w=609.2 h=56.4
+  <sp> 'object 3' x=55.4 y=916.1 w=609.2 h=4.2 flipV fill=none line=#3B3838 w=0.5pt
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt
+    P ''
+  <grpSp> 'Group 49' x=515.2 y=928.5 w=149.4 h=41.0
+    <sp> 'Text Box 57' x=515.3 y=928.5 w=149.2 h=28.2 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r rtl=1 lnSpc=150.0%] ' سجل تجاري 2051059778'
+         run ' سجل تجاري ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '2051059778' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      P[algn=r rtl=1 lnSpc=150.0%] 'رقم الغرفة التجارية 191212'
+         run 'رقم الغرفة التجارية ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '191212' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    <sp> 'Text Box 58' x=515.2 y=953.7 w=149.2 h=15.8 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r] 'vado.sa'
+         run 'v' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+         run 'ado.sa' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+  <sp> 'Text Box 3' x=271.8 y=928.1 w=149.2 h=44.4 prst=rect fill=none line=none
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] 'مكتب الخبر'
+       run 'مكتب الخبر' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] '402 برج الفردان, شارع الأمير تركي, الكورنيش, الخبر, EKAA 7639-34413 المملكة العربية السعودية'
+       run '402 برج الفردان, شارع الأمير تركي, الكور' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run 'EKAA' {'sz': 7.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+       run ' 7639-34413' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run ' المملكة العربية السعودية' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<pic> 'Picture 34' x=531.6 y=576.8 w=13.2 h=18.2 prst=rect image=image5.png
+<pic> 'Picture 29' x=0.0 y=16.1 w=168.7 h=112.4 prst=rect image=image4.png
+<pic> 'Picture 30' x=78.1 y=74.0 w=50.8 h=35.5 prst=rect image=image2.png srcRect={'l': '23691', 't': '22115', 'r': '2025'}

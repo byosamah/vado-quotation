@@ -1,0 +1,364 @@
+===== SLIDE 11 (canvas 756 x 1008 pt) =====
+<graphicFrame> 'Table 42' x=111.8 y=230.2 w=530.2 h=319.3
+  TABLE cols=[164.4, 210.4, 155.5]
+    row0 h=27.8pt
+      cell[0][0] fill=#BBB6A5 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'المرحلة'
+           run 'المرحلة' {'sz': 14.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[0][1] fill=#BBB6A5 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'المُخرج'
+           run 'المُخرج' {'sz': 14.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[0][2] fill=#BBB6A5 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'المدة'
+           run 'المدة' {'sz': 14.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+    row1 h=53.7pt
+      cell[1][0] fill=#BBB6A5 a21% rowSpan=2 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buNone] '1. CD'
+           run '1. ' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+           run 'CD' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'Aller Display', 'cs': 'GE SS Text Medium'}
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'التصميم المعماري المبدئي'
+           run 'التصميم المعماري المبدئي' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[1][1] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] 'عرض لوحة الأفكار'
+           run 'عرض لوحة الأفكار' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] ' Mood board'
+           (empty run) {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+           run 'Mood board' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[1][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt lnSpc=150.0% spcBef=12.0pt spcAft=0.0pt buNone] '7 Days'
+           run '7 Days' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+    row2 h=27.8pt
+      cell[2][0] fill=None vMerge
+        P[rtl=1] ''
+      cell[2][1] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] 'مخططات التصميم المعماري'
+           run 'مخططات التصميم المعماري' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[2][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% spcBef=0.0pt spcAft=0.0pt buNone] '21 Days'
+           run '21 Days' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+    row3 h=41.3pt
+      cell[3][0] fill=#BBB6A5 a21% marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buNone] '2. DD'
+           run '2. ' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+           run 'DD' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'Aller Display', 'cs': 'GE SS Text Medium'}
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'تطوير التصميم'
+           run 'تطوير التصميم' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[3][1] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% spcBef=12.0pt spcAft=0.0pt buNone] 'اختيار الأنظمة الهندسية وتنسيق بين التخصصات الهندسية'
+           run 'اختيار الأنظمة الهندسية وتنسيق بين التخص' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[3][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% spcBef=0.0pt spcAft=0.0pt buNone] '7 Days'
+           run '7 Days' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+    row4 h=30.2pt
+      cell[4][0] fill=#BBB6A5 a21% rowSpan=3 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buNone] '3.  TD '
+           run '3.' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+           (empty run) {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+           run ' TD ' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'Aller Display', 'cs': 'GE SS Text Medium'}
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'الرسومات التنفيذية'
+           run 'الرسومات التنفيذية' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[4][1] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] 'مخططات التصميم المعماري'
+           run 'مخططات التصميم المعماري' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[4][2] fill=none rowSpan=3 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt lnSpc=150.0% spcAft=0.0pt buNone] '45 Days'
+           run '45 Days' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+    row5 h=19.9pt
+      cell[5][0] fill=None vMerge
+        P[rtl=1] ''
+      cell[5][1] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0%] 'مخططات التصميم الإنشائي'
+           run 'مخططات التصميم الإنشائي' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[5][2] fill=none vMerge marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt lnSpc=150.0% spcAft=0.0pt buNone] ''
+    row6 h=36.0pt
+      cell[6][0] fill=None vMerge
+        P[rtl=1] ''
+      cell[6][1] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0%] 'مخططات التصميم الكهروميكانيكي'
+           run 'مخططات التصميم الكهروميكانيكي' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[6][2] fill=none vMerge marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt lnSpc=150.0% spcAft=0.0pt buNone] ''
+    row7 h=41.3pt
+      cell[7][0] fill=#BBB6A5 a21% marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buNone] '4. GA '
+           run '4. ' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+           run 'GA ' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'Aller Display', 'cs': 'GE SS Text Medium'}
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'إصدار رخصة البناء'
+           run 'إصدار رخصة البناء' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[7][1] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0%] 'إصدار رخصة البناء'
+           run 'إصدار رخصة البناء' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[7][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt lnSpc=150.0% spcAft=0.0pt buNone] '7 Days'
+           run '7 Days' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+    row8 h=41.3pt
+      cell[8][0] fill=#BBB6A5 a21% marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buNone] '5. TD'
+           run '5. ' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+           run 'TD' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'Aller Display', 'cs': 'GE SS Text Medium'}
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'المواصفات والكميات'
+           run 'المواصفات والكميات' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[8][1] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0%] 'جدول المواصفات والكميات'
+           run 'جدول المواصفات والكميات' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[8][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt lnSpc=150.0% spcAft=0.0pt buNone] '14 Days'
+           run '14 Days' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+<sp> 'Rectangle 93' x=128.6 y=665.4 w=44.2 h=11.3 prst=rect fill=scheme:bg1 line=none
+  bodyPr: anchor=ctr rtlCol=1
+  P[algn=ctr] ''
+<sp> 'TextBox 94' x=134.3 y=662.8 w=36.0 h=17.0 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=ctr] 'W1'
+     run 'W1' {'sz': 8.0, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Rectangle 135' x=174.8 y=665.4 w=44.2 h=11.3 prst=rect fill=scheme:bg1 line=none
+  bodyPr: anchor=ctr rtlCol=1
+  P[algn=ctr] ''
+<sp> 'TextBox 136' x=180.5 y=662.8 w=36.0 h=17.0 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=ctr] 'W2'
+     run 'W2' {'sz': 8.0, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Rectangle 133' x=221.1 y=665.4 w=44.2 h=11.3 prst=rect fill=scheme:bg1 line=none
+  bodyPr: anchor=ctr rtlCol=1
+  P[algn=ctr] ''
+<sp> 'TextBox 134' x=226.8 y=662.8 w=36.0 h=17.0 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=ctr] 'W3'
+     run 'W3' {'sz': 8.0, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Rectangle 131' x=267.4 y=665.4 w=44.2 h=11.3 prst=rect fill=scheme:bg1 line=none
+  bodyPr: anchor=ctr rtlCol=1
+  P[algn=ctr] ''
+<sp> 'TextBox 132' x=273.1 y=662.8 w=36.0 h=17.0 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=ctr] 'W4'
+     run 'W4' {'sz': 8.0, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Rectangle 129' x=313.6 y=665.4 w=44.2 h=11.3 prst=rect fill=scheme:bg1 line=none
+  bodyPr: anchor=ctr rtlCol=1
+  P[algn=ctr] ''
+<sp> 'TextBox 130' x=319.3 y=662.8 w=36.0 h=17.0 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=ctr] 'W1'
+     run 'W1' {'sz': 8.0, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Rectangle 127' x=359.9 y=665.4 w=44.2 h=11.3 prst=rect fill=scheme:bg1 line=none
+  bodyPr: anchor=ctr rtlCol=1
+  P[algn=ctr] ''
+<sp> 'TextBox 128' x=365.6 y=662.8 w=36.0 h=17.0 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=ctr] 'W2'
+     run 'W2' {'sz': 8.0, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Rectangle 125' x=406.2 y=665.4 w=44.2 h=11.3 prst=rect fill=scheme:bg1 line=none
+  bodyPr: anchor=ctr rtlCol=1
+  P[algn=ctr] ''
+<sp> 'TextBox 126' x=411.9 y=662.8 w=36.0 h=17.0 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=ctr] 'W3'
+     run 'W3' {'sz': 8.0, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Rectangle 123' x=452.4 y=665.4 w=44.2 h=11.3 prst=rect fill=scheme:bg1 line=none
+  bodyPr: anchor=ctr rtlCol=1
+  P[algn=ctr] ''
+<sp> 'TextBox 124' x=458.1 y=662.8 w=36.0 h=17.0 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=ctr] 'W4'
+     run 'W4' {'sz': 8.0, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Rectangle 121' x=498.7 y=665.4 w=44.2 h=11.3 prst=rect fill=scheme:bg1 line=none
+  bodyPr: anchor=ctr rtlCol=1
+  P[algn=ctr] ''
+<sp> 'TextBox 122' x=504.4 y=662.8 w=36.0 h=17.0 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=ctr] 'W1'
+     run 'W1' {'sz': 8.0, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Rectangle 119' x=545.0 y=665.4 w=44.2 h=11.3 prst=rect fill=scheme:bg1 line=none
+  bodyPr: anchor=ctr rtlCol=1
+  P[algn=ctr] ''
+<sp> 'TextBox 120' x=550.7 y=662.8 w=36.0 h=17.0 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=ctr] 'W2'
+     run 'W2' {'sz': 8.0, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Rectangle 115' x=591.2 y=665.4 w=44.2 h=11.3 prst=rect fill=scheme:bg1 line=none
+  bodyPr: anchor=ctr rtlCol=1
+  P[algn=ctr] ''
+<sp> 'TextBox 116' x=596.9 y=662.8 w=36.0 h=17.0 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=ctr] 'W3'
+     run 'W3' {'sz': 8.0, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Rectangle 117' x=637.3 y=665.4 w=44.2 h=11.3 prst=rect fill=scheme:bg1 line=none
+  bodyPr: anchor=ctr rtlCol=1
+  P[algn=ctr] ''
+<sp> 'TextBox 118' x=643.0 y=662.8 w=36.0 h=17.0 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=ctr] 'W4'
+     run 'W4' {'sz': 8.0, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<grpSp> 'Group 102' x=128.6 y=647.0 w=183.0 h=23.5
+  <sp> 'Rectangle 109' x=128.6 y=650.5 w=183.0 h=11.3 prst=rect fill=scheme:bg1 line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'TextBox 110' x=206.1 y=647.0 w=36.0 h=23.5 prst=rect fill=none
+    bodyPr: wrap=square spAutoFit
+    P[algn=ctr] 'M1'
+       run 'M1' {'sz': 9.0, 'spc': 3.0, 'color': 'scheme:bg1', 'latin': 'Aller'}
+<grpSp> 'Group 103' x=313.6 y=647.0 w=183.0 h=23.5
+  <sp> 'Rectangle 107' x=313.6 y=650.5 w=183.0 h=11.3 prst=rect fill=scheme:bg1 line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'TextBox 108' x=391.2 y=647.0 w=36.0 h=23.5 prst=rect fill=none
+    bodyPr: wrap=square spAutoFit
+    P[algn=ctr] 'M2'
+       run 'M2' {'sz': 9.0, 'spc': 3.0, 'color': 'scheme:bg1', 'latin': 'Aller'}
+<grpSp> 'Group 104' x=498.5 y=647.0 w=183.0 h=23.5
+  <sp> 'Rectangle 105' x=498.5 y=650.5 w=183.0 h=11.3 prst=rect fill=scheme:bg1 line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'TextBox 106' x=576.1 y=647.0 w=36.0 h=23.5 prst=rect fill=none
+    bodyPr: wrap=square spAutoFit
+    P[algn=ctr] 'M3'
+       run 'M3' {'sz': 9.0, 'spc': 3.0, 'color': 'scheme:bg1', 'latin': 'Aller'}
+<sp> 'Flowchart: Decision 91' x=129.6 y=690.5 w=8.2 h=8.0 prst=flowChartDecision fill=#D15447 line=w=1.0pt
+  bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+  P[algn=ctr] ''
+<cxnSp> 'Straight Arrow Connector 92' x=136.2 y=694.5 w=171.6 h=0.0 prst=straightConnector1 line=#D15447 w=2.2pt
+<sp> 'Flowchart: Decision 77' x=363.6 y=739.5 w=8.2 h=8.0 prst=flowChartDecision fill=#D15447 line=w=1.0pt
+  bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+  P[algn=ctr] ''
+<cxnSp> 'Straight Arrow Connector 78' x=370.1 y=743.5 w=266.6 h=0.0 prst=straightConnector1 line=#D15447 w=2.2pt
+<cxnSp> 'Straight Arrow Connector 74' x=550.1 y=765.6 w=81.2 h=0.0 prst=straightConnector1 line=#E8BF5A w=2.2pt
+<sp> 'Flowchart: Decision 75' x=543.5 y=760.8 w=8.2 h=8.0 prst=flowChartDecision fill=#D15447 line=w=1.0pt
+  bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+  P[algn=ctr] ''
+<cxnSp> 'Straight Arrow Connector 76' x=550.1 y=764.8 w=81.2 h=0.0 prst=straightConnector1 line=#D15447 w=2.2pt
+<sp> 'Oval 57' x=170.1 y=691.1 w=6.8 h=6.8 prst=ellipse fill=#D15447 line=w=1.0pt
+  bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+  P[algn=ctr] ''
+<sp> 'Flowchart: Decision 72' x=313.8 y=715.7 w=8.2 h=8.0 prst=flowChartDecision fill=#D15447 line=w=1.0pt
+  bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+  P[algn=ctr] ''
+<cxnSp> 'Straight Arrow Connector 73' x=320.4 y=719.7 w=39.5 h=0.0 prst=straightConnector1 line=#D15447 w=2.2pt
+<cxnSp> 'Connector: Elbow 59' x=350.3 y=730.2 w=23.8 h=2.8 rot=270.0deg flipH prst=bentConnector2 line=#D15447 a62% w=1.0pt dashDot
+<cxnSp> 'Connector: Elbow 60' x=531.1 y=752.3 w=21.2 h=3.7 rot=270.0deg flipH prst=bentConnector2 line=#D15447 a62% w=1.0pt dashDot
+<sp> 'Oval 61' x=308.3 y=691.1 w=6.8 h=6.8 prst=ellipse fill=#D15447 line=w=1.0pt
+  bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+  P[algn=ctr] ''
+<cxnSp> 'Connector: Elbow 62' x=301.2 y=707.0 w=23.2 h=2.1 rot=270.0deg flipH prst=bentConnector2 line=#D15447 a62% w=1.0pt dashDot
+<sp> 'Isosceles Triangle 63' x=307.8 y=689.7 w=8.2 h=7.0 prst=triangle fill=#E8BF5A line=w=1.0pt
+  bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+  P[algn=ctr] ''
+<sp> 'TextBox 45' x=91.7 y=688.0 w=35.3 h=28.1 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P 'CD'
+     run 'CD' {'sz': 10.0, 'b': True, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'TextBox 47' x=91.7 y=711.8 w=35.3 h=28.1 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P 'DD'
+     run 'DD' {'sz': 10.0, 'b': True, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'TextBox 48' x=91.7 y=735.7 w=35.3 h=28.1 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P 'TD'
+     run 'TD' {'sz': 10.0, 'b': True, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'TextBox 49' x=91.7 y=759.6 w=35.3 h=28.1 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P 'GA'
+     run 'GA' {'sz': 10.0, 'b': True, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'TextBox 70' x=91.7 y=781.0 w=35.3 h=28.1 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P 'TD'
+     run 'TD' {'sz': 10.0, 'b': True, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Isosceles Triangle 65' x=631.3 y=760.8 w=8.2 h=7.0 prst=triangle fill=scheme:tx2 line=w=1.0pt
+  bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+  P[algn=ctr] ''
+<sp> 'Flowchart: Decision 68' x=590.0 y=783.6 w=8.2 h=8.0 prst=flowChartDecision fill=#D15447 line=w=1.0pt
+  bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+  P[algn=ctr] ''
+<cxnSp> 'Straight Arrow Connector 69' x=596.5 y=787.5 w=84.9 h=0.0 prst=straightConnector1 line=#D15447 w=2.2pt
+<cxnSp> 'Connector: Elbow 67' x=539.8 y=743.5 w=50.1 h=44.0 prst=bentConnector3 line=#D15447 a62% w=1.0pt dashDot
+<grpSp> 'Group 202' x=488.1 y=836.7 w=182.6 h=57.4
+  <grpSp> 'Group 220' x=488.1 y=836.7 w=182.6 h=14.0
+    <cxnSp> 'Straight Arrow Connector 228' x=488.1 y=846.8 w=51.6 h=0.0 prst=straightConnector1 line=#D15447 w=2.2pt
+    <sp> 'TextBox 229' x=551.8 y=836.7 w=118.9 h=14.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Work Progress'
+         run 'Work Progress' {'sz': 10.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+  <grpSp> 'Group 221' x=488.1 y=858.4 w=182.6 h=14.0
+    <cxnSp> 'Straight Arrow Connector 225' x=488.1 y=869.4 w=51.6 h=0.0 prst=straightConnector1 line=#E8BF5A w=2.2pt
+    <cxnSp> 'Straight Arrow Connector 226' x=488.1 y=867.8 w=51.6 h=0.0 prst=straightConnector1 line=#D15447 w=2.2pt
+    <sp> 'TextBox 227' x=551.8 y=858.4 w=118.9 h=14.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Work in Parallel'
+         run 'Work in Parallel' {'sz': 10.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+  <grpSp> 'Group 222' x=491.2 y=880.1 w=179.5 h=14.0
+    <cxnSp> 'Straight Arrow Connector 223' x=491.2 y=891.0 w=46.9 h=0.0 prst=straightConnector1 line=#D15447 w=1.5pt dashDot
+    <sp> 'TextBox 224' x=551.8 y=880.1 w=118.9 h=14.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Consequential Phase'
+         run 'Consequential Phase' {'sz': 10.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<grpSp> 'Group 203' x=298.8 y=836.7 w=182.7 h=35.7
+  <grpSp> 'Group 214' x=300.1 y=858.4 w=181.3 h=14.0
+    <sp> 'Isosceles Triangle 218' x=300.1 y=860.5 w=10.9 h=9.4 prst=triangle fill=scheme:tx2 line=w=1.0pt
+      bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+      P[algn=ctr] ''
+    <sp> 'TextBox 219' x=318.5 y=858.4 w=163.0 h=14.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Governmental Approval'
+         run 'Governmental Approval' {'sz': 10.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+  <grpSp> 'Group 215' x=298.8 y=836.7 w=180.8 h=14.0
+    <sp> 'Flowchart: Decision 216' x=298.8 y=839.9 w=10.9 h=10.7 prst=flowChartDecision fill=#D15447 line=w=1.0pt
+      bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+      P[algn=ctr] ''
+    <sp> 'TextBox 217' x=316.6 y=836.7 w=163.0 h=14.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Phase Start'
+         run 'Phase Start' {'sz': 10.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<grpSp> 'Group 204' x=133.7 y=836.7 w=181.3 h=57.4
+  <grpSp> 'Group 205' x=134.0 y=858.4 w=181.0 h=14.3
+    <sp> 'Oval 212' x=134.0 y=861.8 w=10.9 h=10.9 prst=ellipse fill=#E8BF5A line=w=1.0pt
+      bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+      P[algn=ctr] ''
+    <sp> 'TextBox 213' x=152.1 y=858.4 w=163.0 h=14.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Client Submission'
+         run 'Client Submission' {'sz': 10.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+  <grpSp> 'Group 206' x=134.0 y=836.7 w=181.0 h=14.3
+    <sp> 'Oval 210' x=134.0 y=840.1 w=10.9 h=10.9 prst=ellipse fill=#D15447 line=w=1.0pt
+      bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+      P[algn=ctr] ''
+    <sp> 'TextBox 211' x=152.1 y=836.7 w=163.0 h=14.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Document Submission'
+         run 'Document Submission' {'sz': 10.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+  <grpSp> 'Group 207' x=133.7 y=880.1 w=181.3 h=14.0
+    <sp> 'Isosceles Triangle 208' x=133.7 y=882.1 w=10.9 h=9.4 prst=triangle fill=#E8BF5A line=w=1.0pt
+      bodyPr: anchor=ctr lIns=3.6pt rIns=3.6pt
+      P[algn=ctr] ''
+    <sp> 'TextBox 209' x=152.1 y=880.1 w=163.0 h=14.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Client Revision'
+         run 'Client Revision' {'sz': 10.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Text Box 58' x=374.8 y=96.6 w=307.8 h=53.9 prst=rect fill=none line=none
+  bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+  P[algn=r rtl=1 lnSpc=150.0%] 'الخط الزمني للمشروع'
+     run 'الخط الزمني للمشروع' {'sz': 28.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'TextBox 141' x=104.9 y=188.3 w=550.7 h=457.7 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=r lnSpc=150.0%] 'التسليمات'
+     run 'التسليمات' {'sz': 14.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] '* لا يشمل المدد الزمنية الزائدة بسبب التعديلات المطلوبة من طرف العميل او الجهات الحكومية.'
+     run '* لا يشمل المدد الزمنية الزائدة بسبب الت' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r lnSpc=150.0%] ''
+  P[algn=r lnSpc=150.0%] 'الخط الزمني للمشروع'
+     run 'الخط الزمني للمشروع' {'sz': 14.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+<pic> 'Picture 111' x=0.0 y=16.1 w=168.7 h=112.4 prst=rect image=image4.png
+<pic> 'Picture 112' x=78.1 y=74.0 w=50.8 h=35.5 prst=rect image=image2.png srcRect={'l': '23691', 't': '22115', 'r': '2025'}
+

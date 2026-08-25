@@ -1,0 +1,207 @@
+===== SLIDE 8 (canvas 756 x 1008 pt) =====
+<grpSp> 'Group 3' x=0.0 y=147.7 w=714.6 h=7.1
+  <cxnSp> 'Straight Connector 5' x=0.0 y=154.9 w=714.5 h=0.0 prst=line line=#F2F1EE w=5.0pt
+  <sp> 'Rectangle 6' x=642.7 y=147.7 w=71.9 h=7.1 flipV prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+<grpSp> 'Group 15' x=635.7 y=250.1 w=141.3 h=17.7 rot=270.0deg
+  <sp> 'Rectangle 16' x=635.7 y=250.1 w=17.7 h=17.7 prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 17' x=653.4 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 18' x=671.1 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 19' x=688.7 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 20' x=706.4 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 21' x=724.1 y=250.1 w=17.7 h=17.7 prst=rect fill=#DEE0D8 line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 22' x=741.7 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 23' x=759.3 y=250.1 w=17.7 h=17.7 prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+<sp> 'Text Box 58' x=374.8 y=96.6 w=307.8 h=53.9 prst=rect fill=none line=none
+  bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+  P[algn=r rtl=1 lnSpc=150.0%] 'نطاق العمل'
+     run 'نطاق العمل' {'sz': 28.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'TextBox 27' x=104.2 y=183.9 w=559.6 h=30.6 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=r lnSpc=150.0%] 'الخدمات المشمولة'
+     run 'الخدمات المشمولة' {'sz': 14.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+<sp> 'service11' x=104.9 y=676.2 w=273.1 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Highest and Best Use Study '
+     run 'Highest and Best Use Study ' {'sz': 11.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': 'scheme:bg2', 'latin': 'Aller Light', 'cs': '+mn-cs'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'الدراسة العقارية والاستخدام الأمثل \t'
+     run 'الدراسة العقارية والاستخدام الأمثل ' {'sz': 10.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': 'scheme:bg2', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+     (empty run) {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'status11' x=378.0 y=676.2 w=116.4 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Yes'
+     run 'Yes' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'نعم'
+     run 'نعم' {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'service10' x=104.9 y=632.3 w=273.1 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Architectural Visualization '
+     run 'Architectural Visualization ' {'sz': 11.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': '#E7E6E6', 'latin': 'Aller Light', 'cs': '+mn-cs'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'الإظهار المعماري التسويقي\t'
+     run 'الإظهار المعماري التسويقي' {'sz': 10.0, 'color': 'scheme:bg2', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+     (empty run) {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'status10' x=378.0 y=632.3 w=116.4 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Yes'
+     run 'Yes' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'نعم'
+     run 'نعم' {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'service09' x=104.9 y=588.4 w=273.1 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'BIM Services '
+     run 'BIM Services ' {'sz': 11.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': '#E7E6E6', 'latin': 'Aller Light', 'cs': '+mn-cs'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'خدمات النمذجة المعلوماتية المعمارية\t'
+     run 'خدمات النمذجة المعلوماتية المعمارية\t' {'sz': 10.0, 'color': 'scheme:bg2', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'status09' x=378.0 y=588.4 w=116.4 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Yes'
+     run 'Yes' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'نعم'
+     run 'نعم' {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'service08' x=104.9 y=544.5 w=273.1 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Project Management '
+     run 'Project Management ' {'sz': 11.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': '#E7E6E6', 'latin': 'Aller Light', 'cs': '+mn-cs'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'إدارة المشروع'
+     run 'إدارة المشروع' {'sz': 10.0, 'color': 'scheme:bg2', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'status08' x=378.0 y=544.5 w=116.4 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Yes'
+     run 'Yes' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'نعم'
+     run 'نعم' {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'service07' x=104.9 y=500.5 w=273.1 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Supervision '
+     run 'Supervision ' {'sz': 11.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': '#E7E6E6', 'latin': 'Aller Light', 'cs': '+mn-cs'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'الإشراف الهندسي'
+     run 'الإشراف الهندسي' {'sz': 10.0, 'color': 'scheme:bg2', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'status07' x=378.0 y=500.5 w=116.4 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Yes'
+     run 'Yes' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'نعم'
+     run 'نعم' {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'service06' x=104.9 y=456.6 w=273.1 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Bidding Management '
+     run 'Bidding Management ' {'sz': 11.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': '#E7E6E6', 'latin': 'Aller Light', 'cs': '+mn-cs'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'إدارة الطرح والمناقصات\t'
+     run 'إدارة الطرح والمناقصات' {'sz': 10.0, 'color': 'scheme:bg2', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+     (empty run) {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'status06' x=378.0 y=456.6 w=116.4 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Yes'
+     run 'Yes' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'نعم'
+     run 'نعم' {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'service05' x=104.9 y=412.7 w=273.1 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Interior Design '
+     run 'Interior Design ' {'sz': 11.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': '#E7E6E6', 'latin': 'Aller Light', 'cs': '+mn-cs'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'التصميم الداخلي\t'
+     run 'التصميم الداخلي' {'sz': 10.0, 'color': 'scheme:bg2', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+     (empty run) {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'status05' x=378.0 y=412.7 w=116.4 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Yes'
+     run 'Yes' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'نعم'
+     run 'نعم' {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'service04' x=104.9 y=368.8 w=273.1 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Landscape Design'
+     run 'Landscape Design' {'sz': 11.0, 'color': 'scheme:bg2', 'latin': 'Aller Light'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'تصميم البيئة المبنية (لاندسكيب)\t'
+     run 'تصميم البيئة المبنية (لاندسكيب)' {'sz': 10.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': '#E7E6E6', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+     (empty run) {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'status04' x=378.0 y=368.8 w=116.4 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Yes'
+     run 'Yes' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'نعم'
+     run 'نعم' {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'service03' x=104.9 y=324.8 w=273.1 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Municipal Permit '
+     run 'Municipal Permit ' {'sz': 11.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': '#3B3838', 'latin': 'Aller Light', 'cs': '+mn-cs'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'إصدار رخصة البناء'
+     run 'إصدار رخصة البناء' {'sz': 10.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'status03' x=378.0 y=324.8 w=116.4 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Yes'
+     run 'Yes' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'نعم'
+     run 'نعم' {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'service02' x=104.9 y=280.9 w=273.1 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Architectural + Engineering Design '
+     run 'Architectural + Engineering Design ' {'sz': 11.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': '#3B3838', 'latin': 'Aller Light', 'cs': '+mn-cs'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'التصميم الهندسي والمخططات التنفيذية'
+     run 'التصميم الهندسي والمخططات التنفيذية' {'sz': 10.0, 'u': 'none', 'spc': 0.0, 'baseline': '0', 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'status02' x=378.0 y=280.9 w=116.4 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Yes'
+     run 'Yes' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'نعم'
+     run 'نعم' {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'service01' x=104.9 y=237.0 w=273.1 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Architectural Conceptual Design'
+     run 'Architectural Conceptual Design' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller Light'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'التصميم المعماري المبدئي\t'
+     run 'التصميم المعماري المبدئي\t' {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<sp> 'status01' x=378.0 y=237.0 w=116.4 h=43.9 prst=rect fill=none line=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lvl=1 lnSpc=150.0%] 'Yes'
+     run 'Yes' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller'}
+  P[algn=just lvl=1 lnSpc=150.0%] 'نعم'
+     run 'نعم' {'sz': 10.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<pic> 'Picture 57' x=0.0 y=16.1 w=168.7 h=112.4 prst=rect image=image4.png
+<pic> 'Picture 58' x=78.1 y=74.0 w=50.8 h=35.5 prst=rect image=image2.png srcRect={'l': '23691', 't': '22115', 'r': '2025'}
+<grpSp> 'Group 59' x=55.4 y=916.1 w=609.2 h=56.4
+  <sp> 'object 3' x=55.4 y=916.1 w=609.2 h=4.2 flipV fill=none line=#3B3838 w=0.5pt
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt
+    P ''
+  <grpSp> 'Group 61' x=515.2 y=928.5 w=149.4 h=41.0
+    <sp> 'Text Box 57' x=515.3 y=928.5 w=149.2 h=28.2 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r rtl=1 lnSpc=150.0%] ' سجل تجاري 2051059778'
+         run ' سجل تجاري ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '2051059778' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      P[algn=r rtl=1 lnSpc=150.0%] 'رقم الغرفة التجارية 191212'
+         run 'رقم الغرفة التجارية ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '191212' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    <sp> 'Text Box 58' x=515.2 y=953.7 w=149.2 h=15.8 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r] 'vado.sa'
+         run 'v' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+         run 'ado.sa' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+  <sp> 'Text Box 3' x=271.8 y=928.1 w=149.2 h=44.4 prst=rect fill=none line=none
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] 'مكتب الخبر'
+       run 'مكتب الخبر' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] '402 برج الفردان, شارع الأمير تركي, الكورنيش, الخبر, EKAA 7639-34413 المملكة العربية السعودية'
+       run '402 برج الفردان, شارع الأمير تركي, الكور' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run 'EKAA' {'sz': 7.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+       run ' 7639-34413' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run ' المملكة العربية السعودية' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<sp> 'Slide Number Placeholder 11' x=55.0 y=921.7 w=34.6 h=20.3
+  P[algn=ctr] '[FIELD slidenum: 8]'

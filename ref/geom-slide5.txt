@@ -1,0 +1,112 @@
+===== SLIDE 5 (canvas 756 x 1008 pt) =====
+<grpSp> 'Group 3' x=0.0 y=147.7 w=714.6 h=7.1
+  <cxnSp> 'Straight Connector 5' x=0.0 y=154.9 w=714.5 h=0.0 prst=line line=#F2F1EE w=5.0pt
+  <sp> 'Rectangle 6' x=642.7 y=147.7 w=71.9 h=7.1 flipV prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+<sp> 'TextBox 24' x=149.9 y=188.2 w=492.7 h=532.7 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just rtl=1 lnSpc=150.0%] 'المتطلبات المساحية'
+     run 'المتطلبات المساحية' {'sz': 14.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] 'بالإشارة إلى الاجتماع التمهيدي، ونموذج المشروع المستلم من العميل، نورد فيما يلي المتطلبات الفراغية للمشروع:'
+     run 'بالإشارة إلى الاجتماع التمهيدي، ونموذج ا' {'sz': 12.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] 'القطعة رقم (1)'
+     run 'القطعة رقم (1)' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lvl=1 lnSpc=150.0%] 'المساحات الخارجية'
+     run 'المساحات الخارجية' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\tوتشمل:\t\t'
+     (empty run) {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'وتشمل:' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tموقف سيارتين'
+     run '\t\tموقف سيارتين' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tحديقة'
+     run '\t\tحديقة' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tغرفة سائق'
+     run '\t\tغرفة سائق' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lvl=1 lnSpc=150.0%] 'المساحات الداخلية '
+     run 'المساحات الداخلية ' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\tوتشمل:\t\t'
+     (empty run) {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'وتشمل:' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tالدور الأرضي'
+     run '\t\tالدور الأرضي' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] 'جناح الضيافة (مجلس، غرفة طعام، دورة مياه) ,صالة المعيشة , دورة مياه, مطبخ مغلق'
+     run 'جناح الضيافة (مجلس، غرفة طعام، دورة مياه' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tالدور الأول'
+     run '\t\tالدور الأول' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] 'غرفة نوم رئيسية (ماستر)(تشمل غرفة ملابس, دورة مياه) , غرفتا نوم إضافية (تشمل كل منهما غرفة ملابس صغيرة + دورة مياه) '
+     run 'غرفة نوم رئيسية (ماستر)(تشمل غرفة ملابس,' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tالملحق العلوي'
+     run '\t\tالملحق العلوي' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] 'مستودع , غرفة غسيل وكوي الملابس , غرفة نوم العاملة المنزلية '
+     run 'مستودع , غرفة غسيل وكوي الملابس , غرفة ن' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+  P[algn=just rtl=1 lnSpc=150.0%] '* هذه المساحات قابلة للتعديل أو الإلغاء بناءً على محددات قطعة الأرض أو ترتيب الأولويات.'
+     run '* هذه المساحات قابلة للتعديل أو الإلغاء ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] ''
+<grpSp> 'Group 15' x=635.7 y=250.1 w=141.3 h=17.7 rot=270.0deg
+  <sp> 'Rectangle 16' x=635.7 y=250.1 w=17.7 h=17.7 prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 17' x=653.4 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 18' x=671.1 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 19' x=688.7 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 20' x=706.4 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 21' x=724.1 y=250.1 w=17.7 h=17.7 prst=rect fill=#DEE0D8 line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 22' x=741.7 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 23' x=759.3 y=250.1 w=17.7 h=17.7 prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+<sp> 'Text Box 58' x=374.8 y=96.6 w=307.8 h=53.9 prst=rect fill=none line=none
+  bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+  P[algn=r rtl=1 lnSpc=150.0%] 'نطاق العمل'
+     run 'نطاق العمل' {'sz': 28.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<pic> 'Picture 26' x=0.0 y=16.1 w=168.7 h=112.4 prst=rect image=image4.png
+<pic> 'Picture 27' x=78.1 y=74.0 w=50.8 h=35.5 prst=rect image=image2.png srcRect={'l': '23691', 't': '22115', 'r': '2025'}
+<grpSp> 'Group 28' x=55.4 y=916.1 w=609.2 h=56.4
+  <sp> 'object 3' x=55.4 y=916.1 w=609.2 h=4.2 flipV fill=none line=#3B3838 w=0.5pt
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt
+    P ''
+  <grpSp> 'Group 30' x=515.2 y=928.5 w=149.4 h=41.0
+    <sp> 'Text Box 57' x=515.3 y=928.5 w=149.2 h=28.2 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r rtl=1 lnSpc=150.0%] ' سجل تجاري 2051059778'
+         run ' سجل تجاري ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '2051059778' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      P[algn=r rtl=1 lnSpc=150.0%] 'رقم الغرفة التجارية 191212'
+         run 'رقم الغرفة التجارية ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '191212' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    <sp> 'Text Box 58' x=515.2 y=953.7 w=149.2 h=15.8 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r] 'vado.sa'
+         run 'v' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+         run 'ado.sa' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+  <sp> 'Text Box 3' x=271.8 y=928.1 w=149.2 h=44.4 prst=rect fill=none line=none
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] 'مكتب الخبر'
+       run 'مكتب الخبر' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] '402 برج الفردان, شارع الأمير تركي, الكورنيش, الخبر, EKAA 7639-34413 المملكة العربية السعودية'
+       run '402 برج الفردان, شارع الأمير تركي, الكور' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run 'EKAA' {'sz': 7.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+       run ' 7639-34413' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run ' المملكة العربية السعودية' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<sp> 'Slide Number Placeholder 11' x=55.0 y=921.7 w=34.6 h=20.3
+  P[algn=ctr] '[FIELD slidenum: 5]'

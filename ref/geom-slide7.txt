@@ -1,0 +1,163 @@
+===== SLIDE 7 (canvas 756 x 1008 pt) =====
+<grpSp> 'Group 3' x=0.0 y=147.7 w=714.6 h=7.1
+  <cxnSp> 'Straight Connector 5' x=0.0 y=154.9 w=714.5 h=0.0 prst=line line=#F2F1EE w=5.0pt
+  <sp> 'Rectangle 6' x=642.7 y=147.7 w=71.9 h=7.1 flipV prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+<sp> 'TextBox 24' x=149.9 y=188.2 w=492.7 h=732.6 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just rtl=1 lnSpc=150.0%] '2. المرحلة الثانية:'
+     run '2. المرحلة الثانية:' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\tمرحلة إعداد المخططات التنفيذية Technical Drawings:\t'
+     run '\tمرحلة إعداد المخططات التنفيذية ' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'Technical Drawings:' {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\tيتم في هذه المرحلة إعداد التصاميم الهندسية التفصيلية لكافة التخصصات الهندسية والتي \tتشمل :\t\t'
+     (empty run) {'sz': 12.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'يتم في هذه المرحلة إعداد التصاميم الهندس' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tالتصميم المعماري Architectural Design'
+     run '\t\tالتصميم المعماري ' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'Architectural Design' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tالتصاميم الخاصة بأعمال الموقع العام'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'التصاميم الخاصة بأعمال الموقع العام' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tالتصميم المعماري؛ ويشمل: المساقط الأفقية / الواجهات / القطاعات'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'التصميم المعماري؛ ويشمل: المساقط الأفقية' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tالتفاصيل المعمارية لأعمال الهيكل والتشطيبات '
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'التفاصيل المعمارية لأعمال الهيكل والتشطي' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lvl=2 lnSpc=150.0%] 'التصميم الإنشائي Structural Design'
+     run 'التصميم الإنشائي ' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'Structural Design' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tتصميم القواعد للمباني وفقاً لتقرير فحص التربة واستخدام النظام المناسب \t\t\t\tحسب طبيعة الأرض.'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'تصميم القواعد للمباني وفقاً لتقرير فحص ا' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'حسب طبيعة الأرض.' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tإعداد التصاميم الخاصة بالهيكل الإنشائي للمباني'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'إعداد التصاميم الخاصة بالهيكل الإنشائي ل' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tإعداد التفاصيل الإنشائية الخاصة بالمباني'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'إعداد التفاصيل الإنشائية الخاصة بالمباني' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lvl=2 lnSpc=150.0%] 'التصميم الميكانيكي Mechanical Design'
+     run 'التصميم الميكانيكي ' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'Mechanical Design' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tشبكة المياه الباردة والساخنة والخزانات '
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'شبكة المياه الباردة والساخنة والخزانات ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tشبكة الصرف الصحي'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'شبكة الصرف الصحي' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tشبكة مكافحة الحريق '
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'شبكة مكافحة الحريق ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tشبكة تصريف مياه الأمطار '
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'شبكة تصريف مياه الأمطار ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tنظام التهوية '
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'نظام التهوية ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tنظام التكييف '
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'نظام التكييف ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tنظام المصاعد (إن وُجد)'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'نظام المصاعد (إن وُجد)' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tنظام الغاز  (إن وُجد)'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'نظام الغاز' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run ' (إن وُجد)' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t التصميم الكهربائي Electrical Design \t'
+     (empty run) {'sz': 12.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run ' التصميم الكهربائي ' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'Electrical Design ' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 12.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tتوزيعات أعمال الإنارة ومخارج الكهرباء والتيار المنخفض ومخارج التكييف.'
+     run '\t\t\tتوزيعات أعمال الإنارة ومخارج الكهرباء' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tتمديدات نظام كاميرات المراقبة الأمنية CCTV / IP CAM '
+     run '\t\t\tتمديدات نظام كاميرات المراقبة الأمنية' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'CCTV / IP CAM' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tتمديدات نظام الإنذار من الحريق '
+     run '\t\t\tتمديدات نظام الإنذار من الحريق ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tالمخططات الأحادية لأعمال التيار المنخفض'
+     run '\t\t\tالمخططات الأحادية لأعمال التيار المنخ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tتمديدات شبكة الكابلات والصواعد للمبنى'
+     run '\t\t\tتمديدات شبكة الكابلات والصواعد للمبنى' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tجداول اللوحات والأحمال الخاصة بالمبنى'
+     run '\t\t\tجداول اللوحات والأحمال الخاصة بالمبنى' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tتفصيل غرف الكهرباء وسعة المحولات المستخدمة والتوزيع داخل غرفة العدادات'
+     run '\t\t\tتفصيل غرف الكهرباء وسعة المحولات المس' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tدراسة أفضل الأنظمة البيئية واستخدام العزل الحراري والصوتي.'
+     run '\t\t\tدراسة أفضل الأنظمة البيئية واستخدام ا' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\tالحصول على الرخصة النهائية'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'الحصول على الرخصة النهائية' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tيتم تقديم المشروع والحصول على الموافقات من الجهات المساندة (الجهات المعنية \t\t\tلوزارة الشؤون البلدية والإسكان).'
+     run '\t\t\tيتم تقديم المشروع والحصول على الموافق' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=just rtl=1 lnSpc=150.0%] '\t\t\tالحصول على رخصة البناء النهائية.'
+     run '\t\t\tالحصول على رخصة البناء النهائية.' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+<grpSp> 'Group 15' x=635.7 y=250.1 w=141.3 h=17.7 rot=270.0deg
+  <sp> 'Rectangle 16' x=635.7 y=250.1 w=17.7 h=17.7 prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 17' x=653.4 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 18' x=671.1 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 19' x=688.7 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 20' x=706.4 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 21' x=724.1 y=250.1 w=17.7 h=17.7 prst=rect fill=#DEE0D8 line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 22' x=741.7 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 23' x=759.3 y=250.1 w=17.7 h=17.7 prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+<sp> 'Text Box 58' x=374.8 y=96.6 w=307.8 h=53.9 prst=rect fill=none line=none
+  bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+  P[algn=r rtl=1 lnSpc=150.0%] 'نطاق العمل'
+     run 'نطاق العمل' {'sz': 28.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<pic> 'Picture 26' x=0.0 y=16.1 w=168.7 h=112.4 prst=rect image=image4.png
+<pic> 'Picture 27' x=78.1 y=74.0 w=50.8 h=35.5 prst=rect image=image2.png srcRect={'l': '23691', 't': '22115', 'r': '2025'}
+<grpSp> 'Group 28' x=55.4 y=916.1 w=609.2 h=56.4
+  <sp> 'object 3' x=55.4 y=916.1 w=609.2 h=4.2 flipV fill=none line=#3B3838 w=0.5pt
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt
+    P ''
+  <grpSp> 'Group 30' x=515.2 y=928.5 w=149.4 h=41.0
+    <sp> 'Text Box 57' x=515.3 y=928.5 w=149.2 h=28.2 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r rtl=1 lnSpc=150.0%] ' سجل تجاري 2051059778'
+         run ' سجل تجاري ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '2051059778' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      P[algn=r rtl=1 lnSpc=150.0%] 'رقم الغرفة التجارية 191212'
+         run 'رقم الغرفة التجارية ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '191212' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    <sp> 'Text Box 58' x=515.2 y=953.7 w=149.2 h=15.8 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r] 'vado.sa'
+         run 'v' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+         run 'ado.sa' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+  <sp> 'Text Box 3' x=271.8 y=928.1 w=149.2 h=44.4 prst=rect fill=none line=none
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] 'مكتب الخبر'
+       run 'مكتب الخبر' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] '402 برج الفردان, شارع الأمير تركي, الكورنيش, الخبر, EKAA 7639-34413 المملكة العربية السعودية'
+       run '402 برج الفردان, شارع الأمير تركي, الكور' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run 'EKAA' {'sz': 7.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+       run ' 7639-34413' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run ' المملكة العربية السعودية' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<sp> 'Slide Number Placeholder 11' x=55.0 y=921.7 w=34.6 h=20.3
+  P[algn=ctr] '[FIELD slidenum: 7]'

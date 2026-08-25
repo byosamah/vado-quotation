@@ -1,0 +1,112 @@
+===== SLIDE 1 (canvas 756 x 1008 pt) =====
+<grpSp> 'Group 15' x=138.5 y=470.2 w=516.7 h=310.1
+  <cxnSp> 'Straight Connector 16' x=645.8 y=646.9 w=0.0 h=133.4 prst=line line=scheme:tx1 w=2.8pt
+  <sp> 'TextBox 17' x=142.7 y=584.7 w=512.6 h=41.2 prst=rect fill=none
+    bodyPr: wrap=square rtlCol=1 spAutoFit
+    P[algn=r rtl=1] 'فني و مالي'
+       run 'فني و مالي' {'sz': 28.0, 'spc': -1.5, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+  <sp> 'TextBox 18' x=138.5 y=638.3 w=501.4 h=70.0 prst=rect fill=none
+    bodyPr: wrap=square rtlCol=1 spAutoFit
+    P[algn=r rtl=1 lnSpc=150.0%] 'تصميم {{project_type_ar}}'
+       run 'تصميم ' {'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run '{{project_type_ar}}' {'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lnSpc=150.0%] '{{city_ar}} | {{district_ar}}'
+       run '{{city_ar}} | {{district_ar}}' {'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+  <sp> 'TextBox 19' x=216.5 y=470.2 w=438.8 h=104.2 prst=rect fill=none
+    bodyPr: wrap=square rtlCol=1 spAutoFit
+    P[algn=r rtl=1] 'عرض خدمات'
+       run 'عرض' {'sz': 80.0, 'b': True, 'spc': -1.5, 'color': '#664946', 'latin': 'Cairo', 'cs': 'Cairo'}
+       (empty run) {'sz': 80.0, 'b': True, 'spc': -1.5, 'color': '#664946', 'latin': 'Cairo', 'cs': 'Cairo'}
+       run 'خدمات' {'sz': 80.0, 'b': True, 'spc': -1.5, 'color': '#664946', 'latin': 'Cairo', 'cs': 'Cairo'}
+<sp> 'TextBox 28' x=277.2 y=431.1 w=378.0 h=37.3 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=r rtl=1 lnSpc=150.0%] 'خدمات التصميم المعماري والهندسي'
+     run 'خدمات التصميم المعماري والهندسي' {'sz': 18.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<cxnSp> 'Straight Connector 30' x=99.5 y=795.8 w=555.8 h=0.0 prst=line line=scheme:bg2 w=1.0pt
+<sp> 'TextBox 31' x=247.0 y=76.9 w=408.3 h=33.9 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=r rtl=1 lnSpc=150.0%] 'شركة الرؤيــا للاستشــارات العمرانية و الهندسـية'
+     run 'شركة' {'sz': 16.0, 'b': True, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+     run ' الرؤيــا للاستشــارات العمرانية و الهند' {'sz': 16.0, 'b': True, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<sp> 'TextBox 33' x=142.7 y=115.5 w=512.6 h=26.7 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=r rtl=1] 'VISION ARCH. & ENGINEERING CONSULTANTS'
+     run 'VISION ARCH. & ENGINEERING CONSULTANTS' {'sz': 16.0, 'b': True, 'color': '#3B3838', 'latin': 'Aller', 'cs': 'JF Flat'}
+<grpSp> 'Group 35' x=113.5 y=841.5 w=325.2 h=104.7
+  <grpSp> 'Group 39' x=113.5 y=888.7 w=325.2 h=57.5
+    <sp> 'Text Box 57' x=113.5 y=888.7 w=191.7 h=38.6 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r rtl=1 lnSpc=150.0%] ' سجل تجاري 2051059778'
+         run ' سجل تجاري ' {'sz': 9.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '2051059778' {'sz': 9.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      P[algn=r rtl=1 lnSpc=150.0%] 'رقم الغرفة التجارية 191212'
+         run 'رقم الغرفة التجارية ' {'sz': 9.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '191212' {'sz': 9.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    <sp> 'Text Box 58' x=247.0 y=928.0 w=191.7 h=18.2 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P 'VADO.SA'
+         run 'V' {'sz': 9.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Aller Display', 'cs': 'Arial'}
+         run 'ADO.SA' {'sz': 9.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Aller Display', 'cs': 'Arial'}
+  <sp> 'Text Box 3' x=113.6 y=841.5 w=191.7 h=55.0 prst=rect fill=none line=none
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] 'مكتب الخبر'
+       run 'مكتب الخبر' {'sz': 9.0, 'color': '#3B3838', 'latin': 'GE SS Text Bold', 'cs': 'GE SS Text Bold'}
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] '402 برج الفردان, شارع الأمير تركي, الكورنيش, الخبر, EKAA 7639-34413 المملكة العربية السعودية'
+       run '402 برج الفردان, شارع الأمير تركي, الكور' {'sz': 9.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run 'EKAA' {'sz': 9.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+       run ' 7639-34413' {'sz': 9.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run ' المملكة العربية السعودية' {'sz': 9.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<graphicFrame> 'Table 2' x=309.1 y=841.8 w=336.7 h=104.4
+  TABLE cols=[284.2, 52.5]
+    row0 h=14.4pt
+      cell[0][0] fill=none
+        P '{{name_title_ar}} {{firstname_ar}} {{lastname_ar}}'
+           run '{{name_title_ar}} {{firstname_ar}} {{las' {'sz': 8.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+      cell[0][1] fill=none rowSpan=3
+        P 'التوجيه'
+           run 'التوجيه' {'sz': 9.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+    row1 h=14.4pt
+      cell[1][0] fill=none
+        P '{{phone}}'
+           run '{{phone}}' {'sz': 8.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+      cell[1][1] fill=None vMerge
+        P ''
+    row2 h=14.4pt
+      cell[2][0] fill=none
+        P '{{email}}'
+           run '{{email}}' {'sz': 8.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+      cell[2][1] fill=None vMerge
+        P ''
+    row3 h=14.4pt
+      cell[3][0] fill=none
+        P '{{tfp_dur}}  يوم'
+           run '{{tfp_dur}} ' {'sz': 8.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           (empty run) {'sz': 8.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+           run 'يوم' {'sz': 8.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+      cell[3][1] fill=none
+        P 'الصلاحية'
+           run 'الصلاحية' {'sz': 9.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+    row4 h=14.4pt
+      cell[4][0] fill=none
+        P '{{tfp_number}}'
+           run '{{tfp_number}}' {'sz': 8.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+      cell[4][1] fill=none
+        P 'المرجع'
+           run 'المرجع' {'sz': 9.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+    row5 h=14.4pt
+      cell[5][0] fill=none
+        P '{{date}}'
+           run '{{date}}' {'sz': 8.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+      cell[5][1] fill=none
+        P 'التاريخ'
+           run 'التاريخ' {'sz': 9.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+<sp> 'TextBox 23' x=298.9 y=717.6 w=334.7 h=70.3 prst=rect fill=none
+  bodyPr: wrap=square rtlCol=1 spAutoFit
+  P[algn=r lnSpc=150.0%] 'Technical & Financial Proposal for A/E Services'
+     run 'Technical & Financial Proposal for A/E S' {'sz': 12.0, 'spc': -0.7, 'color': '#3B3838', 'latin': 'Aller Light', 'cs': 'Helvetica World'}
+  P[algn=r lnSpc=150.0%] '{{name_title}} {{firstname}} {{lastname}} {{project_type}}'
+     run '{{name_title}} {{firstname}} {{lastname}' {'sz': 12.0, 'spc': -0.7, 'color': '#3B3838', 'latin': 'Aller Light', 'cs': 'Helvetica World'}
+     run ' {{project_type}}' {'sz': 12.0, 'spc': -0.7, 'color': '#3B3838', 'latin': 'Aller Light', 'cs': 'Helvetica World'}
+  P[algn=r lnSpc=150.0%] '{{city}} | {{district}}'
+     run '{{city}} | {{district}}' {'sz': 12.0, 'spc': -0.7, 'color': '#3B3838', 'latin': 'Aller Light', 'cs': 'Helvetica World'}
+<pic> 'Picture 4' x=45.1 y=44.9 w=137.0 h=91.3 prst=rect image=image2.png

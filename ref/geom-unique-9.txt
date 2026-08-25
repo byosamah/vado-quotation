@@ -1,0 +1,264 @@
+===== SLIDE 9 (canvas 756 x 1008 pt) =====
+<sp> 'TextBox 24' x=104.9 y=188.3 w=492.7 h=29.9 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=just lnSpc=150.0%] 'Phases + Deliverables'
+     run 'Phases + Deliverables' {'sz': 14.0, 'b': True, 'color': '#3B3838', 'latin': 'Aller'}
+<graphicFrame> 'Table 29' x=72.3 y=240.3 w=583.2 h=564.5
+  TABLE cols=[37.9, 114.4, 162.3, 191.2, 77.4]
+    row0 h=24.8pt
+      cell[0][0] fill=#BBB6A5 gridSpan=2 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'المرحلة'
+           run 'المرحلة' {'sz': 14.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[0][1] fill=#BBB6A5 hMerge marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'المرحلة'
+           run 'المرحلة' {'sz': 14.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[0][2] fill=#BBB6A5 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'المُخرج'
+           run 'المُخرج' {'sz': 14.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[0][3] fill=#BBB6A5 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'إيضـــاح'
+           run 'إيضـــاح' {'sz': 14.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[0][4] fill=#BBB6A5 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'التسليم'
+           run 'التسليم' {'sz': 14.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+    row1 h=69.7pt
+      cell[1][0] fill=#BBB6A5 a21% marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] '1'
+           run '1' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[1][1] fill=#BBB6A5 a21% marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buNone] 'PS'
+           run 'PS' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'Aller Display', 'cs': 'GE SS Text Medium'}
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'الدراسات البحثية'
+           run 'الدراسات البحثية' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[1][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] 'دراسة المتطلبات وتحديد البرنامج المعماري'
+           run 'دراسة المتطلبات وتحديد البرنامج المعماري' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[1][3] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buChar='\uf0b7'] 'دراسة أفضل و أعلى استخدام'
+           run 'دراسة أفضل و أعلى استخدام' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buChar='\uf0b7'] 'دراسة اتجاه النمو العمراني'
+           run 'دراسة اتجاه النمو العمراني' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buChar='\uf0b7'] 'دراسة المتطلبات و المحددات الأكواد الحكومية'
+           run 'دراسة المتطلبات و المحددات الأكواد الحكو' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[1][4] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% spcBef=12.0pt spcAft=0.0pt buNone] 'PDF - Soft Copy'
+           run 'PDF - Soft Copy' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+    row2 h=47.2pt
+      cell[2][0] fill=#BBB6A5 a21% rowSpan=2 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] '2'
+           run '2' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[2][1] fill=#BBB6A5 a21% rowSpan=2 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buNone] 'CD'
+           run 'CD' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'Aller Display', 'cs': 'GE SS Text Medium'}
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'التصميم المعماري المبدئي'
+           run 'التصميم المعماري المبدئي' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[2][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] 'عرض لوحة الأفكار'
+           run 'عرض لوحة الأفكار' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] ' Mood board'
+           (empty run) {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+           run 'Mood board' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[2][3] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcBef=12.0pt spcAft=0.0pt buChar='\uf0b7'] 'شرح الفكرة التصميمة والأفكار والمواد المقترحة في المشروع'
+           run 'شرح الفكرة التصميمة والأفكار والمواد الم' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[2][4] fill=none rowSpan=2 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] 'PDF - Soft Copy'
+           run 'PDF - Soft Copy' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+    row3 h=54.5pt
+      cell[3][0] fill=None vMerge
+        P ''
+      cell[3][1] fill=None vMerge
+        P[rtl=1] ''
+      cell[3][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] 'مخططات التصميم المعماري'
+           run 'مخططات التصميم المعماري' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[3][3] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'مساقط أفقية Plans'
+           run 'مساقط أفقية ' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+           run 'Plans' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'واجهات Elevations'
+           run 'واجهات ' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+           run 'Elevations' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'مناظير 3D Renders'
+           run 'مناظير ' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+           run '3D Renders' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[3][4] fill=None vMerge
+        P[rtl=1] ''
+    row4 h=54.5pt
+      cell[4][0] fill=#BBB6A5 a21% marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] '3'
+           run '3' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[4][1] fill=#BBB6A5 a21% marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buNone] 'DD'
+           run 'DD' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'Aller Display', 'cs': 'GE SS Text Medium'}
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'تطوير التصميم'
+           run 'تطوير التصميم' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[4][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% spcBef=12.0pt spcAft=0.0pt buNone] 'اختيار الأنظمة الهندسية وتنسيق بين التخصصات الهندسية'
+           run 'اختيار الأنظمة الهندسية وتنسيق بين التخص' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[4][3] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt marR=0.0pt lnSpc=150.0% spcBef=0.0pt spcAft=0.0pt buChar='\uf0b7'] 'يتم الاجتماع مع المالك لتحديد الأنظمة الهندسية لتطبيقها على التصميم.'
+           run 'يتم الاجتماع مع المالك لتحديد الأنظمة ال' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[4][4] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] 'PDF - Soft Copy'
+           run 'PDF - Soft Copy' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+    row5 h=73.2pt
+      cell[5][0] fill=#BBB6A5 a21% rowSpan=3 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] '4'
+           run '4' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[5][1] fill=#BBB6A5 a21% rowSpan=3 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buNone] 'TD '
+           run 'TD ' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'Aller Display', 'cs': 'GE SS Text Medium'}
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'الرسومات التنفيذية'
+           run 'الرسومات التنفيذية' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[5][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] 'مخططات التصميم المعماري'
+           run 'مخططات التصميم المعماري' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[5][3] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'مساقط أفقية Plans'
+           run 'مساقط أفقية ' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+           run 'Plans' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'واجهات Elevations'
+           run 'واجهات ' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+           run 'Elevations' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'قطاعات Sections'
+           run 'قطاعات ' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+           run 'Sections' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'تفاصيل تنفيذية Details'
+           run 'تفاصيل تنفيذية ' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+           run 'Details' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[5][4] fill=none rowSpan=3 marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] 'PDF + CAD Files  - Soft Copy'
+           run 'PDF + CAD Files  - Soft Copy' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+    row6 h=35.3pt
+      cell[6][0] fill=None vMerge
+        P ''
+      cell[6][1] fill=None vMerge
+        P[rtl=1] ''
+      cell[6][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0%] 'مخططات التصميم الإنشائي'
+           run 'مخططات التصميم الإنشائي' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[6][3] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'RC Structural Drawings, Sections & Details. '
+           run 'RC Structural Drawings, Sections & Detai' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[6][4] fill=None vMerge
+        P[rtl=1] ''
+    row7 h=91.4pt
+      cell[7][0] fill=None vMerge
+        P ''
+      cell[7][1] fill=None vMerge
+        P[rtl=1] ''
+      cell[7][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0%] 'مخططات التصميم الكهروميكانيكي'
+           run 'مخططات التصميم الكهروميكانيكي' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[7][3] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'Electrical & Lighting'
+           run 'Electrical' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+           run ' & Lighting' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'HVAC'
+           run 'HVAC' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'CCTV, Data, Speakers'
+           run 'CCTV, Data, Speakers' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'Water Supply'
+           run 'Water Supply' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'Drainage'
+           run 'Drainage' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[7][4] fill=None vMerge
+        P[rtl=1] ''
+    row8 h=42.8pt
+      cell[8][0] fill=#BBB6A5 a21% marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] '5'
+           run '5' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[8][1] fill=#BBB6A5 a21% marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buNone] 'GA '
+           run 'GA ' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'Aller Display', 'cs': 'GE SS Text Medium'}
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'إصدار رخصة البناء'
+           run 'إصدار رخصة البناء' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[8][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0%] 'إصدار رخصة البناء'
+           run 'إصدار رخصة البناء' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[8][3] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'عبر رفع المخططات الهندسية لموقع بلدي والمتابعة مع البلدية المعنية'
+           run 'عبر رفع المخططات الهندسية لموقع بلدي وال' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[8][4] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] 'PDF - Soft Copy'
+           run 'PDF - Soft Copy' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+    row9 h=42.8pt
+      cell[9][0] fill=#BBB6A5 a21% marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] '6'
+           run '6' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[9][1] fill=#BBB6A5 a21% marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% spcBef=12.0pt spcAft=0.0pt buNone] 'TD'
+           run 'TD' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'Aller Display', 'cs': 'GE SS Text Medium'}
+        P[algn=ctr rtl=1 marL=0.0pt lnSpc=100.0% spcBef=12.0pt] 'المواصفات والكميات'
+           run 'المواصفات والكميات' {'sz': 11.0, 'color': 'scheme:tx1', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+      cell[9][2] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0%] 'جدول المواصفات والكميات'
+           run 'جدول المواصفات والكميات' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[9][3] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=0.0pt buChar='\uf0b7'] 'All Above Sectors bill of quantities and specifications.'
+           run 'All Above Sectors bill of quantities and' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+      cell[9][4] fill=none marL=5.4 marR=5.4 marT=0.0 marB=0.0 anchor=ctr
+        P[algn=ctr rtl=1 lnSpc=150.0% spcBef=12.0pt] 'PDF - Soft Copy'
+           run 'PDF - Soft Copy' {'sz': 11.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+<grpSp> 'Group 45' x=72.3 y=822.8 w=544.7 h=73.5
+  <grpSp> 'Group 33' x=72.3 y=822.8 w=180.6 h=15.0
+    <sp> 'TextBox 39' x=117.4 y=822.8 w=135.5 h=15.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Conceptual Design'
+         run 'Conceptual Design' {'sz': 11.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+    <sp> 'TextBox 40' x=72.3 y=822.8 w=40.9 h=15.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'CD'
+         run 'CD' {'sz': 11.0, 'b': True, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+  <grpSp> 'Group 4' x=73.0 y=847.5 w=269.2 h=15.0
+    <sp> 'TextBox 31' x=117.2 y=847.5 w=224.9 h=15.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Design Development'
+         run 'Design Development' {'sz': 11.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+    <sp> 'TextBox 34' x=73.0 y=847.5 w=40.9 h=15.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'DD'
+         run 'DD' {'sz': 11.0, 'b': True, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+  <grpSp> 'Group 35' x=72.7 y=870.2 w=278.7 h=20.6
+    <sp> 'TextBox 37' x=117.2 y=870.2 w=234.2 h=20.6 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Technical Design (Design + BOQ + Specs.)'
+         run 'Technical Design (Design + BOQ + Specs.)' {'sz': 11.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+    <sp> 'TextBox 38' x=72.7 y=870.2 w=40.9 h=15.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'TD'
+         run 'TD' {'sz': 11.0, 'b': True, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+  <grpSp> 'Group 43' x=347.1 y=823.2 w=269.8 h=20.6
+    <sp> 'TextBox 32' x=392.1 y=823.2 w=224.9 h=20.6 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Governmental Approval'
+         run 'Governmental Approval' {'sz': 11.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+    <sp> 'TextBox 36' x=347.1 y=823.2 w=40.9 h=20.6 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'GA'
+         run 'GA' {'sz': 11.0, 'b': True, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+  <grpSp> 'Group 44' x=347.1 y=848.0 w=269.8 h=48.4
+    <sp> 'TextBox 41' x=392.1 y=848.0 w=224.9 h=15.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Bidding Management'
+         run 'Bidding Management' {'sz': 11.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+    <sp> 'TextBox 42' x=347.1 y=848.0 w=40.9 h=15.0 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'BM'
+         run 'BM' {'sz': 11.0, 'b': True, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+    <sp> 'TextBox 49' x=392.1 y=875.8 w=224.9 h=20.6 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'Pre-requisite Studies'
+         run 'Pre-requisite Studies' {'sz': 11.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+    <sp> 'TextBox 50' x=347.1 y=875.8 w=40.9 h=20.6 prst=rect fill=none
+      bodyPr: wrap=square spAutoFit
+      P 'PS'
+         run 'PS' {'sz': 11.0, 'b': True, 'spc': 3.0, 'color': 'scheme:tx2', 'latin': 'Aller'}
+<sp> 'Text Box 58' x=374.8 y=96.6 w=307.8 h=53.9 prst=rect fill=none line=none
+  bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+  P[algn=r rtl=1 lnSpc=150.0%] 'نطاق العمل'
+     run 'نطاق العمل' {'sz': 28.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<pic> 'Picture 47' x=0.0 y=16.1 w=168.7 h=112.4 prst=rect image=image4.png
+<pic> 'Picture 48' x=78.1 y=74.0 w=50.8 h=35.5 prst=rect image=image2.png srcRect={'l': '23691', 't': '22115', 'r': '2025'}
+

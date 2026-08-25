@@ -1,0 +1,164 @@
+===== SLIDE 12 (canvas 756 x 1008 pt) =====
+<grpSp> 'Group 3' x=0.0 y=147.7 w=714.6 h=7.1
+  <cxnSp> 'Straight Connector 5' x=0.0 y=154.9 w=714.5 h=0.0 prst=line line=#F2F1EE w=5.0pt
+  <sp> 'Rectangle 6' x=642.7 y=147.7 w=71.9 h=7.1 flipV prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+<grpSp> 'Group 15' x=635.7 y=250.1 w=141.3 h=17.7 rot=270.0deg
+  <sp> 'Rectangle 16' x=635.7 y=250.1 w=17.7 h=17.7 prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 17' x=653.4 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 18' x=671.1 y=250.1 w=17.7 h=17.7 prst=rect fill=#DEE0D8 line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 19' x=688.7 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 20' x=706.4 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 21' x=724.1 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 22' x=741.7 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 23' x=759.3 y=250.1 w=17.7 h=17.7 prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+<sp> 'TextBox 27' x=104.5 y=191.9 w=527.5 h=525.4 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=r rtl=1 lvl=1 indent=0.0pt marR=0.0pt lnSpc=150.0% buNone] ''
+  P[algn=r rtl=1 lnSpc=150.0%] 'استنادًا إلى نطاق العمل الموضّح لخدمات التصميم المعماري والهندسي المذكور أعلاه،'
+     run 'استنادًا إلى نطاق العمل الموضّح لخدمات ا' {'sz': 11.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+  P[algn=r rtl=1 lnSpc=150.0%] 'فقد قمنا بإعداد العرض المالي التالي:'
+     run 'فقد قمنا بإعداد العرض المالي التالي:' {'sz': 11.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+  P[algn=r rtl=1 lnSpc=150.0%] ''
+  P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% buNone] 'التكلفة الإجمالية :'
+     run 'التكلفة الإجمالية' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'GE SS Text Bold', 'cs': 'GE SS Text Bold'}
+     run ' :' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'GE SS Text Bold', 'cs': 'GE SS Text Bold'}
+  P[algn=r rtl=1 lvl=1 indent=0.0pt marR=0.0pt lnSpc=150.0% buNone] '\t{{costnumber}}     '
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo Black', 'cs': 'Cairo Black'}
+     run '{{costnumber}}' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo ExtraBold', 'cs': 'Cairo ExtraBold'}
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo Black', 'cs': 'Cairo Black'}
+  P[algn=r rtl=1 lvl=1 indent=0.0pt marR=0.0pt lnSpc=150.0% buNone] '\t{{costwritten}}  ريال سعودي (غير شامل الضريبة)'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+     run '{{costwritten}}' {'sz': 11.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+     run 'ريال سعودي (غير شامل الضريبة)' {'sz': 11.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+  P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% buNone] ''
+  P[algn=r rtl=1 lnSpc=150.0%] 'تفاصيل الدفعات'
+     run 'تفاصيل الدفعات' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r rtl=1 lnSpc=150.0%] ''
+  P[algn=r rtl=1 lvl=1 lnSpc=150.0%] '1.\tالدفعة المقدمة \t\t\t\t\t\t\t\t{{p1}}'
+     run '1.\t' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'الدفعة المقدمة ' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run '{{p1}}' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r rtl=1 lvl=1 lnSpc=200.0%] '\t\t\tعند قبول هذا العرض وتوقيع العقد, يدفع مبلغًا مقدماً\t\t\t\t\t\t\tبما يعادل ما نسبته {{p1}}  من إجمالي التكلفة, وذلك لبدء المشروع'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'عند قبول هذا العرض وتوقيع العقد, يدفع مب' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run '\t\t\tبما يعادل ما ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'نسبته ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run '{{p1}} ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'من إجمالي التكلفة, وذلك لبدء المشروع' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r rtl=1 lvl=1 lnSpc=150.0%] ''
+  P[algn=r rtl=1 lvl=1 indent=-18.0pt marL=54.0pt lnSpc=150.0% buAutoNum=arabicPeriod] 'بعد موافقة المالك على التصميم المبدئي\t\t\t\t\t\t{{p2}}'
+     run 'بعد موافقة المالك على التصميم المبدئي\t\t\t' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run '{{p2}}' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r rtl=1 lvl=1 lnSpc=150.0%] '\t\t\tبعد تطوير التصميم التصميم المبدئي واعتماده من المالك, تُستحق دفعة \t\t\t\t\tبما يعادل نسبة {{p2}} من اجمالي القيمة'
+     run '\t\t\tبعد تطوير التصميم التصميم المبدئي واع' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'نسبة ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run '{{p2}}' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'من اجمالي القيمة' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r rtl=1 lvl=1 lnSpc=150.0%] ''
+  P[algn=r rtl=1 lvl=1 indent=-18.0pt marL=54.0pt lnSpc=150.0% buAutoNum=arabicPeriod] 'بعد اكتمال الرسوم التنفيذية \t\t\t\t\t\t\t{{p3}}'
+     run 'بعد اكتمال الرسوم التنفيذية \t\t\t\t\t\t' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run '{{p3}}' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r rtl=1 lvl=1 lnSpc=150.0%] '\t\t\tبعد اكتمال الرسومات التنفيذية والموافقة عليها من قبل المالك تُستحق '
+     run '\t\t\tبعد اكتمال الرسومات التنفيذية والمواف' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r rtl=1 lvl=1 lnSpc=150.0%] '\t\t\tدفعة بما يعادل نسبة  {{p3}}من اجمالي القيمة'
+     run '\t\t\tدفعة بما يعادل ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'نسبة ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run ' {{p3}}' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'من ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'اجمالي القيمة' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r rtl=1 lvl=1 lnSpc=150.0%] ''
+  P[algn=r rtl=1 lvl=1 lnSpc=150.0%] '4.    قبل جدول الكميات والمواصفات\t\t\t\t\t\t\t{{p4}}'
+     run '4.    قبل جدول الكميات والمواصفات\t\t\t\t\t\t' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     (empty run) {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run '{{p4}}' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r rtl=1 lvl=1 lnSpc=150.0%] '\t\t\tقبل تسليم جدول الكميات والمواصفات,  تُستحق\tدفعة '
+     run '\t\t\tقبل تسليم جدول الكميات والمواصفات,  ت' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r rtl=1 lvl=1 lnSpc=150.0%] '\t\t\tبما يعادل نسبة  {{p4}}من اجمالي القيمة'
+     run '\t\t\tبما يعادل ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'نسبة ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run ' {{p4}}' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'من ' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+     run 'اجمالي القيمة' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r rtl=1 lvl=1 lnSpc=150.0%] ''
+<sp> 'Rectangle 1' x=-243.6 y=831.1 w=756.0 h=0.0 prst=rect fill=none line=none
+  bodyPr: anchor=ctr vert=horz wrap=none lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+  P[algn=l rtl=0 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=100.0% buNone] '\\n(BR)'
+<sp> 'Text Box 58' x=374.8 y=96.6 w=307.8 h=53.9 prst=rect fill=none line=none
+  bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+  P[algn=r rtl=1 lnSpc=150.0%] 'العرض المالي'
+     run 'العرض المالي' {'sz': 28.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<pic> 'Picture 4' x=558.7 y=293.5 w=8.7 h=9.7 prst=rect fill=none image=image6.png srcRect={}
+<sp> 'TextBox 29' x=104.5 y=682.4 w=534.6 h=185.0 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=r rtl=1 lnSpc=150.0%] ''
+  P[algn=r rtl=1 lnSpc=150.0%] 'الحساب البنكي'
+     run 'الحساب البنكي' {'sz': 11.0, 'b': True, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+  P[algn=r rtl=1 lnSpc=150.0%] ''
+  P[algn=r rtl=1 lnSpc=150.0%] ''
+  P[algn=r rtl=1 lnSpc=150.0%] ''
+  P[algn=r rtl=1 lnSpc=150.0%] ''
+  P[algn=r rtl=1 lnSpc=150.0%] '\tVISION ENGINEERING CONSULTANCY COMP'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller Light'}
+     run 'VISION ENGINEERING CONSULTANCY COMP' {'sz': 10.0, 'color': '#3B3838', 'latin': 'Aller Light'}
+  P[algn=r rtl=1 lnSpc=150.0%] '\tSA4205000068228888887000'
+     (empty run) {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller Light'}
+     run 'SA4205000068228888887000' {'sz': 11.0, 'color': '#3B3838', 'latin': 'Aller'}
+  P[algn=r rtl=1 lnSpc=150.0%] ''
+<pic> 'Picture 2' x=452.9 y=746.4 w=124.6 h=47.3 prst=rect fill=none image=image7.png srcRect={}
+<pic> 'Picture 37' x=0.0 y=16.1 w=168.7 h=112.4 prst=rect image=image4.png
+<pic> 'Picture 40' x=78.1 y=74.0 w=50.8 h=35.5 prst=rect image=image2.png srcRect={'l': '23691', 't': '22115', 'r': '2025'}
+<grpSp> 'Group 41' x=55.4 y=916.1 w=609.2 h=56.4
+  <sp> 'object 3' x=55.4 y=916.1 w=609.2 h=4.2 flipV fill=none line=#3B3838 w=0.5pt
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt
+    P ''
+  <grpSp> 'Group 43' x=515.2 y=928.5 w=149.4 h=41.0
+    <sp> 'Text Box 57' x=515.3 y=928.5 w=149.2 h=28.2 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r rtl=1 lnSpc=150.0%] ' سجل تجاري 2051059778'
+         run ' سجل تجاري ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '2051059778' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      P[algn=r rtl=1 lnSpc=150.0%] 'رقم الغرفة التجارية 191212'
+         run 'رقم الغرفة التجارية ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '191212' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    <sp> 'Text Box 58' x=515.2 y=953.7 w=149.2 h=15.8 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r] 'vado.sa'
+         run 'v' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+         run 'ado.sa' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+  <sp> 'Text Box 3' x=271.8 y=928.1 w=149.2 h=44.4 prst=rect fill=none line=none
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] 'مكتب الخبر'
+       run 'مكتب الخبر' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] '402 برج الفردان, شارع الأمير تركي, الكورنيش, الخبر, EKAA 7639-34413 المملكة العربية السعودية'
+       run '402 برج الفردان, شارع الأمير تركي, الكور' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run 'EKAA' {'sz': 7.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+       run ' 7639-34413' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run ' المملكة العربية السعودية' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<sp> 'Slide Number Placeholder 11' x=55.0 y=921.7 w=34.6 h=20.3
+  P[algn=ctr] '[FIELD slidenum: 12]'

@@ -1,0 +1,85 @@
+{
+  "_doc": "One proposal. Copy this file, change the values, then:\n  python3 build.py --data jobs/<name>.json --out out/<TFP number>.pptx\n  python3 tools/presend.py jobs/<name>.json out/<TFP number>.pptx\nAnything you leave out keeps the {{tag}} from content.json.",
+  "fields": {
+    "tfp_number": "250402MKM-RES-VILLA",
+    "tfp_dur": "14",
+    "date": "23 AUG 2026",
+    "name_title_ar": "الأستاذ",
+    "firstname_ar": "فهد",
+    "lastname_ar": "الفلاني",
+    "name_title": "Mr.",
+    "firstname": "Fahad",
+    "lastname": "Al Fulani",
+    "phone": "055 123 4567",
+    "email": "fahad@example.com",
+    "project_type_ar": "فيلا سكنية",
+    "project_type": "Residential Villa",
+    "city_ar": "الخبر",
+    "city": "Khobar",
+    "district_ar": "الثقبة",
+    "district": "Al Thuqbah",
+    "spatialneeds": "فيلا سكنية مفصولة",
+    "lotarea": "386.15",
+    "areasource": "الصك",
+    "lotnumber": "1",
+    "districtnumber": "42",
+    "coordinates": "26.2794, 50.2083",
+    "nat_address": "RAKA2345, 7639 - 34413",
+    "googlelink": "https://maps.app.goo.gl/example",
+    "ksaarchzone": "عمارة الساحل الشرقي",
+    "ksaarchlevel": "مستوى 3 (معاصر, انتقالي, تقليدي)",
+    "usecode": "س-1-أ سكني",
+    "divtype": "لايوجد",
+    "divdesc": "لايوجد",
+    "landuse": "سكني",
+    "usedesc": "سكني بنسبة 60% من مساحة الارض بارتفاع عدد 2 طابق بحد اقصى 10 متر",
+    "numberofunits": "وحدة واحدة بالقطعة",
+    "buildingratio": "0.6",
+    "minimumelev": "20",
+    "frontsetback": "1/5 عرض الشارع",
+    "sidesetback": "2",
+    "backsetback": "2",
+    "floors": "2",
+    "height": "10",
+    "canaddfloor": "لا",
+    "farratio": "غير محدد",
+    "archstyle": "معاصر",
+    "costnumber": "1,534",
+    "costwritten": "auto",
+    "p1": "30%",
+    "p2": "30%",
+    "p3": "30%",
+    "p4": "10%"
+  },
+  "services": [
+    "concept",
+    "engineering",
+    "permit"
+  ],
+  "spatial": {
+    "_doc": "Slide 5. Plain room names; the slide adds the indentation.",
+    "lot_label_ar": "القطعة رقم (1)",
+    "outdoor": [
+      "موقف سيارتين",
+      "حديقة",
+      "غرفة سائق"
+    ],
+    "floors": [
+      {
+        "name_ar": "الدور الأرضي",
+        "rooms_ar": "جناح الضيافة (مجلس، غرفة طعام، دورة مياه) , صالة المعيشة , دورة مياه, مطبخ مغلق"
+      },
+      {
+        "name_ar": "الدور الأول",
+        "rooms_ar": "غرفة نوم رئيسية (ماستر) (تشمل غرفة ملابس, دورة مياه) , غرفتا نوم إضافية (تشمل كل منهما غرفة ملابس صغيرة + دورة مياه)"
+      },
+      {
+        "name_ar": "الملحق العلوي",
+        "rooms_ar": "مستودع , غرفة غسيل وكوي الملابس , غرفة نوم العاملة المنزلية"
+      }
+    ]
+  },
+  "placeholders": [
+    "map"
+  ]
+}

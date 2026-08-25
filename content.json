@@ -1,0 +1,1260 @@
+{
+  "_doc": "Every word in the deck lives here. build.py reads this file and draws it. Values under `fields` are the merge tags: leave them as {{tag}} to produce a blank template, or overwrite them (or pass a second JSON to build.py) to produce a filled proposal.",
+  "fields": {
+    "_doc": "The 49 merge fields. Same names as the old Excel form, so the existing tracker still maps 1:1.",
+    "tfp_number": "{{tfp_number}}",
+    "tfp_dur": "{{tfp_dur}}",
+    "date": "{{date}}",
+    "name_title_ar": "{{name_title_ar}}",
+    "firstname_ar": "{{firstname_ar}}",
+    "lastname_ar": "{{lastname_ar}}",
+    "name_title": "{{name_title}}",
+    "firstname": "{{firstname}}",
+    "lastname": "{{lastname}}",
+    "phone": "{{phone}}",
+    "email": "{{email}}",
+    "project_type_ar": "{{project_type_ar}}",
+    "project_type": "{{project_type}}",
+    "city_ar": "{{city_ar}}",
+    "city": "{{city}}",
+    "district_ar": "{{district_ar}}",
+    "district": "{{district}}",
+    "spatialneeds": "{{spatialneeds}}",
+    "lotarea": "{{lotarea}}",
+    "areasource": "{{areasource}}",
+    "lotnumber": "{{lotnumber}}",
+    "districtnumber": "{{districtnumber}}",
+    "coordinates": "{{coordinates}}",
+    "nat_address": "{{nat_address}}",
+    "googlelink": "{{googlelink}}",
+    "ksaarchzone": "{{ksaarchzone}}",
+    "ksaarchlevel": "{{ksaarchlevel}}",
+    "usecode": "{{usecode}}",
+    "divtype": "{{divtype}}",
+    "divdesc": "{{divdesc}}",
+    "landuse": "{{landuse}}",
+    "usedesc": "{{usedesc}}",
+    "numberofunits": "{{numberofunits}}",
+    "buildingratio": "{{buildingratio}}",
+    "minimumelev": "{{minimumelev}}",
+    "frontsetback": "{{frontsetback}}",
+    "sidesetback": "{{sidesetback}}",
+    "backsetback": "{{backsetback}}",
+    "floors": "{{floors}}",
+    "height": "{{height}}",
+    "canaddfloor": "{{canaddfloor}}",
+    "farratio": "{{farratio}}",
+    "archstyle": "{{archstyle}}",
+    "costnumber": "{{costnumber}}",
+    "costwritten": "{{costwritten}}",
+    "p1": "{{p1}}",
+    "p2": "{{p2}}",
+    "p3": "{{p3}}",
+    "p4": "{{p4}}"
+  },
+  "company": {
+    "name_ar": "شركة الرؤيــا للاستشــارات العمرانية و الهندسـية",
+    "name_ar_short": "شركة الرؤيا للاستشارات الهندسية",
+    "name_en": "VISION ARCH. & ENGINEERING CONSULTANTS",
+    "brand": "VADO",
+    "website": "vado.sa",
+    "website_caps": "VADO.SA",
+    "tagline_en": "CREATING VALUABLE SPACES",
+    "cr_label_ar": "سجل تجاري",
+    "cr_number": "2051059778",
+    "chamber_label_ar": "رقم الغرفة التجارية",
+    "chamber_number": "191212",
+    "office_ar": "مكتب الخبر",
+    "bank_name_asset": "bank-alinma.png",
+    "bank_account_name": "VISION ENGINEERING CONSULTANCY COMP",
+    "iban": "SA4205000068228888887000",
+    "contact_phone": "+966 503 600 488",
+    "contact_email": "m.almulla@vado.sa",
+    "address": {
+      "_doc": "The office address, in parts, because it was two strings before and they disagreed: the footer said postcode 34413 and the contact page said 34443. One of them had been wrong on every proposal sent. 34413 is correct, confirmed 23 Aug 2026. The formats below compose from these parts, so the footer and the contact page can never drift apart again.",
+      "office_no": "402",
+      "building_ar": "برج الفردان",
+      "street_ar": "شارع الأمير تركي",
+      "district_ar": "الكورنيش",
+      "city_ar": "الخبر",
+      "short_code": "EKAA",
+      "building_no": "7639",
+      "postcode": "34413",
+      "country_ar": "المملكة العربية السعودية"
+    },
+    "address_formats": {
+      "footer_ar": "{office_no} {building_ar}, {street_ar}, {district_ar}, {city_ar}, {short_code} {building_no}-{postcode} {country_ar}",
+      "contact_line1_ar": "{office_no} {building_ar}، {street_ar}, حي {district_ar}",
+      "contact_line2_ar": "{city_ar} {building_no}-{postcode} ، {country_ar}"
+    }
+  },
+  "sections": [
+    {
+      "key": "intro",
+      "ar": "المقدمة",
+      "medium_words": 0
+    },
+    {
+      "key": "project",
+      "ar": "عن المشروع",
+      "medium_words": 1
+    },
+    {
+      "key": "scope",
+      "ar": "نطاق العمل",
+      "medium_words": 1
+    },
+    {
+      "key": "method",
+      "ar": "منهجية العمل",
+      "medium_words": 1
+    },
+    {
+      "key": "timeline",
+      "ar": "الخط الزمني للمشروع",
+      "medium_words": 2
+    },
+    {
+      "key": "financial",
+      "ar": "العرض المالي",
+      "medium_words": 1
+    },
+    {
+      "key": "agreement",
+      "ar": "الاتفاقية",
+      "medium_words": 0
+    },
+    {
+      "key": "contact",
+      "ar": "معلومات التواصل",
+      "medium_words": 1
+    }
+  ],
+  "cover": {
+    "kicker_ar": "خدمات التصميم المعماري والهندسي",
+    "headline_ar": [
+      "عرض",
+      "خدمات"
+    ],
+    "subhead_ar": "فني و مالي",
+    "english_line1": "Technical & Financial Proposal for A/E Services",
+    "meta_rows": [
+      {
+        "label_ar": "التوجيه",
+        "value": "{{name_title_ar}} {{firstname_ar}} {{lastname_ar}}",
+        "span": 3
+      },
+      {
+        "label_ar": "",
+        "value": "{{phone}}"
+      },
+      {
+        "label_ar": "",
+        "value": "{{email}}"
+      },
+      {
+        "label_ar": "الصلاحية",
+        "value": "{{tfp_dur}} يوم"
+      },
+      {
+        "label_ar": "المرجع",
+        "value": "{{tfp_number}}"
+      },
+      {
+        "label_ar": "التاريخ",
+        "value": "{{date}}"
+      }
+    ]
+  },
+  "contents": {
+    "title_ar": "المحتوى"
+  },
+  "intro": {
+    "salutation_ar": "{{name_title_ar}} {{firstname_ar}} {{lastname_ar}}",
+    "body_ar": [
+      [
+        {
+          "t": "يسرّنا أن نُقدّم لكم شركة الرؤيا للاستشارات الهندسية \"فادو VADO \" وهي شركة استشارات ديناميكية في الخبر، المملكة العربية السعودية، وتتمتع بتاريخ عريق يعود إلى عام 1994."
+        }
+      ],
+      [
+        {
+          "t": " تتميز شركة فادو بمحفظة مشاريع متنوعة تشمل القطاعات الحضرية العامة، وتصميم المساحات الخارجية، والثقافية، والتجزئة، والضيافة، والسكنية، وقد اكتسبت سمعة طيبة في تقديم أعمال عالية الجودة والتميّز. يعمل فريقنا وفق قيم "
+        },
+        {
+          "t": "الرؤية، والطموح، والديناميكية، والأصالة",
+          "b": true
+        },
+        {
+          "t": "، ويكرّس جهوده لتجاوز توقعات العملاء في مجالات الخدمات المعمارية والهندسية. نحن نؤمن بأهمية التصميم التعاوني، حيث نضمن أن تكون رؤيتكم في صميم كل مشروع.ويهدف هذا العرض إلى تقديم الجوانب الفنية والمالية المتعلقة بخبراتنا في المشاريع السكنية والتجارية. نحن ملتزمون بابتكار مساحات ذات قيمة، مع الالتزام بالجداول الزمنية والميزانيات المحددة، مع الحفاظ على أعلى مستويات الاحترافية والكفاءة. ونتطلع إلى فرصة التعاون معكم لتحقيق رؤيتكم وتحويلها إلى واقع ملموس."
+        }
+      ]
+    ],
+    "signoff_ar": "مع خالص التحية،",
+    "_doc": "body_ar is a list of paragraphs; each paragraph is a list of runs. Set \"b\": true on a run to bold it, as the company values are.",
+    "salutation_honorific_ar": "حفظه الله،"
+  },
+  "project": {
+    "summary_rows": [
+      {
+        "label_ar": "نوعية المشروع ",
+        "value_ar": "{{project_type_ar}}",
+        "h": 36.0
+      },
+      {
+        "label_ar": "المتطلبات المساحية",
+        "value_ar": "{{spatialneeds}}",
+        "h": 79.2
+      },
+      {
+        "label_ar": "مساحة الارض",
+        "value_ar": "{{lotarea}} م² · حسب {{areasource}}",
+        "h": 36.0
+      },
+      {
+        "label_ar": "تفاصيل القطعة",
+        "value_ar": "قطعة رقم {{lotnumber}}",
+        "h": 24.0,
+        "rowspan": 3
+      },
+      {
+        "label_ar": null,
+        "value_ar": "مخطط {{districtnumber}}, {{district_ar}}",
+        "h": 24.0
+      },
+      {
+        "label_ar": null,
+        "value_ar": "{{city_ar}}, المملكة العربية السعودية",
+        "h": 24.0
+      },
+      {
+        "label_ar": "الموقع",
+        "value_ar": "",
+        "h": 156.5,
+        "rowspan": 4
+      }
+    ],
+    "location_lines": [
+      {
+        "value": "{{coordinates}}",
+        "size": 8,
+        "font": "en_light",
+        "color": "ink",
+        "h": 11.0
+      },
+      {
+        "value": "{{nat_address}}",
+        "size": 8,
+        "font": "cairo",
+        "color": "olive",
+        "h": 11.0
+      },
+      {
+        "value": "{{googlelink}}",
+        "size": 8,
+        "font": "en_light",
+        "color": "ink",
+        "h": 11.0
+      }
+    ],
+    "regulatory_heading_ar": "المحددات التنظيمية",
+    "arch_style_rows": [
+      {
+        "label_ar": "تصنيف النمط المعماري",
+        "values": [
+          "{{ksaarchzone}}",
+          "{{ksaarchlevel}}"
+        ]
+      }
+    ],
+    "limits_rows": [
+      {
+        "label_ar": "نسبة البناء",
+        "value": "{{buildingratio}}"
+      },
+      {
+        "label_ar": "الحد الأدنى للواجهة",
+        "value": "{{minimumelev}}"
+      },
+      {
+        "label_ar": "ارتداد الواجهة",
+        "value": "{{frontsetback}}"
+      },
+      {
+        "label_ar": "ارتداد الجوانب",
+        "value": "{{sidesetback}}"
+      },
+      {
+        "label_ar": "ارتداد خلفي",
+        "value": "{{backsetback}}"
+      },
+      {
+        "label_ar": "الطوابق",
+        "value": "{{floors}}"
+      },
+      {
+        "label_ar": "ارتفاع المبنى",
+        "value": "{{height}}"
+      },
+      {
+        "label_ar": "يمكن اضافة دور",
+        "value": "{{canaddfloor}}"
+      },
+      {
+        "label_ar": "معامل كتلة البناء",
+        "value": "{{farratio}}"
+      }
+    ],
+    "use_rows": [
+      {
+        "label_ar": "رمز الاستخدام",
+        "value": "{{usecode}}",
+        "h": 27.6
+      },
+      {
+        "label_ar": "نوع التقسيم",
+        "value": "{{divtype}}",
+        "h": 27.6
+      },
+      {
+        "label_ar": "وصف التقسيم",
+        "value": "{{divdesc}}",
+        "h": 27.6
+      },
+      {
+        "label_ar": "الاستخدام لقطعة الأرض",
+        "value": "{{landuse}}",
+        "h": 27.6
+      },
+      {
+        "label_ar": "وصف اشتراط البناء",
+        "value": "{{usedesc}}",
+        "h": 56.1
+      },
+      {
+        "label_ar": "عدد الوحدات",
+        "value": "{{numberofunits}}",
+        "h": 27.6
+      }
+    ],
+    "source_note_ar": "* المستكشف الجغرافي لأمانة المنطقة الشرقية واشتراطات إنشاء المباني السكنية 2026 م مرجع المعلومات السابقة بحسب تاريخ العرض."
+  },
+  "spatial": {
+    "_doc": "Slide 5, the brief. Its SHAPE changes with the project, not just its words: a villa has outdoor spaces and floors, a fuel station has a forecourt and buildings, offices have levels and cores. So it is a list of groups, and a group holds either a flat list of `items`, or `blocks` that each name a part and describe what is in it, or both. Any number of groups, any number of blocks. A job replaces `groups` wholesale.",
+    "heading_ar": "المتطلبات المساحية",
+    "lead_ar": "بالإشارة إلى الاجتماع التمهيدي، ونموذج المشروع المستلم من العميل، نورد فيما يلي المتطلبات الفراغية للمشروع:",
+    "lot_label_ar": "القطعة رقم ({{lotnumber}})",
+    "includes_label_ar": "وتشمل:",
+    "note_ar": "* هذه المساحات قابلة للتعديل أو الإلغاء بناءً على محددات قطعة الأرض أو ترتيب الأولويات.",
+    "indent": {
+      "_doc": "Indent from the start edge, in points. RTL text starts on the right, so these are applied as a right margin. They replace the literal tab characters the original used, which moved whenever the font or a name length changed.",
+      "includes": 36.0,
+      "item": 72.0,
+      "rooms": 0.0
+    },
+    "groups": [
+      {
+        "title_ar": "المساحات الخارجية",
+        "items": [
+          "موقف سيارتين",
+          "حديقة",
+          "غرفة سائق"
+        ]
+      },
+      {
+        "title_ar": "المساحات الداخلية",
+        "blocks": [
+          {
+            "name_ar": "الدور الأرضي",
+            "contents_ar": "جناح الضيافة (مجلس، غرفة طعام، دورة مياه) ,صالة المعيشة , دورة مياه, مطبخ مغلق"
+          },
+          {
+            "name_ar": "الدور الأول",
+            "contents_ar": "غرفة نوم رئيسية (ماستر)(تشمل غرفة ملابس, دورة مياه) , غرفتا نوم إضافية (تشمل كل منهما غرفة ملابس صغيرة + دورة مياه) "
+          },
+          {
+            "name_ar": "الملحق العلوي",
+            "contents_ar": "مستودع , غرفة غسيل وكوي الملابس , غرفة نوم العاملة المنزلية "
+          }
+        ]
+      }
+    ]
+  },
+  "scope": {
+    "_doc": "The scope, as one list that flows across as many pages as it needs. Page one carries the heading and the lead; later pages carry only lines. `page_break: true` forces a new page, which is how phase two starts its own. `page_capacity` is how many paragraphs fit above the footer; the builder never exceeds it, so adding scope for a project that needs more disciplines grows the deck instead of overflowing a page.",
+    "heading_ar": "تفصيل نطاق العمل",
+    "lead_ar": "بالإشارة إلى الاجتماع التمهيدي، والأبحاث والدراسات، فإن تفصيل نطاق العمل كما يلي:",
+    "indent_step": 36.0,
+    "page_capacity": 32,
+    "lines": [
+      {
+        "t": "1. المرحلة الأولى:",
+        "sz": 12,
+        "b": true,
+        "level_indent": 1
+      },
+      {
+        "t": "التصميم المعماري",
+        "sz": 12,
+        "b": true,
+        "level_indent": 2
+      },
+      {
+        "t": "تقسم الى:",
+        "sz": 11,
+        "level_indent": 1
+      },
+      {
+        "t": "التصاميم المعمارية المبدئية Concept Design Development:",
+        "sz": 11,
+        "b": true,
+        "level_indent": 2
+      },
+      {
+        "t": "يتم في هذه المرحلة إعداد الفكرة التصميمية بشكل يظهر المشروع بصورة متميزة  (بالتنسيق مع المالك أو من يمثله) والتي تشمل:",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "دراسة المتطلبات للمالك من حيث المكونات والمساحات ووضع برنامج المشروع والذي يحقق هذه المتطلبات.",
+        "sz": 11,
+        "bullet": "•"
+      },
+      {
+        "t": "دراسة التصاميم الخاصة بتوزيع الموقع العام.",
+        "sz": 11,
+        "bullet": "•"
+      },
+      {
+        "t": "دراسة التصاميم الخاصة بتوزيع المساقط الأفقية للمشروع.",
+        "sz": 11,
+        "bullet": "•"
+      },
+      {
+        "t": "دراسة التصاميم الخارجية للواجهات وإعداد مناظير خارجية بما يحقق أفضل النتائج.",
+        "sz": 11,
+        "bullet": "•"
+      },
+      {
+        "t": " الحصول على الموافقة المبدئية للمشروع:",
+        "sz": 11,
+        "b": true,
+        "level_indent": 2
+      },
+      {
+        "t": "يتم في هذه المرحلة إعداد التصاميم الهندسية المبدئية المطلوبة للحصول على  الموافقة المبدئية للمشروع من البلدية.",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "  تحديد الارتفاعات ونسب البناء و الارتدادات والاستخدامات وخلافه",
+        "sz": 11
+      },
+      {
+        "t": "وأخذ الموافقة من الامانة .",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "page_break": true
+      },
+      {
+        "t": "2. المرحلة الثانية:",
+        "sz": 12,
+        "b": true
+      },
+      {
+        "t": "مرحلة إعداد المخططات التنفيذية Technical Drawings:",
+        "sz": 12,
+        "b": true,
+        "level_indent": 1
+      },
+      {
+        "t": "يتم في هذه المرحلة إعداد التصاميم الهندسية التفصيلية لكافة التخصصات الهندسية والتي  تشمل :",
+        "sz": 11,
+        "level_indent": 1
+      },
+      {
+        "t": "التصميم المعماري Architectural Design",
+        "sz": 11,
+        "b": true,
+        "level_indent": 2
+      },
+      {
+        "t": "التصاميم الخاصة بأعمال الموقع العام",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "التصميم المعماري؛ ويشمل: المساقط الأفقية / الواجهات / القطاعات",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "التفاصيل المعمارية لأعمال الهيكل والتشطيبات",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "التصميم الإنشائي Structural Design",
+        "sz": 11,
+        "b": true,
+        "level_indent": 2
+      },
+      {
+        "t": "تصميم القواعد للمباني وفقاً لتقرير فحص التربة واستخدام النظام المناسب  حسب طبيعة الأرض.",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "إعداد التصاميم الخاصة بالهيكل الإنشائي للمباني",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "إعداد التفاصيل الإنشائية الخاصة بالمباني",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "التصميم الميكانيكي Mechanical Design",
+        "sz": 11,
+        "b": true,
+        "level_indent": 2
+      },
+      {
+        "t": "شبكة المياه الباردة والساخنة والخزانات",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "شبكة الصرف الصحي",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "شبكة مكافحة الحريق",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "شبكة تصريف مياه الأمطار",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "نظام التهوية",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "نظام التكييف",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "نظام المصاعد (إن وُجد)",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "نظام الغاز  (إن وُجد)",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": " التصميم الكهربائي Electrical Design",
+        "sz": 11,
+        "b": true,
+        "level_indent": 2
+      },
+      {
+        "t": "توزيعات أعمال الإنارة ومخارج الكهرباء والتيار المنخفض ومخارج التكييف.",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "تمديدات نظام كاميرات المراقبة الأمنية CCTV / IP CAM",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "تمديدات نظام الإنذار من الحريق",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "المخططات الأحادية لأعمال التيار المنخفض",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "تمديدات شبكة الكابلات والصواعد للمبنى",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "جداول اللوحات والأحمال الخاصة بالمبنى",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "تفصيل غرف الكهرباء وسعة المحولات المستخدمة والتوزيع داخل غرفة العدادات",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "دراسة أفضل الأنظمة البيئية واستخدام العزل الحراري والصوتي.",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "الحصول على الرخصة النهائية",
+        "sz": 11,
+        "b": true,
+        "level_indent": 2
+      },
+      {
+        "t": "يتم تقديم المشروع والحصول على الموافقات من الجهات المساندة (الجهات المعنية  لوزارة الشؤون البلدية والإسكان).",
+        "sz": 11,
+        "level_indent": 3
+      },
+      {
+        "t": "الحصول على رخصة البناء النهائية.",
+        "sz": 11,
+        "level_indent": 3
+      }
+    ]
+  },
+  "services": {
+    "heading_ar": "الخدمات المشمولة",
+    "yes_en": "Yes",
+    "yes_ar": "نعم",
+    "no_en": "N/A",
+    "items": [
+      {
+        "id": "concept",
+        "en": "Architectural Conceptual Design",
+        "ar": "التصميم المعماري المبدئي",
+        "included": true,
+        "alias_excel": "Architectural Conceptual Design"
+      },
+      {
+        "id": "engineering",
+        "en": "Architectural + Engineering Design ",
+        "ar": "التصميم الهندسي والمخططات التنفيذية",
+        "included": true,
+        "alias_excel": "Engineering Design"
+      },
+      {
+        "id": "permit",
+        "en": "Municipal Permit ",
+        "ar": "إصدار رخصة البناء",
+        "included": true,
+        "alias_excel": "Municipal Permit"
+      },
+      {
+        "id": "landscape",
+        "en": "Landscape Design",
+        "ar": "تصميم البيئة المبنية (لاندسكيب)",
+        "included": false,
+        "alias_excel": "Landscape Design"
+      },
+      {
+        "id": "interior",
+        "en": "Interior Design ",
+        "ar": "التصميم الداخلي",
+        "included": false,
+        "alias_excel": "Interior Design"
+      },
+      {
+        "id": "bidding",
+        "en": "Bidding Management ",
+        "ar": "إدارة الطرح والمناقصات",
+        "included": false,
+        "alias_excel": "Bidding Management"
+      },
+      {
+        "id": "supervision",
+        "en": "Supervision ",
+        "ar": "الإشراف الهندسي",
+        "included": false,
+        "alias_excel": "Supervision"
+      },
+      {
+        "id": "pm",
+        "en": "Project Management ",
+        "ar": "إدارة المشروع",
+        "included": false,
+        "alias_excel": "Project Management"
+      },
+      {
+        "id": "bim",
+        "en": "BIM Services ",
+        "ar": "خدمات النمذجة المعلوماتية المعمارية",
+        "included": false,
+        "alias_excel": "Bim Services"
+      },
+      {
+        "id": "archviz",
+        "en": "Architectural Visualization ",
+        "ar": "الإظهار المعماري التسويقي",
+        "included": false,
+        "alias_excel": "Arch Viz."
+      },
+      {
+        "id": "hbu",
+        "en": "Highest and Best Use Study ",
+        "ar": "الدراسة العقارية والاستخدام الأمثل ",
+        "included": false,
+        "alias_excel": "HBU Study"
+      }
+    ],
+    "_doc": "The eleven services, in the order they are listed when asked. A job names the ids it sells under \"services\"; every id not named is drawn as N/A. There is deliberately no default set: which services a job sells is a commercial decision, so it is always asked, never assumed."
+  },
+  "phases": {
+    "head_ar": [
+      "المرحلة",
+      "المُخرج",
+      "إيضـــاح",
+      "التسليم"
+    ],
+    "rows": [
+      {
+        "id": "research",
+        "no": "1",
+        "code": "PS",
+        "name_ar": "الدراسات البحثية",
+        "h": 69.7,
+        "deliverable_ar": [
+          "دراسة المتطلبات وتحديد البرنامج المعماري"
+        ],
+        "detail": [
+          "دراسة أفضل و أعلى استخدام",
+          "دراسة اتجاه النمو العمراني",
+          "دراسة المتطلبات و المحددات الأكواد الحكومية"
+        ],
+        "handover": "PDF - Soft Copy",
+        "requires": "hbu",
+        "h_timeline": 41.3,
+        "duration_days": null,
+        "schedule": {
+          "after": null,
+          "overlap_days": 0,
+          "parallel": false,
+          "markers": []
+        }
+      },
+      {
+        "id": "concept",
+        "no": "2",
+        "code": "CD",
+        "name_ar": "التصميم المعماري المبدئي",
+        "h": 47.2,
+        "span": 2,
+        "deliverable_ar": [
+          "عرض لوحة الأفكار",
+          " Mood board"
+        ],
+        "detail": [
+          "شرح الفكرة التصميمة والأفكار والمواد المقترحة في المشروع"
+        ],
+        "handover": "PDF - Soft Copy",
+        "h_timeline": 53.7,
+        "duration_days": 7,
+        "schedule": {
+          "after": null,
+          "overlap_days": 0,
+          "parallel": false,
+          "markers": [
+            {
+              "kind": "document_submission",
+              "at_day": 6
+            },
+            {
+              "kind": "document_submission",
+              "at": "end"
+            },
+            {
+              "kind": "client_revision",
+              "at": "end"
+            }
+          ]
+        }
+      },
+      {
+        "id": "concept_drawings",
+        "no": null,
+        "code": null,
+        "name_ar": null,
+        "h": 54.5,
+        "deliverable_ar": [
+          "مخططات التصميم المعماري"
+        ],
+        "detail": [
+          "مساقط أفقية Plans",
+          "واجهات Elevations",
+          "مناظير 3D Renders"
+        ],
+        "handover": null,
+        "h_timeline": 27.8,
+        "duration_days": 21
+      },
+      {
+        "id": "develop",
+        "no": "3",
+        "code": "DD",
+        "name_ar": "تطوير التصميم",
+        "h": 54.5,
+        "deliverable_ar": [
+          "اختيار الأنظمة الهندسية وتنسيق بين التخصصات الهندسية"
+        ],
+        "detail": [
+          "يتم الاجتماع مع المالك لتحديد الأنظمة الهندسية لتطبيقها على التصميم."
+        ],
+        "handover": "PDF - Soft Copy",
+        "h_timeline": 41.3,
+        "duration_days": 7,
+        "schedule": {
+          "after": "CD",
+          "overlap_days": 0,
+          "parallel": false,
+          "markers": []
+        }
+      },
+      {
+        "id": "technical",
+        "no": "4",
+        "code": "TD ",
+        "name_ar": "الرسومات التنفيذية",
+        "h": 73.2,
+        "span": 3,
+        "deliverable_ar": [
+          "مخططات التصميم المعماري"
+        ],
+        "detail": [
+          "مساقط أفقية Plans",
+          "واجهات Elevations",
+          "قطاعات Sections",
+          "تفاصيل تنفيذية Details"
+        ],
+        "handover": "PDF + CAD Files  - Soft Copy",
+        "h_timeline": 30.2,
+        "duration_span": 3,
+        "duration_days": 45,
+        "schedule": {
+          "after": "DD",
+          "overlap_days": 0,
+          "parallel": false,
+          "markers": []
+        }
+      },
+      {
+        "id": "technical_structural",
+        "no": null,
+        "code": null,
+        "name_ar": null,
+        "h": 35.3,
+        "deliverable_ar": [
+          "مخططات التصميم الإنشائي"
+        ],
+        "detail": [
+          "RC Structural Drawings, Sections & Details. "
+        ],
+        "handover": null,
+        "h_timeline": 19.9,
+        "duration_days": null
+      },
+      {
+        "id": "technical_mep",
+        "no": null,
+        "code": null,
+        "name_ar": null,
+        "h": 91.4,
+        "deliverable_ar": [
+          "مخططات التصميم الكهروميكانيكي"
+        ],
+        "detail": [
+          "Electrical & Lighting",
+          "HVAC",
+          "CCTV, Data, Speakers",
+          "Water Supply",
+          "Drainage"
+        ],
+        "handover": null,
+        "h_timeline": 36.0,
+        "duration_days": null
+      },
+      {
+        "id": "permit",
+        "no": "5",
+        "code": "GA ",
+        "name_ar": "إصدار رخصة البناء",
+        "h": 42.8,
+        "deliverable_ar": [
+          "إصدار رخصة البناء"
+        ],
+        "detail": [
+          "عبر رفع المخططات الهندسية لموقع بلدي والمتابعة مع البلدية المعنية"
+        ],
+        "handover": "PDF - Soft Copy",
+        "h_timeline": 41.3,
+        "duration_days": 7,
+        "schedule": {
+          "after": "TD",
+          "overlap_days": 18,
+          "parallel": true,
+          "markers": [
+            {
+              "kind": "gov_approval",
+              "at": "end"
+            }
+          ]
+        }
+      },
+      {
+        "id": "boq",
+        "no": "6",
+        "code": "TD",
+        "name_ar": "المواصفات والكميات",
+        "h": 42.8,
+        "deliverable_ar": [
+          "جدول المواصفات والكميات"
+        ],
+        "detail": [
+          "All Above Sectors bill of quantities and specifications."
+        ],
+        "handover": "PDF - Soft Copy",
+        "h_timeline": 41.3,
+        "duration_days": 14,
+        "schedule": {
+          "after": "TD",
+          "overlap_days": 11,
+          "parallel": false,
+          "markers": []
+        }
+      }
+    ],
+    "heading_ar": "المراحل والمخرجات",
+    "_doc": "The phases, once. Slide 9 draws the deliverables and slide 11 draws the schedule from this same list, so the two cannot disagree. A row with `requires` only appears when that service is sold: the research phase delivers a highest-and-best-use study, so it drops out of both pages when hbu is not on the bill. A row with `no: null` continues the phase above it and travels with it. `duration` is what slide 11 shows; a phase with none is on the deliverables page but not on the schedule, and presend says so. `codes` is the legend, and only the codes actually used get printed. `duration_days` is the length of that row in days; a phase lasts the sum of its own row and its continuations, so CD is 7 + 21 = 28. `schedule` says where the phase sits: `after` names the phase it follows, `overlap_days` is how many days early it starts, and `parallel` draws the double arrow. The Gantt is computed from those numbers, so a bar can never disagree with the duration printed beside it. Every row has a stable `id`. A job overrides how long a row takes with {\"durations\": {\"technical\": 90}}, so the days belong to the project and the phase structure belongs to the studio.",
+    "codes": {
+      "CD": "Conceptual Design",
+      "DD": "Design Development",
+      "TD": "Technical Design (Design + BOQ + Specs.)",
+      "GA": "Governmental Approval",
+      "BM": "Bidding Management",
+      "PS": "Pre-requisite Studies"
+    }
+  },
+  "method": {
+    "principles_heading_ar": "مبادئ التصميم",
+    "principles_ar": [
+      "الوظيفية",
+      "كفاءة استخدام المساحات",
+      "كفاءة الطاقة",
+      "الاندماج مع الطبيعة (المواد + الإضاءة + المساحات الخضراء + الماء)",
+      "مشاركة العميل والتعاون",
+      "التميّز الهندسي"
+    ],
+    "style_label_ar": "الطراز المعماري ",
+    "style_value": "{{archstyle}} ",
+    "method_heading_ar": "منهجية التصميم",
+    "triangle": {
+      "top_left_ar": "القصد",
+      "top_right_ar": "الوظيفة",
+      "bottom_ar": "الشكل",
+      "centre_ar": "التصميم"
+    },
+    "lead_ar": "تُعد الركائز الثلاث للتصميم – القصد، والوظيفة، والشكل – مترابطة وجوهرية لابتكار تصاميم ناجحة وفعّالة. ومن خلال مراعاة كل ركيزة طوال عملية التصميم، بدءًا من التصوّر المبدئي وحتى التنفيذ، يقدم فريق التصميم في شركة الرؤيا للاستشارات الهندسية \"فادو VADO\"  تصاميم هادفة، تتمحور حول المستخدم، وجذابة بصريًا. يُمكّن تحقيق التوازن بين هذه الركائز من تبنّي منهج شامل ومتكامل في التصميم، مما ينتج عنه مساحات وتجارب ذات مغزى وجمال بصري في آنٍ واحد.",
+    "pillars": [
+      {
+        "name_ar": "القصد",
+        "sep": ":",
+        "body_ar": " تشير إلى الغرض الأساسي والمفهوم الكامن وراء التصميم. وتشمل الأهداف والرؤية والنتائج المرجوة من المشروع. يتطلب التصميم بنيّة واضحة فهم احتياجات العميل، وأهداف المشروع، والسياق الذي سيوجد فيه التصميم."
+      },
+      {
+        "name_ar": "الوظيفة",
+        "sep": " :",
+        "body_ar": "تركّز على الجوانب العملية وقابلية الاستخدام في التصميم. وتشمل فهم الوظيفة المقصودة للمساحة وتصميمها بطريقة تعزز من أدائها. تأخذ الوظيفة بعين الاعتبار عوامل مثل إمكانيات الموقع، والأُرغونوميا (علم التفاعل البشري مع البيئة)، والكفاءة، والسلامة، وسهولة الاستخدام."
+      },
+      {
+        "name_ar": "الشكل ",
+        "sep": ":",
+        "body_ar": "يتعلق بالجوانب الجمالية والتكوين والعناصر البصرية للتصميم. ويشمل الشكل العام، والبنية، وترتيب العناصر التي تُنتج تصميمًا جذّابًا ومتناسقًا بصريًا. يأخذ الشكل في الحسبان مبادئ النسبة، والمقياس، والتوازن، والإيقاع، والتناغم، وتفاعل الضوء والظل. كما يتضمن اختيار المواد والألوان والملمس والتشطيبات التي تعزز التأثير البصري للتصميم."
+      }
+    ],
+    "principles_indent": 108.0,
+    "_doc": "Slide 10, the design method. Fixed content: it argues how the studio works and says nothing about any particular project. The only value that changes is {{archstyle}}. `principles_ar` is a plain list, and the first item is drawn on the heading line because that is how the page is set; add or remove one and the rest follow. The triangle labels must match the pillar names below them, which they did not: the diagram said الوظيفية while the paragraph explaining it said الوظيفة."
+  },
+  "timeline": {
+    "heading_ar": "التسليمات",
+    "footer_heading_ar": "الخط الزمني للمشروع",
+    "note_ar": "* لا يشمل المدد الزمنية الزائدة بسبب التعديلات المطلوبة من طرف العميل او الجهات الحكومية.",
+    "head_ar": [
+      "المرحلة",
+      "المُخرج",
+      "المدة"
+    ],
+    "gantt": {
+      "_doc": "Only the chart furniture lives here: the month and week labels and the legend. The bars, their positions and the dashed drops between them are computed from `phases.rows`, so the chart cannot say anything the duration column does not. The legend reads in Arabic, like the rest of the deck. These words are also the ones the browser tool offers when someone adds a mark to a bar, so they are written once here and read from here.",
+      "months": [
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "weeks_per_month": 4,
+      "week_labels": [
+        "W1",
+        "W2",
+        "W3",
+        "W4"
+      ],
+      "legend": [
+        {
+          "col": 0,
+          "row": 0,
+          "kind": "document_submission",
+          "label": "تسليم مستندات"
+        },
+        {
+          "col": 0,
+          "row": 1,
+          "kind": "client_submission",
+          "label": "تسليم من العميل"
+        },
+        {
+          "col": 0,
+          "row": 2,
+          "kind": "client_revision",
+          "label": "مراجعة العميل"
+        },
+        {
+          "col": 1,
+          "row": 0,
+          "kind": "phase_start",
+          "label": "بداية المرحلة"
+        },
+        {
+          "col": 1,
+          "row": 1,
+          "kind": "gov_approval",
+          "label": "موافقة جهة حكومية"
+        },
+        {
+          "col": 2,
+          "row": 0,
+          "kind": "progress",
+          "label": "سير العمل"
+        },
+        {
+          "col": 2,
+          "row": 1,
+          "kind": "parallel",
+          "label": "عمل متوازٍ"
+        },
+        {
+          "col": 2,
+          "row": 2,
+          "kind": "consequential",
+          "label": "مرحلة تابعة"
+        }
+      ]
+    },
+    "_doc": "The schedule. Its rows come from `phases.rows`, so a phase added or dropped there moves here too. Only the Gantt geometry lives in this block."
+  },
+  "financial": {
+    "lead_ar": [
+      "استنادًا إلى نطاق العمل الموضّح لخدمات التصميم المعماري والهندسي المذكور أعلاه،",
+      "فقد قمنا بإعداد العرض المالي التالي:"
+    ],
+    "total_label_ar": "التكلفة الإجمالية :",
+    "total_number": "{{costnumber}}",
+    "total_written_ar": "{{costwritten}}",
+    "currency_note_ar": "ريال سعودي (غير شامل الضريبة)",
+    "payments_heading_ar": "تفاصيل الدفعات",
+    "payments": [
+      {
+        "id": "advance",
+        "title_ar": "الدفعة المقدمة",
+        "pct": "{{p1}}",
+        "body_ar": [
+          "عند قبول هذا العرض وتوقيع العقد, يدفع مبلغًا مقدماً بما يعادل ما نسبته {{p1}} من إجمالي التكلفة, وذلك لبدء المشروع"
+        ]
+      },
+      {
+        "id": "concept_approved",
+        "title_ar": "بعد موافقة المالك على التصميم المبدئي",
+        "pct": "{{p2}}",
+        "body_ar": [
+          "بعد تطوير التصميم التصميم المبدئي واعتماده من المالك, تُستحق دفعة بما يعادل نسبة {{p2}} من اجمالي القيمة"
+        ]
+      },
+      {
+        "id": "technical_done",
+        "title_ar": "بعد اكتمال الرسوم التنفيذية",
+        "pct": "{{p3}}",
+        "body_ar": [
+          "بعد اكتمال الرسومات التنفيذية والموافقة عليها من قبل المالك تُستحق دفعة بما يعادل نسبة {{p3}} من اجمالي القيمة"
+        ]
+      },
+      {
+        "id": "before_boq",
+        "title_ar": "قبل جدول الكميات والمواصفات",
+        "pct": "{{p4}}",
+        "body_ar": [
+          "قبل تسليم جدول الكميات والمواصفات, تُستحق دفعة بما يعادل نسبة {{p4}} من اجمالي القيمة"
+        ]
+      }
+    ],
+    "bank_heading_ar": "الحساب البنكي",
+    "_doc": "The price page. Payments are numbered in order, so inserting one renumbers the rest. The percentage sits against a declared tab stop rather than a hand-counted run of tabs, and the riyal amount beside it is worked out from the fee, so a client can read what each stage costs without doing four multiplications. The currency mark beside the figure is text, not an image. It was an image of the new SAR symbol pinned to a page coordinate, and a coordinate cannot follow text: it landed on the heading once and on the written amount once. Neither Cairo nor GE SS Text carries a riyal glyph (U+FDFC and U+20C0 both come out blank or as a box, checked by rendering them), so ر.س is what is left that always draws. Install the SAMA symbol font and this can become the glyph again.",
+    "total_row_ar": "الإجمالي",
+    "columns": {
+      "_doc": "The payment schedule is a table, right to left: number, stage, share, amount. A table aligns by construction. Before this the columns were chased with tab characters and only lined up on the one row whose title happened to be short enough.",
+      "widths": [
+        26.0,
+        300.0,
+        58.0,
+        84.0
+      ],
+      "row_h": 62.0,
+      "total_h": 26.0
+    },
+    "riyal_mark": {
+      "_doc": "The Saudi riyal symbol, as an image, because neither Cairo nor GE SS Text carries the glyph: U+FDFC and U+20C0 both come out blank or as a box, checked by rendering them through both fonts. An image cannot follow text, so the figure gets its own box with a fixed LEFT edge and the mark sits a fixed gap to the left of it. The number then grows rightwards, away from the mark, and the two can never overlap however long the figure is. Nudge `figure_x` to move the pair across the page; `gap` is the space between them.",
+      "asset": "sar-symbol.png",
+      "figure_x": 545.0,
+      "gap": 16.0,
+      "w": 11.0,
+      "h": 12.3,
+      "dy": 3.0
+    }
+  },
+  "agreement": {
+    "notes_heading_ar": "ملاحظات على العرض",
+    "notes": [
+      {
+        "t": "العرض الفني والمالي ساري لمدة {{tfp_dur}} يوم من تاريخه.",
+        "level": 0
+      },
+      {
+        "t": "العرض الفني والمالي غير شامل رسوم الجهات المعنية الخاصة بإصدار رخصة البناء النهائية للمشروع.",
+        "level": 0
+      },
+      {
+        "t": "يقوم المالك بتزويد المكتب الاستشاري بكافة المعلومات المتعلقة بالأرض وهي على سبيل المثال لا الحصر:",
+        "level": 0
+      },
+      {
+        "t": "صك الملكية.",
+        "level": 1
+      },
+      {
+        "t": "تفويض المكتب في موقع بلدي.",
+        "level": 1
+      },
+      {
+        "t": "القرار المساحي لقطع الأراضي الصادر من البلدية.",
+        "level": 1
+      },
+      {
+        "t": "تقرير فحص التربة لأرض المشروع. ",
+        "level": 1
+      },
+      {
+        "t": "الرفع المساحي لحدود ومناسيب الأرض.",
+        "level": 1
+      },
+      {
+        "t": "يبدأ العمل بعد أسبوع من استلام الدفعة المقدمة أو توقيع العقد أيهما تالياً.",
+        "level": 0
+      }
+    ],
+    "contract_heading_ar": "نص العقد",
+    "basmala_ar": "بسم الله الرحمن الرحيم",
+    "contract_body_ar": "لما قام الطرف الثاني بالتقدم بعرضه الفني والمالي للقيام بأعمال التصميم المعماري والهندسي لمشروع {{project_type_ar}} للطرف الأول على الأرض السالف ذكرها في مستند هذا العرض، ولما كان العرض المقدم من الطرف الثاني قد اقترن بقبول الطرف الأول وذلك بعد اطلاعه على متطلبات المالك والاشتراطات البلدية وشروط العقد وسائر المستندات المرفقة به، وأبدى كافة الاستعداد للقيام بهذه الأعمال؛ لذا فقد اتفق الطرفان على بنود العرض السابقة وهي بمثابة بنود العقد، ويخضع هذا العقد للأنظمة المعمول بها في المملكة العربية السعودية بالمحكمة التجارية بالدمام ويجري تفسيره وتنفيذه والفصل فيما ينشأ عنه من نزاع أو دعاوى – لا سمح الله – بموجبها.",
+    "closing_ar": "وبالله التوفيق ،،",
+    "footnote_ar": "* يتم توقيع عقد منفصل بناءً على هذا العرض في حال رغبة العميل.",
+    "_doc": "Slide 13, the contract. Signing this page forms the agreement, so nothing here is positioned by blank paragraphs: the footnote and the two signature blocks sit at declared coordinates, and the notes are a plain list that PowerPoint numbers. A note with `level: 1` is a bullet under the note above it.",
+    "signature_y": 716.4,
+    "footnote_y": 690.0,
+    "parties": [
+      {
+        "side": "owner",
+        "x": 404.0,
+        "w": 207.4,
+        "role_ar": "المالك",
+        "name_ar": "{{name_title_ar}} {{firstname_ar}} {{lastname_ar}}",
+        "party_ar": "الطرف الأول"
+      },
+      {
+        "side": "consultant",
+        "x": 154.9,
+        "w": 227.6,
+        "role_ar": "الاستشاري المصمم",
+        "name_ar": "شركة الرؤيا للاستشارات الهندسية",
+        "signatory_ar": "م. معتز بن خالد الملا",
+        "party_ar": "الطرف الثاني"
+      }
+    ]
+  },
+  "contact": {
+    "lead_ar": "لأي استفسارات أو لمزيد من المناقشات، يرجى التواصل معنا عبر بيانات الاتصال التالية:",
+    "closing_ar": [
+      "فريقنا متاح دائمًا لتقديم أي معلومات إضافية، وتوضيح التفاصيل الفنية، ومناقشة متطلبات المشروع بمزيد من التفصيل.",
+      "نتطلع إلى فرصة أن نكون جزءًا من المساهمة في تحقيق هذا المشروع بنجاح.",
+      "شكرًا لكم.",
+      "مع خالص التحية،"
+    ],
+    "team_ar": "فريق فادو"
+  },
+  "lists": {
+    "_doc": "Closed lists. These were the drop-downs in the old Excel form; tools/presend.py checks the job against them so a value cannot be invented.",
+    "ksa_arch_zones": [
+      "عمارة الساحل الشرقي",
+      "عمارة القطيف",
+      "عمارة واحات الأحساء",
+      "عمارة مرتفعات أبها",
+      "عمارة جزر فرسان",
+      "عمارة أصدار عسير",
+      "عمارة بيشة الصحراوية",
+      "العمارة النجدية الشرقية",
+      "عمارة ساحل تهامة",
+      "عمارة سفوح تهامة",
+      "عمارة ريف المدينة المنورة",
+      "عمارة ساحل تبوك",
+      "العمارة الحجازية الساحلية",
+      "العمارة النجدية",
+      "عمارة الطائف",
+      "عمارة نجران",
+      "عمارة جبال السروات",
+      "عمارة المدينة المنورة",
+      "العمارة النجدية الشمالية",
+      "لاينطبق/ مستثنى"
+    ],
+    "ksa_arch_levels": [
+      "مستوى 1 (تقليدي)",
+      "مستوى 2 (انتقالي, تقليدي)",
+      "مستوى 3 (معاصر, انتقالي, تقليدي)",
+      "لاينطبق/ مستثنى"
+    ],
+    "arch_styles": [
+      "معاصر",
+      "كلاسيكي",
+      "نيو كلاسيكي",
+      "تراثي",
+      "حديث"
+    ]
+  },
+  "signatories": {
+    "_doc": "Who signs the proposal. A job picks one with \"signatory\": \"<id>\". The image, the name, the role and the office travel together, so a change of signatory can never leave one person's signature over another person's name.",
+    "default": "mkm",
+    "mkm": {
+      "name_ar": "معتز بن خالد الملا",
+      "name_prefixed_ar": "م. معتز بن خالد الملا",
+      "role_ar": "معماري | نائب الرئيس",
+      "office_ar": "مكتب الرؤيا للاستشارات الهندسية VADO",
+      "signature_asset": "signature-mkm.png"
+    }
+  }
+}

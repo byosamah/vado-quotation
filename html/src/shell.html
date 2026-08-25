@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
+<title>VADO — العرض الفني والمالي</title>
+<style>/*__CSS__*/</style>
+</head>
+<body>
+
+<div id="top">
+
+  <!-- right: what this page needs -->
+  <aside id="panel">
+    <header id="panel-head">
+      <div class="head-row">
+        <button id="btn-menu" class="icon" type="button"
+                aria-label="الأدوات" aria-expanded="false" aria-controls="rail">
+          <span aria-hidden="true">☰</span>
+        </button>
+        <div class="crumb">
+          <span id="page-name"></span>
+          <span id="page-where">صفحة ١ من ١٥</span>
+        </div>
+      </div>
+      <div class="meter"><div class="meter-fill" id="meter"></div></div>
+      <div class="meter-label" id="meter-label"></div>
+      <div id="viewtabs">
+        <button id="tab-form" class="vt is-on" type="button" aria-pressed="true">التعبئة</button>
+        <button id="tab-page" class="vt" type="button" aria-pressed="false">الصفحة</button>
+      </div>
+    </header>
+
+    <div id="panel-scroll">
+      <div id="page-form"></div>
+    </div>
+
+    <!-- fixed: the way forward never moves -->
+    <nav id="nav">
+      <button id="btn-prev" class="nav">→ السابق</button>
+      <button id="btn-next" class="nav primary">التالي ←</button>
+    </nav>
+  </aside>
+
+  <!-- middle: the page -->
+  <main id="stage"></main>
+
+  <!-- left: everything about the proposal as a whole -->
+  <aside id="rail">
+    <button id="drawer-x" class="quiet" type="button" aria-label="إغلاق الأدوات">
+      <span aria-hidden="true">✕</span>
+    </button>
+    <button id="btn-review" class="wide marked">قبل الإرسال</button>
+    <p class="note">راجع ما نقص، ثم حمّل الـ PDF.</p>
+
+    <div class="rail-tools">
+      <button id="btn-save" class="quiet wide">احفظ نسخة</button>
+      <button id="btn-open" class="quiet wide">افتح ملف</button>
+      <input type="file" id="file-open" accept=".json" hidden>
+      <label class="zoom">
+        <span>حجم العرض</span>
+        <input type="range" id="zoom" min="30" max="130" step="5" value="60">
+      </label>
+      <p class="note" id="store-note" hidden>
+        هذا المتصفح لا يحفظ عملك تلقائياً. اضغط <b>احفظ نسخة</b> قبل الإغلاق.
+      </p>
+    </div>
+  </aside>
+
+</div>
+
+<div id="scrim" hidden></div>
+
+<section id="review" hidden>
+  <div class="sheet">
+    <button class="close" id="btn-close-review">إغلاق</button>
+    <h2>قبل الإرسال</h2>
+    <div id="review-body"></div>
+    <div class="review-actions">
+      <button id="btn-pdf" class="primary big">حمّل الـ PDF</button>
+      <p class="note" id="pdf-note"></p>
+    </div>
+    <p class="danger-zone">
+      <button id="btn-reset" class="danger quiet mini">امسح كل شيء وابدأ من جديد</button>
+    </p>
+  </div>
+</section>
+
+<script>/*__DATA__*/</script>
+<script>/*__JS__*/</script>
+</body>
+</html>

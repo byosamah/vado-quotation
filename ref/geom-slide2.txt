@@ -1,0 +1,77 @@
+===== SLIDE 2 (canvas 756 x 1008 pt) =====
+<sp> 'TextBox 15' x=255.5 y=298.1 w=408.3 h=123.6 prst=rect fill=none
+  bodyPr: wrap=square rtlCol=1 spAutoFit
+  P[algn=r rtl=1] 'المحتوى'
+     run 'المحتوى' {'sz': 96.0, 'b': True, 'spc': -1.5, 'color': '#6E413E', 'latin': 'GE SS Text Bold', 'cs': 'GE SS Text Bold'}
+<grpSp> 'Group 16' x=367.9 y=450.0 w=229.9 h=265.4
+  <sp> 'TextBox 17' x=367.9 y=450.0 w=180.3 h=265.0 prst=rect fill=none
+    bodyPr: wrap=square spAutoFit
+    P[algn=r rtl=1 lnSpc=150.0%] 'المقدمة'
+       run 'المقدمة' {'color': '#374151', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lnSpc=150.0%] 'عن المشروع'
+       run 'عن ' {'color': '#374151', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+       run 'المشروع' {'color': '#374151', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lnSpc=150.0%] 'نطاق العمل'
+       run 'نطاق' {'color': '#374151', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+       run ' العمل' {'color': '#374151', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lnSpc=150.0%] 'منهجية العمل'
+       run 'منهجية' {'color': '#374151', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+       run ' العمل' {'color': '#374151', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lnSpc=150.0%] 'الخط الزمني للمشروع'
+       run 'الخط الزمني ' {'color': '#374151', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+       run 'للمشروع' {'color': '#374151', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lnSpc=150.0%] 'العرض المالي'
+       run 'العرض' {'color': '#374151', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+       run ' المالي' {'color': '#374151', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lnSpc=150.0%] 'الاتفاقية'
+       run 'الاتفاقية' {'color': '#374151', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lnSpc=150.0%] 'معلومات التواصل'
+       run 'معلومات' {'color': '#374151', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+       run ' التواصل' {'color': '#374151', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+  <sp> 'TextBox 18' x=548.2 y=450.0 w=49.6 h=265.4 prst=rect fill=none
+    bodyPr: wrap=square spAutoFit
+    P[algn=l lnSpc=150.0%] '01'
+       run '01' {'color': 'scheme:bg2', 'latin': 'Aller'}
+    P[algn=l lnSpc=150.0%] '02'
+       run '02' {'color': 'scheme:bg2', 'latin': 'Aller'}
+    P[algn=l lnSpc=150.0%] '03'
+       run '03' {'color': 'scheme:bg2', 'latin': 'Aller'}
+    P[algn=l lnSpc=150.0%] '04'
+       run '04' {'color': 'scheme:bg2', 'latin': 'Aller'}
+    P[algn=l lnSpc=150.0%] '05'
+       run '05' {'color': 'scheme:bg2', 'latin': 'Aller'}
+    P[algn=l lnSpc=150.0%] '06'
+       run '06' {'color': 'scheme:bg2', 'latin': 'Aller'}
+    P[algn=l lnSpc=150.0%] '07'
+       run '07' {'color': 'scheme:bg2', 'latin': 'Aller'}
+    P[algn=l lnSpc=150.0%] '08'
+       run '08' {'color': 'scheme:bg2', 'latin': 'Aller'}
+<grpSp> 'Group 12' x=55.4 y=916.1 w=609.2 h=56.4
+  <sp> 'object 3' x=55.4 y=916.1 w=609.2 h=4.2 flipV fill=none line=#3B3838 w=0.5pt
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt
+    P ''
+  <grpSp> 'Group 14' x=515.2 y=928.5 w=149.4 h=41.0
+    <sp> 'Text Box 57' x=515.3 y=928.5 w=149.2 h=28.2 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r rtl=1 lnSpc=150.0%] ' سجل تجاري 2051059778'
+         run ' سجل تجاري ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '2051059778' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      P[algn=r rtl=1 lnSpc=150.0%] 'رقم الغرفة التجارية 191212'
+         run 'رقم الغرفة التجارية ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '191212' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    <sp> 'Text Box 58' x=515.2 y=953.7 w=149.2 h=15.8 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r] 'vado.sa'
+         run 'v' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+         run 'ado.sa' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+  <sp> 'Text Box 3' x=271.8 y=928.1 w=149.2 h=44.4 prst=rect fill=none line=none
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] 'مكتب الخبر'
+       run 'مكتب الخبر' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] '402 برج الفردان, شارع الأمير تركي, الكورنيش, الخبر, EKAA 7639-34413 المملكة العربية السعودية'
+       run '402 برج الفردان, شارع الأمير تركي, الكور' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run 'EKAA' {'sz': 7.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+       run ' 7639-34413' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run ' المملكة العربية السعودية' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<sp> 'Slide Number Placeholder 11' x=55.0 y=921.7 w=34.6 h=20.3
+  P[algn=ctr] '[FIELD slidenum: 2]'

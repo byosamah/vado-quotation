@@ -1,0 +1,139 @@
+===== SLIDE 13 (canvas 756 x 1008 pt) =====
+<grpSp> 'Group 3' x=0.0 y=147.7 w=714.6 h=7.1
+  <cxnSp> 'Straight Connector 5' x=0.0 y=154.9 w=714.5 h=0.0 prst=line line=#F2F1EE w=5.0pt
+  <sp> 'Rectangle 6' x=642.7 y=147.7 w=71.9 h=7.1 flipV prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+<grpSp> 'Group 15' x=635.7 y=250.1 w=141.3 h=17.7 rot=270.0deg
+  <sp> 'Rectangle 16' x=635.7 y=250.1 w=17.7 h=17.7 prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 17' x=653.4 y=250.1 w=17.7 h=17.7 prst=rect fill=#DEE0D8 line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 18' x=671.1 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 19' x=688.7 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 20' x=706.4 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 21' x=724.1 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 22' x=741.7 y=250.1 w=17.7 h=17.7 prst=rect line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+  <sp> 'Rectangle 23' x=759.3 y=250.1 w=17.7 h=17.7 prst=rect fill=#F2F1EE line=none
+    bodyPr: anchor=ctr rtlCol=1
+    P[algn=ctr] ''
+<sp> 'TextBox 28' x=104.9 y=196.4 w=537.8 h=738.6 prst=rect fill=none
+  bodyPr: wrap=square spAutoFit
+  P[algn=r rtl=1 lnSpc=150.0% spcAft=8.0pt] 'ملاحظات على العرض'
+     run 'ملاحظات على العرض' {'sz': 16.0, 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+  P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=8.0pt buAutoNum=arabicPeriod] 'العرض الفني والمالي ساري لمدة {{tfp_dur}} يوم من تاريخه.'
+     run 'العرض الفني والمالي ساري ' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+     run 'لمدة ' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+     run '{{tfp_dur}}' {'sz': 12.0, 'b': True, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+     (empty run) {'sz': 12.0, 'b': True, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+     run 'يوم' {'sz': 12.0, 'b': True, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+     run ' من تاريخه.' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+  P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=8.0pt buAutoNum=arabicPeriod] 'العرض الفني والمالي غير شامل رسوم الجهات المعنية الخاصة بإصدار رخصة البناء النهائية للمشروع.'
+     run 'العرض الفني والمالي غير شامل رسوم الجهات' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+  P[algn=r rtl=1 lvl=0 indent=-27.0pt marL=27.0pt lnSpc=150.0% spcAft=8.0pt buAutoNum=arabicPeriod] 'يقوم المالك بتزويد المكتب الاستشاري بكافة المعلومات المتعلقة بالأرض وهي على سبيل المثال لا الحصر:'
+     run 'يقوم المالك بتزويد المكتب الاستشاري بكاف' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+  P[algn=r rtl=1 lvl=1 indent=-27.0pt marL=63.0pt lnSpc=150.0% buChar='•'] 'صك الملكية.'
+     run 'صك الملكية.' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+  P[algn=r rtl=1 lvl=1 indent=-27.0pt marL=63.0pt lnSpc=150.0% buChar='•'] 'تفويض المكتب في موقع بلدي.'
+     run 'تفويض المكتب في موقع بلدي.' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+  P[algn=r rtl=1 lvl=1 indent=-27.0pt marL=63.0pt lnSpc=150.0% buChar='•'] 'القرار المساحي لقطع الأراضي الصادر من البلدية.'
+     run 'القرار المساحي لقطع الأراضي الصادر من ال' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+  P[algn=r rtl=1 lvl=1 indent=-27.0pt marL=63.0pt lnSpc=150.0% buChar='•'] 'تقرير فحص التربة لأرض المشروع. '
+     run 'تقرير فحص التربة لأرض المشروع. ' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+  P[algn=r rtl=1 lvl=1 indent=-27.0pt marL=63.0pt lnSpc=150.0% buChar='•'] 'الرفع المساحي لحدود ومناسيب الأرض.'
+     run 'الرفع المساحي لحدود ومناسيب الأرض.' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+  P[algn=r rtl=1 indent=-27.0pt marL=27.0pt lnSpc=150.0% buAutoNum=arabicPeriod] 'يبدأ العمل بعد أسبوع من استلام الدفعة المقدمة أو توقيع العقد أيهما تالياً.'
+     run 'يبدأ العمل بعد أسبوع من استلام الدفعة ال' {'sz': 12.0, 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+  P[algn=r rtl=1 indent=-27.0pt marL=27.0pt lnSpc=150.0% buAutoNum=arabicPeriod] ''
+  P[algn=r rtl=1 lnSpc=150.0% spcAft=8.0pt] 'نص العقد'
+     run 'نص العقد' {'sz': 16.0, 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+  P[algn=ctr rtl=1 lnSpc=150.0% spcAft=8.0pt] 'بسم الله الرحمن الرحيم'
+     run 'بسم الله الرحمن الرحيم' {'sz': 12.0, 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+  P[algn=ctr rtl=1 lnSpc=150.0% spcAft=8.0pt] 'لما قام الطرف الثاني بالتقدم بعرضه الفني والمالي للقيام بأعمال التصميم المعماري والهندسي لمشروع {{project_type_ar}} للطرف الأول على الأرض السالف ذكرها في مستند هذا العرض، ولما كان العرض المقدم من الطرف الثاني قد اقترن بقبول الطرف الأول وذلك بعد اطلاعه على متطلبات المالك والاشتراطات البلدية وشروط العقد وسائر المستندات المرفقة به، وأبدى كافة الاستعداد للقيام بهذه الأعمال؛ لذا فقد اتفق الطرفان على بنود العرض السابقة وهي بمثابة بنود العقد، ويخضع هذا العقد للأنظمة المعمول بها في المملكة العربية السعودية بالمحكمة التجارية بالدمام ويجري تفسيره وتنفيذه والفصل فيما ينشأ عنه من نزاع أو دعاوى – لا سمح الله – بموجبها.'
+     run 'لما قام الطرف الثاني بالتقدم بعرضه الفني' {'sz': 12.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+     run 'لمشروع ' {'sz': 12.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+     run '{{project_type_ar}}' {'sz': 12.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+     (empty run) {'sz': 12.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+     run 'للطرف الأول على الأرض السالف ذكرها في مس' {'sz': 12.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+  P[algn=ctr rtl=1 lnSpc=150.0% spcAft=8.0pt] 'وبالله التوفيق ،،'
+     run 'وبالله التوفيق ،،' {'sz': 12.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+  P[algn=ctr rtl=1 lnSpc=150.0% spcAft=8.0pt] ''
+  P[algn=ctr rtl=1 lnSpc=150.0% spcAft=8.0pt] ''
+  P[algn=ctr rtl=1 lnSpc=150.0% spcAft=8.0pt] ''
+  P[algn=ctr rtl=1 lnSpc=150.0% spcAft=8.0pt] ''
+  P[algn=ctr rtl=1 lnSpc=150.0% spcAft=8.0pt] ''
+  P[algn=ctr rtl=1 lnSpc=150.0% spcAft=8.0pt] ''
+  P[algn=r rtl=1 lnSpc=150.0% spcAft=8.0pt] '* يتم توقيع عقد منفصل بناءً على هذا العرض في حال رغبة العميل.'
+     run '* يتم توقيع عقد منفصل بناءً على هذا العر' {'sz': 10.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+<sp> 'Text Box 2' x=404.0 y=716.4 w=207.4 h=155.4 prst=rect fill=none line=none
+  bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+  P[algn=ctr rtl=1 lnSpc=150.0%] 'المالك'
+     run 'المالك' {'sz': 10.5, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+  P[algn=ctr rtl=1 lnSpc=150.0%] ''
+  P[algn=ctr rtl=1 lnSpc=150.0%] '{{name_title_ar}} {{firstname_ar}} {{lastname_ar}}'
+     run '{{name_title_ar}} {{firstname_ar}} {{las' {'sz': 12.0, 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+  P[algn=ctr rtl=1 lnSpc=150.0%] ''
+  P[algn=ctr rtl=1 lnSpc=150.0%] ''
+  P[algn=ctr rtl=1 lnSpc=150.0%] 'الطرف الأول'
+     run 'الطرف الأول' {'sz': 12.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+<sp> 'Text Box 29' x=154.9 y=717.2 w=227.6 h=152.7 prst=rect fill=none line=none
+  bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+  P[algn=ctr lnSpc=150.0%] 'الاستشاري المصمم'
+     run 'الاستشاري المصمم' {'sz': 10.5, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+  P[algn=ctr lnSpc=150.0%] ''
+  P[algn=ctr lnSpc=150.0%] 'شركة الرؤيا للاستشارات الهندسية'
+     run 'شركة الرؤيا للاستشارات الهندسية' {'sz': 12.0, 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+  P[algn=ctr lnSpc=150.0%] 'م. معتز بن خالد الملا'
+     run 'م. معتز بن خالد الملا' {'sz': 12.0, 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+  P[lnSpc=150.0%] '\xa0'
+     (empty run) {'sz': 12.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+  P[lnSpc=150.0%] ''
+  P[algn=ctr lnSpc=150.0%] 'الطرف الثاني'
+     run 'الطرف الثاني' {'sz': 12.0, 'latin': 'Aller', 'cs': 'GE SS Text Light'}
+<sp> 'Text Box 58' x=374.8 y=96.6 w=307.8 h=53.9 prst=rect fill=none line=none
+  bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+  P[algn=r rtl=1 lnSpc=150.0%] 'الاتفاقية'
+     run 'الاتفاقية' {'sz': 28.0, 'color': '#3B3838', 'latin': 'GE SS Text Medium', 'cs': 'GE SS Text Medium'}
+<pic> 'Picture 27' x=0.0 y=16.1 w=168.7 h=112.4 prst=rect image=image4.png
+<pic> 'Picture 29' x=78.1 y=74.0 w=50.8 h=35.5 prst=rect image=image2.png srcRect={'l': '23691', 't': '22115', 'r': '2025'}
+<grpSp> 'Group 30' x=55.4 y=916.1 w=609.2 h=56.4
+  <sp> 'object 3' x=55.4 y=916.1 w=609.2 h=4.2 flipV fill=none line=#3B3838 w=0.5pt
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt
+    P ''
+  <grpSp> 'Group 34' x=515.2 y=928.5 w=149.4 h=41.0
+    <sp> 'Text Box 57' x=515.3 y=928.5 w=149.2 h=28.2 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r rtl=1 lnSpc=150.0%] ' سجل تجاري 2051059778'
+         run ' سجل تجاري ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '2051059778' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+      P[algn=r rtl=1 lnSpc=150.0%] 'رقم الغرفة التجارية 191212'
+         run 'رقم الغرفة التجارية ' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+         run '191212' {'sz': 6.0, 'spc': 0.4, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    <sp> 'Text Box 58' x=515.2 y=953.7 w=149.2 h=15.8 prst=rect fill=none line=none
+      bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+      P[algn=r] 'vado.sa'
+         run 'v' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+         run 'ado.sa' {'sz': 7.0, 'b': True, 'spc': 0.4, 'color': '#3B3838', 'latin': 'Cairo SemiBold', 'cs': 'Cairo SemiBold'}
+  <sp> 'Text Box 3' x=271.8 y=928.1 w=149.2 h=44.4 prst=rect fill=none line=none
+    bodyPr: anchor=t vert=horz wrap=square lIns=7.2pt tIns=3.6pt rIns=7.2pt bIns=3.6pt spAutoFit
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] 'مكتب الخبر'
+       run 'مكتب الخبر' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+    P[algn=r rtl=1 lvl=0 indent=0.0pt marL=0.0pt marR=0.0pt lnSpc=150.0% buNone] '402 برج الفردان, شارع الأمير تركي, الكورنيش, الخبر, EKAA 7639-34413 المملكة العربية السعودية'
+       run '402 برج الفردان, شارع الأمير تركي, الكور' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run 'EKAA' {'sz': 7.0, 'color': '#3B3838', 'latin': 'Cairo', 'cs': 'Cairo'}
+       run ' 7639-34413' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+       run ' المملكة العربية السعودية' {'sz': 7.0, 'color': '#3B3838', 'latin': 'GE SS Text Light', 'cs': 'GE SS Text Light'}
+<sp> 'Slide Number Placeholder 11' x=55.0 y=921.7 w=34.6 h=20.3
+  P[algn=ctr] '[FIELD slidenum: 13]'

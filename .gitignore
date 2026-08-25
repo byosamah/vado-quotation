@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+out/
+ref/png-*/
+ref/sbs/
+.vercel
+.env*

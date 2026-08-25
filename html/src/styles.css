@@ -1,0 +1,884 @@
+/* ---------------------------------------------------------------------
+   The page is 756 x 1008 points, exactly as the PowerPoint stores A3
+   portrait. CSS understands pt natively, so every coordinate ported from
+   the Python is used unchanged. No conversion, no rounding, no drift.
+   --------------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* the html and body rules live with the chrome, further down */
+
+/* ---- the deck ------------------------------------------------------- */
+
+#stage {
+  flex: 1 1 auto;
+  padding: 24pt;
+  display: flex; flex-direction: column; align-items: center; gap: 24pt;
+  overflow-x: auto;
+}
+
+.page {
+  position: relative;
+  width: 756pt; height: 1008pt;
+  flex: 0 0 auto;
+  background: #fffdf8 var(--paper) center/cover no-repeat;
+  box-shadow: 0 1pt 2pt rgba(60,50,40,.10), 0 8pt 26pt rgba(60,50,40,.15);
+  overflow: hidden;
+  direction: ltr;               /* the canvas is neutral; text sets its own */
+
+  /* PowerPoint gives a new text box 18 pt, and three places in the deck
+   * rely on it rather than stating a size: the cover's project block and
+   * the contents list, whose comment in s02_contents.py says so outright.
+   * Without this they fell back to the browser's 16 px, which is 12 pt, and
+   * slide 2's numbers ran four rows past the section names they label. */
+  font-size: 18pt;
+}
+
+.page > * { position: absolute; }
+
+/* A text box. Python gives it x/y/w/h plus insets; autofit lets it grow
+   downward, which is what spAutoFit does in PowerPoint. */
+.tb { display: flex; flex-direction: column; }
+.tb.a-t   { justify-content: flex-start; }
+.tb.a-ctr { justify-content: center; }
+.tb.a-b   { justify-content: flex-end; }
+.tb.nowrap p { white-space: pre; }
+
+/* A paragraph with no stated spacing is PowerPoint's 100%, which is 1.2
+ * times the point size. The browser's own `normal` is not the same thing:
+ * Cairo declares a 1.874 em line box and GE SS Text 1.245, and using those
+ * put the scope 275 pt off the bottom of a page. Anything with an `ls` gets
+ * an inline line-height from core.js instead. */
+.tb p, table.t td p { line-height: 1.2; }
+
+.tb p { margin: 0; }
+
+/* Space-before on the first paragraph of a cell has nothing to push away
+ * from, and it pushed the row instead: slide 11's last phase landed on the
+ * note below the table. The slide modules set that margin inline, straight
+ * from the Python, so only !important can take it off. */
+table.t td > .cell:first-child > p:first-child { margin-top: 0 !important; }
+/* Any paragraph the slide modules mark rtl, wherever it sits. This was
+ * scoped to `.tb` and so never reached a table cell, which meant every
+ * mixed line inside a table was laid out left to right: on slide 4 the plot
+ * area read "م² · حسب الصك 512" with the number at the wrong end. Pure
+ * Arabic still read correctly, because Arabic letters order themselves,
+ * which is precisely why it went unnoticed. */
+p.rtl { direction: rtl; }
+.al-l { text-align: left; }  .al-r { text-align: right; }
+.al-c { text-align: center; } .al-just { text-align: justify; }
+.al-just:last-child { text-align: inherit; }
+
+/* A bulleted paragraph hangs its marker on the start side, which is the
+   right in Arabic. text-indent does the hang; padding does the block. */
+p.bul { text-indent: var(--hang, 0); }
+p.bul > .mk { display: inline-block; width: var(--mkw, 18pt); text-indent: 0; }
+
+.rule { background: currentColor; }
+.rule.dash {
+  background: none;
+  border-top-width: var(--w, 1pt); border-top-style: dashed;
+  border-top-color: currentColor;
+}
+
+.shape { }
+.shape.tri  { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.shape.dia  { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.shape.oval { border-radius: 50%; }
+
+/* An arrow is a bar with a triangular head, so it matches the connector
+   PowerPoint draws rather than a border-image approximation. */
+.arrow { display: block; }
+.arrow > .stem { position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
+.arrow > .head {
+  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  width: 0; height: 0; border-style: solid;
+  border-top-color: transparent; border-bottom-color: transparent;
+}
+
+.pic { object-fit: fill; }
+
+table.t { border-collapse: collapse; table-layout: fixed; position: absolute; }
+table.t td { padding: 0; vertical-align: middle; border: 0; }
+table.t td.a-t   { vertical-align: top; }
+table.t td.a-ctr { vertical-align: middle; }
+table.t td.a-b   { vertical-align: bottom; }
+table.t td > .cell { display: block; }
+table.t td p { margin: 0; }
+
+/* ---- a blank on the page -------------------------------------------- */
+
+/* An unfilled value says what belongs in it, in Arabic, on a dotted line.
+ * Nothing on the page reads as code. Both this and the estimate mark are
+ * screen only: the print rules below strip them. */
+.blank {
+  color: #a8a29a;
+  border-bottom: 1px dotted #b9b3aa;
+  padding-bottom: 1px;
+}
+.ph { background: rgba(230,160,20,.20); border-radius: 2pt; }
+
+[contenteditable] { outline: none; }
+[contenteditable]:hover { background: rgba(120,160,255,.16); border-radius: 2pt; }
+[contenteditable]:focus {
+  background: rgba(120,160,255,.26); border-radius: 2pt;
+  border-bottom-color: transparent; color: inherit;
+}
+.field-lit { box-shadow: 0 0 0 3pt rgba(122,31,43,.35); border-radius: 2pt; }
+
+
+/* ---- the tool around the page ---------------------------------------
+   Everything below dresses the two sidebars and the stage they sit
+   beside. Nothing here reaches the A3 page: the document keeps the
+   colours, the type and the coordinates the PowerPoint gives it.
+   --------------------------------------------------------------------- */
+
+:root {
+  --ui-bg:        #ECE9E3;   /* the stage the page rests on          */
+  --ui-surface:   #FAF8F5;   /* both sidebars                        */
+  --ui-card:      #FFFFFF;   /* a group of fields                    */
+  --ui-sunk:      #F2EFEA;   /* a well inside a card                 */
+  --ui-line:      #E0DBD2;
+  --ui-line-soft: #EDE9E2;
+  --ui-ink:       #1C1917;
+  --ui-ink-2:     #4F4A44;
+  --ui-ink-3:     #78716A;
+  --ui-brand:     #7A1F2B;
+  --ui-brand-hi:  #922835;
+  --ui-brand-tint:#F6EDEE;
+  --ui-warn:      #8A6A16;
+  --ui-warn-tint: #FBF4E3;
+  --ui-ok:        #3D7A4A;
+  --ui-danger:    #A32B2B;
+  --ui-ring:      0 0 0 3px rgba(122, 31, 43, .14);
+  --ui-r:         9px;       /* controls */
+  --ui-r-lg:      12px;      /* cards    */
+}
+
+/* ---- the frame ------------------------------------------------------ */
+
+html { background: var(--ui-bg); }
+
+/* Three columns. In a right-to-left document a plain flex row runs from
+ * the right, so the fields (written first) sit on the right, the page in
+ * the middle, and the whole-proposal tools on the left. */
+body {
+  margin: 0; padding: 0; display: flex; flex-direction: column;
+  height: 100vh; overflow: hidden;
+  font-family: 'CairoRegular', sans-serif;
+  color: var(--ui-ink);
+  background: var(--ui-bg);
+  -webkit-font-smoothing: antialiased;
+}
+#top { flex: 1 1 auto; display: flex; flex-direction: row; min-height: 0; }
+
+/* The zoom goes on the page, not on the stage. Put it on the stage and it
+ * scales the stage's own 100vh box too, so the viewport shrinks with every
+ * step and the page ends up clipped. */
+/* Centred as a block, not as a flex item. A zoomed element keeps its
+ * pre-zoom width for layout, so flex centring measured the page at its full
+ * 1008 px, decided it overflowed, and pinned it to the start edge: the page
+ * ended up shoved against the fields instead of sitting in the middle. */
+#stage {
+  flex: 1 1 auto; display: block; text-align: center;
+  padding: 26px 22px; overflow: auto; min-width: 0;
+  overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  background: var(--ui-bg);
+}
+.page { display: none; }
+.page.current { display: block; margin: 0 auto; }
+
+/* ---- scrollbars ----------------------------------------------------- */
+
+#panel-scroll, #rail, #stage, .sheet { scrollbar-width: thin; scrollbar-color: #D6D1C8 transparent; }
+#panel-scroll::-webkit-scrollbar, #rail::-webkit-scrollbar,
+#stage::-webkit-scrollbar, .sheet::-webkit-scrollbar { width: 10px; height: 10px; }
+#panel-scroll::-webkit-scrollbar-thumb, #rail::-webkit-scrollbar-thumb,
+#stage::-webkit-scrollbar-thumb, .sheet::-webkit-scrollbar-thumb {
+  background: #D6D1C8; border-radius: 6px; border: 3px solid transparent;
+  background-clip: content-box;
+}
+#panel-scroll::-webkit-scrollbar-track, #rail::-webkit-scrollbar-track,
+#stage::-webkit-scrollbar-track, .sheet::-webkit-scrollbar-track { background: transparent; }
+
+/* ---- the panel of fields, on the reading edge ------------------------ */
+
+/* Header and footer stay put; only the list of fields scrolls. A page with
+ * seventeen values must never push Next off the bottom of the screen. */
+#panel {
+  flex: 0 0 348px; overflow: hidden; overflow-wrap: anywhere;
+  background: var(--ui-surface);
+  border-inline-start: 1px solid var(--ui-line);
+  color: var(--ui-ink);
+  font: 13px/1.7 'CairoRegular', sans-serif;
+  padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 14px;
+}
+/* Fixed. The way forward sits in the same place on every page, whether the
+ * page wants three values or twenty-eight. */
+#panel-head, #nav { flex: 0 0 auto; }
+
+#panel-head .crumb {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+}
+#page-name {
+  font-family: 'CairoSemiBold', sans-serif; font-size: 17px;
+  letter-spacing: -.01em; color: var(--ui-ink);
+}
+#page-where { color: var(--ui-ink-3); font-size: 11.5px; }
+
+.meter {
+  height: 4px; background: var(--ui-line); border-radius: 2px;
+  overflow: hidden; margin-top: 11px;
+}
+.meter-fill {
+  height: 100%; background: var(--ui-brand); width: 0;
+  border-radius: 2px; transition: width .3s ease;
+}
+.meter-label { font-size: 11px; color: var(--ui-ink-3); margin-top: 6px; }
+
+/* one scrolling area holding the fields and the buttons under them */
+#panel-scroll {
+  flex: 1 1 auto; overflow-y: auto; overflow-x: hidden; min-height: 0;
+  overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  display: flex; flex-direction: column; padding-inline-end: 4px;
+  margin-inline-end: -4px;
+}
+#page-form { flex: 0 0 auto; padding-bottom: 4px; }
+#page-form h3 {
+  font: 600 11px/1.5 'CairoSemiBold', sans-serif;
+  letter-spacing: .06em; text-transform: none;
+  color: var(--ui-ink-3); margin: 2px 0 10px;
+}
+
+/* ---- one card per source of values ---------------------------------- */
+
+/* A page can want twenty-eight values from four different documents. The
+ * card is the boundary between them, so somebody holding the Balady page
+ * can see where its fifteen begin and end without counting. */
+.fgroup {
+  background: var(--ui-card);
+  border: 1px solid var(--ui-line);
+  border-radius: var(--ui-r-lg);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.group-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 8px; margin: 0;
+  background: var(--ui-sunk); border-bottom: 1px solid var(--ui-line);
+  padding: 9px 13px;
+}
+.g-name {
+  font-family: 'CairoSemiBold', sans-serif; font-size: 12.5px;
+  color: var(--ui-ink); letter-spacing: -.01em;
+}
+.g-src  { font-size: 10.5px; color: var(--ui-ink-3); }
+.fgroup > .f, .fgroup > .group-note { margin-inline: 13px; }
+.fgroup > .f:first-of-type { margin-top: 12px; }
+.group-note {
+  font-size: 11px; color: var(--ui-warn); background: var(--ui-warn-tint);
+  border: 1px solid #EADFC2; border-radius: 7px;
+  padding: 7px 9px; margin-top: 12px; line-height: 1.6;
+}
+.group-note + .f { margin-top: 10px; }
+
+/* ---- one value ------------------------------------------------------ */
+
+.f { margin-bottom: 12px; }
+.fgroup > .f:last-child { margin-bottom: 13px; }
+.f > .lab { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+.f .name { font-size: 12.5px; color: var(--ui-ink-2); }
+.f .src  { font-size: 10.5px; color: var(--ui-ink-3); }
+
+.f input, .f select, .f textarea,
+.tpl-box select, .tpl-box input[type=text],
+.grp-body input[type=text], .grp-body textarea, .grp-body select,
+.grp-body input[type=number], .ln textarea, #rail .row input {
+  width: 100%; background: var(--ui-card); color: var(--ui-ink);
+  border: 1px solid var(--ui-line); border-radius: var(--ui-r);
+  padding: 8px 10px; font: 13px/1.5 'CairoRegular', sans-serif;
+  direction: rtl; text-align: right;
+  transition: border-color .12s, box-shadow .12s;
+}
+.f input, .f select, .f textarea { margin-top: 5px; }
+.f input.ltr, .f input[data-ltr] { direction: ltr; text-align: left; }
+
+.f input:focus, .f textarea:focus, .f select:focus,
+.tpl-box select:focus, .tpl-box input[type=text]:focus,
+.grp-body input:focus, .grp-body textarea:focus, .grp-body select:focus,
+.ln textarea:focus, #rail .row input:focus {
+  border-color: var(--ui-brand); outline: none; box-shadow: var(--ui-ring);
+}
+.f input::placeholder, .grp-body ::placeholder, #rail .row input::placeholder {
+  color: #A9A29A;
+}
+
+.f .est {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 11px; color: var(--ui-ink-3); margin-top: 6px;
+}
+.f .est input { width: auto; margin: 0; accent-color: var(--ui-brand); }
+.f.is-est input[type=text] { border-color: #D8C48A; background: var(--ui-warn-tint); }
+
+.f.cont {
+  margin-inline-start: 12px; border-inline-start: 2px solid var(--ui-line);
+  padding-inline-start: 10px;
+}
+.f.cont .name { font-size: 11.5px; color: var(--ui-ink-3); }
+.lane-span { font-size: 10.5px; color: var(--ui-ink-3); margin: 4px 0 0; }
+.lane-note { font-size: 10.5px; color: var(--ui-warn); margin: 4px 0 0; line-height: 1.6; }
+
+/* ---- buttons -------------------------------------------------------- */
+
+button {
+  background: var(--ui-card); color: var(--ui-ink);
+  border: 1px solid var(--ui-line); border-radius: var(--ui-r);
+  padding: 9px 13px; cursor: pointer;
+  font: 13px 'CairoRegular', sans-serif;
+  transition: background .12s, border-color .12s, color .12s;
+}
+button:hover:not(:disabled) { background: var(--ui-sunk); border-color: #CFC9BF; }
+button:focus-visible { outline: none; box-shadow: var(--ui-ring); border-color: var(--ui-brand); }
+button:disabled { opacity: .4; cursor: not-allowed; }
+
+/* The one filled maroon on any screen. On the page it is التالي, in the
+ * review sheet it is the PDF. Nothing else competes with it. */
+button.primary {
+  background: var(--ui-brand); border-color: var(--ui-brand); color: #fff;
+  font-family: 'CairoSemiBold', sans-serif;
+}
+button.primary:hover:not(:disabled) { background: var(--ui-brand-hi); border-color: var(--ui-brand-hi); }
+
+/* The rail's own call to action. Brand coloured, not brand filled, so the
+ * two never shout at each other from opposite edges of the screen. */
+button.marked {
+  background: var(--ui-brand-tint); border-color: #E3CDD1; color: var(--ui-brand);
+  font-family: 'CairoSemiBold', sans-serif;
+}
+button.marked:hover:not(:disabled) { background: #F0E1E3; border-color: #D8BCC1; }
+
+button.wide  { width: 100%; }
+button.nav   { flex: 1 1 0; }
+button.big   { font-size: 15px; padding: 12px 18px; }
+button.quiet {
+  background: transparent; border-color: transparent; color: var(--ui-ink-2);
+  font-size: 12px;
+}
+button.quiet:hover:not(:disabled) { background: #EFEBE4; border-color: transparent; }
+button.danger { color: var(--ui-danger); }
+button.mini   { padding: 3px 9px; font-size: 11px; }
+
+#nav {
+  display: flex; gap: 8px;
+  padding-top: 14px; border-top: 1px solid var(--ui-line);
+}
+#btn-prev { color: var(--ui-ink-2); }
+
+/* ---- a page that asks for nothing ----------------------------------- */
+
+/* A page with nothing to fill in should look settled, not like something
+ * failed to load. The card sits in the middle of the space it has. */
+#page-form.resting {
+  display: flex; flex-direction: column; justify-content: center;
+  align-items: stretch; gap: 10px; flex: 1 1 auto;
+}
+.nothing {
+  background: var(--ui-card); border: 1px solid var(--ui-line);
+  border-radius: var(--ui-r-lg);
+  padding: 20px 16px; text-align: center; font-size: 12.5px;
+  line-height: 1.8; color: var(--ui-ink-3);
+}
+.nothing b {
+  display: block; font-family: 'CairoSemiBold', sans-serif;
+  font-size: 14px; color: var(--ui-ink); margin-bottom: 5px;
+}
+.nothing .why { font-size: 11.5px; color: var(--ui-ink-3); }
+.jump { width: 100%; font-size: 12px; }
+
+/* ---- the one-time hello --------------------------------------------- */
+
+/* Somebody opening this for the first time lands on empty boxes with
+ * nothing telling them what to do. One line, dismissed for good on the
+ * first close, so a daily user never sees it twice. */
+.intro {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: var(--ui-card); border: 1px solid var(--ui-line);
+  border-radius: var(--ui-r-lg);
+  padding: 11px 13px; font-size: 11.5px; line-height: 1.8;
+  color: var(--ui-ink-3); margin-bottom: 12px;
+}
+.intro-txt { margin: 0; flex: 1 1 auto; }
+.intro b { font-family: 'CairoSemiBold', sans-serif; color: var(--ui-ink-2); font-weight: 400; }
+.intro-x {
+  flex: 0 0 auto; background: none; border: 0; padding: 0;
+  min-width: 34px; min-height: 34px; margin: -8px -6px -8px 0;
+  display: grid; place-items: center;
+  font-size: 17px; line-height: 1; color: var(--ui-ink-3); cursor: pointer;
+  border-radius: 8px;
+}
+.intro-x:hover { background: none; color: var(--ui-ink); }
+
+/* ---- the rail: the proposal as a whole ------------------------------ */
+
+#rail {
+  flex: 0 0 208px; overflow-wrap: anywhere;
+  background: var(--ui-surface);
+  border-inline-end: 1px solid var(--ui-line);
+  color: var(--ui-ink);
+  font: 12px/1.7 'CairoRegular', sans-serif;
+  padding: 18px 16px 16px; overflow-y: auto; overflow-x: hidden;
+  display: flex; flex-direction: column; gap: 10px;
+}
+/* nothing in the rail may be wider than the rail */
+#rail * { min-width: 0; max-width: 100%; }
+#rail h4 {
+  font: 600 10.5px 'CairoSemiBold', sans-serif; letter-spacing: .05em;
+  color: var(--ui-ink-3); margin: 0 0 6px;
+}
+.rail-block { border-top: 1px solid var(--ui-line); padding-top: 14px; margin-top: 6px; }
+.warn-soft { color: var(--ui-warn) !important; }
+
+/* the file's own controls live at the foot of the rail */
+.rail-tools {
+  margin-top: auto; border-top: 1px solid var(--ui-line); padding-top: 14px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.rail-tools .zoom { color: var(--ui-ink-3); font-size: 11px; margin-top: 6px; }
+.rail-tools .zoom span { display: block; margin-bottom: 5px; }
+.rail-tools .zoom input { width: 100%; }
+
+.note { font-size: 11px; color: var(--ui-ink-3); line-height: 1.7; margin: 0; }
+#store-note {
+  color: var(--ui-warn); background: var(--ui-warn-tint);
+  border: 1px solid #EADFC2; border-radius: var(--ui-r); padding: 9px 10px;
+}
+.zoom { font-size: 11px; color: var(--ui-ink-3); }
+.zoom input {
+  width: 100%; accent-color: var(--ui-brand);
+  background: none; border: 0; padding: 0;
+}
+
+.tools { border-top: 1px solid var(--ui-line); padding-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.tools-row { display: flex; gap: 8px; }
+.tools-row button { flex: 1 1 0; }
+
+/* the rail is narrow, so the name and its button stack rather than fight */
+#rail .row { flex-wrap: wrap; }
+#rail .row input { flex: 1 1 100%; padding: 6px 8px; font-size: 12px; }
+#rail .row button { flex: 1 1 100%; }
+
+/* ---- small shared pieces -------------------------------------------- */
+
+.row { display: flex; gap: 6px; align-items: center; margin-bottom: 6px; }
+.row input { flex: 1 1 auto; margin: 0; }
+.chk {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: var(--ui-card); border: 1px solid var(--ui-line);
+  border-radius: var(--ui-r); padding: 10px 12px;
+  margin-bottom: 6px; font-size: 12.5px; color: var(--ui-ink-2);
+  cursor: pointer; transition: border-color .12s, background .12s;
+}
+.chk:hover { border-color: #CFC9BF; background: var(--ui-sunk); }
+.chk:has(input:checked) { border-color: #DCC3C7; background: var(--ui-brand-tint); }
+.chk:has(input:checked) > span:first-of-type,
+.chk:has(input:checked) > div:first-of-type { color: var(--ui-ink); }
+.chk input {
+  margin: 2px 0 0; flex: 0 0 auto;
+  width: 15px; height: 15px; accent-color: var(--ui-brand); cursor: pointer;
+}
+.chk .en { display: block; color: var(--ui-ink-3); font-size: 11px; direction: ltr; text-align: right; }
+.sub { font-size: 11px; color: var(--ui-ink-3); margin: -4px 0 12px; }
+
+.readout {
+  background: var(--ui-card); border: 1px solid var(--ui-line);
+  border-radius: var(--ui-r-lg);
+  padding: 12px 13px; margin-bottom: 12px;
+  font-size: 11px; color: var(--ui-ink-3);
+}
+.readout b {
+  display: block; font: 600 20px 'CairoSemiBold', sans-serif;
+  color: var(--ui-ink); margin-bottom: 2px;
+}
+
+.stepper { display: flex; align-items: center; gap: 8px; }
+.stepper-val {
+  flex: 1 1 auto; text-align: center;
+  font: 600 14px 'CairoSemiBold', sans-serif; color: var(--ui-ink);
+}
+.stepper button { flex: 0 0 34px; font-size: 15px; padding: 3px 0; }
+
+/* ---- shared templates ----------------------------------------------- */
+
+#tpl-list { display: flex; flex-direction: column; gap: 5px; margin: 6px 0; }
+.tpl {
+  display: flex; gap: 5px; align-items: center;
+  background: var(--ui-card); border: 1px solid var(--ui-line);
+  border-radius: 7px; padding: 5px 8px; font-size: 11.5px;
+}
+.tpl .nm { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tpl button { padding: 2px 7px; font-size: 10.5px; }
+.tpl button.armed,
+.tpl-box button.armed,
+button.mini.armed {
+  background: var(--ui-brand); border-color: var(--ui-brand); color: #fff;
+}
+
+/* the template picker and the picture controls, at the top of the page form */
+.tpl-box {
+  background: var(--ui-card); border: 1px solid var(--ui-line);
+  border-radius: var(--ui-r-lg); padding: 12px 13px; margin-bottom: 12px;
+}
+.tpl-box h3 { margin: 0 0 9px; }
+.tpl-box .row { flex-wrap: nowrap; margin-bottom: 7px; }
+.tpl-box select { flex: 1 1 auto; min-width: 0; font-size: 12px; padding: 7px 9px; }
+.tpl-box input[type=text] { flex: 1 1 auto; min-width: 0; margin: 0; }
+.tpl-box button { flex: 0 0 auto; }
+label.crop { display: block; font-size: 11px; color: var(--ui-ink-3); margin: 8px 0 3px; }
+label.crop input { width: 100%; accent-color: var(--ui-brand); background: none; border: 0; padding: 0; }
+label.crop input:disabled { opacity: .35; }
+
+/* ---- the brief: groups hold floors, floors hold rooms ---------------- */
+
+.grp {
+  border: 1px solid var(--ui-line); border-radius: var(--ui-r-lg);
+  margin-bottom: 10px; overflow: hidden; background: var(--ui-card);
+}
+.grp-head {
+  display: flex; gap: 6px; align-items: center;
+  background: var(--ui-sunk); border-bottom: 1px solid var(--ui-line);
+  padding: 8px 9px;
+}
+.grp-head input {
+  flex: 1 1 auto; min-width: 0; margin: 0;
+  background: transparent; border: 1px solid transparent; color: var(--ui-ink);
+  font: 600 12.5px 'CairoSemiBold', sans-serif;
+  direction: rtl; text-align: right; padding: 3px 6px; border-radius: 6px;
+}
+.grp-head input:focus { background: var(--ui-card); border-color: var(--ui-brand); box-shadow: var(--ui-ring); }
+.grp-body { padding: 10px; display: flex; flex-direction: column; gap: 9px; }
+.blk {
+  border-inline-start: 2px solid var(--ui-line); padding-inline-start: 10px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.sub-f { display: block; }
+.sub-f > span { display: block; font-size: 10.5px; color: var(--ui-ink-3); margin-bottom: 3px; }
+.sub-f .row { margin: 0; }
+.grp-body textarea { font: 12px/1.7 'CairoRegular', sans-serif; resize: vertical; min-height: 48px; }
+.grp-body input[type=text] { margin: 0; font-size: 12px; padding: 7px 9px; }
+.grp-body select { flex: 1 1 auto; min-width: 0; font-size: 11.5px; padding: 6px 8px; }
+.grp-body input[type=number] { width: auto; font-size: 11.5px; padding: 6px 8px; }
+.grp-body .row { display: flex; gap: 6px; align-items: center; margin: 0; }
+.grp-body .row.add { justify-content: flex-start; gap: 6px; padding-top: 2px; }
+button.mini.danger { color: var(--ui-danger); flex: 0 0 auto; }
+
+/* one line of the scope */
+.ln { margin-bottom: 8px; }
+.ln textarea {
+  font: 11.5px/1.7 'CairoRegular', sans-serif;
+  padding: 6px 9px; resize: vertical; min-height: 34px;
+}
+.ln textarea.bold { font-family: 'CairoSemiBold', sans-serif; }
+.ln-bar { display: flex; gap: 3px; align-items: center; margin-top: 4px; }
+.ln-bar button { padding: 1px 7px; font-size: 10.5px; }
+.ln-lvl { font-size: 10px; color: var(--ui-ink-3); min-width: 12px; text-align: center; }
+
+/* ---- before you send ------------------------------------------------ */
+
+#review {
+  position: fixed; inset: 0; background: rgba(28, 25, 23, .38);
+  backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center; z-index: 20;
+  padding: 24px;
+}
+#review[hidden] { display: none; }
+.sheet {
+  overscroll-behavior: contain;
+  background: var(--ui-surface); color: var(--ui-ink);
+  border: 1px solid var(--ui-line); border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(28, 25, 23, .22);
+  padding: 26px; width: min(580px, 100%); max-height: 88vh; overflow-y: auto;
+  font: 13px/1.8 'CairoRegular', sans-serif; position: relative;
+}
+.sheet h2 {
+  font: 600 20px 'CairoSemiBold', sans-serif;
+  margin: 0 0 16px; letter-spacing: -.01em;
+}
+.sheet h3 {
+  font: 600 10.5px 'CairoSemiBold', sans-serif; letter-spacing: .05em;
+  color: var(--ui-ink-3); margin: 20px 0 6px;
+}
+/* the far side from the heading, which is flush to the reading edge */
+.sheet .close { position: absolute; inset-inline-end: 18px; top: 18px; font-size: 12px; }
+
+.chk-row {
+  display: flex; gap: 10px; padding: 9px 0;
+  border-bottom: 1px solid var(--ui-line-soft);
+}
+.chk-row:last-child { border-bottom: 0; }
+.chk-row .mark { flex: 0 0 18px; font-size: 12px; line-height: 1.9; opacity: .8; }
+.chk-row .what { flex: 1 1 auto; }
+.chk-row .where { color: var(--ui-ink-3); font-size: 11px; }
+.chk-row .detail { color: var(--ui-ink-3); font-size: 11.5px; }
+.chk-row.miss .mark { color: #B4736F; }
+.chk-row.est  .mark { color: #B49556; }
+.chk-row.ok   .mark { color: #7AA383; }
+
+.review-actions { margin-top: 22px; text-align: center; }
+.danger-zone {
+  margin-top: 24px; padding-top: 14px;
+  border-top: 1px solid var(--ui-line); text-align: center;
+}
+
+/* ---- the pieces a narrow screen needs ------------------------------- */
+
+/* Hidden on a wide screen, where all three columns are already on show.
+ * They are declared here once so the media queries only switch them on. */
+#btn-menu, #viewtabs, #scrim { display: none; }
+
+button.icon {
+  flex: 0 0 auto; width: 40px; height: 40px; padding: 0;
+  font-size: 17px; line-height: 1; display: grid; place-items: center;
+}
+.head-row { display: flex; align-items: center; gap: 10px; }
+.head-row .crumb { flex: 1 1 auto; min-width: 0; }
+#page-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Two halves of one control, so it reads as a switch and not as two
+ * buttons that happen to sit together. */
+#viewtabs {
+  display: none; gap: 3px; margin-top: 12px;
+  background: var(--ui-sunk); border: 1px solid var(--ui-line);
+  border-radius: 10px; padding: 3px;
+}
+.vt {
+  flex: 1 1 0; background: transparent; border: 0; border-radius: 7px;
+  padding: 8px 0; font: 12.5px 'CairoRegular', sans-serif;
+  color: var(--ui-ink-3); min-height: 36px;
+}
+.vt:hover:not(.is-on) { background: transparent; color: var(--ui-ink-2); }
+.vt.is-on {
+  background: var(--ui-card); color: var(--ui-ink);
+  font-family: 'CairoSemiBold', sans-serif;
+  box-shadow: 0 1px 2px rgba(28, 25, 23, .07);
+}
+
+#drawer-x { display: none; }
+
+@media screen and (max-width: 1100px) {
+  #drawer-x {
+    display: grid; place-items: center;
+    position: absolute; top: 12px; inset-inline-end: 12px;
+    width: 36px; height: 36px; padding: 0; font-size: 15px;
+    background: var(--ui-card); border: 1px solid var(--ui-line);
+    border-radius: 9px; color: var(--ui-ink-2); z-index: 1;
+  }
+  #rail { position: fixed; }              /* the close sits against it */
+  #btn-review { margin-top: 44px; }
+}
+
+#scrim {
+  position: fixed; inset: 0; z-index: 30;
+  background: rgba(28, 25, 23, .38);
+  opacity: 0; transition: opacity .2s ease;
+}
+#scrim[hidden] { display: none; }
+body.menu-open #scrim { opacity: 1; }
+
+/* ---- laptop and narrow desktop --------------------------------------- */
+
+/* The rail is the first thing to go: it holds the whole-proposal tools,
+ * and none of them is needed on the way through the fifteen pages. */
+@media screen and (max-width: 1100px) {
+  #btn-menu { display: grid; }
+  #scrim { display: block; }
+  #rail {
+    position: fixed; top: 0; bottom: 0; z-index: 40;
+    inset-inline-start: 0; inset-inline-end: auto;
+    width: min(300px, 86vw);
+    transform: translateX(100%);          /* rtl: off the reading edge */
+    transition: transform .22s ease;
+    border-inline-end: 0;
+    border-inline-start: 1px solid var(--ui-line);
+    box-shadow: -10px 0 34px rgba(28, 25, 23, .16);
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+  body.menu-open #rail { transform: translateX(0); }
+  #panel { flex-basis: 320px; }
+}
+
+/* A left-to-right rendering would slide the drawer the wrong way. */
+@media screen and (max-width: 1100px) {
+  html[dir="ltr"] #rail { transform: translateX(-100%); }
+  html[dir="ltr"] body.menu-open #rail { transform: translateX(0); }
+}
+
+/* ---- tablet ---------------------------------------------------------- */
+
+@media screen and (max-width: 900px) {
+  #panel { flex-basis: 300px; padding: 14px 14px 12px; }
+  #stage { padding: 16px 12px; }
+}
+
+/* ---- phone ----------------------------------------------------------- */
+
+/* One thing at a time. The fields fill the screen, and the page is a tap
+ * away on the same switch that brings the fields back. The way forward
+ * stays pinned to the bottom, where a thumb already is. */
+@media screen and (max-width: 760px) {
+  html, body { height: 100dvh; }
+
+  #top { flex-direction: column; }
+
+  #panel {
+    flex: 1 1 auto; width: 100%; min-height: 0;
+    border-inline-start: 0; padding: 12px 14px 0; gap: 10px;
+  }
+
+  #viewtabs { display: flex; }
+
+  #panel-head .meter-label { display: none; }   /* the meter already says it */
+  #page-name { font-size: 16px; }
+
+  /* The page sits over the middle band, between the head and the way
+   * forward. Both bands are measured in the script, because a page name
+   * can wrap to two lines and a guess would clip the paper. */
+  #stage {
+    position: fixed; z-index: 5;
+    inset-inline: 0;
+    top: var(--m-head, 120px);
+    bottom: var(--m-nav, 76px);
+    display: none; padding: 12px;
+  }
+  body.show-page #stage { display: block; }
+  /* kept in the layout so the two bands do not move when the view swaps */
+  body.show-page #panel-scroll { visibility: hidden; }
+
+  #nav {
+    padding-top: 10px;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    background: var(--ui-surface);
+  }
+  button.nav { min-height: 46px; font-size: 14px; }
+
+  /* A sheet on a phone is the screen, not a card floating on it. */
+  #review { padding: 0; align-items: stretch; }
+  .sheet {
+    width: 100%; max-height: 100dvh; border-radius: 0; border: 0;
+    padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
+  }
+  .sheet .close { inset-inline-end: 14px; top: 14px; min-height: 36px; }
+  .sheet h2 { font-size: 18px; padding-inline-end: 70px; }
+  .chk-row .what { min-width: 0; }
+  .chk-row .where { flex: 0 0 auto; white-space: nowrap; }
+  button.big { width: 100%; }
+}
+
+/* ---- small phone ----------------------------------------------------- */
+
+@media screen and (max-width: 400px) {
+  #panel { padding: 10px 11px 0; }
+  .fgroup > .f, .fgroup > .group-note { margin-inline: 11px; }
+  .group-head { padding: 9px 11px; }
+  #page-name { font-size: 15px; }
+  .vt { font-size: 12px; }
+}
+
+/* ---- a short window, phone or not ------------------------------------ */
+
+/* A laptop in landscape with the browser half height has the same problem
+ * a phone has: the way forward must not be pushed off the bottom. */
+/* A phone on its side is 332 px tall inside the browser. The heading was
+ * taking 124 of them and the way forward another 66, which left the paper
+ * less room than it needed and the nav bar cut its foot off. Everything
+ * here buys height back. */
+@media screen and (max-height: 620px) {
+  #panel-head .meter-label { display: none; }
+  #panel { padding-top: 9px; gap: 7px; }
+  #page-name { font-size: 14px; }
+  #page-where { font-size: 11px; }
+  #panel-head .meter { margin-top: 7px; }
+  #viewtabs { margin-top: 7px; padding: 2px; }
+  .vt { padding: 5px 0; min-height: 30px; font-size: 12px; }
+  #btn-menu { width: 34px; height: 34px; font-size: 15px; }
+  #nav { padding-top: 7px; padding-bottom: calc(7px + env(safe-area-inset-bottom)); }
+  button.nav { min-height: 38px; }
+  #stage { padding: 8px; }
+  /* The hint was taking two fifths of the space the fields had. */
+  .intro { padding: 8px 10px; font-size: 11px; line-height: 1.6; margin-bottom: 9px; }
+}
+
+/* ---- a pointer that is a finger -------------------------------------- */
+
+/* Everything here is about the hand, not the screen size. A tablet is wide
+ * and still has no mouse: it zooms the whole page when a box under 16 px
+ * takes focus, and it misses a 17 px button just as a phone does. */
+@media screen and (hover: none) {
+  #panel input, #panel select, #panel textarea,
+  #rail input, #rail select, #rail textarea,
+  .sheet input, .sheet select, .sheet textarea { font-size: 16px; }
+  #panel input[type=range], #rail input[type=range] { font-size: inherit; }
+
+  #panel button, #rail button, .sheet button { min-height: 40px; }
+  #panel button.mini, #rail button.mini, .sheet button.mini {
+    min-height: 34px; padding: 6px 11px; font-size: 12px;
+  }
+  .stepper button { flex: 0 0 44px; min-height: 44px; }
+  .ln-bar button { min-height: 34px; padding: 5px 11px; }
+  .tpl button { min-height: 34px; padding: 6px 11px; font-size: 12px; }
+  .chk { padding: 12px; }
+  .chk input { width: 18px; height: 18px; margin-top: 1px; }
+  .f .est input { width: 18px; height: 18px; }
+}
+
+@media screen and (hover: none) {
+  button:hover:not(:disabled) { background: var(--ui-card); border-color: var(--ui-line); }
+  button.primary:hover:not(:disabled) { background: var(--ui-brand); border-color: var(--ui-brand); }
+  button.marked:hover:not(:disabled) { background: var(--ui-brand-tint); border-color: #E3CDD1; }
+  button.quiet:hover:not(:disabled) { background: transparent; }
+  .chk:hover { border-color: var(--ui-line); background: var(--ui-card); }
+  .chk:has(input:checked):hover { border-color: #DCC3C7; background: var(--ui-brand-tint); }
+}
+
+/* ---- someone who asked for less movement ----------------------------- */
+
+@media screen and (prefers-reduced-motion: reduce) {
+  #rail, #scrim, .meter-fill, button, .chk { transition: none; }
+}
+
+/* ---- print ---------------------------------------------------------- */
+
+@page { size: 756pt 1008pt; margin: 0; }
+
+@media print {
+  html, body { background: #fff; display: block; }
+  /* Every part of the tool goes, not just the fields panel. The left rail
+   * was left in the flex row, so it printed its own buttons onto page 15
+   * and, worse, squeezed the stage: each page kept its 756 pt width, sat
+   * offset inside a narrower box, and anything far enough across fell off
+   * the paper. That is where the fee and the amount in words went missing
+   * from page 12. */
+  #panel, #rail, #review { display: none !important; }
+  #top { display: block; }
+  /* every page prints, whichever one is on screen */
+  #stage {
+    padding: 0; display: block; height: auto; overflow: visible;
+    text-align: initial;
+  }
+  .page {
+    display: block !important; box-shadow: none; margin: 0;
+    zoom: 1 !important;                 /* the screen zoom must not print */
+    break-after: page; page-break-after: always;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page:last-child { break-after: auto; page-break-after: auto; }
+  /* the helps are for the person filling it in, never for the client */
+  .blank { color: transparent; border-bottom: none; }
+  .ph, .field-lit { background: none; box-shadow: none; }
+  [contenteditable]:hover, [contenteditable]:focus { background: none; }
+}
+
+/* strong enough to find at a glance on a page shown at 70 per cent */
+.field-lit {
+  box-shadow: 0 0 0 2.5pt rgba(122,31,43,.55);
+  border-radius: 2pt; background: rgba(122,31,43,.10);
+}
