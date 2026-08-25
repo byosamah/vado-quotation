@@ -5,3 +5,4 @@ ref/png-*/
 ref/sbs/
 .vercel
 .env*
+html/.fontcache/

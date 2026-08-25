@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import hashlib
 import io
 import json
 import os
@@ -62,13 +63,58 @@ ALIASES = {
 }
 
 
+CACHE = os.path.join(HERE, '.fontcache')
+
+
 def woff2(path):
+    """The font as base64 woff2, converted once and then remembered.
+
+    fontTools does not produce the same bytes twice from the same input.
+    Without this cache a rebuild that changed nothing still rewrote all
+    eight fonts: same file length, 624 kB of different bytes. Every rebuild
+    then landed in git as an unreadable 1.7 MB diff, and `git status` could
+    no longer answer whether the deployed build was current.
+
+    Keyed on the bytes of the source font, so replacing or updating a font
+    converts it again. Delete html/.fontcache to force the work.
+    """
     from fontTools.ttLib import TTFont
+    with open(path, 'rb') as fh:
+        digest = hashlib.sha256(fh.read()).hexdigest()[:32]
+    hit = os.path.join(CACHE, digest + '.b64')
+    if os.path.exists(hit):
+        with open(hit, encoding='ascii') as fh:
+            cached = fh.read()
+        # A truncated cache file would embed a font the browser cannot
+        # parse, and a font that fails to load is silent: the page renders
+        # in a fallback face and every line in the deck moves.
+        #
+        # Checking the magic bytes is not enough. Cut a valid base64 string
+        # short and the first four bytes still decode to wOF2, so the first
+        # version of this check waved half a font through and the build
+        # embedded 71 kB of truncated brotli. woff2 states its own total
+        # length at offset 8; compare that with what actually arrived.
+        try:
+            raw = base64.b64decode(cached, validate=True)
+            if (raw[:4] == b'wOF2' and len(raw) >= 12 and
+                    int.from_bytes(raw[8:12], 'big') == len(raw)):
+                return cached
+        except Exception:
+            pass
+        os.remove(hit)
+
     f = TTFont(path)
     f.flavor = 'woff2'
     buf = io.BytesIO()
     f.save(buf)
-    return base64.b64encode(buf.getvalue()).decode('ascii')
+    b64 = base64.b64encode(buf.getvalue()).decode('ascii')
+
+    os.makedirs(CACHE, exist_ok=True)
+    tmp = hit + '.tmp'
+    with open(tmp, 'w', encoding='ascii') as fh:
+        fh.write(b64)
+    os.replace(tmp, hit)      # a half-written cache file must never be read
+    return b64
 
 
 def face_metrics(family):
