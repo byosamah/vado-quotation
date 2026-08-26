@@ -20,7 +20,13 @@ TABLE_X, TABLE_Y, TABLE_W = 111.8, 230.2, 530.2
 HEAD_H = 27.8
 BULLET_NONE = 'none'
 PHASE_ROW_MIN = 41.3       # two 11 pt lines; the value the original used
-WEEK_LABEL_MIN_PT = 26.0   # below this a week cell is too narrow to label
+# What a week cell can carry, measured off the rendered page rather than
+# guessed. At 8 pt with 3 pt of letter spacing «W1» inks 17.6 pt and «1»
+# inks 7.5 pt, and a cell is 0.955 of a week's width. One threshold of 26 pt
+# threw the label away with 8 pt of room still free, and threw the digit
+# away together with the W.
+WEEK_LABEL_MIN_PT = 21.0   # room for «W1»: holds to about 27 weeks
+WEEK_NUM_MIN_PT = 10.0     # room for «1»:  holds a full year of weeks
 
 
 def build(ctx, slide):
@@ -132,29 +138,44 @@ def _gantt(ctx, slide, g):
     def dx(day):
         return wx(day / 7.0)
 
-    # month band
-    span = g['weeks_per_month'] * wk - (wk - bar_w)
+    # Month band. It covers the weeks that exist, not the weeks a rounded
+    # month count implies. plan['months'] is ceil(weeks / 4), so a thirteen
+    # week programme drew sixteen cells of month bar over thirteen cells of
+    # weeks: 128 pt of bar past the grid, 54 pt of it off the paper. The
+    # last month is short when the work is short.
     for m in range(plan['months']):
+        first = m * g['weeks_per_month']
+        cover = min(g['weeks_per_month'], n_weeks - first)
+        if cover <= 0:
+            break
         label = g['months'][m] if m < len(g['months']) else f'M{m + 1}'
-        mx = wx(m * g['weeks_per_month'])
+        mx = wx(first)
+        span = cover * wk - (wk - bar_w)
         rect(ctx, slide, mx, t['month_row_y'], span, t['bar_h'], fill='month_bar')
         _, tx = textbox(ctx, slide, mx + span / 2 - 18.0, t['month_row_y'] - 3.5,
                         36.0, 23.5, autofit=True)
         tx.para([{'t': label, 'sz': 9, 'spc': 3.0, 'f': 'en', 'c': 'white'}], algn='c')
 
-    # week band. On a long programme the cells get narrow, and W1 W2 W3 W4
-    # printed in a 15 pt cell is a smear. Past the threshold the cells still
-    # draw, giving the eye a rhythm, but the labels come off and the months
-    # carry the reading.
-    label_weeks = wk >= WEEK_LABEL_MIN_PT
+    # Week band. On a long programme the cells get narrow. The W is the
+    # first thing to go, not the whole label: under M2 a row reading
+    # 1 2 3 4 is still the weeks of that month, and an empty cell is
+    # nothing. The number comes off the position, so it survives a
+    # content.json that renames the labels.
+    full = wk >= WEEK_LABEL_MIN_PT          # room for «W1»
+    num = wk >= WEEK_NUM_MIN_PT             # room for «1»
     for i in range(n_weeks):
         bx = wx(i)
         rect(ctx, slide, bx, t['week_row_y'], bar_w, t['bar_h'], fill='week_bar')
-        if not label_weeks:
+        if not num:
             continue
-        _, tx = textbox(ctx, slide, bx + (bar_w - 36.0) / 2, t['week_row_y'] - 2.6,
-                        36.0, 17.0, autofit=True)
-        tx.para([{'t': g['week_labels'][i % g['weeks_per_month']], 'sz': 8, 'spc': 3.0,
+        label = (g['week_labels'][i % g['weeks_per_month']] if full
+                 else str(i % g['weeks_per_month'] + 1))
+        # The box only has to hold the ink. A 36 pt box on a 12 pt cell put
+        # every label a third of a cell wide on both its neighbours.
+        lw = 22.0 if full else 12.0
+        _, tx = textbox(ctx, slide, bx + (bar_w - lw) / 2, t['week_row_y'] - 2.6,
+                        lw, 17.0, autofit=True)
+        tx.para([{'t': label, 'sz': 8, 'spc': 3.0,
                   'f': 'en', 'c': 'chart_ink'}], algn='c')
 
     lanes = plan['lanes']

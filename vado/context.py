@@ -346,9 +346,24 @@ class Ctx:
 
         weeks_needed = max(1, math.ceil(cursor / 7.0)) if cursor else 1
         per_month = self.c('timeline', 'gantt')['weeks_per_month']
-        months = max(1, math.ceil(weeks_needed / per_month))
+        # The grid is as wide as the work needs, unless the job says
+        # otherwise. `timeline_weeks` is the stepper on the panel, and the
+        # browser has honoured it since the twin was written. This did not,
+        # so a chart set to thirteen weeks on screen was built as sixteen
+        # and the two files disagreed about the same proposal.
+        fitted = max(1, math.ceil(weeks_needed / per_month)) * per_month
+        try:
+            asked = int(self.job.get('timeline_weeks'))
+        except (TypeError, ValueError):
+            asked = 0
+        # Never narrower than the work. A hand written job could ask for
+        # four weeks of grid to hold eighty days and the bars would run off
+        # the right of the page.
+        weeks = max(weeks_needed, asked) if asked > 0 else fitted
+        months = max(1, math.ceil(weeks / per_month))
         return {'lanes': lanes, 'total_days': cursor,
-                'weeks': months * per_month, 'months': months}
+                'weeks': weeks, 'months': months,
+                'weeks_needed': weeks_needed, 'fitted_weeks': fitted}
 
     def phase_codes(self):
         """Legend entries for the codes actually on the page, in first use

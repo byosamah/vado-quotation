@@ -347,7 +347,10 @@ V.Ctx = class {
      * some want the chart tight. `timeline_weeks` is that choice. */
     const fitted = Math.max(1, Math.ceil(weeksNeeded / perMonth)) * perMonth;
     const asked = parseInt(this.job.timeline_weeks, 10);
-    const weeks = (asked > 0) ? asked : fitted;
+    /* Never narrower than the work. The stepper already refuses to go
+     * below it, but a job file written by hand does not go through the
+     * stepper, and the bars would run off the right of the page. */
+    const weeks = (asked > 0) ? Math.max(weeksNeeded, asked) : fitted;
     const months = Math.max(1, Math.ceil(weeks / perMonth));
     return { lanes, total_days: cursor, weeks, months,
              weeksNeeded, fittedWeeks: fitted };

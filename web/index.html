@@ -1955,7 +1955,10 @@ V.Ctx = class {
      * some want the chart tight. `timeline_weeks` is that choice. */
     const fitted = Math.max(1, Math.ceil(weeksNeeded / perMonth)) * perMonth;
     const asked = parseInt(this.job.timeline_weeks, 10);
-    const weeks = (asked > 0) ? asked : fitted;
+    /* Never narrower than the work. The stepper already refuses to go
+     * below it, but a job file written by hand does not go through the
+     * stepper, and the bars would run off the right of the page. */
+    const weeks = (asked > 0) ? Math.max(weeksNeeded, asked) : fitted;
     const months = Math.max(1, Math.ceil(weeks / perMonth));
     return { lanes, total_days: cursor, weeks, months,
              weeksNeeded, fittedWeeks: fitted };
@@ -2754,7 +2757,13 @@ V.slides.s11_timeline = {
   TABLE_X: 111.8, TABLE_Y: 230.2, TABLE_W: 530.2,
   HEAD_H: 27.8,
   PHASE_ROW_MIN: 41.3,      /* two 11 pt lines; the value the original used */
-  WEEK_LABEL_MIN_PT: 26.0,  /* below this a week cell is too narrow to label */
+  /* What a week cell can carry, measured off the rendered page rather than
+   * guessed. At 8 pt with 3 pt of letter spacing «W1» inks 17.6 pt and «1»
+   * inks 7.5 pt, and a cell is 0.955 of a week's width. The old single
+   * threshold of 26 pt threw the label away with 8 pt of room still free,
+   * and threw the digit away with the W. */
+  WEEK_LABEL_MIN_PT: 21.0,  /* room for «W1»: holds to about 27 weeks */
+  WEEK_NUM_MIN_PT: 10.0,    /* room for «1»:  holds a full year of weeks */
   LEGEND_MARKER_GAP: 18.4,  /* a marker is about 11 pt wide */
   LEGEND_ARROW_GAP: 63.7,   /* an arrow is 51.6 pt, so its label sits further */
 
@@ -2850,10 +2859,21 @@ V.slides.s11_timeline = {
     const wx = week => x0 + week * wk;
     const dx = day => wx(day / 7.0);
 
-    const span = g.weeks_per_month * wk - (wk - barW);
+    /* One cell, however many weeks it covers, with the same trailing gap
+     * a single week cell has. */
+    const cellW = cover => cover * wk - (wk - barW);
+
+    /* The month row covers the weeks that exist, not the weeks a rounded
+     * month count implies. `plan.months` is `ceil(weeks / 4)`, so a
+     * thirteen week programme drew sixteen cells of month bar over
+     * thirteen cells of weeks: 128 pt of bar past the grid, 54 pt of it
+     * off the paper. The last month is short when the work is short. */
     for (let m = 0; m < plan.months; m++) {
+      const first = m * g.weeks_per_month;
+      const cover = Math.min(g.weeks_per_month, nWeeks - first);
+      if (cover <= 0) break;
       const label = m < g.months.length ? g.months[m] : 'M' + (m + 1);
-      const mx = wx(m * g.weeks_per_month);
+      const mx = wx(first), span = cellW(cover);
       V.rect(ctx, page, mx, t.month_row_y, span, t.bar_h, { fill: 'month_bar' });
       const [, tx] = V.textbox(ctx, page, mx + span / 2 - 18.0, t.month_row_y - 3.5,
                                36.0, 23.5, { autofit: true });
@@ -2861,17 +2881,26 @@ V.slides.s11_timeline = {
     }
 
     /* On a long programme the cells get narrow, and W1 W2 W3 W4 printed in
-     * a 15 pt cell is a smear. Past the threshold the cells still draw,
-     * giving the eye a rhythm, but the labels come off. */
-    const labelWeeks = wk >= this.WEEK_LABEL_MIN_PT;
+     * a 15 pt cell is a smear. What to do about it is MODE, set while we
+     * choose between the three. */
+    const full = wk >= this.WEEK_LABEL_MIN_PT;   /* room for «W1» */
+    const num = wk >= this.WEEK_NUM_MIN_PT;     /* room for «1»  */
     for (let i = 0; i < nWeeks; i++) {
       const bx = wx(i);
       V.rect(ctx, page, bx, t.week_row_y, barW, t.bar_h, { fill: 'week_bar' });
-      if (!labelWeeks) continue;
-      const [, tx] = V.textbox(ctx, page, bx + (barW - 36.0) / 2, t.week_row_y - 2.6,
-                               36.0, 17.0, { autofit: true });
-      tx.para([{ t: g.week_labels[i % g.weeks_per_month], sz: 8, spc: 3.0,
-                 f: 'en', c: 'chart_ink' }], { algn: 'c' });
+      if (!num) continue;
+      /* The W is the first thing to go, not the whole label. Under M2 a row
+       * reading 1 2 3 4 is still the weeks of that month; an empty cell is
+       * nothing. The number comes off the position, so it survives a
+       * content.json that renames the labels. */
+      const label = full ? g.week_labels[i % g.weeks_per_month]
+                         : String(i % g.weeks_per_month + 1);
+      /* The box only has to hold the ink. A 36 pt box on a 12 pt cell put
+       * every label a third of a cell wide on both its neighbours. */
+      const lw = full ? 22.0 : 12.0;
+      const [, tx] = V.textbox(ctx, page, bx + (barW - lw) / 2, t.week_row_y - 2.6,
+                               lw, 17.0, { autofit: true });
+      tx.para([{ t: label, sz: 8, spc: 3.0, f: 'en', c: 'chart_ink' }], { algn: 'c' });
     }
 
     const lanes = plan.lanes;
