@@ -335,8 +335,12 @@ V.Ctx = class {
       /* A job may set its own marks on a lane. Which milestones a client
        * sees is a project decision, not a house rule: a job with no
        * municipal step has no approval triangle to draw. */
+      /* Only a list counts as an answer. An empty one is an answer and
+       * means the lane carries nothing. A null left in the job file used
+       * to pass this test, and `lane.markers.forEach` then threw and took
+       * the whole page down with it. */
       const own = (this.job.markers || {})[lane.id];
-      lane.markers = own !== undefined ? own : (s.markers || []);
+      lane.markers = Array.isArray(own) ? own : (s.markers || []);
       ends[lane.code] = lane.end_day;
       cursor = Math.max(cursor, lane.end_day);
     });

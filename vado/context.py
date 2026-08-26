@@ -323,6 +323,7 @@ class Ctx:
         for row in rows:
             if row['no'] is not None:
                 current = {
+                    'id': row.get('id'),
                     'code': (row.get('code') or '').strip(),
                     'name_ar': row.get('name_ar'),
                     'days': row.get('duration_days') or 0,
@@ -340,7 +341,18 @@ class Ctx:
             lane['start_day'] = start
             lane['end_day'] = start + lane['days']
             lane['parallel'] = bool(sched.get('parallel'))
-            lane['markers'] = sched.get('markers') or []
+            # A job may set its own marks on a lane. Which milestones a
+            # client sees is a project decision, not a house rule: a job
+            # with no municipal step has no approval triangle to draw. The
+            # browser has honoured this key since the twin was written and
+            # this did not, so a marker taken off a lane on screen was
+            # still drawn in the PowerPoint.
+            #
+            # Only a list counts as an answer. An empty one is an answer
+            # and means the lane carries nothing; anything else, including
+            # a null left behind by hand, falls back to content.json.
+            own = (self.job.get('markers') or {}).get(lane['id'])
+            lane['markers'] = own if isinstance(own, list) else (sched.get('markers') or [])
             ends[lane['code']] = lane['end_day']
             cursor = max(cursor, lane['end_day'])
 
