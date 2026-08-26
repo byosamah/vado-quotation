@@ -1282,7 +1282,12 @@ V.App = class {
   review() {
     const host = document.getElementById('review-body');
     host.textContent = '';
-    const missing = [], estimates = [], problems = [], ok = [];
+    /* `notes` sit beside the estimates under the same ⚠, because they are
+     * the same kind of thing to look at. They are counted apart because
+     * they are not values: «مراحل بلا مدة» is one row about the whole
+     * programme, and counting it as «قيمة تقديرية واحدة» said something
+     * that is not true. */
+    const missing = [], estimates = [], problems = [], notes = [], ok = [];
 
     Object.keys(this.ctx.content.fields || {}).forEach(name => {
       if (name === '_doc' || DERIVED[name]) return;
@@ -1324,8 +1329,8 @@ V.App = class {
     const noDuration = this.ctx.phases()
       .filter(r => r.no != null && !r.duration_days).map(r => (r.code || '').trim());
     if (noDuration.length)
-      estimates.push({ what: 'مراحل بلا مدة: ' + noDuration.join('، '),
-                       detail: 'العميل يقرأها كعمل بلا تاريخ انتهاء' });
+      notes.push({ what: 'مراحل بلا مدة: ' + noDuration.join('، '),
+                   detail: 'العميل يقرأها كعمل بلا تاريخ انتهاء' });
 
     /* A scope still promising something slide 8 marks N/A is a contract
      * that says two different things, and it gets read the other way. */
@@ -1380,10 +1385,10 @@ V.App = class {
 
     section('ناقص، لا يمكن الإرسال قبل تعبئته', missing, 'miss', '✕');
     section('مشاكل', problems, 'miss', '✕');
-    section('قيم تقديرية', estimates, 'est', '⚠');
+    section('قيم تقديرية', estimates.concat(notes), 'est', '⚠');
     section('تم', ok, 'ok', '✓');
 
-    if (!missing.length && !problems.length && !estimates.length) {
+    if (!missing.length && !problems.length && !estimates.length && !notes.length) {
       const p = V.el('p', 'note');
       p.style.color = '#93d39b';
       p.textContent = 'لا يوجد ما يمنع الإرسال. اقرأ الصفحات مرة أخيرة قبل أن ترسل.';
@@ -1408,6 +1413,7 @@ V.App = class {
       const line = p.what + (p.detail ? '. ' + p.detail : '');
       this.pdfWarnings.push(/[.؟]$/.test(line) ? line : line + '.');
     });
+    notes.forEach(n => this.pdfWarnings.push(n.what + '.'));
     if (estimates.length)
       this.pdfWarnings.push(arCount(estimates.length,
         'قيمة تقديرية واحدة غير مؤكدة',

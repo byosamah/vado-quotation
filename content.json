@@ -352,33 +352,7 @@
       "item": 72.0,
       "rooms": 0.0
     },
-    "groups": [
-      {
-        "title_ar": "المساحات الخارجية",
-        "items": [
-          "موقف سيارتين",
-          "حديقة",
-          "غرفة سائق"
-        ]
-      },
-      {
-        "title_ar": "المساحات الداخلية",
-        "blocks": [
-          {
-            "name_ar": "الدور الأرضي",
-            "contents_ar": "جناح الضيافة (مجلس، غرفة طعام، دورة مياه) ,صالة المعيشة , دورة مياه, مطبخ مغلق"
-          },
-          {
-            "name_ar": "الدور الأول",
-            "contents_ar": "غرفة نوم رئيسية (ماستر)(تشمل غرفة ملابس, دورة مياه) , غرفتا نوم إضافية (تشمل كل منهما غرفة ملابس صغيرة + دورة مياه) "
-          },
-          {
-            "name_ar": "الملحق العلوي",
-            "contents_ar": "مستودع , غرفة غسيل وكوي الملابس , غرفة نوم العاملة المنزلية "
-          }
-        ]
-      }
-    ]
+    "groups": []
   },
   "scope": {
     "_doc": "The scope, as one list that flows across as many pages as it needs. Page one carries the heading and the lead; later pages carry only lines. `page_break: true` forces a new page, which is how phase two starts its own. `page_capacity` is how many paragraphs fit above the footer; the builder never exceeds it, so adding scope for a project that needs more disciplines grows the deck instead of overflowing a page.",
@@ -636,21 +610,21 @@
         "id": "concept",
         "en": "Architectural Conceptual Design",
         "ar": "التصميم المعماري المبدئي",
-        "included": true,
+        "included": false,
         "alias_excel": "Architectural Conceptual Design"
       },
       {
         "id": "engineering",
         "en": "Architectural + Engineering Design ",
         "ar": "التصميم الهندسي والمخططات التنفيذية",
-        "included": true,
+        "included": false,
         "alias_excel": "Engineering Design"
       },
       {
         "id": "permit",
         "en": "Municipal Permit ",
         "ar": "إصدار رخصة البناء",
-        "included": true,
+        "included": false,
         "alias_excel": "Municipal Permit"
       },
       {
@@ -761,7 +735,7 @@
         ],
         "handover": "PDF - Soft Copy",
         "h_timeline": 53.7,
-        "duration_days": 7,
+        "duration_days": null,
         "schedule": {
           "after": null,
           "overlap_days": 0,
@@ -798,7 +772,7 @@
         ],
         "handover": null,
         "h_timeline": 27.8,
-        "duration_days": 21
+        "duration_days": null
       },
       {
         "id": "develop",
@@ -814,7 +788,7 @@
         ],
         "handover": "PDF - Soft Copy",
         "h_timeline": 41.3,
-        "duration_days": 7,
+        "duration_days": null,
         "schedule": {
           "after": "CD",
           "overlap_days": 0,
@@ -841,7 +815,7 @@
         "handover": "PDF + CAD Files  - Soft Copy",
         "h_timeline": 30.2,
         "duration_span": 3,
-        "duration_days": 45,
+        "duration_days": null,
         "schedule": {
           "after": "DD",
           "overlap_days": 0,
@@ -899,7 +873,7 @@
         ],
         "handover": "PDF - Soft Copy",
         "h_timeline": 41.3,
-        "duration_days": 7,
+        "duration_days": null,
         "schedule": {
           "after": "TD",
           "overlap_days": 18,
@@ -926,7 +900,7 @@
         ],
         "handover": "PDF - Soft Copy",
         "h_timeline": 41.3,
-        "duration_days": 14,
+        "duration_days": null,
         "schedule": {
           "after": "TD",
           "overlap_days": 11,
