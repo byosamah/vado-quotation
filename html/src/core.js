@@ -180,7 +180,17 @@ V.Text = class {
    * that order, "Days 7". The same fault turned "1. CD" into "CD .1".
    */
   run(spec) {
-    const s = V.el('span');
+    /* A run carrying `link` becomes an anchor rather than a span. It is
+     * drawn exactly as the text around it, so nothing on the page changes;
+     * what changes is that the e-mail address and the web address on the
+     * contact page can be pressed, in the browser and in the PDF a browser
+     * prints, instead of being copied out by hand. */
+    const s = V.el(spec.link ? 'a' : 'span', spec.link ? 'lnk' : null);
+    if (spec.link) {
+      s.href = spec.link;
+      s.target = '_blank';
+      s.rel = 'noopener noreferrer';
+    }
     const raw = spec.t == null ? '' : String(spec.t);
 
     if (spec.f) s.classList.add('f-' + spec.f);
@@ -214,7 +224,7 @@ V.Text = class {
     };
 
     const re = /\{\{\s*([a-zA-Z0-9_]+)\s*\}\}/g;
-    let last = 0, m;
+    let last = 0, m, approx = false;
     while ((m = re.exec(raw)) !== null) {
       if (m.index > last) s.appendChild(document.createTextNode(marked(raw.slice(last, m.index))));
       const name = m[1];
@@ -239,13 +249,34 @@ V.Text = class {
         child.textContent = V.label(name).ar;
       } else {
         child.textContent = marked(value);
-        if (this.ctx.estimates.indexOf(name) >= 0) child.classList.add('ph');
+        /* A value the person marked تقريبي says so on the page, in a word
+         * the client reads, not only in a highlight the client never sees.
+         * The highlight is for the person filling it in and is stripped
+         * when the page prints; the word is the document telling the client
+         * that what it just said is a stand-in. */
+        if (this.ctx.estimates.indexOf(name) >= 0) {
+          child.classList.add('ph');
+          approx = true;
+        }
       }
       this.ctx.bindEditable(child, name);
       s.appendChild(child);
       last = m.index + m[0].length;
     }
     if (last < raw.length) s.appendChild(document.createTextNode(marked(raw.slice(last))));
+
+    /* The word goes at the END of the run, not beside the value inside it.
+     * Land area is written "{{lotarea}} م² · حسب {{areasource}}", and a
+     * mark planted where the tag sits reads «512 تقريبًا م²», which is not
+     * a sentence in Arabic. At the end it qualifies the whole statement,
+     * which is what an approximate figure does anyway. Which box carries
+     * the mark is still plain: the panel, the rail and the check all name
+     * the field, and the page highlights it while it is being filled. */
+    if (approx) {
+      const mk = V.el('span', 'approx');
+      mk.textContent = ' ' + this.ctx.approxWord();
+      s.appendChild(mk);
+    }
     return s;
   }
 

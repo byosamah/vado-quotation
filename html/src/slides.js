@@ -141,37 +141,40 @@ V.slides.s01_cover = {
     const h = g.hrule;
     V.hline(ctx, page, h.x, h.y, h.w, 'muted', h.weight);
 
-    b = g.english;
-    [, t] = V.textbox(ctx, page, b.x, b.y, b.w, b.h, { autofit: true });
-    [cv.english_line1,
-     '{{name_title}} {{firstname}} {{lastname}} {{project_type}}',
-     '{{city}} | {{district}}'].forEach(line => {
-      t.para([{ t: line, sz: 12, spc: -0.7, f: 'en_light', c: INK }],
-             { algn: 'r', ls: 1.5 });
-    });
+    /* The English block that stood here is gone. The document is Arabic,
+     * and the three lines it carried said in Latin letters exactly what
+     * the Arabic block above already says. It comes back when the deck
+     * gains a real English edition, not as a caption on the Arabic one. */
 
     this.metaTable(ctx, page, g.meta_table, cv.meta_rows);
     this.coverFooter(ctx, page, g.footer, co);
   },
 
-  /* Value on the left, label on the right, no rules. The label can span
-   * rows. rtl sets the base direction so "14 يوم" reads number-then-word
-   * right to left; algn keeps the flush edge where the design has it. */
+  /* Value on the left, label on the right, no rules. rtl sets the base
+   * direction so "14 يوم" reads number-then-word right to left; algn keeps
+   * the flush edge where the design has it.
+   *
+   * A label that covers more than one row names the FIRST of them, so it is held at the top of the merge
+   * rather than centred in it. Centred, «التوجيه» drew level with the phone
+   * number, one row below the name it labels, and every reader took the
+   * heading to belong to the wrong line. Both cells in such a row sit at
+   * the top, so the two start on the same edge whatever their sizes. */
   metaTable(ctx, page, g, rows) {
     const heights = rows.map(() => g.row_h);
     const tbl = new V.Table(ctx, page, g.x, g.y, g.w, g.h, g.cols, heights);
+    const span = rows[0].span || 1;
     rows.forEach((row, i) => {
-      tbl.anchor(i, 0); tbl.anchor(i, 1);
+      const top = span > 1 && i === 0 ? 't' : 'ctr';
+      tbl.anchor(i, 0, top); tbl.anchor(i, 1, top);
       tbl.text(i, 0).para(
         [{ t: row.value, sz: 8, spc: 0.4, f: 'cairo', c: INK }],
-        { rtl: true, algn: 'l' });
+        { rtl: true, algn: 'l', ls: 1.0 });
       if (row.label_ar) {
         tbl.text(i, 1).para(
           [{ t: row.label_ar, sz: 9, b: true, spc: 0.4, f: 'cairo', c: INK }],
-          { rtl: true, algn: 'l' });
+          { rtl: true, algn: 'l', ls: 1.0 });
       }
     });
-    const span = rows[0].span || 1;
     if (span > 1) tbl.merge(0, 1, span - 1, 1);
   },
 
@@ -365,7 +368,12 @@ V.slides.s04_project = {
     const asset = ctx.job.map || 'map-placeholder.png';
     const pos = ctx.job.map_pos || { x: 50, y: 50 };
     V.picture(ctx, page, asset, g.x, g.y, g.w, g.h, {
-      transparency: g.transparency,
+      /* The theme fades the picture so the numbers over it still lead. How
+       * far is a judgement about one photograph, not a house rule: a pale
+       * satellite view disappears at the theme's fade and a dark street map
+       * still shouts through it. A job that says nothing keeps the theme's
+       * own value, so nothing already sent changes. */
+      transparency: 1 - ctx.mapOpacity(),
       cover: true,
       fit: ctx.job.map_fit || 'cover',
       position: pos.x + '% ' + pos.y + '%',
@@ -562,32 +570,29 @@ V.slides.s08_services = {
     const items = ctx.services();
     const ordered = items.filter(s => s.included).concat(items.filter(s => !s.included));
 
+    /* This one page is a checklist read against an English contract, so
+     * the English service names stay beside the Arabic. Everything on it
+     * hangs off the same left edge, English and Arabic alike: two lines of
+     * a pair that start at opposite edges of the box stop reading as a
+     * pair, which is the whole job of this page.
+     *
+     * The answer column says نعم or لا ينطبق and nothing else. It carried
+     * "Yes" and "N/A" above the Arabic, and a one-word answer does not
+     * need saying twice. */
     ordered.forEach((item, i) => {
       const y = g.y_top + i * g.row_gap;
       const colour = item.included ? 'ink' : 'service_off';
 
-      /* The English runs left to right from the start of the box and the
-       * Arabic under it runs right to left to the end of it, which is what
-       * PowerPoint does with a justified line and what the original deck
-       * shows. Laying the Arabic out left to right, as a bare `justify`
-       * does in a browser, left both lines starting at the same edge and
-       * the pairing stopped reading as a pair. */
       [, t] = V.textbox(ctx, page, g.name.x, y, g.name.w, g.row_h, { autofit: true });
       t.para([{ t: item.en, sz: 11, f: 'en_light', c: colour }],
-             { algn: 'just', level: 1, ls: 1.5 });
+             { algn: 'l', ls: 1.5 });
       t.para([{ t: item.ar, sz: 10, f: 'ar_medium', c: colour }],
-             { algn: 'r', rtl: true, level: 1, ls: 1.5 });
+             { algn: 'l', rtl: true, ls: 1.5 });
 
       [, t] = V.textbox(ctx, page, g.status.x, y, g.status.w, g.row_h, { autofit: true });
-      if (item.included) {
-        t.para([{ t: sv.yes_en, sz: 11, f: 'en', c: colour }],
-               { algn: 'just', level: 1, ls: 1.5 });
-        t.para([{ t: sv.yes_ar, sz: 10, f: 'ar_medium', c: colour }],
-               { algn: 'r', rtl: true, level: 1, ls: 1.5 });
-      } else {
-        t.para([{ t: sv.no_en, sz: 11, f: 'en', c: colour }],
-               { algn: 'just', level: 1, ls: 1.5 });
-      }
+      t.para([{ t: item.included ? sv.yes_ar : sv.no_ar, sz: 11,
+                f: 'ar_medium', c: colour }],
+             { algn: 'l', rtl: true, ls: 1.5 });
     });
   },
 };
@@ -598,26 +603,92 @@ V.slides.s09_phases = {
   title: 'Phases + deliverables',
   section: 'scope',
   COLS: [37.9, 114.4, 162.3, 191.2, 77.4],
+  LEFT: 72.3, WIDTH: 583.2, TABLE_Y: 240.3,
   HEAD_H: 24.8,
   BULLET: '',
   LEGEND_COLS: { 0: [72.3, 117.3], 1: [347.1, 392.1] },
-  LEGEND_ROWS: [822.8, 847.5, 872.5],
+  LEGEND_Y: 822.8, LEGEND_PITCH: 24.7, LEGEND_TIGHT: 17.5,
+  LEGEND_PER_COL: 3, LEGEND_LINE: 15.0,
 
-  build(ctx, page, _p, pageNo) {
+  /* How much the page may bend before the type has to shrink.
+   *
+   * `gap` is the clear air the design leaves between the last row and the
+   * legend. `floor` is the last line the legend may touch: the footer rule
+   * is at 918.2 and a legend sitting on it reads as part of it. `min_scale`
+   * is where shrinking stops being a fix and starts being unreadable; a
+   * page that hits it is a page carrying more phases than one sheet holds,
+   * and the answer to that is a phase fewer, not smaller type. */
+  FIT: { gap: 14.0, floor: 906.0, min_scale: 0.74 },
+
+  /* How many pages the phases need. A job selling everything the studio
+   * offers, described at length, does not fit on one sheet, and a table
+   * shrunk far enough to fit is a table nobody reads. */
+  pages(ctx) { return this.split(ctx).length; },
+
+  /* How the phases divide across those pages.
+   *
+   * A phase and its continuation rows move together. Splitting them would
+   * leave a page of rows naming no phase, which is the one thing this
+   * table exists to say.
+   *
+   * A row's declared height was measured against the fonts the PowerPoint
+   * uses, and Cairo is wider, so the only honest budget in a browser is a
+   * measured one. adjust() writes what each phase actually took into
+   * `ctx.phaseHeights` the first time the pages are laid out, and asks for
+   * one more render if that changes the answer. Until then a phase is
+   * worth its declared height, which is what the PowerPoint uses too and
+   * is close enough to get the first render right on any real job. */
+  split(ctx) {
+    const rows = ctx.phases();
+    const groups = [];
+    rows.forEach(r => {
+      if (r.no != null || !groups.length) groups.push([]);
+      groups[groups.length - 1].push(r);
+    });
+    const measured = ctx.phaseHeights || {};
+    const room = ctx.geo('phases_page', 'rows_room');
+    const out = [];
+    let cur = [], used = 0;
+    groups.forEach(g => {
+      const key = g[0].id || '';
+      const h = measured[key] != null ? measured[key]
+                                      : g.reduce((a, r) => a + (r.h || 0), 0);
+      if (cur.length && used + h > room) { out.push(cur); cur = []; used = 0; }
+      cur = cur.concat(g);
+      used += h;
+    });
+    if (cur.length) out.push(cur);
+    return out.length ? out : [[]];
+  },
+
+  build(ctx, page, pageIdx, pageNo) {
     const ph = ctx.c('phases');
     V.chrome.contentPage(ctx, page, ctx.c('sections', 2).ar, this.section, pageNo);
 
-    let t;
-    [, t] = V.textbox(ctx, page, 104.9, 188.3, 492.7, 29.9, { autofit: true });
-    t.para([{ t: ph.heading_ar, sz: 14, b: true, f: 'cairo', c: INK }],
-           { algn: 'r', rtl: true, ls: 1.5 });
+    const sheets = this.split(ctx);
+    const last = pageIdx === sheets.length - 1;
+    page.dataset.phasePage = pageIdx;
+
+    /* The heading names the table, so it is said once, above the first of
+     * them. A second page carries on. */
+    if (pageIdx === 0) {
+      const [, t] = V.textbox(ctx, page, 104.9, 188.3, 492.7, 29.9,
+                              { autofit: true });
+      t.para([{ t: ph.heading_ar, sz: 14, b: true, f: 'cairo', c: INK }],
+             { algn: 'r', rtl: true, ls: 1.5 });
+    }
 
     /* the phases this job actually has: a phase whose service was not sold
      * is gone from here and from the schedule on slide 11 together */
-    const rows = ctx.phases();
+    const rows = sheets[pageIdx] || [];
     const heights = [this.HEAD_H].concat(rows.map(r => r.h));
-    const tbl = new V.Table(ctx, page, 72.3, 240.3, 583.2, 564.5,
+    const tbl = new V.Table(ctx, page, this.LEFT, this.TABLE_Y,
+                            this.WIDTH, 564.5,
                             this.COLS, heights, { rtl: true });
+    /* adjust() below finds the table by this mark rather than by being the
+     * only table on the page, which it would stop being the day this page
+     * gains a second one. */
+    tbl.tbl.dataset.phases = '1';
 
     const heads = ['', ph.head_ar[0], ph.head_ar[1], ph.head_ar[2], ph.head_ar[3]];
     for (let c = 0; c < 5; c++) {
@@ -664,7 +735,9 @@ V.slides.s09_phases = {
     });
 
     this.mergeContinuations(tbl, rows);
-    this.legend(ctx, page, ctx.phaseCodes());
+    /* The legend explains the codes in the table above it, so it belongs
+     * under the last of them, not under each. */
+    if (last) this.legend(ctx, page, ctx.phaseCodes());
   },
 
   /* A run of rows whose `no` is null belongs to the phase above. */
@@ -687,16 +760,139 @@ V.slides.s09_phases = {
    * on the page appear: the original named a phase no row used, and a
    * client asking "where is that phase" is a question nobody wants. */
   legend(ctx, page, codes) {
-    const perCol = this.LEGEND_ROWS.length;
+    const perCol = this.LEGEND_PER_COL;
     codes.forEach(([code, label], i) => {
       const [codeX, labelX] = this.LEGEND_COLS[Math.min(Math.floor(i / perCol), 1)];
-      const y = this.LEGEND_ROWS[i % perCol];
-      let t;
-      [, t] = V.textbox(ctx, page, codeX, y, 40.9, 15.0, { autofit: true });
-      t.para([{ t: code, sz: 11, b: true, spc: 3.0, f: 'en', c: 'chart_ink' }]);
-      [, t] = V.textbox(ctx, page, labelX, y, 234.2, 15.0, { autofit: true });
-      t.para([{ t: label, sz: 11, f: 'en', c: 'chart_ink' }]);
+      const row = i % perCol;
+      const y = this.LEGEND_Y + row * this.LEGEND_PITCH;
+      [[codeX, 40.9, { t: code, sz: 11, b: true, spc: 3.0, f: 'en', c: 'chart_ink' }],
+       [labelX, 234.2, { t: label, sz: 11, f: 'en', c: 'chart_ink' }]]
+        .forEach(([x, w, run]) => {
+          const [box, t] = V.textbox(ctx, page, x, y, w, this.LEGEND_LINE,
+                                     { autofit: true });
+          /* adjust() moves these, and it needs to know which line of the
+           * legend each box is on to lay them out again at a new pitch. */
+          box.dataset.legendRow = row;
+          t.para([run]);
+        });
     });
+  },
+
+  /* Make the page hold what this job puts on it.
+   *
+   * Three things happen here, in order, because each depends on the one
+   * before it.
+   *
+   * First the rows are measured. Their declared heights come from the
+   * original document, measured against the fonts the PowerPoint uses;
+   * Cairo is wider, so a cell takes more lines here than the height allows
+   * and a CSS row height is a floor rather than a ceiling. What each phase
+   * really took is written back to the context, and if that changes how
+   * many pages the phases need, one more render is asked for and this
+   * stops. It cannot loop: what a phase measures does not depend on which
+   * page it landed on.
+   *
+   * Then the table is fitted. The legend follows it down instead of
+   * waiting at a fixed line, and tightens its own spacing before it asks
+   * anything else to give. Only when both have given everything does the
+   * table shrink, and it shrinks by being laid out in a wider box and
+   * scaled back into place, so the type gets smaller and the wrapping
+   * follows. Scaling a table laid out at its final width would have
+   * squashed the letters instead.
+   *
+   * A page can only be measured once it is on screen, which is why none of
+   * this is done while the page is built. The PowerPoint has no
+   * measurement to work from at all: it breaks the page on the declared
+   * heights and leaves its legend where the design puts it.
+   */
+  adjust(ctx, page) {
+    const pr = page.getBoundingClientRect();
+    const tbl = page.querySelector('[data-phases]');
+    if (!tbl || !pr.height) return;
+    const perPt = pr.height / 1008;
+    const bottomOf = () =>
+      (tbl.getBoundingClientRect().bottom - pr.top) / perPt;
+
+    const scale = k => {
+      tbl.style.width = V.pt(this.WIDTH / k);
+      tbl.style.transformOrigin = '0 0';
+      tbl.style.transform = k === 1 ? '' : 'scale(' + k + ')';
+    };
+    scale(1);
+
+    if (this.measure(ctx, page, perPt)) return;
+
+    const marks = page.querySelectorAll('[data-legend-row]');
+    let lastRow = 0;
+    marks.forEach(el => { lastRow = Math.max(lastRow, +el.dataset.legendRow); });
+
+    /* The tallest the table may be for a given legend spacing. A page with
+     * no legend under it answers to the footer alone. */
+    const roomAt = pitch => this.FIT.floor -
+      (marks.length ? this.LEGEND_LINE + lastRow * pitch + this.FIT.gap : 0);
+
+    /* The table hangs from a fixed top and scales from it, so its height
+     * is what shrinks. Two or three passes settle it: a narrower line
+     * wraps differently, so the first guess is only ever close. */
+    let k = 1;
+    const room = roomAt(this.LEGEND_TIGHT) - this.TABLE_Y;
+    for (let pass = 0; pass < 6; pass++) {
+      const tall = bottomOf() - this.TABLE_Y;
+      if (tall <= room + 0.5) break;
+      const next = Math.max(this.FIT.min_scale, k * room / tall);
+      const done = next >= k - 0.002;
+      k = next;
+      scale(k);
+      if (done) break;
+    }
+
+    if (!marks.length) return;
+
+    /* Where the legend ends up: never above the line the design gives it,
+     * never overlapping the table, never past the footer. It keeps its own
+     * spacing while there is room for it and tightens only when there is
+     * not. */
+    const bottom = bottomOf();
+    let pitch = this.LEGEND_PITCH;
+    let top = Math.max(this.LEGEND_Y, bottom + this.FIT.gap);
+    if (top + lastRow * pitch + this.LEGEND_LINE > this.FIT.floor) {
+      pitch = this.LEGEND_TIGHT;
+      top = Math.min(Math.max(this.LEGEND_Y, bottom + this.FIT.gap),
+                     this.FIT.floor - this.LEGEND_LINE - lastRow * pitch);
+    }
+    marks.forEach(el => {
+      el.style.top = V.pt(top + (+el.dataset.legendRow) * pitch);
+    });
+  },
+
+  /* What each phase on this page really took, written back so split() can
+   * use a measured budget instead of a declared one. Answers true when the
+   * measurement changes how many pages the phases need, which is the
+   * caller's cue to stop and let the deck be drawn again.
+   *
+   * The rows of the table are the rows of this page's slice, in order,
+   * after the heading row. A continuation row's height counts towards the
+   * phase above it, because the two cannot be parted. */
+  measure(ctx, page, perPt) {
+    const idx = +page.dataset.phasePage;
+    const rows = this.split(ctx)[idx];
+    if (!rows) return false;
+    const trs = [].slice.call(
+      page.querySelectorAll('[data-phases] tbody tr')).slice(1);
+    if (trs.length !== rows.length) return false;
+
+    const seen = ctx.phaseHeights || (ctx.phaseHeights = {});
+    let key = null;
+    rows.forEach((r, i) => {
+      if (r.no != null || key === null) { key = r.id || ('row' + i); seen[key] = 0; }
+      seen[key] += trs[i].getBoundingClientRect().height / perPt;
+    });
+
+    const want = this.split(ctx).length;
+    const have = document.querySelectorAll('[data-phase-page]').length;
+    if (want === have || !ctx.relayout) return false;
+    ctx.relayout();
+    return true;
   },
 };
 
@@ -1234,24 +1430,38 @@ V.slides.s13_agreement = {
      * The designation used to sit at the bottom, under the name, where it
      * read as an afterthought rather than as the heading of the block.
      *
-     * The two sides end level. The consultant names a person as well as the
-     * company, so it takes one blank line fewer to land in the same place.
-     */
+     * A client is sometimes a company and sometimes one person. Where a
+     * company is named it takes the line the consultant's company takes
+     * opposite, with the person who signs for it underneath, so both sides
+     * of the contract are read the same way. Where none is named the line
+     * is not drawn at all: an empty one would print as a gap above a
+     * private client's name and read as something left out.
+     *
+     * The two sides end level whichever shape each takes, because the
+     * blank lines below are what is left of four rather than a count
+     * written down beside each case. */
+    const named = !party.name_optional ||
+                  String(ctx.fill(party.name_ar)).indexOf('{{') < 0;
+
     const [el, t] = V.textbox(ctx, page, party.x, y, party.w, 155.0, { autofit: true });
     t.para([{ t: party.party_ar, sz: 12, f: 'ar_medium', c: INK }],
            { algn: 'c', rtl: true, ls: 1.5 });
     t.para([{ t: party.role_ar, sz: 10.5, f: 'en', c: INK }],
            { algn: 'c', rtl: true, ls: 1.5 });
     t.blank(1, { sz: 12, f: 'en', algn: 'c', rtl: true, ls: 1.5 });
-    t.para([{ t: party.name_ar, sz: 12, f: 'ar_medium', c: INK }],
-           { algn: 'c', rtl: true, ls: 1.5 });
+
+    let lines = 0;
+    if (named) {
+      t.para([{ t: party.name_ar, sz: 12, f: 'ar_medium', c: INK }],
+             { algn: 'c', rtl: true, ls: 1.5 });
+      lines += 1;
+    }
     if (signatory) {
       t.para([{ t: signatory, sz: 12, f: 'ar_medium', c: INK }],
              { algn: 'c', rtl: true, ls: 1.5 });
-      t.blank(2, { sz: 12, f: 'en', algn: 'c', rtl: true, ls: 1.5 });
-    } else {
-      t.blank(3, { sz: 12, f: 'ar_medium', algn: 'c', rtl: true, ls: 1.5 });
+      lines += 1;
     }
+    t.blank(4 - lines, { sz: 12, f: 'ar_medium', algn: 'c', rtl: true, ls: 1.5 });
     return el;
   },
 };
@@ -1282,7 +1492,8 @@ V.slides.s14_contact = {
                      after, level: o.level });
         return;
       }
-      t.para([{ t: txt, sz: 11, b: !!o.bold, f: 'cairo', c: INK }],
+      t.para([{ t: txt, sz: 11, b: !!o.bold, f: 'cairo', c: INK,
+                link: o.link }],
              { algn: 'r', rtl: true, ls: 1.5, after, level: o.level });
     };
 
@@ -1290,10 +1501,14 @@ V.slides.s14_contact = {
     line('');
     line(co.name_ar_short, { bold: true, level: 4 });
     line(co.contact_phone, { level: 4 });
-    line(co.contact_email, { level: 4 });
+    /* The address and the site can be pressed, here and in the PDF this
+     * page prints to. They are the two lines a client acts on, and reading
+     * an address off a picture to type it back in is the one thing a
+     * document should never ask. */
+    line(co.contact_email, { level: 4, link: 'mailto:' + co.contact_email });
     line(ctx.address('contact_line1_ar'), { level: 4, after: null });
     line(ctx.address('contact_line2_ar'), { level: 4, after: null });
-    line(co.website + ' ', { level: 4 });
+    line(co.website + ' ', { level: 4, link: 'https://' + co.website });
     line('');
     ct.closing_ar.slice(0, 2).forEach(p => { line(p); line(''); });
     ct.closing_ar.slice(2).forEach(p => line(p));

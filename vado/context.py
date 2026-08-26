@@ -41,7 +41,10 @@ class Ctx:
         overlay = self.job.get('fields') if 'fields' in self.job else {
             k: v for k, v in self.job.items()
             if k not in ('services', 'spatial', 'content', 'signatory',
-                         'placeholders', 'durations', 'map', 'map_marker')
+                         'placeholders', 'durations', 'starts', 'markers',
+                         'payments',
+                         'timeline_weeks', 'map', 'map_data', 'map_marker',
+                         'map_pos', 'map_fit', 'map_opacity')
         }
         self.fields.update(overlay or {})
         self.placeholders = list(self.job.get('placeholders') or [])
@@ -52,6 +55,30 @@ class Ctx:
     # ---- derived values --------------------------------------------------
     AUTO = ('', 'auto')
 
+    @staticmethod
+    def _percent(raw):
+        """A share of the fee, as a percentage.
+
+        "30", "30%", "٣٠٪" and "0.3" all mean the same thing, and the amount
+        column already worked all four out the same way. This makes what is
+        PRINTED agree with that arithmetic instead of printing whatever
+        happened to be typed.
+        """
+        text = str(raw)
+        # An unfilled share is "{{p1}}", and stripping it down to its digits
+        # leaves a 1, which reads as 100%. On a job with a fee and no split
+        # that made every stage cost the whole fee. A tag is not a number.
+        if '{{' in text:
+            return None
+        digits = re.sub(r'[^0-9.]', '', text)
+        try:
+            n = float(digits)
+        except ValueError:
+            return None
+        if n <= 0:
+            return None
+        return round(n if n > 1 else n * 100, 1)
+
     def _derive(self):
         """Work out what can be worked out, so no fact is typed twice.
 
@@ -59,6 +86,41 @@ class Ctx:
         eventually. Where one value can be computed from another, set it to
         "auto" in the job and let it follow.
         """
+        # The fee, grouped in threes. A six-figure number with no separators
+        # is read wrong about as often as it is read right, and this one is
+        # the number the client signs against. Typing 50000 prints 50,000.
+        fee = str(self.fields.get('costnumber', '')).strip()
+        if fee and not fee.startswith('{{') and _is_number(fee):
+            head, _, frac = fee.replace(',', '').partition('.')
+            self.fields['costnumber'] = f'{int(head):,}' + (('.' + frac) if frac else '')
+
+        # Each stage's share carries its own sign, so the column reads as
+        # percentages rather than as four bare numbers.
+        #
+        # The shares live on the payment rows now, and p1 to p4 follow
+        # them. They are still the merge fields: the office tracker maps to
+        # those names and tools/presend.py reads them, so a schedule edited
+        # on the page has to reach them or the two would quietly disagree.
+        # A default row's share IS "{{p1}}", so for an untouched job this
+        # writes back exactly what it read, tidied. Rows past the fourth
+        # have no field of their own; they are printed and totalled all the
+        # same.
+        for i, row in enumerate(self.payment_rows()[:4], start=1):
+            k = f'p{i}'
+            value = str(self.fill(row.get('pct') or ''))
+            if '{{' in value:
+                # Nothing has been said yet. The studio's own rows carry
+                # "{{p1}}" as their share, so leaving the field exactly as
+                # it is keeps the blank template round-tripping its own
+                # tags; emptying it here made build.py warn that four
+                # fields had no value.
+                continue
+            pct = self._percent(value)
+            # The row is the truth. A share cleared on the page clears the
+            # field with it, back to the tag, so the cell prints as a blank
+            # rather than keeping a number nobody can see any more.
+            self.fields[k] = f'{pct:g}%' if pct is not None else '{{%s}}' % k
+
         number = str(self.fields.get('costnumber', '')).strip()
         written = str(self.fields.get('costwritten', '')).strip()
         if _is_number(number) and written in self.AUTO + ('{{costwritten}}',):
@@ -120,14 +182,35 @@ class Ctx:
         if not isinstance(text, str) or '{{' not in text:
             return text
 
+        # A value the person marked تقريبي says so on the page, in a word
+        # the client reads. Without it a stand-in is indistinguishable from
+        # a fact three days later.
+        #
+        # The word goes at the END of the string, not beside the value
+        # inside it. Land area is written "{{lotarea}} م² · حسب
+        # {{areasource}}", and a mark planted where the tag sits reads
+        # «512 تقريبًا م²», which is not a sentence in Arabic. At the end it
+        # qualifies the whole statement, which is what an approximate figure
+        # does anyway.
+        approx = []
+
         def swap(m):
             name = m.group(1)
             if name in self.fields:
-                return str(self.fields[name])
+                value = str(self.fields[name])
+                if value and not value.startswith('{{') \
+                        and name in self.placeholders:
+                    approx.append(name)
+                return value
             self.unknown_tags.add(name)
             return m.group(0)
 
-        return TAG.sub(swap, text)
+        out = TAG.sub(swap, text)
+        return (out + ' ' + self.approx_word()) if approx else out
+
+    def approx_word(self):
+        """The word that follows a value marked تقريبي on the page."""
+        return (self.content.get('marks') or {}).get('approx_ar', 'تقريبًا')
 
     def field(self, name):
         return self.fields.get(name, '{{%s}}' % name)
@@ -226,26 +309,70 @@ class Ctx:
         parts = {k: v for k, v in co['address'].items() if not k.startswith('_')}
         return co['address_formats'][fmt].format(**parts)
 
+    def payment_rows(self):
+        """The rows of the payment schedule.
+
+        A job that writes its own list replaces the studio's four entirely,
+        and may hold any number of them. A job that says nothing gets the
+        default, whose shares are the merge fields p1 to p4.
+        """
+        own = self.job.get('payments')
+        if isinstance(own, list) and own:
+            return own
+        return self.c('financial', 'payments')
+
+    def trigger(self, row):
+        """The word in front of a payment's event, and whether it leads the
+        sentence under the heading as well.
+
+        قبل and بعد are prepositions, so they read the same in both. دفعة
+        مقدمة names the payment instead, and leading the sentence with it
+        made it say دفعة twice. It heads the row and stays out of the
+        sentence. A word the person typed is a preposition like عند, so it
+        leads.
+        """
+        words = self.c('financial', 'triggers')
+        if row.get('when') == 'custom':
+            return {'ar': str(row.get('when_ar') or '').strip(),
+                    'in_body': True}
+        w = words.get(row.get('when')) or {}
+        return {'ar': str(w.get('ar') or '').strip(),
+                'in_body': w.get('in_body') is not False}
+
     def payments(self):
         """The payment schedule, with the riyal amount worked out.
 
+        A payment is three parts: the trigger word, the event, and the
+        share. Everything a client reads on that row is built from those
+        three, so a payment cannot say one thing in its heading and another
+        underneath.
+
         A client reading "30%" has to multiply to learn what the stage
-        costs. Both numbers are already here, so the deck does the sum. The
-        amount is omitted rather than guessed when the fee is still a tag.
+        costs. Both numbers are already here, so the deck does the sum.
+        Where the fee is not a number yet there is no amount to state, and
+        the sentence says the share instead.
         """
+        fi = self.c('financial')
         fee = str(self.fields.get('costnumber', '')).replace(',', '').strip()
         total = float(fee) if _is_number(fee) else None
         out = []
-        for i, pay in enumerate(self.c('financial', 'payments'), start=1):
-            raw = str(self.fill(pay['pct'])).strip().rstrip('%')
-            share = None
-            if _is_number(raw):
-                share = float(raw)
-                share = share if share > 1 else share * 100
-            amount = f'{total * share / 100:,.0f}' if (total and share) else None
-            out.append({'no': f'{i}.', 'title_ar': pay['title_ar'],
-                        'pct': self.fill(pay['pct']), 'amount': amount,
-                        'body_ar': pay['body_ar']})
+        for i, row in enumerate(self.payment_rows(), start=1):
+            share = self._percent(self.fill(row['pct']))
+            amount = f'{total * share / 100:,.2f}' if (total and share) else None
+            when = self.trigger(row)
+            event = str(self.fill(row.get('event_ar') or '')).strip()
+            head = ' '.join(p for p in (when['ar'], event) if p)
+            lead = head if when['in_body'] else event
+            pct = f'{share:g}%' if share is not None else str(self.fill(row['pct']))
+            if amount:
+                body = (fi['due_ar'].replace('{when}', lead)
+                        .replace('{amount}', amount + ' ' + fi['amount_unit_ar']))
+            else:
+                body = (fi['due_pct_ar'].replace('{when}', lead)
+                        .replace('{pct}', pct))
+            out.append({'no': f'{i}.', 'title_ar': head + '.', 'pct': pct,
+                        'amount': amount, 'body_ar': [body.strip()],
+                        'share': share, 'when': when['ar'], 'event_ar': event})
         return out
 
     def payment_totals(self):
@@ -258,15 +385,14 @@ class Ctx:
         pays = self.payments()
         pcts, amounts = [], []
         for p in pays:
-            raw = str(p['pct']).strip().rstrip('%')
-            if _is_number(raw):
-                v = float(raw)
-                pcts.append(v if v > 1 else v * 100)
+            if p['share'] is not None:
+                pcts.append(p['share'])
             if p['amount']:
                 amounts.append(float(p['amount'].replace(',', '')))
         return {
             'pct': f'{sum(pcts):.0f}%' if len(pcts) == len(pays) else '',
-            'amount': f'{sum(amounts):,.0f}' if len(amounts) == len(pays) else None,
+            'amount': (f'{sum(amounts):,.2f}'
+                       if pays and len(amounts) == len(pays) else None),
         }
 
     def phases(self):
@@ -333,11 +459,23 @@ class Ctx:
             elif current is not None:
                 current['days'] += row.get('duration_days') or 0
 
+        # A phase a job pins by hand starts on the day it was given,
+        # whatever the after/overlap rules would have worked out.
+        # Everything downstream still follows, because a dependent phase
+        # reads the pinned phase's END day the same way it read a
+        # calculated one. So one phase can be moved to the day the client
+        # was promised without the rest being retyped.
+        pinned = self.job.get('starts') or {}
         for lane in lanes:
             sched = lane['schedule']
             after = sched.get('after')
             base = ends.get(after, cursor) if after else 0.0
-            start = max(0.0, base - (sched.get('overlap_days') or 0))
+            own = pinned.get(lane['id'])
+            if isinstance(own, (int, float)):
+                start = max(0.0, float(own))
+            else:
+                start = max(0.0, base - (sched.get('overlap_days') or 0))
+            lane['pinned'] = isinstance(own, (int, float))
             lane['start_day'] = start
             lane['end_day'] = start + lane['days']
             lane['parallel'] = bool(sched.get('parallel'))

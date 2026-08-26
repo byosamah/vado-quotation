@@ -16,19 +16,69 @@ HEAD_H = 24.8
 BULLET = ''
 
 
-def build(ctx, slide):
+def pages(ctx):
+    """How many pages the phases need.
+
+    A job selling everything the studio offers, described at length, does
+    not fit on one sheet, and a table squeezed far enough to fit is a table
+    nobody reads.
+    """
+    return len(split(ctx))
+
+
+def split(ctx):
+    """How the phases divide across those pages.
+
+    A phase and its continuation rows move together. Splitting them would
+    leave a page of rows naming no phase, which is the one thing this table
+    exists to say.
+
+    The budget is `theme.phases_page.rows_room`, the same number the
+    browser uses, so the two break the page in the same place. They cannot
+    always agree on whether a page is full: this has only the heights
+    declared in content.json, measured against the fonts the PowerPoint
+    uses, while the browser measures what Cairo actually drew and Cairo is
+    wider. Where they part, the browser splits first.
+    """
+    groups = []
+    for r in ctx.phases():
+        if r['no'] is not None or not groups:
+            groups.append([])
+        groups[-1].append(r)
+
+    room = ctx.geo('phases_page', 'rows_room')
+    out, cur, used = [], [], 0.0
+    for g in groups:
+        h = sum(r.get('h') or 0 for r in g)
+        if cur and used + h > room:
+            out.append(cur)
+            cur, used = [], 0.0
+        cur += g
+        used += h
+    if cur:
+        out.append(cur)
+    return out or [[]]
+
+
+def build(ctx, slide, page=0):
     ph = ctx.c('phases')
     chrome.content_page(ctx, slide, title=ctx.c('sections', 2)['ar'], section=SECTION)
 
-    _, t = textbox(ctx, slide, 104.9, 188.3, 492.7, 29.9, autofit=True)
-    t.para([{'t': ph['heading_ar'], 'sz': 14, 'b': True, 'f': 'cairo', 'c': 'ink'}],
-           algn='r', rtl=True, ls=1.5)
+    sheets = split(ctx)
+    last = page == len(sheets) - 1
+
+    # The heading names the table, so it is said once, above the first of
+    # them. A second page carries on.
+    if page == 0:
+        _, t = textbox(ctx, slide, 104.9, 188.3, 492.7, 29.9, autofit=True)
+        t.para([{'t': ph['heading_ar'], 'sz': 14, 'b': True,
+                 'f': 'cairo', 'c': 'ink'}], algn='r', rtl=True, ls=1.5)
 
     # the phases this job actually has: a phase whose service was not sold
     # is gone from here and from the schedule on slide 11 together
-    rows = ctx.phases()
+    rows = sheets[page] if page < len(sheets) else []
     heights = [HEAD_H] + [r['h'] for r in rows]
-    tbl = Table(ctx, slide, 72.3, 240.3, 583.2, 564.5, COLS, heights, rtl=True)
+    tbl = Table(ctx, slide, 72.3, 240.3, 583.2, sum(heights), COLS, heights, rtl=True)
 
     # header band
     heads = ['', ph['head_ar'][0], ph['head_ar'][1], ph['head_ar'][2], ph['head_ar'][3]]
@@ -72,7 +122,10 @@ def build(ctx, slide):
                 algn='c', rtl=True, ls=1.5, before=12)
 
     _merge_continuations(tbl, rows)
-    _legend(ctx, slide, ctx.phase_codes())
+    # The legend explains the codes in the table above it, so it belongs
+    # under the last of them, not under each.
+    if last:
+        _legend(ctx, slide, ctx.phase_codes())
 
 
 def _merge_continuations(tbl, rows):

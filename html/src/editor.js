@@ -20,6 +20,52 @@ const SEEN = 'vado-tfp-intro-v1';
 const LIST_FOR = { ksaarchzone: 'ksa_arch_zones', ksaarchlevel: 'ksa_arch_levels',
                    archstyle: 'arch_styles' };
 
+/* Fields with a short list of ready answers and a way out to typing your
+ * own. A closed list above refuses anything not on it; an open list only
+ * saves the typing on the answer that comes up nine times in ten. */
+const OPEN_LIST = {
+  name_title_ar: ['الأستاذ', 'الأستاذة', 'الأمير', 'الأميرة',
+                  'الدكتور', 'الدكتورة', 'المهندس', 'المهندسة'],
+};
+/* The sentinel value for «أخرى» on an open list. Two underscores each
+ * side so it can never be mistaken for an answer somebody typed. */
+const OTHER = '__other__';
+
+/* Values the document prints only when they are given. A private client has
+ * no company, so an empty box here is an answer rather than a gap: it is
+ * offered, it is never counted as missing, and the page draws nothing where
+ * it would have gone. */
+const OPTIONAL = new Set(['client_company_ar']);
+
+/* Values a page's own control owns, so the panel draws no box of its own
+ * for them. The four shares are typed as percentages on the payment rows
+ * on page 12 now, and a second set of boxes saying the same thing is a
+ * second place to change them and a second place for them to disagree.
+ * They are still named in V.PAGE_FIELDS, because a value nobody can reach
+ * is the thing the self-check exists to catch, and قبل الإرسال reads every
+ * payment back with its share and its amount. */
+const BY_CONTROL = new Set(['p1', 'p2', 'p3', 'p4']);
+
+/* The one option on the architecture zone list that says the classification
+ * does not apply. Choosing it answers the level as well, because a plot
+ * outside the classification has no level inside it either. */
+const ARCH_NA = 'لاينطبق/ مستثنى';
+
+/* The date, written the way every proposal already on file writes it. */
+const MONTHS_EN = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
+                   'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+const fmtDate = d => String(d.getDate()).padStart(2, '0') + ' ' +
+                     MONTHS_EN[d.getMonth()] + ' ' + d.getFullYear();
+const isoOf = d => d.getFullYear() + '-' +
+                   String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                   String(d.getDate()).padStart(2, '0');
+const dayFrom = n => {
+  const d = new Date();
+  d.setHours(12, 0, 0, 0);      /* midday, so a timezone shift cannot move the day */
+  d.setDate(d.getDate() + n);
+  return d;
+};
+
 /* Worked out from other answers, so they are shown but not typed into. */
 const DERIVED = {
   costwritten: 'يُكتب تلقائياً بالحروف من الرقم أعلاه',
@@ -46,7 +92,7 @@ const GROUPS = [
 ];
 
 /* Groups where a value can be a stand-in rather than a fact, so each one
- * offers the تقديري mark. It was on the fifteen Balady fields alone, which
+ * offers the تقريبي mark. It was on the fifteen Balady fields alone, which
  * left the coordinates, the national address, the map link and both
  * architecture lists with no way to be marked or unmarked by hand, even
  * though jobs arrive with exactly those flagged. */
@@ -69,6 +115,21 @@ V.App = class {
   constructor(data) {
     this.ctx = new V.Ctx(data);
     this.ctx.onBind = (span, name) => this.bind(span, name);
+    /* A page that can only tell how many pages it needs once it has been
+     * measured asks for the deck to be drawn again. Page 9 is the case:
+     * its rows are declared at the heights the PowerPoint's fonts give
+     * them, and Cairo is wider. Deferred, because the ask arrives from
+     * inside a render, and guarded, so two pages asking at once cost one
+     * redraw rather than two. */
+    this.ctx.relayout = () => {
+      if (this._relayout) return;
+      this._relayout = true;
+      setTimeout(() => {
+        this._relayout = false;
+        this.render();
+        this.show(this.page);
+      }, 0);
+    };
     this.stage = document.getElementById('stage');
     this.restore();
     this.render();
@@ -76,6 +137,16 @@ V.App = class {
     this.wire();
     this.show(this.page);
     this.loadTemplates();          /* the office's list, fetched in the background */
+
+    /* Everything a page works out for itself is worked out from a
+     * measurement, and the first measurement is taken while the web fonts
+     * are still arriving. A fallback face is narrower than Cairo, so page 9
+     * measured a table twenty points shorter than the one it would draw and
+     * left its legend sitting on the last two rows. Measure again once the
+     * real faces are in. */
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => this.show(this.page));
+    }
   }
 
   get job() { return this.ctx.job; }
@@ -87,6 +158,12 @@ V.App = class {
     const f = this.job.fields || (this.job.fields = {});
     if (value === '' || value == null) delete f[name];
     else f[name] = value;
+    /* A plot outside the Saudi architecture classification has no level
+     * inside it either, so the one answer that says «does not apply»
+     * answers both boxes. Every other zone leaves the level alone: which
+     * of the three levels a job is built to is a design decision, and
+     * guessing it would be the tool deciding it. */
+    if (name === 'ksaarchzone' && value === ARCH_NA) f.ksaarchlevel = ARCH_NA;
     this.changed();
   }
 
@@ -149,6 +226,9 @@ V.App = class {
       const seen = [];
       pg.querySelectorAll('[data-field]').forEach(el => {
         if (seen.indexOf(el.dataset.field) < 0) seen.push(el.dataset.field);
+      });
+      (V.PAGE_FIELDS[m.module] || []).forEach(name => {
+        if (seen.indexOf(name) < 0) seen.push(name);
       });
       /* Listed in the order a person gathers them, not the order they are
        * drawn. Someone holding the deed answers every land value at once,
@@ -231,7 +311,8 @@ V.App = class {
 
   missingOn(n) {
     return this.onPage[n - 1].filter(f =>
-      !DERIVED[f] && String(this.ctx.field(f)).indexOf('{{') === 0);
+      !DERIVED[f] && !OPTIONAL.has(f) && !BY_CONTROL.has(f) &&
+      String(this.ctx.field(f)).indexOf('{{') === 0);
   }
 
   /* Fit the page to the space it has. The zoom is set on the page itself:
@@ -332,7 +413,7 @@ V.App = class {
     const host = document.getElementById('page-form');
     host.textContent = '';
 
-    const names = this.onPage[this.page - 1];
+    const names = this.onPage[this.page - 1].filter(f => !BY_CONTROL.has(f));
     const extra = V.PAGE_CONTROLS[m.module];
 
     /* Templates and the picture belong at the top of the page they change,
@@ -409,7 +490,7 @@ V.App = class {
             card.appendChild(head);
             if (ESTIMATABLE.has(g)) {
               const note = V.el('p', 'group-note');
-              note.textContent = 'علّم أي قيمة لم تأتِ من المصدر بعلامة تقديري.';
+              note.textContent = 'علّم أي قيمة لم تأتِ من المصدر بعلامة تقريبي.';
               card.appendChild(note);
             }
             host.appendChild(card);
@@ -424,15 +505,23 @@ V.App = class {
     if (extra && !V.CONTROLS_FIRST[m.module]) this[extra](host);
   }
 
-  total() {
-    const f = this.ctx.content.fields || {};
-    return Object.keys(f).filter(k => k !== '_doc' && !DERIVED[k]).length;
+  /* Every field that reaches a page, worked out from the pages themselves.
+   *
+   * It used to be every field content.json declares, which counted six the
+   * document no longer prints: the Latin name, city, district and project
+   * type belonged to the English block on the cover, and that block is
+   * gone until the deck gains a real English edition. Counting them asked
+   * for values that land nowhere and left the meter short of full on a
+   * proposal that was finished. */
+  onAPage() {
+    return Object.keys(this.pageOf).filter(k =>
+      k !== '_doc' && !DERIVED[k] && !OPTIONAL.has(k) && !BY_CONTROL.has(k));
   }
 
+  total() { return this.onAPage().length; }
+
   countFilled() {
-    const f = this.ctx.content.fields || {};
-    return Object.keys(f).filter(k =>
-      k !== '_doc' && !DERIVED[k] &&
+    return this.onAPage().filter(k =>
       String(this.ctx.field(k)).indexOf('{{') !== 0).length;
   }
 
@@ -445,6 +534,23 @@ V.App = class {
     const lab = V.el('div', 'lab');
     const nm = V.el('span', 'name'); nm.textContent = meta.ar;
     lab.appendChild(nm);
+    /* One value can land on more than one page: the plot number is printed
+     * on page 4 and again in the heading of page 5's brief. It is one box,
+     * so page 5 opens already carrying what page 4 was told, and typing it
+     * here changes both. Saying so out loud is the whole point: a box that
+     * silently edits another page is the kind of surprise that gets a
+     * proposal sent with two different plot numbers on it. */
+    if (OPTIONAL.has(name)) {
+      const opt = V.el('span', 'src');
+      opt.textContent = 'اختياري';
+      lab.appendChild(opt);
+    }
+    const from = this.pageOf[name];
+    if (from && from !== this.page) {
+      const echo = V.el('span', 'src');
+      echo.textContent = 'نفس قيمة صفحة ' + ar(from);
+      lab.appendChild(echo);
+    }
     wrap.appendChild(lab);
 
     if (DERIVED[name]) {
@@ -455,37 +561,24 @@ V.App = class {
       return wrap;
     }
 
-    let input;
-    const listName = LIST_FOR[name];
-    if (listName) {
-      input = V.el('select');
-      const blank = V.el('option'); blank.value = ''; blank.textContent = '— اختر —';
-      input.appendChild(blank);
-      (this.ctx.content.lists[listName] || []).forEach(v => {
-        const o = V.el('option'); o.value = v; o.textContent = v;
-        input.appendChild(o);
-      });
-    } else {
-      input = V.el('input');
-      input.type = 'text';
-      /* "مثال: 250402MKM-RES-VILLA" was drawn "250402مثال: MKM-RES-VILLA".
-       * The example is Latin, the word before it is Arabic, and without a
-       * mark between them the layout engine splits the value in half. The
-       * same fault the deck has, in a text box this time. */
-      if (meta.example) {
-        const mixed = /[A-Za-z0-9]/.test(meta.example);
-        input.placeholder = 'مثال: ' + (mixed ? V.LRM : '') + meta.example;
-      }
-      if (LTR.has(name)) input.classList.add('ltr');
-    }
     const cur = String(this.ctx.field(name));
-    input.value = cur.indexOf('{{') === 0 ? '' : cur;
+    const value = cur.indexOf('{{') === 0 ? '' : cur;
+
+    /* Four kinds of answer. The first three save typing on the values that
+     * repeat; the fourth is a plain box. Each returns the control to put in
+     * the row and the element the rail should put the cursor in. */
+    let input, control;
+    if (name === 'date') {
+      [control, input] = this.dateControl(name, value);
+    } else if (OPEN_LIST[name]) {
+      [control, input] = this.openListControl(name, value, meta);
+    } else if (LIST_FOR[name]) {
+      control = input = this.closedListControl(name, value);
+    } else {
+      control = input = this.textControl(name, value, meta);
+    }
     input.dataset.field = name;
-    input.addEventListener('change', () => this.set(name, input.value.trim()));
-    input.addEventListener('input', () => {
-      this.draft = { name: name, value: input.value };
-      this.buildRail();
-    });
+
     /* light up the value on the page while the box has focus, so nobody
      * has to hunt for what they are changing */
     input.addEventListener('focus', () => this.highlight(name, true));
@@ -496,7 +589,7 @@ V.App = class {
     wrap.addEventListener('mouseleave', () => {
       if (document.activeElement !== input) this.highlight(name, false);
     });
-    wrap.appendChild(input);
+    wrap.appendChild(control);
 
     /* A value typed to make the page reviewable has to be marked as one.
      * The sentence explaining it is said once in the group heading; here it
@@ -506,11 +599,142 @@ V.App = class {
       const cb = V.el('input'); cb.type = 'checkbox';
       cb.checked = this.ctx.estimates.indexOf(name) >= 0;
       cb.addEventListener('change', () => this.markEstimate(name, cb.checked));
-      const t = V.el('span'); t.textContent = 'تقديري';
+      const t = V.el('span'); t.textContent = 'تقريبي';
       est.appendChild(cb); est.appendChild(t);
       wrap.appendChild(est);
     }
     return wrap;
+  }
+
+  /* ---- the four kinds of answer box --------------------------------- */
+
+  /* A plain box. Every value that is not on a list ends up here. */
+  textControl(name, value, meta) {
+    const input = V.el('input');
+    input.type = 'text';
+    /* "مثال: 250402MKM-RES-VILLA" was drawn "250402مثال: MKM-RES-VILLA".
+     * The example is Latin, the word before it is Arabic, and without a
+     * mark between them the layout engine splits the value in half. The
+     * same fault the deck has, in a text box this time. */
+    if (meta.example) {
+      const mixed = /[A-Za-z0-9]/.test(meta.example);
+      input.placeholder = 'مثال: ' + (mixed ? V.LRM : '') + meta.example;
+    }
+    if (LTR.has(name)) input.classList.add('ltr');
+    input.value = value;
+    input.addEventListener('change', () => this.set(name, input.value.trim()));
+    input.addEventListener('input', () => {
+      this.draft = { name: name, value: input.value };
+      this.buildRail();
+    });
+    return input;
+  }
+
+  /* A list nothing may leave: tools/presend.py rejects a value that is not
+   * on it, so a value the check would reject cannot be typed here. */
+  closedListControl(name, value) {
+    const sel = V.el('select');
+    const blank = V.el('option'); blank.value = ''; blank.textContent = '— اختر —';
+    sel.appendChild(blank);
+    (this.ctx.content.lists[LIST_FOR[name]] || []).forEach(v => {
+      const o = V.el('option'); o.value = v; o.textContent = v;
+      sel.appendChild(o);
+    });
+    sel.value = value;
+    sel.addEventListener('change', () => this.set(name, sel.value.trim()));
+    return sel;
+  }
+
+  /* A list of ready answers with a way out. The box only appears once
+   * «أخرى» is chosen, or when the value already stored is not on the list,
+   * so the common case is one press and the rare one still works. */
+  openListControl(name, value, meta) {
+    const options = OPEN_LIST[name];
+    const custom = !!value && options.indexOf(value) < 0;
+
+    const box = V.el('div', 'pick');
+    const sel = V.el('select');
+    const blank = V.el('option'); blank.value = ''; blank.textContent = '— اختر —';
+    sel.appendChild(blank);
+    options.forEach(v => {
+      const o = V.el('option'); o.value = v; o.textContent = v;
+      sel.appendChild(o);
+    });
+    const other = V.el('option');
+    other.value = OTHER; other.textContent = 'أخرى، أكتبها بنفسي';
+    sel.appendChild(other);
+    sel.value = custom ? OTHER : value;
+
+    const input = this.textControl(name, custom ? value : '', meta);
+    input.hidden = !custom;
+
+    sel.addEventListener('change', () => {
+      if (sel.value === OTHER) {
+        /* Nothing is written yet: «أخرى» is a question, not an answer.
+         * Committing here would redraw the panel and take this box away
+         * before anyone could type in it. */
+        input.hidden = false;
+        input.focus();
+        return;
+      }
+      this.set(name, sel.value.trim());
+    });
+
+    box.appendChild(sel);
+    box.appendChild(input);
+    return [box, input];
+  }
+
+  /* The date. اليوم and غداً are the two answers a proposal actually
+   * carries; anything else opens a calendar. What is stored is the written
+   * form every proposal already on file uses, so nothing downstream has to
+   * learn a second one. */
+  dateControl(name, value) {
+    const today = fmtDate(dayFrom(0)), tomorrow = fmtDate(dayFrom(1));
+    const READY = [['', '— اختر —'], [today, 'اليوم  ·  ' + today],
+                   [tomorrow, 'غداً  ·  ' + tomorrow], [OTHER, 'تاريخ آخر']];
+    const custom = !!value && value !== today && value !== tomorrow;
+
+    const box = V.el('div', 'pick');
+    const sel = V.el('select');
+    READY.forEach(([v, label]) => {
+      const o = V.el('option'); o.value = v; o.textContent = label;
+      sel.appendChild(o);
+    });
+    sel.value = custom ? OTHER : value;
+
+    const day = V.el('input');
+    day.type = 'date';
+    day.classList.add('ltr');
+    day.hidden = !custom;
+    /* The stored form is written for a reader, so it has to be read back
+     * into the calendar's own. Date.parse understands "23 AUG 2026". */
+    if (custom) {
+      const d = new Date(value);
+      if (!isNaN(d)) day.value = isoOf(d);
+    }
+
+    sel.addEventListener('change', () => {
+      if (sel.value === OTHER) {
+        day.hidden = false;
+        /* showPicker is not everywhere, and a browser without it still
+         * gets a focused box the person can type into. */
+        try { day.showPicker(); } catch (e) { day.focus(); }
+        return;
+      }
+      this.set(name, sel.value);
+    });
+    day.addEventListener('change', () => {
+      if (!day.value) { this.set(name, ''); return; }
+      /* An ISO date read without a time is UTC midnight, which is the day
+       * before in every timezone west of Greenwich. Split it instead. */
+      const [y, m, dd] = day.value.split('-').map(Number);
+      this.set(name, fmtDate(new Date(y, m - 1, dd)));
+    });
+
+    box.appendChild(sel);
+    box.appendChild(day);
+    return [box, day];
   }
 
   highlight(name, on) {
@@ -543,10 +767,15 @@ V.App = class {
 
     /* A worked-out value is nobody's job to fill, so it is neither
      * complete nor missing. The panel already explains it. */
-    const names = this.onPage[this.page - 1].filter(f => !DERIVED[f]);
+    const names = this.onPage[this.page - 1]
+      .filter(f => !DERIVED[f] && !BY_CONTROL.has(f));
     const done = [], left = [];
     names.forEach(name => {
       const v = this.value(name);
+      /* An optional value left empty belongs in neither list. It is not
+       * complete, because nothing was said; it is not missing, because
+       * nothing has to be. */
+      if (v === '' && OPTIONAL.has(name)) return;
       (v === '' ? left : done).push({ name: name, v: v });
     });
 
@@ -607,7 +836,7 @@ V.App = class {
       /* An estimate says so in the space the value would take. The value
        * is on the page beside it and in the box that holds it, so the
        * warning is the thing worth the width. */
-      val.textContent = est ? 'تقديري' : r.v;
+      val.textContent = est ? 'تقريبي' : r.v;
       if (!est && LTR.has(r.name)) val.classList.add('ltr');
       row.title = V.label(r.name).ar + '  ·  ' + r.v;
       row.appendChild(val);
@@ -657,11 +886,35 @@ V.App = class {
    * of the page, was the one cut off at the edge.
    */
   brief(host) {
-    const sp = this.ctx.spatial();
-    const groups = JSON.parse(JSON.stringify(sp.groups || []));
-    const commit = () => {
-      this.job.spatial = Object.assign({}, this.job.spatial, { groups });
-      this.changed();
+    /* Every press here acts on the brief as it stands at that instant, not
+     * on the copy this panel was drawn from.
+     *
+     * A commit redraws all fifteen pages and rebuilds the panel, so a
+     * button pressed while a box still has focus is racing its own blur:
+     * the blur commits the typing, the panel is rebuilt, and the node the
+     * press started on is gone before the mouse comes back up. So a press
+     * acts on mousedown, lets go of whatever had focus first so the typing
+     * is not lost, and then reads the brief back fresh. Without that
+     * re-read, moving a floor would write back the copy taken before the
+     * blur and quietly undo the words just typed into it.
+     */
+    const edit = fn => {
+      const live = document.activeElement;
+      if (live && live.blur) live.blur();
+      setTimeout(() => {
+        const groups = JSON.parse(JSON.stringify(this.ctx.spatial().groups || []));
+        if (fn(groups) === false) return;
+        this.job.spatial = Object.assign({}, this.job.spatial, { groups });
+        this.changed();
+      }, 0);
+    };
+
+    /* A press, not a click: see edit() above. `detail` is 0 only for the
+     * click a keyboard raises, which has no mousedown of its own to catch. */
+    const press = (btn, fn) => {
+      btn.addEventListener('mousedown', e => { e.preventDefault(); fn(); });
+      btn.addEventListener('click', e => { if (!e.detail) fn(); });
+      return btn;
     };
 
     /* Deleting a floor takes its rooms with it, so it asks first. */
@@ -669,8 +922,9 @@ V.App = class {
       const b = V.el('button', 'mini danger');
       b.textContent = '×';
       b.title = title;
+      b.type = 'button';
       let armed = false;
-      b.addEventListener('click', () => {
+      press(b, () => {
         if (!armed) {
           armed = true;
           b.textContent = 'احذف؟';
@@ -685,9 +939,33 @@ V.App = class {
       return b;
     };
 
-    const labelled = (text, control) => {
+    /* Up and down, one step at a time. Two arrows beat dragging here: the
+     * panel is a narrow column that scrolls, and a drag that has to cross
+     * its own scroll is the one gesture a mouse cannot do smoothly. An
+     * arrow at the end of its list is dead rather than hidden, so a row
+     * never changes shape as it moves. */
+    const mover = (what, at, len, apply) => {
+      const box = V.el('span', 'mv');
+      [['▲', -1, 'ارفع ' + what], ['▼', 1, 'أنزل ' + what]].forEach(([g, step, title]) => {
+        const b = V.el('button', 'mini mv-b');
+        b.type = 'button';
+        b.textContent = g;
+        b.title = title;
+        const to = at + step;
+        if (to < 0 || to >= len) b.disabled = true;
+        else press(b, () => apply(to));
+        box.appendChild(b);
+      });
+      return box;
+    };
+
+    /* Move one entry of a list to another place in it. */
+    const shift = (list, from, to) => { list.splice(to, 0, list.splice(from, 1)[0]); };
+
+    const labelled = (text, control, extra) => {
       const wrap = V.el('label', 'sub-f');
       const cap = V.el('span'); cap.textContent = text;
+      if (extra) cap.appendChild(extra);
       wrap.appendChild(cap); wrap.appendChild(control);
       return wrap;
     };
@@ -695,8 +973,11 @@ V.App = class {
     const h = V.el('h3'); h.textContent = 'الأدوار والمساحات';
     host.appendChild(h);
     const sub = V.el('p', 'group-note');
-    sub.textContent = 'ملخص صفحة ٤ يُبنى من هذه الأدوار، فأي دور تضيفه يظهر هناك.';
+    sub.textContent = 'ملخص صفحة ٤ يُبنى من هذه الأدوار، فأي دور تضيفه يظهر هناك. ' +
+      'الأسهم ترتب ما تراه على الصفحة، من أعلى إلى أسفل.';
     host.appendChild(sub);
+
+    const groups = this.ctx.spatial().groups || [];
 
     groups.forEach((g, gi) => {
       const card = V.el('div', 'grp');
@@ -705,24 +986,31 @@ V.App = class {
       const ti = V.el('input');
       ti.type = 'text'; ti.value = g.title_ar || '';
       ti.placeholder = 'اسم المجموعة';
-      ti.addEventListener('change', () => { g.title_ar = ti.value; commit(); });
+      ti.addEventListener('change',
+        () => edit(gs => { gs[gi].title_ar = ti.value; }));
       head.appendChild(ti);
+      head.appendChild(mover('المجموعة', gi, groups.length,
+        to => edit(gs => shift(gs, gi, to))));
       head.appendChild(deleter('احذف المجموعة وكل ما فيها',
-                               () => { groups.splice(gi, 1); commit(); }));
+        () => edit(gs => { gs.splice(gi, 1); })));
       card.appendChild(head);
 
       const body = V.el('div', 'grp-body');
+      const blocks = g.blocks || [], items = g.items || [];
 
-      (g.blocks || []).forEach((b, bi) => {
+      blocks.forEach((b, bi) => {
         const blk = V.el('div', 'blk');
         const nameRow = V.el('div', 'row');
         const nm = V.el('input');
         nm.type = 'text'; nm.value = b.name_ar || '';
         nm.placeholder = 'مثال: الدور الأرضي';
-        nm.addEventListener('change', () => { b.name_ar = nm.value; commit(); });
+        nm.addEventListener('change',
+          () => edit(gs => { gs[gi].blocks[bi].name_ar = nm.value; }));
         nameRow.appendChild(nm);
+        nameRow.appendChild(mover('الدور', bi, blocks.length,
+          to => edit(gs => shift(gs[gi].blocks, bi, to))));
         nameRow.appendChild(deleter('احذف الدور وما فيه',
-                                    () => { g.blocks.splice(bi, 1); commit(); }));
+          () => edit(gs => { gs[gi].blocks.splice(bi, 1); })));
         blk.appendChild(labelled('الدور', nameRow));
 
         /* a box you can read: it wraps and grows instead of scrolling
@@ -731,32 +1019,37 @@ V.App = class {
         ct.rows = 2;
         ct.value = b.contents_ar || '';
         ct.placeholder = 'مجلس , صالة معيشة , مطبخ';
-        ct.addEventListener('change', () => { b.contents_ar = ct.value; commit(); });
+        ct.addEventListener('change',
+          () => edit(gs => { gs[gi].blocks[bi].contents_ar = ct.value; }));
         blk.appendChild(labelled('ما فيه', ct));
 
         body.appendChild(blk);
       });
 
-      (g.items || []).forEach((item, ii) => {
+      items.forEach((item, ii) => {
         const row = V.el('div', 'row');
         const inp = V.el('input');
         inp.type = 'text'; inp.value = item;
         inp.placeholder = 'مثال: موقف 3 سيارات';
-        inp.addEventListener('change', () => { g.items[ii] = inp.value; commit(); });
+        inp.addEventListener('change',
+          () => edit(gs => { gs[gi].items[ii] = inp.value; }));
         row.appendChild(inp);
+        row.appendChild(mover('العنصر', ii, items.length,
+          to => edit(gs => shift(gs[gi].items, ii, to))));
         row.appendChild(deleter('احذف العنصر',
-                                () => { g.items.splice(ii, 1); commit(); }));
+          () => edit(gs => { gs[gi].items.splice(ii, 1); })));
         body.appendChild(labelled('عنصر', row));
       });
 
       const add = V.el('div', 'row add');
-      [['+ دور', () => (g.blocks || (g.blocks = []))
+      [['+ دور', gs => (gs[gi].blocks || (gs[gi].blocks = []))
           .push({ name_ar: '', contents_ar: '' })],
-       ['+ عنصر', () => (g.items || (g.items = [])).push('')]]
+       ['+ عنصر', gs => (gs[gi].items || (gs[gi].items = [])).push('')]]
         .forEach(([txt, fn]) => {
           const b = V.el('button', 'mini');
+          b.type = 'button';
           b.textContent = txt;
-          b.addEventListener('click', () => { fn(); commit(); });
+          press(b, () => edit(fn));
           add.appendChild(b);
         });
       body.appendChild(add);
@@ -766,11 +1059,9 @@ V.App = class {
     });
 
     const addGroup = V.el('button', 'mini wide');
+    addGroup.type = 'button';
     addGroup.textContent = '+ مجموعة جديدة';
-    addGroup.addEventListener('click', () => {
-      groups.push({ title_ar: '', blocks: [] });
-      commit();
-    });
+    press(addGroup, () => edit(gs => { gs.push({ title_ar: '', blocks: [] }); }));
     host.appendChild(addGroup);
   }
 
@@ -862,20 +1153,77 @@ V.App = class {
       });
       wrap.appendChild(input);
 
-      /* what this phase costs the programme, so a change is not silent */
+      /* Where this phase lands, as two more boxes rather than as a
+       * sentence to read and not be able to argue with.
+       *
+       * The three numbers describe one bar, so any one of them fixes the
+       * other two. Type a duration and the end moves. Type a start and the
+       * whole bar moves there and stays, whatever the after/overlap rules
+       * would have said, and every phase that follows this one follows it
+       * to its new end. Type an end and the duration stretches to reach it.
+       *
+       * A phase with continuation rows lasts longer than its own row says,
+       * so the end box works against the WHOLE phase and gives its own row
+       * whatever is left after the continuations are counted. */
       if (isPhase && parent) {
-        const span = V.el('p', 'lane-span');
-        span.textContent = 'من اليوم ' + ar(Math.round(parent.start_day)) +
-          ' إلى ' + ar(Math.round(parent.end_day)) +
-          (parent.days !== (row.duration_days || 0)
-            ? ' · ' + ar(parent.days) + ' يوماً بالكامل' : '');
+        /* `parent` is the one variable walked down the whole list, so a
+         * handler that read it later would read whichever phase the walk
+         * finished on. Hold this phase in a name of its own: without it
+         * every end box on the page edited the last phase in the deck. */
+        const lane = parent;
+        const span = V.el('div', 'span-row');
+        const cont = lane.days - (row.duration_days || 0);
+
+        const dayBox = (cap, value, onSet) => {
+          const lab = V.el('label', 'sub-f day');
+          const c = V.el('span'); c.textContent = cap;
+          const inp = V.el('input');
+          inp.type = 'number'; inp.min = '0'; inp.classList.add('ltr');
+          inp.value = value;
+          inp.addEventListener('change', () => onSet(inp.value));
+          lab.appendChild(c); lab.appendChild(inp);
+          span.appendChild(lab);
+        };
+
+        dayBox('من اليوم', Math.round(lane.start_day), v => {
+          const st = this.job.starts || (this.job.starts = {});
+          if (v === '') delete st[row.id];
+          else st[row.id] = Math.max(0, parseInt(v, 10) || 0);
+          this.changed();
+        });
+        dayBox('إلى اليوم', Math.round(lane.end_day), v => {
+          const end = Math.max(lane.start_day, parseInt(v, 10) || 0);
+          const d = this.job.durations || (this.job.durations = {});
+          d[row.id] = Math.max(0, Math.round(end - lane.start_day - cont));
+          this.changed();
+        });
         wrap.appendChild(span);
-        const ov = (row.schedule || {}).overlap_days;
-        if (ov) {
-          const note = V.el('p', 'lane-note');
-          note.textContent = 'تبدأ قبل انتهاء ' + (row.schedule.after || '') +
-            ' بـ ' + ar(ov) + ' يوماً، لأنها تُقدَّم على رسومات جارية.';
-          wrap.appendChild(note);
+
+        if (cont) {
+          const whole = V.el('p', 'lane-note');
+          whole.textContent = ar(lane.days) + ' يوماً بالكامل، منها ' +
+            ar(cont) + ' في الصفوف تحتها.';
+          wrap.appendChild(whole);
+        }
+
+        if (lane.pinned) {
+          const back = V.el('button', 'mini');
+          back.type = 'button';
+          back.textContent = 'أعِد هذه المرحلة إلى ترتيبها التلقائي';
+          back.addEventListener('click', () => {
+            const st = this.job.starts || {};
+            delete st[row.id];
+            this.changed();
+          });
+          wrap.appendChild(back);
+        } else {
+          const ov = (row.schedule || {}).overlap_days;
+          if (ov) {
+            const note = V.el('p', 'lane-note');
+            note.textContent = 'تبدأ قبل انتهاء ' + (row.schedule.after || '') +
+              ' بـ ' + ar(ov) + ' يوماً، لأنها تُقدَّم على رسومات جارية.';
+            wrap.appendChild(note);
+          }
         }
       }
       host.appendChild(wrap);
@@ -995,12 +1343,184 @@ V.App = class {
     });
   }
 
-  /* The four shares are printed added up in front of the client, so they
-   * have to reach the whole fee. */
+  /* The payment schedule, built one row at a time.
+   *
+   * A payment is three parts and nothing else: a word saying when it falls
+   * due, the event it names, and the share of the fee. The heading the
+   * client reads is the first two joined, and the sentence under it is the
+   * same two with the riyal amount worked out. Nothing on the page is typed
+   * twice, so a payment cannot say one thing in its heading and another
+   * underneath, which is how the old wording drifted: row three read
+   * «اكتمال الرسوم التنفيذية» above and «اكتمال الرسومات التنفيذية» below.
+   *
+   * The four shares still reach p1 to p4, so the office tracker and
+   * tools/presend.py find them where they always were.
+   */
   money(host) {
+    /* The same race the brief has: a press fires before the box's own
+     * blur, so it has to let go of what has focus and then read the rows
+     * back fresh, or a reorder writes back the copy taken before the
+     * typing was committed. */
+    const rowsNow = () => JSON.parse(JSON.stringify(this.ctx.paymentRows()))
+      .map(r => {
+        /* The studio's four carry «{{p1}}» as their share. Copying that
+         * into the job would freeze a tag where a number belongs, so it is
+         * resolved on the way in. */
+        const share = this.ctx._percent(this.ctx.fill(r.pct));
+        return { id: r.id, when: r.when || 'none', when_ar: r.when_ar || '',
+                 event_ar: r.event_ar || '',
+                 pct: share == null ? '' : String(share) };
+      });
+
+    const edit = fn => {
+      const live = document.activeElement;
+      if (live && live.blur) live.blur();
+      setTimeout(() => {
+        const rows = rowsNow();
+        if (fn(rows) === false) return;
+        this.job.payments = rows;
+        this.changed();
+      }, 0);
+    };
+    const press = (btn, fn) => {
+      btn.addEventListener('mousedown', e => { e.preventDefault(); fn(); });
+      btn.addEventListener('click', e => { if (!e.detail) fn(); });
+      return btn;
+    };
+    const shift = (list, from, to) => { list.splice(to, 0, list.splice(from, 1)[0]); };
+
+    const labelled = (text, control) => {
+      const wrap = V.el('label', 'sub-f');
+      const cap = V.el('span'); cap.textContent = text;
+      wrap.appendChild(cap); wrap.appendChild(control);
+      return wrap;
+    };
+
+    const mover = (at, len, apply) => {
+      const box = V.el('span', 'mv');
+      [['▲', -1, 'ارفع الدفعة'], ['▼', 1, 'أنزل الدفعة']].forEach(([g, step, title]) => {
+        const b = V.el('button', 'mini mv-b');
+        b.type = 'button'; b.textContent = g; b.title = title;
+        const to = at + step;
+        if (to < 0 || to >= len) b.disabled = true;
+        else press(b, () => apply(to));
+        box.appendChild(b);
+      });
+      return box;
+    };
+
+    const deleter = (at, len) => {
+      const b = V.el('button', 'mini danger');
+      b.type = 'button'; b.textContent = '×'; b.title = 'احذف الدفعة';
+      if (len <= 1) { b.disabled = true; b.title = 'لا بد من دفعة واحدة على الأقل'; }
+      else {
+        let armed = false;
+        press(b, () => {
+          if (!armed) {
+            armed = true; b.textContent = 'احذف؟'; b.classList.add('armed');
+            setTimeout(() => {
+              armed = false; b.textContent = '×'; b.classList.remove('armed');
+            }, 4000);
+            return;
+          }
+          edit(rows => { rows.splice(at, 1); });
+        });
+      }
+      return b;
+    };
+
+    const h = V.el('h3'); h.textContent = 'الدفعات';
+    host.appendChild(h);
+    const sub = V.el('p', 'group-note');
+    sub.textContent = 'كل دفعة ثلاثة أجزاء: متى تُستحق، وعلى أي حدث، وكم نسبتها. ' +
+      'العنوان والجملة تحته يُبنيان منها، والمبلغ يُحسب من الأتعاب.';
+    host.appendChild(sub);
+
+    const words = this.ctx.c('financial', 'triggers');
+    const CHOICES = [['adv', words.adv.ar], ['before', words.before.ar],
+                     ['after', words.after.ar], ['custom', 'مخصص'],
+                     ['none', 'بلا']];
+
+    const rows = this.ctx.paymentRows();
+    const shown = this.ctx.payments();
+    const unit = this.ctx.c('financial', 'amount_unit_ar');
+
+    rows.forEach((row, i) => {
+      const card = V.el('div', 'grp');
+      const pay = shown[i] || {};
+
+      const head = V.el('div', 'grp-head');
+      const no = V.el('span', 'pay-no');
+      no.textContent = ar(i + 1);
+      head.appendChild(no);
+
+      const when = V.el('select');
+      CHOICES.forEach(([v, label]) => {
+        const o = V.el('option'); o.value = v; o.textContent = label;
+        if (v === (row.when || 'none')) o.selected = true;
+        when.appendChild(o);
+      });
+      when.addEventListener('change',
+        () => edit(rs => { rs[i].when = when.value; }));
+      head.appendChild(when);
+      head.appendChild(mover(i, rows.length, to => edit(rs => shift(rs, i, to))));
+      head.appendChild(deleter(i, rows.length));
+      card.appendChild(head);
+
+      const body = V.el('div', 'grp-body');
+
+      if ((row.when || 'none') === 'custom') {
+        const own = V.el('input');
+        own.type = 'text'; own.value = row.when_ar || '';
+        own.placeholder = 'مثال: عند';
+        own.addEventListener('change',
+          () => edit(rs => { rs[i].when_ar = own.value.trim(); }));
+        body.appendChild(labelled('الكلمة قبل الحدث', own));
+      }
+
+      const ev = V.el('input');
+      ev.type = 'text'; ev.value = row.event_ar || '';
+      ev.placeholder = 'مثال: اكتمال الرسوم التنفيذية';
+      ev.addEventListener('change',
+        () => edit(rs => { rs[i].event_ar = ev.value.trim(); }));
+      body.appendChild(labelled('الحدث', ev));
+
+      /* The share is typed as a bare number. The sign belongs to what is
+       * printed, not to what is typed: «30%» in the box invites «30%%». */
+      const share = V.el('input');
+      share.type = 'number'; share.min = '0'; share.max = '100'; share.step = '0.1';
+      share.classList.add('ltr');
+      share.value = this.ctx._percent(this.ctx.fill(row.pct)) || '';
+      share.placeholder = '30';
+      share.addEventListener('change',
+        () => edit(rs => { rs[i].pct = share.value.trim(); }));
+      body.appendChild(labelled('النسبة ٪', share));
+
+      /* What this row costs the client, so a share changed here is not a
+       * number nobody checked. */
+      const money = V.el('p', 'lane-span');
+      money.textContent = pay.amount
+        ? pay.amount + ' ' + unit
+        : 'المبلغ يظهر عند إدخال الأتعاب.';
+      body.appendChild(money);
+
+      card.appendChild(body);
+      host.appendChild(card);
+    });
+
+    const add = V.el('button', 'mini wide');
+    add.type = 'button';
+    add.textContent = '+ دفعة';
+    press(add, () => edit(rs => {
+      rs.push({ id: 'pay' + (rs.length + 1), when: 'after',
+                when_ar: '', event_ar: '', pct: '' });
+    }));
+    host.appendChild(add);
+
+    /* The four shares are printed added up in front of the client, so they
+     * have to reach the whole fee. */
     const totals = this.ctx.paymentTotals();
-    const unset = ['p1', 'p2', 'p3', 'p4']
-      .some(k => String(this.ctx.field(k)).indexOf('{{') === 0);
+    const unset = shown.some(p => p.share == null);
     const p = V.el('p', 'sub');
     if (unset) p.textContent = 'الدفعات غير محددة بعد.';
     else {
@@ -1011,6 +1531,24 @@ V.App = class {
       p.style.opacity = 1;
     }
     host.appendChild(p);
+
+    if (rows.length > 4) {
+      const note = V.el('p', 'note warn-soft');
+      note.textContent = 'الدفعات بعد الرابعة لا تصل إلى جدول المتابعة: ' +
+        'حقوله أربعة فقط، من p1 إلى p4.';
+      host.appendChild(note);
+    }
+
+    const back = V.el('button', 'mini wide');
+    back.type = 'button';
+    back.textContent = 'ارجع إلى دفعات المكتب الأربع';
+    back.disabled = !this.job.payments;
+    press(back, () => {
+      if (!this.job.payments) return;
+      delete this.job.payments;
+      this.changed();
+    });
+    host.appendChild(back);
   }
 
   /* The plot in its street context. Without one the stand-in is used, and
@@ -1074,6 +1612,34 @@ V.App = class {
     slider('يمين ويسار', 'x');
     slider('أعلى وأسفل', 'y');
 
+    /* How solid the picture is drawn. The theme fades it so the numbers
+     * over it still lead, but how far is a judgement about one photograph:
+     * a pale satellite view disappears at the theme's fade and a dark
+     * street map still shouts through it. Live while dragging, written to
+     * the job when let go, so a drag does not rebuild the deck per pixel. */
+    const fade = V.el('label', 'crop');
+    const fcap = V.el('span');
+    const pctOf = v => ar(Math.round(v * 100)) + '٪';
+    fcap.textContent = 'وضوح الصورة  ' + pctOf(this.ctx.mapOpacity());
+    const frange = V.el('input');
+    frange.type = 'range'; frange.min = '10'; frange.max = '100'; frange.step = '5';
+    frange.value = String(Math.round(this.ctx.mapOpacity() * 100));
+    const paint = () => {
+      const v = +frange.value / 100;
+      fcap.textContent = 'وضوح الصورة  ' + pctOf(v);
+      const img = document.querySelector(
+        '#page-' + this.page + ' img[style*="object-fit"]');
+      if (img) img.style.opacity = v;
+    };
+    frange.addEventListener('input', paint);
+    frange.addEventListener('change', () => {
+      this.job.map_opacity = +frange.value / 100;
+      paint();
+      this.persist();
+    });
+    fade.appendChild(fcap); fade.appendChild(frange);
+    host.appendChild(fade);
+
     const whole = V.el('label', 'est');
     const cb = V.el('input'); cb.type = 'checkbox';
     cb.checked = this.job.map_fit === 'contain';
@@ -1090,6 +1656,7 @@ V.App = class {
     drop.addEventListener('click', () => {
       delete this.job.map; delete this.job.map_data;
       delete this.job.map_pos; delete this.job.map_fit;
+      delete this.job.map_opacity;
       this.changed();
     });
     host.appendChild(drop);
@@ -1158,7 +1725,9 @@ V.App = class {
     const key = this.templateKey();
     if (!key || !host) return;
 
-    const fields = this.onPage[this.page - 1].filter(f => !DERIVED[f]);
+    const fields = this.onPage[this.page - 1]
+      .filter(f => !DERIVED[f] && !BY_CONTROL.has(f));
+    const extra = V.TEMPLATE_EXTRA[key];
     const all = this.templates()[key] || {};
     const names = Object.keys(all);
 
@@ -1200,7 +1769,8 @@ V.App = class {
       if (!tpl) return;
       /* it overwrites what is already typed, so it asks once */
       const clashes = Object.keys(tpl.fields || {})
-        .some(k => (this.job.fields || {})[k] !== undefined);
+        .some(k => (this.job.fields || {})[k] !== undefined) ||
+        !!(extra && extra.busy(this));
       if (clashes && !armed) {
         armed = true;
         use.textContent = 'يستبدل؟';
@@ -1214,6 +1784,7 @@ V.App = class {
       (tpl.placeholders || []).forEach(n => {
         if (est.indexOf(n) < 0) est.push(n);
       });
+      if (extra) extra.apply(this, tpl);
       this.changed();
     });
     del.addEventListener('click', async () => {
@@ -1242,10 +1813,10 @@ V.App = class {
       });
       btn.disabled = true; btn.textContent = 'يحفظ…';
       try {
-        await this.pushTemplate('put', key, name, {
+        await this.pushTemplate('put', key, name, Object.assign({
           fields: values,
           placeholders: this.ctx.estimates.filter(n => n in values),
-        });
+        }, extra ? extra.grab(this) : null));
         this.show(this.page);
       } catch (e) {
         btn.disabled = false;
@@ -1258,8 +1829,9 @@ V.App = class {
     box.appendChild(save);
 
     const warn = V.el('p', 'note warn-soft');
-    warn.textContent = 'يحفظ ' + ar(fields.length) +
-      ' قيمة من هذه الصفحة فقط. لا يحفظ اسم العميل ولا الأتعاب.';
+    warn.textContent = extra ? extra.holds(this)
+      : 'يحفظ ' + ar(fields.length) +
+        ' قيمة من هذه الصفحة فقط. لا يحفظ اسم العميل ولا الأتعاب.';
     box.appendChild(warn);
 
     const where = V.el('p', 'note');
@@ -1274,6 +1846,37 @@ V.App = class {
     host.appendChild(box);
   }
 
+  /* Only the page on screen gets its adjust() run, because that is when a
+   * page can be measured. Printing puts all fifteen on paper at once, so
+   * every one of them has to be adjusted first: without this, page 13
+   * printed its closing line on top of the footnote.
+   *
+   * It answers with the pages whose content still runs off the paper after
+   * every page has done what it can. Page 9 shrinks its table to fit and
+   * page 13 drops its signatures to clear the contract text, but both have
+   * a floor: below it the type stops being readable, and the honest answer
+   * is that the page is carrying more than one sheet holds. That has to be
+   * said out loud rather than discovered in the PDF.
+   */
+  adjustAll() {
+    const pages = [...this.stage.querySelectorAll('.page')];
+    pages.forEach(p => p.classList.add('current'));
+    const spill = [];
+    this.manifest.forEach((m, i) => {
+      const page = document.getElementById('page-' + (i + 1));
+      const mod = V.slides[m.module];
+      if (mod && mod.adjust) mod.adjust(this.ctx, page);
+      const pr = page.getBoundingClientRect();
+      if (!pr.height) return;
+      const perPt = pr.height / 1008;
+      const past = [...page.children].some(e =>
+        (e.getBoundingClientRect().bottom - pr.top) / perPt > 1009);
+      if (past) spill.push(i + 1);
+    });
+    pages.forEach((p, i) => p.classList.toggle('current', i + 1 === this.page));
+    return spill;
+  }
+
   /* ---- before you send ---------------------------------------------- */
 
   /* The last place a wrong number gets caught, and the only place the PDF
@@ -1285,12 +1888,11 @@ V.App = class {
     /* `notes` sit beside the estimates under the same ⚠, because they are
      * the same kind of thing to look at. They are counted apart because
      * they are not values: «مراحل بلا مدة» is one row about the whole
-     * programme, and counting it as «قيمة تقديرية واحدة» said something
+     * programme, and counting it as «قيمة تقريبية واحدة» said something
      * that is not true. */
     const missing = [], estimates = [], problems = [], notes = [], ok = [];
 
-    Object.keys(this.ctx.content.fields || {}).forEach(name => {
-      if (name === '_doc' || DERIVED[name]) return;
+    this.onAPage().forEach(name => {
       if (String(this.ctx.field(name)).indexOf('{{') !== 0) return;
       missing.push({ what: V.label(name).ar, where: this.pageOf[name] });
     });
@@ -1306,11 +1908,22 @@ V.App = class {
                        detail: v.indexOf('{{') === 0 ? '' : v });
     });
 
-    const shares = ['p1', 'p2', 'p3', 'p4'].map(k => String(this.ctx.field(k)));
+    /* Read off the schedule itself, not off p1 to p4. Those are the first
+     * four shares and nothing more, so a job carrying five payments would
+     * have had its fifth checked by nobody. */
+    const pays = this.ctx.payments();
     const totals = this.ctx.paymentTotals();
-    if (shares.some(v => v.indexOf('{{') === 0))
-      problems.push({ what: 'الدفعات غير محددة', detail: '' });
-    else if (Math.abs(totals.raw - 100) > 0.01)
+    const noShare = pays.filter(p => p.share == null);
+    const noEvent = pays.filter(p => !p.event_ar && !p.when);
+    if (noShare.length)
+      problems.push({ what: 'دفعات بلا نسبة: ' +
+                        noShare.map(p => ar(parseInt(p.no, 10))).join('، '),
+                      detail: 'تظهر في الجدول بلا مبلغ' });
+    if (noEvent.length)
+      problems.push({ what: 'دفعات بلا حدث: ' +
+                        noEvent.map(p => ar(parseInt(p.no, 10))).join('، '),
+                      detail: 'الصف يُطبع بلا عنوان' });
+    if (!noShare.length && Math.abs(totals.raw - 100) > 0.01)
       problems.push({ what: 'مجموع الدفعات ' + ar(Math.round(totals.raw * 10) / 10) + '٪',
                       detail: 'يجب أن يكون ١٠٠٪' });
 
@@ -1322,6 +1935,18 @@ V.App = class {
         problems.push({ what: 'المبلغ بالحروف لا يطابق الرقم',
                         detail: 'الرقم يقول: ' + spelled });
     }
+
+    /* Nothing may run off the paper. Every page stretches to hold what a
+     * job puts on it and page 9 shrinks its table to fit, but there is a
+     * floor below which type stops being readable. Past that the page
+     * really is too full, and the answer is a phase fewer or a shorter
+     * paragraph, not smaller type. */
+    const spill = this.adjustAll();
+    if (spill.length)
+      problems.push({ what: 'المحتوى يتجاوز حدود ' + arCount(spill.length,
+                        'صفحة واحدة', 'صفحتين', 'صفحات', 'صفحة'),
+                      detail: 'صفحة ' + spill.map(ar).join('، ') +
+                        ' · اختصر النص أو أنقص مرحلة' });
 
     /* A warning, not a blocker, because presend.py treats it as one. The
      * two paths must not disagree about what stops a proposal: a job the
@@ -1345,6 +1970,11 @@ V.App = class {
     if (fee && fee.indexOf('{{') < 0)
       ok.push({ what: 'الأتعاب  ' + fee + ' ريال',
                 detail: this.ctx.fields.costwritten || '' });
+    /* Every payment read back, because a schedule the client signs is not
+     * something a total alone can vouch for. */
+    pays.forEach(p => ok.push({
+      what: 'دفعة ' + ar(parseInt(p.no, 10)) + '  ' + (p.title_ar || '—'),
+      detail: [p.pct, p.amount].filter(Boolean).join('  ·  ') }));
     ok.push({ what: 'الخدمات  ' + ar(sold.size) + ' من ' +
                     ar(this.ctx.services().length) });
     ok.push({ what: 'المدة  ' + arCount(
@@ -1385,7 +2015,7 @@ V.App = class {
 
     section('ناقص، لا يمكن الإرسال قبل تعبئته', missing, 'miss', '✕');
     section('مشاكل', problems, 'miss', '✕');
-    section('قيم تقديرية', estimates.concat(notes), 'est', '⚠');
+    section('قيم تقريبية', estimates.concat(notes), 'est', '⚠');
     section('تم', ok, 'ok', '✓');
 
     if (!missing.length && !problems.length && !estimates.length && !notes.length) {
@@ -1416,16 +2046,17 @@ V.App = class {
     notes.forEach(n => this.pdfWarnings.push(n.what + '.'));
     if (estimates.length)
       this.pdfWarnings.push(arCount(estimates.length,
-        'قيمة تقديرية واحدة غير مؤكدة',
-        'قيمتان تقديريتان غير مؤكدتين',
-        'قيم تقديرية غير مؤكدة',
-        'قيمة تقديرية غير مؤكدة') + '.');
+        'قيمة تقريبية واحدة غير مؤكدة',
+        'قيمتان تقريبيتان غير مؤكدتين',
+        'قيم تقريبية غير مؤكدة',
+        'قيمة تقريبية غير مؤكدة') + '.');
 
     const note = document.getElementById('pdf-note');
     note.style.color = '';
-    note.textContent = this.pdfWarnings.length
-      ? 'ما نقص يظهر فارغاً في الملف.'
-      : 'يفتح نافذة الطباعة. اختر «حفظ كـ PDF».';
+    note.textContent = (this.pdfWarnings.length
+      ? 'ما نقص يظهر فارغاً في الملف. '
+      : 'يفتح نافذة الطباعة. اختر «حفظ كـ PDF». ') +
+      'ويُحفظ معه ملف العرض باسم «' + this.fileBase() + '».';
     this.askPdf(false);
 
     document.getElementById('review').hidden = false;
@@ -1452,9 +2083,59 @@ V.App = class {
     box.scrollIntoView({ block: 'nearest' });
   }
 
+  /* What the office files this proposal under: the reference number from
+   * page 1, then the document and its revision. Both downloads carry it,
+   * so the PDF a client is sent and the file it can be re-opened from sit
+   * beside each other in the same folder under the same name.
+   *
+   * Only the characters a file system refuses are taken out. The comma and
+   * the spaces are the format, not decoration. */
+  fileBase() {
+    const ref = String(this.ctx.field('tfp_number') || '').trim();
+    const num = (!ref || ref.indexOf('{{') === 0) ? 'VADO-TFP' : ref;
+    return (num + ', TFP R00').replace(/[\\/:*?"<>|]+/g, '-').trim();
+  }
+
+  /* The proposal as a file that can be opened again. costwritten and
+   * spatialneeds are worked out, so they go back as "auto" rather than as
+   * a copy that can go stale. */
+  saveJob(name) {
+    const out = JSON.parse(JSON.stringify(this.job));
+    if (out.fields) {
+      if (this.ctx.fields.costnumber && out.fields.costwritten === undefined)
+        out.fields.costwritten = 'auto';
+      if (out.fields.spatialneeds === undefined) out.fields.spatialneeds = 'auto';
+    }
+    const blob = new Blob([JSON.stringify(out, null, 2)],
+                          { type: 'application/json' });
+    const a = V.el('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name + '.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  /* The browser names the PDF after the document's title, so the title is
+   * what has to change. It goes back afterwards, because the tab is read
+   * by the person filling the form in, not by the client.
+   *
+   * The saved copy goes first. A print dialog is modal, and a download
+   * started behind it does not always survive. */
   printNow() {
     this.closeReview();
+    const name = this.fileBase();
+    this.saveJob(name);
+    const was = document.title;
+    document.title = name;
+    const back = () => {
+      document.title = was;
+      window.removeEventListener('afterprint', back);
+    };
+    window.addEventListener('afterprint', back);
     window.print();
+    /* Headless printing never raises afterprint, so the title would stay
+     * changed for the rest of the session. */
+    setTimeout(back, 2000);
   }
 
   closeReview() {
@@ -1554,23 +2235,9 @@ V.App = class {
       setTimeout(() => { this.syncBands(); if (!this.zoomPct) this.fit(); }, 250);
     });
 
-    /* Only the page on screen gets its adjust() run, because that is when a
-     * page can be measured. Printing puts all fifteen on paper at once, so
-     * every one of them has to be adjusted first: without this, page 13
-     * printed its closing line on top of the footnote. */
-    const adjustAll = () => {
-      this.stage.querySelectorAll('.page').forEach(p => p.classList.add('current'));
-      this.manifest.forEach((m, i) => {
-        const mod = V.slides[m.module];
-        if (mod && mod.adjust)
-          mod.adjust(this.ctx, document.getElementById('page-' + (i + 1)));
-      });
-      this.stage.querySelectorAll('.page').forEach((p, i) =>
-        p.classList.toggle('current', i + 1 === this.page));
-    };
-    window.addEventListener('beforeprint', adjustAll);
+    window.addEventListener('beforeprint', () => this.adjustAll());
     /* headless printing never fires beforeprint, so do it once on load too */
-    adjustAll();
+    this.adjustAll();
 
     document.addEventListener('keydown', e => {
       if (e.target.matches('input, textarea, select, [contenteditable]')) return;
@@ -1579,25 +2246,7 @@ V.App = class {
       if (e.key === 'Escape') this.closeReview();
     });
 
-    on('btn-save', 'click', () => {
-      const out = JSON.parse(JSON.stringify(this.job));
-      /* costwritten and spatialneeds are worked out, so they go back as
-       * "auto" rather than as a copy that can go stale */
-      if (out.fields) {
-        if (this.ctx.fields.costnumber && out.fields.costwritten === undefined)
-          out.fields.costwritten = 'auto';
-        if (out.fields.spatialneeds === undefined) out.fields.spatialneeds = 'auto';
-      }
-      const name = String(this.ctx.field('tfp_number') || 'VADO-TFP')
-        .replace(/[^\w.-]+/g, '-');
-      const blob = new Blob([JSON.stringify(out, null, 2)],
-                            { type: 'application/json' });
-      const a = V.el('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = name + '.json';
-      a.click();
-      URL.revokeObjectURL(a.href);
-    });
+    on('btn-save', 'click', () => this.saveJob(this.fileBase()));
 
     const file = document.getElementById('file-open');
     on('btn-open', 'click', () => file.click());
@@ -1654,6 +2303,7 @@ V.markerNames = ctx => {
 
 V.TEMPLATE_PAGES = {
   s04_project: true,
+  s05_spatial: true,
 };
 
 /* Pages whose control belongs above the fields rather than under them. */
@@ -1661,11 +2311,51 @@ V.CONTROLS_FIRST = {
   s04_project: true,
 };
 
+/* A page whose template carries more than its text boxes says so here.
+ * Page 5 is the case: its one box is the plot number, and everything that
+ * makes the page — the groups, the floors and the rooms inside them —
+ * lives in the job's own `spatial` block instead. A template that saved
+ * only the boxes would save the plot number of a villa and none of it.
+ *
+ * `grab` reads what to store, `apply` puts it back, `holds` is the one
+ * sentence the panel says about what the template carries, and `busy` is
+ * true when applying one would overwrite work already done. */
+V.TEMPLATE_EXTRA = {
+  s05_spatial: {
+    grab: app => ({ groups: JSON.parse(JSON.stringify(app.ctx.spatial().groups || [])) }),
+    apply: (app, tpl) => {
+      if (!tpl.groups) return;
+      app.job.spatial = Object.assign({}, app.job.spatial,
+        { groups: JSON.parse(JSON.stringify(tpl.groups)) });
+    },
+    holds: app => {
+      const gs = app.ctx.spatial().groups || [];
+      let floors = 0, items = 0;
+      gs.forEach(g => { floors += (g.blocks || []).length; items += (g.items || []).length; });
+      return 'يحفظ ' + arCount(gs.length, 'مجموعة واحدة', 'مجموعتين', 'مجموعات', 'مجموعة') +
+        ' و' + arCount(floors, 'دوراً واحداً', 'دورين', 'أدوار', 'دوراً') +
+        ' و' + arCount(items, 'عنصراً واحداً', 'عنصرين', 'عناصر', 'عنصراً') +
+        '، ورقم القطعة. لا يحفظ اسم العميل ولا الأتعاب.';
+    },
+    busy: app => (app.job.spatial && (app.job.spatial.groups || []).length > 0),
+  },
+};
+
 /* What each of those controls is called, for the rail to name. */
 V.CONTROL_NAMES = {
   map: 'صورة الموقع', brief: 'الأدوار والمساحات',
   services: 'الخدمات المشمولة', durations: 'مدد المراحل',
   money: 'الأتعاب والدفعات',
+};
+
+/* Fields a page owns but does not always draw. The panel builds its boxes
+ * from the spans the pages render, which is what keeps it honest, but a
+ * value printed only when it is given has no span while it is empty: the
+ * one place it can be typed is the one place it does not appear. Named here
+ * so the box exists before the value does. */
+V.PAGE_FIELDS = {
+  s12_financial: ['p1', 'p2', 'p3', 'p4'],
+  s13_agreement: ['client_company_ar'],
 };
 
 V.PAGE_CONTROLS = {

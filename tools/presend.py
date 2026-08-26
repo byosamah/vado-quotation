@@ -142,7 +142,7 @@ def _check_placeholders(ctx, warnings):
     the same as a page that is correct.
 
     These warn rather than block. A proposal goes out while a بلدي number
-    is still being chased, the screen calls these تقديري and asks before it
+    is still being chased, the screen calls these تقريبي and asks before it
     prints one, and this has to let out what that lets out.
     """
     if not ctx.job.get('map') and 'map' not in ctx.placeholders:
@@ -438,6 +438,16 @@ def _summary(ctx):
             else:
                 mark = ''
             print(f'    {k:<16} {v}{mark}')
+
+    # p1 to p4 are the first four shares and nothing more. A job carrying
+    # five payments would have had its fifth read back by nobody, so the
+    # schedule is printed as the schedule rather than as four fields.
+    print('\n  Payments on slide 12')
+    totals = ctx.payment_totals()
+    for pay in ctx.payments():
+        amount = pay['amount'] or '—'
+        print(f"    {pay['no']:<4}{pay['pct']:<6}{amount:>14}   {pay['title_ar']}")
+    print(f"    {'':<4}{totals['pct']:<6}{(totals['amount'] or '—'):>14}   الإجمالي")
 
     print('\n  The brief on slide 5')
     for g in ctx.spatial()['groups']:

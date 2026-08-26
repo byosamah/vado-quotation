@@ -195,11 +195,17 @@ window.vadoSelfCheck = async function (pptxTextUrl) {
 
   /* every field must be reachable from some page's list */
   if (app && app.pageOf) {
+    /* A field on no page is a field nobody can fill in: the panel builds
+     * its boxes from what the pages actually draw. The one exception is
+     * declared in content.json rather than allowed for here, so a field
+     * that quietly stops being printed is still caught. */
+    const parked = new Set((ctx.content.fields_unprinted || {}).names || []);
     const known = Object.keys(ctx.content.fields || {}).filter(k => k !== '_doc');
-    const orphans = known.filter(k => !(k in app.pageOf));
+    const orphans = known.filter(k => !(k in app.pageOf) && !parked.has(k));
     if (orphans.length)
       fail.push('fields on no page: ' + orphans.join(', '));
     info.fieldsReachable = known.length - orphans.length + '/' + known.length;
+    info.fieldsParked = parked.size;
   }
 
   /* ---- the derived values must agree with the deck ---- */

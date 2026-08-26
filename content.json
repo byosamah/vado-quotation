@@ -5,6 +5,7 @@
     "tfp_number": "{{tfp_number}}",
     "tfp_dur": "{{tfp_dur}}",
     "date": "{{date}}",
+    "client_company_ar": "{{client_company_ar}}",
     "name_title_ar": "{{name_title_ar}}",
     "firstname_ar": "{{firstname_ar}}",
     "lastname_ar": "{{lastname_ar}}",
@@ -51,6 +52,21 @@
     "p2": "{{p2}}",
     "p3": "{{p3}}",
     "p4": "{{p4}}"
+  },
+  "fields_unprinted": {
+    "_doc": "Fields the deck carries but prints nowhere at present. The Latin name, project type, city and district fed the English block on the cover, and that block was removed when the document went fully Arabic. They are kept because the office tracker maps to these names and the English edition will want them back. The browser self-check reads this list so that a field on no page is still an error everywhere else, and tools/presend.py still checks each one against its Arabic twin.",
+    "names": [
+      "name_title",
+      "firstname",
+      "lastname",
+      "project_type",
+      "city",
+      "district"
+    ]
+  },
+  "marks": {
+    "_doc": "Words the document adds to a value rather than to a page. approx_ar follows any value the person marked تقريبي, so a stand-in reads as one on the printed page instead of as a fact.",
+    "approx_ar": "تقريبًا"
   },
   "company": {
     "name_ar": "شركة الرؤيــا للاستشــارات العمرانية و الهندسـية",
@@ -137,7 +153,6 @@
       "خدمات"
     ],
     "subhead_ar": "فني و مالي",
-    "english_line1": "Technical & Financial Proposal for A/E Services",
     "meta_rows": [
       {
         "label_ar": "التوجيه",
@@ -602,9 +617,8 @@
   },
   "services": {
     "heading_ar": "الخدمات المشمولة",
-    "yes_en": "Yes",
     "yes_ar": "نعم",
-    "no_en": "N/A",
+    "no_ar": "لا ينطبق",
     "items": [
       {
         "id": "concept",
@@ -1049,47 +1063,39 @@
     "payments": [
       {
         "id": "advance",
-        "title_ar": "الدفعة المقدمة",
-        "pct": "{{p1}}",
-        "body_ar": [
-          "عند قبول هذا العرض وتوقيع العقد, يدفع مبلغًا مقدماً بما يعادل ما نسبته {{p1}} من إجمالي التكلفة, وذلك لبدء المشروع"
-        ]
+        "when": "adv",
+        "event_ar": "عند قبول هذا العرض وتوقيع العقد",
+        "pct": "{{p1}}"
       },
       {
         "id": "concept_approved",
-        "title_ar": "بعد موافقة المالك على التصميم المبدئي",
-        "pct": "{{p2}}",
-        "body_ar": [
-          "بعد تطوير التصميم التصميم المبدئي واعتماده من المالك, تُستحق دفعة بما يعادل نسبة {{p2}} من اجمالي القيمة"
-        ]
+        "when": "after",
+        "event_ar": "موافقة المالك على التصميم المبدئي",
+        "pct": "{{p2}}"
       },
       {
         "id": "technical_done",
-        "title_ar": "بعد اكتمال الرسوم التنفيذية",
-        "pct": "{{p3}}",
-        "body_ar": [
-          "بعد اكتمال الرسومات التنفيذية والموافقة عليها من قبل المالك تُستحق دفعة بما يعادل نسبة {{p3}} من اجمالي القيمة"
-        ]
+        "when": "after",
+        "event_ar": "اكتمال الرسوم التنفيذية",
+        "pct": "{{p3}}"
       },
       {
         "id": "before_boq",
-        "title_ar": "قبل جدول الكميات والمواصفات",
-        "pct": "{{p4}}",
-        "body_ar": [
-          "قبل تسليم جدول الكميات والمواصفات, تُستحق دفعة بما يعادل نسبة {{p4}} من اجمالي القيمة"
-        ]
+        "when": "before",
+        "event_ar": "جدول الكميات والمواصفات",
+        "pct": "{{p4}}"
       }
     ],
     "bank_heading_ar": "الحساب البنكي",
-    "_doc": "The price page. Payments are numbered in order, so inserting one renumbers the rest. The percentage sits against a declared tab stop rather than a hand-counted run of tabs, and the riyal amount beside it is worked out from the fee, so a client can read what each stage costs without doing four multiplications. The currency mark beside the figure is text, not an image. It was an image of the new SAR symbol pinned to a page coordinate, and a coordinate cannot follow text: it landed on the heading once and on the written amount once. Neither Cairo nor GE SS Text carries a riyal glyph (U+FDFC and U+20C0 both come out blank or as a box, checked by rendering them), so ر.س is what is left that always draws. Install the SAMA symbol font and this can become the glyph again.",
+    "_doc": "The price page. A payment is three parts and nothing else: a trigger word from `triggers`, the event it names, and the share of the fee. The heading the client reads is the first two joined; the sentence under it is `due_ar` with the same two and the riyal amount, worked out from the share and the fee so nobody multiplies anything by hand. Where the fee is not yet a number there is no amount to state, and `due_pct_ar` says the share instead. These four rows are the default. A job that sets its own `payments` list replaces them entirely and may hold any number of rows; the first four shares are written back to p1..p4, so the office tracker and tools/presend.py still find them where they have always been. The currency mark beside the total figure is an image, because neither Cairo nor GE SS Text carries a riyal glyph.",
     "total_row_ar": "الإجمالي",
     "columns": {
       "_doc": "The payment schedule is a table, right to left: number, stage, share, amount. A table aligns by construction. Before this the columns were chased with tab characters and only lined up on the one row whose title happened to be short enough.",
       "widths": [
         26.0,
-        300.0,
+        288.0,
         58.0,
-        84.0
+        96.0
       ],
       "row_h": 62.0,
       "total_h": 26.0
@@ -1102,7 +1108,29 @@
       "w": 11.0,
       "h": 12.3,
       "dy": 3.0
-    }
+    },
+    "triggers": {
+      "_doc": "The word in front of a payment's event, and the whole of what makes one row differ from another. A row is three parts: this word, the event, and the share. The heading the client reads and the sentence under it are both built from those three, so a payment cannot say one thing in its heading and another in its body.\n\n`in_body` says whether the word leads the sentence as well as the heading. قبل and بعد are prepositions and do: «بعد اكتمال الرسوم التنفيذية تُستحق دفعة بمبلغ قدره...». دفعة مقدمة names the payment instead, and leading with it made the sentence say دفعة twice: «دفعة مقدمة عند قبول العرض تُستحق دفعة بمبلغ قدره...». It heads the row and stays out of the sentence.\n\n\"none\" draws no word at all, for an event that already carries its own preposition; \"custom\" takes whatever the row writes in `when_ar`, and leads the sentence, because a word typed in front of an event is a preposition like عند.",
+      "adv": {
+        "ar": "دفعة مقدمة",
+        "in_body": false
+      },
+      "before": {
+        "ar": "قبل",
+        "in_body": true
+      },
+      "after": {
+        "ar": "بعد",
+        "in_body": true
+      },
+      "none": {
+        "ar": "",
+        "in_body": true
+      }
+    },
+    "due_ar": "{when} تُستحق دفعة بمبلغ قدره {amount}.",
+    "due_pct_ar": "{when} تُستحق دفعة بما يعادل نسبة {pct} من إجمالي التكلفة.",
+    "amount_unit_ar": "ريالاً سعوديًّا"
   },
   "agreement": {
     "notes_heading_ar": "ملاحظات على العرض",
@@ -1158,8 +1186,10 @@
         "x": 404.0,
         "w": 207.4,
         "role_ar": "المالك",
-        "name_ar": "{{name_title_ar}} {{firstname_ar}} {{lastname_ar}}",
-        "party_ar": "الطرف الأول"
+        "name_ar": "{{client_company_ar}}",
+        "party_ar": "الطرف الأول",
+        "signatory_ar": "{{name_title_ar}} {{firstname_ar}} {{lastname_ar}}",
+        "name_optional": true
       },
       {
         "side": "consultant",

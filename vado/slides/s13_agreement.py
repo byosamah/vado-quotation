@@ -73,17 +73,32 @@ def _party(ctx, slide, party, y):
     if party['side'] == 'consultant':
         signatory = ctx.signatory()['name_prefixed_ar']
 
+    # A client is sometimes a company and sometimes one person. Where a
+    # company is named it takes the line the consultant's company takes
+    # opposite, with the person who signs for it underneath. Where none is
+    # named the line is not drawn at all: an empty one would print as a gap
+    # above a private client's name and read as something left out.
+    #
+    # The two sides end level whichever shape each takes, because the blank
+    # lines below are what is left of three rather than a count written
+    # down beside each case.
+    named = (not party.get('name_optional')
+             or '{{' not in str(ctx.fill(party['name_ar'])))
+
     _, t = textbox(ctx, slide, party['x'], y, party['w'], 155.0, autofit=True)
     t.para([{'t': party['role_ar'], 'sz': 10.5, 'f': 'en', 'c': INK}],
            algn='c', rtl=True, ls=1.5)
     t.blank(1, sz=10.5, f='en', algn='c', rtl=True, ls=1.5)
-    t.para([{'t': party['name_ar'], 'sz': 12, 'f': 'ar_medium', 'c': INK}],
-           algn='c', rtl=True, ls=1.5)
+
+    lines = 0
+    if named:
+        t.para([{'t': party['name_ar'], 'sz': 12, 'f': 'ar_medium', 'c': INK}],
+               algn='c', rtl=True, ls=1.5)
+        lines += 1
     if signatory:
         t.para([{'t': signatory, 'sz': 12, 'f': 'ar_medium', 'c': INK}],
                algn='c', rtl=True, ls=1.5)
-        t.blank(1, sz=12, f='en', algn='c', rtl=True, ls=1.5)
-    else:
-        t.blank(2, sz=12, f='ar_medium', algn='c', rtl=True, ls=1.5)
+        lines += 1
+    t.blank(3 - lines, sz=12, f='ar_medium', algn='c', rtl=True, ls=1.5)
     t.para([{'t': party['party_ar'], 'sz': 12, 'f': 'en', 'c': INK}],
            algn='c', rtl=True, ls=1.5)

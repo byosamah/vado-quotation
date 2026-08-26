@@ -213,33 +213,33 @@
     },
     "kicker": {
       "x": 277.2,
-      "y": 431.1,
+      "y": 510.7,
       "w": 378.0,
       "h": 37.3
     },
     "headline": {
       "x": 210.2,
-      "y": 470.2,
+      "y": 549.8,
       "w": 438.8,
       "h": 104.2,
       "size": 80
     },
     "subhead": {
       "x": 136.4,
-      "y": 584.7,
+      "y": 664.3,
       "w": 512.6,
       "h": 41.2
     },
     "project": {
       "x": 132.3,
-      "y": 638.3,
+      "y": 717.9,
       "w": 501.4,
       "h": 70.0
     },
     "vrule": {
       "x": 639.5,
-      "y": 646.9,
-      "h": 133.4,
+      "y": 726.5,
+      "h": 53.8,
       "weight": 2.8
     },
     "hrule": {
@@ -247,12 +247,6 @@
       "y": 795.8,
       "w": 555.8,
       "weight": 1.0
-    },
-    "english": {
-      "x": 298.9,
-      "y": 717.6,
-      "w": 334.7,
-      "h": 70.3
     },
     "meta_table": {
       "x": 309.1,
@@ -285,7 +279,8 @@
         "h": 18.2
       },
       "size": 9
-    }
+    },
+    "_doc": "Slide 1. The statement block (kicker, headline, subhead, project) hangs from the horizontal rule rather than from the top of the page: it lost the English block that used to sit between it and the rule, and leaving it where it was opened eighty points of white above the rule with nothing in it. Everything below the rule is unchanged."
   },
   "contents": {
     "_doc": "Slide 2. The numbers sit behind the section names, so they want a tint rather than a colour. Any key from `colors` works here.",
@@ -336,6 +331,10 @@
     "y_top": 237.0,
     "row_gap": 43.9,
     "row_h": 43.9
+  },
+  "phases_page": {
+    "_doc": "Slide 9. The tallest the phase rows may be on one page, in points, before the phases split across two. Worked out from the page: the legend may reach 906, it is 15 tall on three lines 17.5 apart, it keeps 14 clear of the table, the table starts at 240.3 and its heading row is 24.8. That leaves 576.9 for the rows. It is one number in one place because the PowerPoint and the browser have to break the page in the same spot, and they measure the rows differently: the PowerPoint has only the heights declared in content.json, while the browser measures what Cairo actually drew.",
+    "rows_room": 576.9
   },
   "timeline": {
     "_doc": "Slide 11 Gantt. Weeks are 46.27 pt wide; the grid starts at x_start.",

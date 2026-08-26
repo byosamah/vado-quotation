@@ -118,6 +118,17 @@ table.t td p { margin: 0; }
 }
 .ph { background: rgba(230,160,20,.20); border-radius: 2pt; }
 
+/* The word that follows a value marked تقريبي. Unlike the highlight beside
+ * it, this one belongs to the document and prints with it. */
+.approx { font-size: .74em; opacity: .75; white-space: nowrap; }
+
+/* An address that can be pressed. It has to look like the text it sits in,
+ * because the document is the design and a blue underline is not in it.
+ * The cursor is the only thing that gives it away on screen, and in the
+ * printed PDF the link annotation is there whether or not it is visible. */
+.lnk { color: inherit; text-decoration: none; cursor: pointer; }
+.lnk:hover { text-decoration: underline; }
+
 [contenteditable] { outline: none; }
 [contenteditable]:hover { background: rgba(120,160,255,.16); border-radius: 2pt; }
 [contenteditable]:focus {
@@ -588,6 +599,36 @@ button.mini.armed {
 .tpl-box select { flex: 1 1 auto; min-width: 0; font-size: 12px; padding: 7px 9px; }
 .tpl-box input[type=text] { flex: 1 1 auto; min-width: 0; margin: 0; }
 .tpl-box button { flex: 0 0 auto; }
+/* A field answered from a short list with a way out to typing. The box
+ * below the list only appears once «أخرى» is chosen, so the common answer
+ * stays one press and the rare one is still reachable. */
+.pick { display: block; }
+.pick > select { margin-bottom: 0; }
+.pick > input:not([hidden]) { margin-top: 6px; }
+
+/* Up and down, one step at a time. Two arrows beat dragging in a narrow
+ * column that scrolls: a drag across its own scroll is the one gesture a
+ * mouse cannot do smoothly. */
+.mv { display: inline-flex; gap: 2px; flex: 0 0 auto; }
+.mv-b {
+  padding: 2px 6px; font-size: 10px; line-height: 1.2;
+  min-width: 22px; color: var(--ui-ink-3);
+}
+.mv-b:disabled { opacity: .28; cursor: default; }
+
+/* The serial number in front of a payment row, so the panel numbers the
+ * schedule the same way the page does. */
+.pay-no {
+  flex: 0 0 auto; min-width: 18px; text-align: center;
+  font: 600 12.5px 'CairoSemiBold', sans-serif; color: var(--ui-ink-3);
+}
+.grp-head > select { flex: 1 1 auto; min-width: 0; margin: 0; }
+
+/* The two ends of a phase's bar, beside the duration that joins them. */
+.span-row { display: flex; gap: 8px; margin-top: 6px; }
+.span-row .sub-f.day { flex: 1 1 0; min-width: 0; }
+.span-row .sub-f.day input { width: 100%; margin: 0; }
+
 label.crop { display: block; font-size: 11px; color: var(--ui-ink-3); margin: 8px 0 3px; }
 label.crop input { width: 100%; accent-color: var(--ui-brand); background: none; border: 0; padding: 0; }
 label.crop input:disabled { opacity: .35; }

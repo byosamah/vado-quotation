@@ -104,7 +104,7 @@ V.Ctx = class {
     Object.assign(this.fields, job.fields || {});
     /* Values the person marked as a stand-in rather than read off the
      * source. The job file calls them `placeholders`; the screen calls them
-     * تقديري, which is what they are. */
+     * تقريبي, which is what they are. */
     this.estimates = (job.placeholders || []).slice();
     this.placeholders = this.estimates;
     this.unknownTags = new Set();
@@ -116,7 +116,56 @@ V.Ctx = class {
     this._derive();
   }
 
+  /* A share of the fee, as a percentage. "30", "30%", "٣٠٪" and "0.3" all
+   * mean the same thing, and the amount column already worked all four out
+   * the same way. This makes what is PRINTED agree with that arithmetic
+   * instead of printing whatever happened to be typed. */
+  _percent(raw) {
+    const text = String(raw);
+    /* An unfilled share is «{{p1}}», and stripping it down to its digits
+     * leaves a 1, which reads as 100%. On a job with a fee and no split
+     * that made every stage cost the whole fee. A tag is not a number. */
+    if (text.indexOf('{{') >= 0) return null;
+    const n = parseFloat(text.replace(/[^0-9.]/g, ''));
+    if (!isFinite(n) || n <= 0) return null;
+    return Math.round((n > 1 ? n : n * 100) * 10) / 10;
+  }
+
   _derive() {
+    /* The fee, grouped in threes. A six-figure number with no separators is
+     * read wrong about as often as it is read right, and this one is the
+     * number the client signs against. Typing 50000 prints 50,000. */
+    const fee = String(this.fields.costnumber || '').trim();
+    if (fee && fee.indexOf('{{') !== 0 && isNum(fee)) {
+      const parts = fee.replace(/,/g, '').split('.');
+      this.fields.costnumber =
+        V.comma(parts[0]) + (parts[1] ? '.' + parts[1] : '');
+    }
+
+    /* Each stage's share carries its own sign, so the column reads as
+     * percentages rather than as four bare numbers.
+     *
+     * The shares live on the payment rows now, and p1 to p4 follow them.
+     * They are still the merge fields: the office tracker maps to those
+     * names and tools/presend.py reads them, so a schedule edited on the
+     * page has to reach them or the two would quietly disagree. A default
+     * row's share IS «{{p1}}», so for an untouched job this writes back
+     * exactly what it read, tidied. Rows past the fourth have no field of
+     * their own; they are printed and totalled all the same. */
+    this.paymentRows().slice(0, 4).forEach((row, i) => {
+      const k = 'p' + (i + 1);
+      const value = String(this.fill(row.pct || ''));
+      /* Nothing said yet. The studio's own rows carry «{{p1}}» as their
+       * share, so leaving the field exactly as it is keeps the blank
+       * template round-tripping its own tags. */
+      if (value.indexOf('{{') >= 0) return;
+      const pct = this._percent(value);
+      /* The row is the truth. A share cleared on the page clears the field
+       * with it, back to the tag, so the cell prints as a blank rather
+       * than keeping a number nobody can see any more. */
+      this.fields[k] = pct != null ? pct + '%' : '{{' + k + '}}';
+    });
+
     const number = String(this.fields.costnumber || '').trim();
     const written = String(this.fields.costwritten || '').trim();
     if (isNum(number) &&
@@ -168,6 +217,24 @@ V.Ctx = class {
   }
 
   isTemplate() { return !Object.keys(this.job).length; }
+
+  /* How solid the site picture on page 4 is drawn. The theme fades it so
+   * the numbers over it still lead; a job may say a different amount,
+   * because a pale satellite view disappears at the theme's fade and a
+   * dark street map still shouts through it. Returned as opacity, which is
+   * what the slider says and the reverse of the theme's transparency. */
+  mapOpacity() {
+    const own = parseFloat(this.job.map_opacity);
+    if (isFinite(own)) return Math.max(0, Math.min(1, own));
+    return 1 - (this.geo('site_map', 'transparency') || 0);
+  }
+
+  /* The word that follows a value marked تقريبي on the printed page. It
+   * lives in content.json so the deck and the PowerPoint say it the same
+   * way; the fallback keeps an older content file from blanking a page. */
+  approxWord() {
+    return ((this.content.marks || {}).approx_ar) || 'تقريبًا';
+  }
 
   /* ---- theme ---- */
   color(key) {
@@ -233,18 +300,60 @@ V.Ctx = class {
       parts[k] == null ? m : parts[k]);
   }
 
-  /* The payment schedule with the riyal amount worked out, so a client is
-   * not asked to multiply 30% by the fee to learn what a stage costs. */
+  /* The rows of the payment schedule. A job that writes its own list
+   * replaces the studio's four entirely, and may hold any number of them.
+   * A job that says nothing gets the default, whose shares are the merge
+   * fields p1 to p4. */
+  paymentRows() {
+    const own = this.job.payments;
+    if (Array.isArray(own) && own.length) return own;
+    return this.c('financial', 'payments');
+  }
+
+  /* The word in front of a payment's event, and whether it leads the
+   * sentence under the heading as well.
+   *
+   * قبل and بعد are prepositions, so they read the same in both. دفعة
+   * مقدمة names the payment instead, and leading the sentence with it made
+   * it say دفعة twice: «دفعة مقدمة عند قبول العرض تُستحق دفعة بمبلغ
+   * قدره...». It heads the row and stays out of the sentence. A word the
+   * person typed is a preposition like عند, so it leads. */
+  trigger(row) {
+    const words = this.c('financial', 'triggers');
+    if (row.when === 'custom')
+      return { ar: String(row.when_ar || '').trim(), in_body: true };
+    const w = words[row.when] || {};
+    return { ar: String(w.ar || '').trim(), in_body: w.in_body !== false };
+  }
+
+  /* A payment is three parts: the trigger word, the event, and the share.
+   * Everything a client reads on that row is built from those three, so a
+   * payment cannot say one thing in its heading and another underneath.
+   *
+   * The riyal amount is worked out here rather than left to the reader: a
+   * client asked to multiply 30% by the fee to learn what a stage costs is
+   * a client who does it wrong once. Where the fee is not a number yet
+   * there is no amount to state, and the sentence says the share instead. */
   payments() {
+    const fi = this.c('financial');
     const fee = String(this.fields.costnumber || '').replace(/,/g, '').trim();
     const total = isNum(fee) ? parseFloat(fee) : null;
-    return this.c('financial', 'payments').map((pay, i) => {
-      const raw = String(this.fill(pay.pct)).trim().replace(/%$/, '');
-      let share = null;
-      if (isNum(raw)) { share = parseFloat(raw); share = share > 1 ? share : share * 100; }
-      const amount = (total && share) ? V.comma(Math.round(total * share / 100)) : null;
-      return { no: (i + 1) + '.', title_ar: pay.title_ar,
-               pct: this.fill(pay.pct), amount: amount, body_ar: pay.body_ar };
+    return this.paymentRows().map((row, i) => {
+      const share = this._percent(this.fill(row.pct));
+      const money = (total && share) ? total * share / 100 : null;
+      const amount = money == null ? null : V.money(money);
+      const when = this.trigger(row);
+      const event = String(this.fill(row.event_ar) || '').trim();
+      const head = [when.ar, event].filter(Boolean).join(' ');
+      const lead = when.in_body ? head : event;
+      const pct = share == null ? String(this.fill(row.pct)) : share + '%';
+      const body = (amount
+        ? fi.due_ar.replace('{when}', lead)
+                   .replace('{amount}', amount + ' ' + fi.amount_unit_ar)
+        : fi.due_pct_ar.replace('{when}', lead).replace('{pct}', pct)).trim();
+      return { no: (i + 1) + '.', title_ar: head + '.', pct: pct,
+               amount: amount, body_ar: [body], share: share,
+               when: when.ar, event_ar: event };
     });
   }
 
@@ -254,15 +363,14 @@ V.Ctx = class {
     const pays = this.payments();
     const pcts = [], amounts = [];
     pays.forEach(p => {
-      const raw = String(p.pct).trim().replace(/%$/, '');
-      if (isNum(raw)) { const v = parseFloat(raw); pcts.push(v > 1 ? v : v * 100); }
+      if (p.share != null) pcts.push(p.share);
       if (p.amount) amounts.push(parseFloat(p.amount.replace(/,/g, '')));
     });
     return {
       pct: pcts.length === pays.length
         ? Math.round(pcts.reduce((a, b) => a + b, 0)) + '%' : '',
-      amount: amounts.length === pays.length
-        ? V.comma(Math.round(amounts.reduce((a, b) => a + b, 0))) : null,
+      amount: amounts.length === pays.length && pays.length
+        ? V.money(amounts.reduce((a, b) => a + b, 0)) : null,
       raw: pcts.reduce((a, b) => a + b, 0),
     };
   }
@@ -325,10 +433,19 @@ V.Ctx = class {
         current.days += row.duration_days || 0;
       }
     });
+    /* A phase a job pins by hand starts on the day it was given, whatever
+     * the after/overlap rules would have worked out. Everything downstream
+     * still follows, because a dependent phase reads the pinned phase's END
+     * day the same way it read a calculated one. So one phase can be moved
+     * to the day the client was promised without the rest being retyped. */
+    const pinned = this.job.starts || {};
     lanes.forEach(lane => {
       const s = lane.schedule, after = s.after;
       const base = after ? (ends[after] != null ? ends[after] : cursor) : 0;
-      const start = Math.max(0, base - (s.overlap_days || 0));
+      const pin = parseInt(pinned[lane.id], 10);
+      const start = isFinite(pin) ? Math.max(0, pin)
+                                  : Math.max(0, base - (s.overlap_days || 0));
+      lane.pinned = isFinite(pin);
       lane.start_day = start;
       lane.end_day = start + lane.days;
       lane.parallel = !!s.parallel;
@@ -377,3 +494,13 @@ V.Ctx = class {
 };
 
 V.comma = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+/* Riyals, the way a payment schedule writes them: grouped in threes and
+ * always to two places. A schedule where one row reads 75,000 and the next
+ * 83,333.33 looks like two different kinds of number. */
+/* toFixed first, then group. Rounding the fraction on its own carries
+ * wrong: 75,000.996 would print as 75,000.100. */
+V.money = function (n) {
+  const parts = Math.abs(n).toFixed(2).split('.');
+  return (n < 0 ? '-' : '') + V.comma(parts[0]) + '.' + parts[1];
+};

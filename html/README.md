@@ -28,10 +28,13 @@ Everything structural sits on the page it changes: the map picker on 4, the
 room list on 5, the services on 8, the durations on 11, the fee and the
 split on 12.
 
-Each of the fifteen Balady values carries a **تقديري** tick, meaning the
+Each of the fifteen Balady values carries a **تقريبي** tick, meaning the
 number is a stand-in rather than something read off بلدي. That replaces the
 job file's `placeholders` list, which is a developer's idea, with the same
-safety in words an employee uses.
+safety in words an employee uses. A ticked value prints the word
+**تقريبًا** after the phrase it sits in, so the client is told as well. The
+highlight beside it on screen is for the person filling the form in and does
+not print.
 
 On the left, the same page is ticked off as it is filled. Every value the
 page carries sits under **مكتمل** with what you typed beside it, or under
@@ -90,12 +93,98 @@ decision that reaches every future proposal, so it is a text edit in
 
 Changeable, from the page or the panel:
 
-* the 49 field values, clicked and typed straight on the page
+* the field values, clicked and typed straight on the page
 * which of the eleven services this job sells
-* how long each phase takes, in days
-* the fee and the payment split
-* the room schedule on slide 5, including adding and deleting floors
-* the site map image
+* how long each phase takes, and which day it starts and ends on
+* the fee, and the payment schedule: when each falls due, on what, and for
+  how much
+* the room schedule on slide 5: adding, deleting and reordering
+* the site map image, how it is cropped and how solid it is drawn
+
+Some values answer from a short list instead of a box. **التاريخ** offers
+today, tomorrow, or a calendar. **اللقب** offers the eight titles the office
+uses, or أخرى to type one. Choosing **لاينطبق/ مستثنى** for the Saudi
+architecture zone answers the level with it, because a plot outside the
+classification has no level inside it either.
+
+**اسم الشركة** on page 13 is the one box that may be left empty on purpose.
+Filled, it prints above the client's name in the الطرف الأول block, the way
+the studio's own company prints above its signatory opposite. Empty, no line
+is drawn and nothing counts it as missing.
+
+## The English
+
+The document is Arabic. The English block that stood on the cover was
+removed, and with it the last use of `name_title`, `firstname`, `lastname`,
+`project_type`, `city` and `district`. Those six fields are still declared,
+under `fields_unprinted` in `content.json`, because the office tracker maps
+to these names and an English edition will want them back. They are not
+asked for, not counted, and not printed.
+
+Two places keep English on purpose. Page 8 is a checklist read against an
+English contract, so each service carries its English name beside the
+Arabic; only the **Yes** and **N/A** answers went, because نعم and لا ينطبق
+say the same thing. Page 9 keeps the deliverable notes and the two-letter
+phase codes, which label the bars on page 11.
+
+## The payment schedule
+
+A payment on page 12 is three parts and nothing else:
+
+| Part | What it is | Where it comes from |
+|---|---|---|
+| **متى** | the word in front of the event | a list: دفعة مقدمة, قبل, بعد, مخصص, بلا |
+| **الحدث** | the event itself | typed |
+| **النسبة** | the share of the fee | typed as a bare number; the `%` is printed, not typed |
+
+The heading the client reads is the first two joined. The sentence under it
+is the same two again with the riyal amount, worked out from the share and
+the fee and written to two places: «بعد اكتمال الرسوم التنفيذية تُستحق دفعة
+بمبلغ قدره 13,500.00 ريالاً سعوديًّا.» Nothing on that row is typed twice,
+so a payment cannot say one thing in its heading and another underneath.
+That is how the old wording drifted: row three read «اكتمال الرسوم
+التنفيذية» above and «اكتمال الرسومات التنفيذية» below.
+
+بلا draws no word at all, for an event that already carries its own
+preposition. مخصص takes whatever you type in front of it.
+
+قبل and بعد are prepositions, so they lead the sentence as well as the
+heading. دفعة مقدمة names the payment instead, so it heads the row and
+stays out of the sentence: leading with it made the sentence say دفعة
+twice. Which words lead is `in_body` in `content.json`.
+
+Rows can be added, deleted and reordered. The first four shares are still
+written back to `p1` to `p4`, so the office tracker and `tools/presend.py`
+find them where they always were. A fifth payment reaches neither, and the
+panel says so; `presend.py` prints the whole schedule instead of those four
+fields, so nothing goes unread.
+
+## Page 9 grows a second page
+
+The phases table splits when the phases do not fit on one sheet, the way
+the scope already splits. A phase and its continuation rows move together,
+the heading is said once above the first page, and the legend sits under
+the last.
+
+Where to break is `theme.phases_page.rows_room`, one number both outputs
+read, so they break in the same place. They cannot always agree that a page
+is full: the PowerPoint has only the heights declared in `content.json`,
+measured against its own fonts, while the browser measures what Cairo
+actually drew and Cairo is wider. Where they part, the browser splits
+first. A job that reaches that difference is already carrying far more text
+than any proposal the studio has sent.
+
+Below the split, the page still bends before it breaks: the legend follows
+the table down and tightens its own spacing, and only then does the table
+shrink, laid out in a wider box and scaled back so the wrapping follows the
+type. قبل الإرسال names any page whose content still runs off the paper.
+
+## The two downloads
+
+**حمّل الـ PDF** names the file
+`<رقم العرض>, TFP R00` and downloads the job file beside it under the same
+name. The browser takes a printed file's name from the page title, so the
+title is changed for the length of the print and put back afterwards.
 
 ## The fonts
 

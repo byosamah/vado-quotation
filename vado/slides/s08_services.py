@@ -25,6 +25,15 @@ def build(ctx, slide):
     ordered = ([s for s in items if s['included']] +
                [s for s in items if not s['included']])
 
+    # This one page is a checklist read against an English contract, so the
+    # English service names stay beside the Arabic. Everything on it hangs
+    # off the same left edge, English and Arabic alike: two lines of a pair
+    # that start at opposite edges of the box stop reading as a pair, which
+    # is the whole job of this page.
+    #
+    # The answer column says نعم or لا ينطبق and nothing else. It carried
+    # "Yes" and "N/A" above the Arabic, and a one-word answer does not need
+    # saying twice.
     for i, item in enumerate(ordered):
         y = g['y_top'] + i * g['row_gap']
         colour = 'ink' if item['included'] else 'service_off'
@@ -32,17 +41,11 @@ def build(ctx, slide):
         _, t = textbox(ctx, slide, g['name']['x'], y, g['name']['w'], g['row_h'],
                        autofit=True)
         t.para([{'t': item['en'], 'sz': 11, 'f': 'en_light', 'c': colour}],
-               algn='just', level=1, ls=1.5)
+               algn='l', ls=1.5)
         t.para([{'t': item['ar'], 'sz': 10, 'f': 'ar_medium', 'c': colour}],
-               algn='just', level=1, ls=1.5)
+               algn='l', ls=1.5)
 
         _, t = textbox(ctx, slide, g['status']['x'], y, g['status']['w'], g['row_h'],
                        autofit=True)
-        if item['included']:
-            t.para([{'t': sv['yes_en'], 'sz': 11, 'f': 'en', 'c': colour}],
-                   algn='just', level=1, ls=1.5)
-            t.para([{'t': sv['yes_ar'], 'sz': 10, 'f': 'ar_medium', 'c': colour}],
-                   algn='just', level=1, ls=1.5)
-        else:
-            t.para([{'t': sv['no_en'], 'sz': 11, 'f': 'en', 'c': colour}],
-                   algn='just', level=1, ls=1.5)
+        t.para([{'t': sv['yes_ar'] if item['included'] else sv['no_ar'],
+                 'sz': 11, 'f': 'ar_medium', 'c': colour}], algn='l', ls=1.5)

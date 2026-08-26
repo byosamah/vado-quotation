@@ -65,13 +65,10 @@ def build(ctx, slide):
     h = g['hrule']
     hline(ctx, slide, h['x'], h['y'], h['w'], 'muted', h['weight'])
 
-    b = g['english']
-    _, t = textbox(ctx, slide, b['x'], b['y'], b['w'], b['h'], autofit=True, rtl_col=True)
-    for line in (cv['english_line1'],
-                 '{{name_title}} {{firstname}} {{lastname}} {{project_type}}',
-                 '{{city}} | {{district}}'):
-        t.para([{'t': line, 'sz': 12, 'spc': -0.7, 'f': 'en_light', 'c': ink}],
-               algn='r', ls=1.5)
+    # The English block that stood here is gone. The document is Arabic,
+    # and the three lines it carried said in Latin letters exactly what the
+    # Arabic block above already says. It comes back when the deck gains a
+    # real English edition, not as a caption on the Arabic one.
 
     _meta_table(ctx, slide, g['meta_table'], cv['meta_rows'])
     _cover_footer(ctx, slide, g['footer'], co)
@@ -81,9 +78,16 @@ def _meta_table(ctx, slide, g, rows):
     """Value on the left, label on the right, no rules. Labels can span rows."""
     heights = [g['row_h']] * len(rows)
     tbl = Table(ctx, slide, g['x'], g['y'], g['w'], g['h'], g['cols'], heights)
+    # A label that covers more than one row names the FIRST of them, so it
+    # is held at the top of the merge rather than centred in it. Centred,
+    # "التوجيه" drew level with the phone number, one row below the name it
+    # labels. Both cells of such a row sit at the top, so the two start on
+    # the same edge whatever their sizes.
+    span = rows[0].get('span', 1)
     for i, row in enumerate(rows):
-        tbl.anchor(i, 0)
-        tbl.anchor(i, 1)
+        top = 't' if span > 1 and i == 0 else 'ctr'
+        tbl.anchor(i, 0, top)
+        tbl.anchor(i, 1, top)
         # rtl sets the base direction so "14 يوم" reads number-then-word
         # right to left. algn keeps the flush edge where the design has it:
         # without it, an RTL paragraph would jump to the right of the cell.
@@ -95,7 +99,6 @@ def _meta_table(ctx, slide, g, rows):
             t.para([{'t': row['label_ar'], 'sz': 9, 'b': True, 'spc': 0.4,
                      'f': 'cairo', 'c': 'ink'}], rtl=True, algn='l')
     # the addressee label spans its three value rows
-    span = rows[0].get('span', 1)
     if span > 1:
         tbl.merge(0, 1, span - 1, 1)
 
