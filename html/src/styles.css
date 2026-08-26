@@ -426,7 +426,7 @@ button.mini   { padding: 3px 9px; font-size: 11px; }
   border-inline-end: 1px solid var(--ui-line);
   color: var(--ui-ink);
   font: 12px/1.7 'CairoRegular', sans-serif;
-  padding: 18px 16px 16px; overflow-y: auto; overflow-x: hidden;
+  padding: 18px 16px 16px; overflow: hidden;
   display: flex; flex-direction: column; gap: 10px;
 }
 /* nothing in the rail may be wider than the rail */
@@ -437,6 +437,61 @@ button.mini   { padding: 3px 9px; font-size: 11px; }
 }
 .rail-block { border-top: 1px solid var(--ui-line); padding-top: 14px; margin-top: 6px; }
 .warn-soft { color: var(--ui-warn) !important; }
+
+/* ---- what this page holds, and what it still wants ------------------- */
+
+/* The list scrolls inside itself rather than pushing the rail. Page 4 has
+ * twenty-eight values, and قبل الإرسال must not be twenty-eight rows below
+ * the fold on the one page most likely to be half empty. */
+#rail-status {
+  flex: 0 1 auto; min-height: 60px; overflow-y: auto; overflow-x: hidden;
+  margin-inline-end: -6px; padding-inline-end: 6px;
+}
+.rail-where {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 8px; padding-bottom: 10px; margin-bottom: 11px;
+  border-bottom: 1px solid var(--ui-line);
+}
+.rail-where b {
+  font: 600 13.5px/1.4 'CairoSemiBold', sans-serif; color: var(--ui-ink);
+}
+.rail-where span { color: var(--ui-ink-3); font-size: 11px; white-space: nowrap; }
+
+.rail-sec {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font: 600 10.5px 'CairoSemiBold', sans-serif; letter-spacing: .05em;
+  color: var(--ui-ink-3); margin: 13px 0 5px;
+}
+.rail-sec:first-of-type { margin-top: 0; }
+.rail-n { font-size: 11px; }
+
+/* A row is a button, because it is the way back to the box that fills it. */
+.rl {
+  display: grid; grid-template-columns: 13px minmax(0, 1fr) auto;
+  align-items: baseline; gap: 6px; width: 100%;
+  background: none; border: 0; border-radius: 7px;
+  padding: 5px 6px; margin: 0 0 1px;
+  font: 12px/1.55 'CairoRegular', sans-serif; color: var(--ui-ink-2);
+  text-align: start; cursor: pointer;
+}
+.rl:hover:not(:disabled) { background: var(--ui-sunk); border-color: transparent; }
+.rl:focus-visible { border-color: transparent; }
+.rl-mark { font-size: 10px; }
+.rl.ok   .rl-mark { color: var(--ui-ok); }
+.rl.est  .rl-mark { color: var(--ui-warn); }
+.rl.miss .rl-mark { color: var(--ui-danger); }
+.rl.miss { color: var(--ui-ink); }
+/* Two long Arabic names must not push the value off the rail. */
+.rl-name, .rl-val { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#rail .rl-val { max-width: 68px; color: var(--ui-ink-3); font-size: 11px; }
+.rl.est .rl-val { color: var(--ui-warn); }
+.rl-val.ltr { direction: ltr; unicode-bidi: isolate; text-align: start; }
+
+.rail-rest { font-size: 11.5px; line-height: 1.75; color: var(--ui-ink-3); margin: 0; }
+.rail-also {
+  font-size: 11px; line-height: 1.7; color: var(--ui-ink-3);
+  margin: 13px 0 0; padding-top: 11px; border-top: 1px solid var(--ui-line-soft);
+}
 
 /* the file's own controls live at the foot of the rail */
 .rail-tools {
@@ -624,6 +679,24 @@ button.mini.danger { color: var(--ui-danger); flex: 0 0 auto; }
 .chk-row.ok   .mark { color: #7AA383; }
 
 .review-actions { margin-top: 22px; text-align: center; }
+
+/* The question the PDF button asks while anything is still missing. It
+ * replaces the button rather than sitting under it, so there is one thing
+ * to press and it is not the one that was just pressed. */
+#pdf-confirm[hidden] { display: none; }
+.ask-head {
+  font: 600 15px 'CairoSemiBold', sans-serif; color: var(--ui-ink);
+  margin: 0 0 9px;
+}
+.ask-list {
+  margin: 0 auto 15px; padding-inline-start: 18px; text-align: start;
+  color: var(--ui-warn); font-size: 12.5px; line-height: 1.8;
+  max-width: 380px;
+}
+.ask-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  justify-content: center; align-items: center;
+}
 .danger-zone {
   margin-top: 24px; padding-top: 14px;
   border-top: 1px solid var(--ui-line); text-align: center;
@@ -673,7 +746,7 @@ button.icon {
     border-radius: 9px; color: var(--ui-ink-2); z-index: 1;
   }
   #rail { position: fixed; }              /* the close sits against it */
-  #btn-review { margin-top: 44px; }
+  #rail-status { margin-top: 44px; }
 }
 
 #scrim {
@@ -849,6 +922,16 @@ body.menu-open #scrim { opacity: 1; }
 
 @page { size: 756pt 1008pt; margin: 0; }
 
+/* Strong enough to find at a glance on a page shown at 70 per cent.
+ *
+ * It has to be declared before the print block, not after it. A media
+ * query adds no weight, so the same class written later wins even when
+ * printing: the ring survived on to the client's PDF. */
+.field-lit {
+  box-shadow: 0 0 0 2.5pt rgba(122,31,43,.55);
+  border-radius: 2pt; background: rgba(122,31,43,.10);
+}
+
 @media print {
   html, body { background: #fff; display: block; }
   /* Every part of the tool goes, not just the fields panel. The left rail
@@ -872,13 +955,12 @@ body.menu-open #scrim { opacity: 1; }
   }
   .page:last-child { break-after: auto; page-break-after: auto; }
   /* the helps are for the person filling it in, never for the client */
-  .blank { color: transparent; border-bottom: none; }
+  /* Hidden, not colourless. Transparent text still goes into the PDF's
+   * text layer, so a client who selects the page reads «مساحة الأرض»
+   * where the number should be. Either way the box it takes is kept, so
+   * nothing around it moves. */
+  .blank { visibility: hidden; border-bottom: none; }
   .ph, .field-lit { background: none; box-shadow: none; }
   [contenteditable]:hover, [contenteditable]:focus { background: none; }
 }
 
-/* strong enough to find at a glance on a page shown at 70 per cent */
-.field-lit {
-  box-shadow: 0 0 0 2.5pt rgba(122,31,43,.55);
-  border-radius: 2pt; background: rgba(122,31,43,.10);
-}

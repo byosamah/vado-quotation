@@ -33,10 +33,22 @@ number is a stand-in rather than something read off بلدي. That replaces the
 job file's `placeholders` list, which is a developer's idea, with the same
 safety in words an employee uses.
 
+On the left, the same page is ticked off as it is filled. Every value the
+page carries sits under **مكتمل** with what you typed beside it, or under
+**ناقص** with a cross. The list redraws on every keystroke, so it never
+disagrees with the box in front of you. Press a row and the cursor goes to
+the box that fills that value. The five pages that carry a control rather
+than text say which control, instead of claiming to need nothing.
+
 **قبل الإرسال** is the only place the PDF button lives. It lists what is
 still empty and on which page, what is marked as an estimate, and reads the
-fee, the services and the programme back. The button is dead while anything
-is missing, and an estimate has to be acknowledged before it can be sent.
+fee, the services and the programme back.
+
+The button is never dead. A proposal goes out while a بلدي value is still
+being chased, and a tool that refuses to print gets worked around by
+rebuilding the deck by hand, which is how one leaves with no check at all.
+What is still empty prints as empty space, and the press asks once, naming
+what is missing and what is only an estimate, before it makes the file.
 
 The work saves itself as you type. **احفظ نسخة** downloads the job file for
 another machine or for whoever builds the PowerPoint; **افتح ملف** resumes

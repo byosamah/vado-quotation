@@ -16,6 +16,23 @@ Say which half you are in before you edit.
 - Panel field labels come from the skill's `references/fields.md`. The
   captions printed on the page come from `content.json`. Same Arabic,
   two files.
+- `#rail *` and `#panel *` set `max-width: 100%`. An id rule beats a
+  class, so a class `max-width` inside either needs the id in front of it.
+- To see what will really print, flip the print block to `screen` through
+  `document.styleSheets` and screenshot the page. The same trick tests a
+  breakpoint when `resize_window` refuses. Never call `window.print()` in
+  a browser check: the dialog freezes the extension. Stub it and count.
+
+## editor.js
+
+- **A commit redraws everything.** `set()` calls `changed()`, which
+  re-renders all fifteen pages and rebuilds `#page-form` and the rail. A
+  control that reacts to a press while a box has focus loses that press:
+  the node it started on is gone before mouseup, so the click never fires.
+  Act on `mousedown`, focus inside `setTimeout(..., 0)` so it lands after
+  the rebuild, and treat `e.detail === 0` as the keyboard's click.
+- **Arabic counts go through `arCount(n, one, two, few, many)`.**
+  `ar(n) + ' قيمة'` is wrong at one, at two, and at three to ten.
 
 ## The self-check needs a port you have never used
 

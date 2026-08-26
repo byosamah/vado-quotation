@@ -50,6 +50,10 @@
     <button id="drawer-x" class="quiet" type="button" aria-label="إغلاق الأدوات">
       <span aria-hidden="true">✕</span>
     </button>
+
+    <!-- what this page still wants, ticked off as it is typed -->
+    <div id="rail-status"></div>
+
     <button id="btn-review" class="wide marked">قبل الإرسال</button>
     <p class="note">راجع ما نقص، ثم حمّل الـ PDF.</p>
 
@@ -79,6 +83,16 @@
     <div class="review-actions">
       <button id="btn-pdf" class="primary big">حمّل الـ PDF</button>
       <p class="note" id="pdf-note"></p>
+
+      <!-- the press asks first while anything is still missing -->
+      <div id="pdf-confirm" hidden>
+        <p class="ask-head">هل أنت متأكد؟</p>
+        <ul class="ask-list" id="pdf-ask"></ul>
+        <div class="ask-row">
+          <button id="btn-pdf-no" class="quiet">تراجع</button>
+          <button id="btn-pdf-yes" class="primary big">نعم، حمّل الـ PDF</button>
+        </div>
+      </div>
     </div>
     <p class="danger-zone">
       <button id="btn-reset" class="danger quiet mini">امسح كل شيء وابدأ من جديد</button>

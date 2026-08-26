@@ -55,6 +55,16 @@ const ESTIMATABLE = new Set([3, 4, 5, 6]);
 const AR_DIGITS = '٠١٢٣٤٥٦٧٨٩';
 const ar = n => String(n).replace(/[0-9]/g, d => AR_DIGITS[+d]);
 
+/* Arabic counts a thing four different ways: one, two, three to ten, and
+ * eleven up. «٣ قيمة» is wrong in the same way «3 value» is, and this
+ * screen says these numbers to somebody who reads Arabic. The caller gives
+ * the whole phrase for one and for two, because the words after the noun
+ * have to agree with it as well. */
+const arCount = (n, one, two, few, many) =>
+  n === 1 ? one :
+  n === 2 ? two :
+  n <= 10 ? ar(n) + ' ' + few : ar(n) + ' ' + many;
+
 V.App = class {
   constructor(data) {
     this.ctx = new V.Ctx(data);
@@ -73,6 +83,7 @@ V.App = class {
   /* ---- the model --------------------------------------------------- */
 
   set(name, value) {
+    this.draft = null;
     const f = this.job.fields || (this.job.fields = {});
     if (value === '' || value == null) delete f[name];
     else f[name] = value;
@@ -173,6 +184,13 @@ V.App = class {
       if (e.key === 'Enter') { e.preventDefault(); span.blur(); }
       if (e.key === 'Escape') { span.blur(); this.show(this.page); }
     });
+    /* The rail counts this value the moment it is typed, not when the box
+     * is left. A page that reads ناقص beside a value already on screen is
+     * a tool arguing with itself. */
+    span.addEventListener('input', () => {
+      this.draft = { name: name, value: span.textContent.replace(/[‎‏]/g, '') };
+      this.buildRail();
+    });
     span.addEventListener('blur', () => {
       const v = span.textContent.replace(/[‎‏]/g, '').trim();
       const now = span.dataset.empty ? '' : String(this.ctx.field(name));
@@ -184,6 +202,7 @@ V.App = class {
   /* ---- moving between pages ----------------------------------------- */
 
   show(n) {
+    this.draft = null;
     this.page = Math.max(1, Math.min(this.manifest.length, n));
     this.stage.querySelectorAll('.page').forEach((p, i) =>
       p.classList.toggle('current', i + 1 === this.page));
@@ -195,6 +214,7 @@ V.App = class {
     if (mod && mod.adjust)
       mod.adjust(this.ctx, document.getElementById('page-' + this.page));
     this.buildForm();
+    this.buildRail();
     this.syncBands();
     this.persist();
   }
@@ -462,6 +482,10 @@ V.App = class {
     input.value = cur.indexOf('{{') === 0 ? '' : cur;
     input.dataset.field = name;
     input.addEventListener('change', () => this.set(name, input.value.trim()));
+    input.addEventListener('input', () => {
+      this.draft = { name: name, value: input.value };
+      this.buildRail();
+    });
     /* light up the value on the page while the box has focus, so nobody
      * has to hunt for what they are changing */
     input.addEventListener('focus', () => this.highlight(name, true));
@@ -494,6 +518,132 @@ V.App = class {
     if (!pg) return;
     pg.querySelectorAll('[data-field="' + name + '"]').forEach(el =>
       el.classList.toggle('field-lit', on));
+  }
+
+  /* ---- the rail: what this page holds and what it still wants -------- */
+
+  /* The panel is where a value is typed. This is where it is ticked off,
+   * and it carries the value itself, because «المساحة ✓» and
+   * «المساحة ٥١٢ م²» are not the same reassurance. It redraws on
+   * every keystroke, so ناقص never argues with what is already on screen.
+   */
+  buildRail() {
+    const host = document.getElementById('rail-status');
+    if (!host) return;
+    host.textContent = '';
+
+    const m = this.manifest[this.page - 1];
+    const head = V.el('div', 'rail-where');
+    const nm = V.el('b');
+    nm.textContent = V.PAGE_NAMES[m.module] || '';
+    const wh = V.el('span');
+    wh.textContent = 'صفحة ' + ar(this.page);
+    head.appendChild(nm); head.appendChild(wh);
+    host.appendChild(head);
+
+    /* A worked-out value is nobody's job to fill, so it is neither
+     * complete nor missing. The panel already explains it. */
+    const names = this.onPage[this.page - 1].filter(f => !DERIVED[f]);
+    const done = [], left = [];
+    names.forEach(name => {
+      const v = this.value(name);
+      (v === '' ? left : done).push({ name: name, v: v });
+    });
+
+    const control = V.CONTROL_NAMES[V.PAGE_CONTROLS[m.module]];
+
+    if (!names.length && !control) {
+      const rest = V.el('p', 'rail-rest');
+      rest.textContent = 'هذه الصفحة ثابتة. لا تحتاج منك شيئاً.';
+      host.appendChild(rest);
+      return;
+    }
+
+    const section = (title, rows, cls) => {
+      if (!rows.length) return;
+      const h = V.el('div', 'rail-sec');
+      const t = V.el('span'); t.textContent = title;
+      const c = V.el('span', 'rail-n'); c.textContent = ar(rows.length);
+      h.appendChild(t); h.appendChild(c);
+      host.appendChild(h);
+      rows.forEach(r => host.appendChild(this.railRow(r, cls)));
+    };
+    section('مكتمل', done, 'ok');
+    section('ناقص', left, 'miss');
+
+    /* Five pages carry something that is not a text box. Calling those
+     * «ثابتة» because they hold no field would be a lie: page 8 sells
+     * the services and page 12 splits the fee. */
+    if (control) {
+      const also = V.el('p', 'rail-also');
+      also.textContent = names.length
+        ? 'وفيها أيضاً ' + control + '، تُضبط من اللوحة.'
+        : 'لا قيم تُكتب هنا. اضبط ' + control + ' من اللوحة.';
+      host.appendChild(also);
+    }
+  }
+
+  /* What the box holds right now: the draft while it is being typed, the
+   * stored value once it is committed, '' when it is neither. */
+  value(name) {
+    if (this.draft && this.draft.name === name) return this.draft.value.trim();
+    const v = String(this.ctx.field(name));
+    return v.indexOf('{{') === 0 ? '' : v;
+  }
+
+  railRow(r, cls) {
+    const est = this.ctx.estimates.indexOf(r.name) >= 0;
+    const row = V.el('button', 'rl ' + (cls === 'ok' && est ? 'est' : cls));
+    row.type = 'button';
+
+    const mark = V.el('span', 'rl-mark');
+    mark.textContent = cls === 'miss' ? '✕' : (est ? '⚠' : '✓');
+    const name = V.el('span', 'rl-name');
+    name.textContent = V.label(r.name).ar;
+    row.appendChild(mark); row.appendChild(name);
+
+    if (r.v) {
+      const val = V.el('span', 'rl-val');
+      /* An estimate says so in the space the value would take. The value
+       * is on the page beside it and in the box that holds it, so the
+       * warning is the thing worth the width. */
+      val.textContent = est ? 'تقديري' : r.v;
+      if (!est && LTR.has(r.name)) val.classList.add('ltr');
+      row.title = V.label(r.name).ar + '  ·  ' + r.v;
+      row.appendChild(val);
+    }
+
+    /* On mousedown, not on click. Leaving a box with a changed value
+     * commits it, and a commit redraws this list, so the row the press
+     * started on is gone before the mouse comes back up and the click
+     * never happens. The press is the part that survives.
+     *
+     * `detail` is 0 only for a click the keyboard raised, which has no
+     * mousedown of its own to catch. */
+    row.addEventListener('mousedown', () => this.reveal(r.name));
+    row.addEventListener('click', e => { if (!e.detail) this.reveal(r.name); });
+    row.addEventListener('mouseenter', () => {
+      this.railLit = r.name;
+      this.highlight(r.name, true);
+    });
+    row.addEventListener('mouseleave', () => this.highlight(r.name, false));
+    return row;
+  }
+
+  /* A row is the way back to the box that fills it. On a narrow screen the
+   * rail is a drawer over the panel, so it closes first or it would hide
+   * the box it just put the cursor in. */
+  reveal(name) {
+    this.menu(false);
+    /* Wait for the press to finish what it started. Leaving the box being
+     * typed in commits it, and that rebuilds the whole panel, so the box
+     * to put the cursor in is not the one on screen now. */
+    setTimeout(() => {
+      const box = document.querySelector('#page-form [data-field="' + name + '"]');
+      if (!box) return;
+      box.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      box.focus();
+    }, 0);
   }
 
   /* ---- the controls that belong to one page ------------------------- */
@@ -1192,8 +1342,9 @@ V.App = class {
                 detail: this.ctx.fields.costwritten || '' });
     ok.push({ what: 'الخدمات  ' + ar(sold.size) + ' من ' +
                     ar(this.ctx.services().length) });
-    ok.push({ what: 'المدة  ' + ar(Math.round(this.ctx.timelinePlan().total_days)) +
-                    ' يوماً' });
+    ok.push({ what: 'المدة  ' + arCount(
+      Math.round(this.ctx.timelinePlan().total_days),
+      'يوم واحد', 'يومان', 'أيام', 'يوماً') });
     const client = [this.ctx.field('name_title_ar'), this.ctx.field('firstname_ar'),
                     this.ctx.field('lastname_ar')].join(' ');
     if (client.indexOf('{{') < 0) ok.push({ what: 'العميل  ' + client });
@@ -1239,38 +1390,71 @@ V.App = class {
       host.appendChild(p);
     }
 
-    const blocked = missing.length > 0 || problems.length > 0;
-    const pdf = document.getElementById('btn-pdf');
-    const note = document.getElementById('pdf-note');
-    pdf.disabled = blocked;
+    /* Nothing here stops the file being made. A proposal goes out while a
+     * بلدي value is still being chased, and a tool that refuses to print
+     * is worked around by somebody rebuilding the deck by hand, which is
+     * how a proposal leaves with no check at all. What is missing prints
+     * as empty space, and the press asks before it prints.
+     *
+     * An estimate that reads correctly is indistinguishable from a real
+     * value three days later, so it is still a decision. It is taken in
+     * the same breath as the rest instead of in a checkbox of its own. */
+    this.pdfWarnings = [];
+    if (missing.length)
+      this.pdfWarnings.push('ناقص ' +
+        arCount(missing.length, 'قيمة واحدة', 'قيمتان', 'قيم', 'قيمة') +
+        '. تظهر فارغة في الملف.');
+    problems.forEach(p => {
+      const line = p.what + (p.detail ? '. ' + p.detail : '');
+      this.pdfWarnings.push(/[.؟]$/.test(line) ? line : line + '.');
+    });
+    if (estimates.length)
+      this.pdfWarnings.push(arCount(estimates.length,
+        'قيمة تقديرية واحدة غير مؤكدة',
+        'قيمتان تقديريتان غير مؤكدتين',
+        'قيم تقديرية غير مؤكدة',
+        'قيمة تقديرية غير مؤكدة') + '.');
 
-    if (blocked) {
-      note.textContent = 'عبّئ الصفوف المعلَّمة ✕ أولاً.';
-      note.style.color = '#ff8f8f';
-    } else if (estimates.length) {
-      /* An estimate that reads correctly is indistinguishable from a real
-       * value three days later, so sending one has to be a decision. */
-      note.textContent = '';
-      note.style.color = '';
-      const ack = V.el('label', 'est');
-      ack.style.justifyContent = 'center';
-      const cb = V.el('input'); cb.type = 'checkbox';
-      const t = V.el('span');
-      t.textContent = 'أعلم أن العرض يحتوي ' + ar(estimates.length) +
-                      ' قيمة تقديرية غير مؤكدة';
-      ack.appendChild(cb); ack.appendChild(t);
-      note.appendChild(ack);
-      pdf.disabled = true;
-      cb.addEventListener('change', () => { pdf.disabled = !cb.checked; });
-    } else {
-      note.textContent = 'يفتح نافذة الطباعة. اختر «حفظ كـ PDF».';
-      note.style.color = '';
-    }
+    const note = document.getElementById('pdf-note');
+    note.style.color = '';
+    note.textContent = this.pdfWarnings.length
+      ? 'ما نقص يظهر فارغاً في الملف.'
+      : 'يفتح نافذة الطباعة. اختر «حفظ كـ PDF».';
+    this.askPdf(false);
 
     document.getElementById('review').hidden = false;
   }
 
-  closeReview() { document.getElementById('review').hidden = true; }
+  /* The press asks in the same words the list above uses, so the answer is
+   * given against the same facts. */
+  askPdf(on) {
+    const box = document.getElementById('pdf-confirm');
+    if (!box) return;
+    box.hidden = !on;
+    document.getElementById('btn-pdf').hidden = !!on;
+    document.getElementById('pdf-note').hidden = !!on;
+    if (!on) return;
+    const list = document.getElementById('pdf-ask');
+    list.textContent = '';
+    (this.pdfWarnings || []).forEach(w => {
+      const li = V.el('li');
+      li.textContent = w;
+      list.appendChild(li);
+    });
+    /* The question is taller than the button it replaces, so on a long
+     * list the answer would open below the bottom of the sheet. */
+    box.scrollIntoView({ block: 'nearest' });
+  }
+
+  printNow() {
+    this.closeReview();
+    window.print();
+  }
+
+  closeReview() {
+    this.askPdf(false);
+    document.getElementById('review').hidden = true;
+  }
 
   /* A page turn on a phone means the next thing to type, so the fields come
    * back with it. On a wide screen nothing is hidden and this is just show. */
@@ -1285,13 +1469,45 @@ V.App = class {
   wire() {
     const on = (id, ev, fn) => document.getElementById(id).addEventListener(ev, fn);
 
+    /* A row taken away under the pointer never sends mouseleave, so the
+     * value it lit on the page would stay lit. The list around the rows is
+     * never taken away, so its own mouseleave is the one to trust. */
+    on('rail-status', 'mouseleave', () => {
+      if (!this.railLit) return;
+      this.highlight(this.railLit, false);
+      this.railLit = null;
+    });
+
     on('btn-prev', 'click', () => this.step(-1));
     on('btn-next', 'click', () => this.step(1));
     on('btn-review', 'click', () => this.review());
 
 
     on('btn-close-review', 'click', () => this.closeReview());
-    on('btn-pdf', 'click', () => { this.closeReview(); window.print(); });
+
+    /* Pressing the dark outside closes the sheet, the way every other
+     * overlay on the machine does.
+     *
+     * A press that starts on the sheet and ends outside it is a selection
+     * dragged past the edge, and the browser reports that click on the
+     * backdrop as well. Reading a number back is exactly when somebody
+     * drags across it, so where the press began has to be remembered or
+     * the sheet shuts while it is being read. */
+    const rev = document.getElementById('review');
+    let fromSheet = false;
+    rev.addEventListener('mousedown', e => {
+      fromSheet = !!(e.target.closest && e.target.closest('.sheet'));
+    });
+    rev.addEventListener('click', e => {
+      if (e.target === rev && !fromSheet) this.closeReview();
+      fromSheet = false;
+    });
+    on('btn-pdf', 'click', () => {
+      if ((this.pdfWarnings || []).length) this.askPdf(true);
+      else this.printNow();
+    });
+    on('btn-pdf-yes', 'click', () => this.printNow());
+    on('btn-pdf-no', 'click', () => this.askPdf(false));
 
     const zoom = document.getElementById('zoom');
     zoom.addEventListener('input', () => {
@@ -1437,6 +1653,13 @@ V.TEMPLATE_PAGES = {
 /* Pages whose control belongs above the fields rather than under them. */
 V.CONTROLS_FIRST = {
   s04_project: true,
+};
+
+/* What each of those controls is called, for the rail to name. */
+V.CONTROL_NAMES = {
+  map: 'صورة الموقع', brief: 'الأدوار والمساحات',
+  services: 'الخدمات المشمولة', durations: 'مدد المراحل',
+  money: 'الأتعاب والدفعات',
 };
 
 V.PAGE_CONTROLS = {

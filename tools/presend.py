@@ -5,12 +5,23 @@
 
 Prints three things:
 
-  BLOCKERS  something a client would notice. Exit code 1.
-  WARNINGS  something worth a second look. Exit code 0.
+  BLOCKERS  the file itself is wrong. Exit code 1.
+  WARNINGS  a decision for you to make. Exit code 0.
   SUMMARY   every value that went in, so you can read it back.
 
 The point is the summary. A machine can tell you a field is empty; only you
 can tell that the plot number is the neighbour's.
+
+A blocker means the PowerPoint is broken, not that the job is unfinished:
+a tag still showing on a slide, a fee that is not a number, text that runs
+past the footer. Everything a person can weigh and send anyway is a
+warning, because the browser twin now prints it after asking once. The two
+must agree about what stops a proposal. One this refuses to pass gets
+rebuilt by hand instead, and then nothing checks it at all.
+
+They still part on one thing, an unfilled value, and only because the two
+files do. The browser leaves empty space where the value belongs. The
+PowerPoint writes `{{lotarea}}` on the page, in front of the client.
 """
 from __future__ import annotations
 
@@ -59,14 +70,14 @@ def main(job_path, pptx_path):
     blockers, warnings = [], []
 
     _check_unfilled(pptx_path, blockers)
-    _check_placeholders(ctx, blockers)
-    _check_payments(ctx, blockers)
+    _check_placeholders(ctx, warnings)
+    _check_payments(ctx, blockers, warnings)
     _check_lists(ctx, blockers)
     _check_pairs(ctx, warnings)
     _check_money(ctx, blockers, warnings)
     _check_rooms(ctx, warnings)
     _check_services(ctx, blockers, warnings)
-    _check_scope(ctx, blockers, warnings)
+    _check_scope(ctx, warnings)
     _check_project_fit(ctx, warnings)
     _check_capacity(ctx, pptx_path, blockers, warnings)
     _check_phases(ctx, warnings)
@@ -102,7 +113,12 @@ def main(job_path, pptx_path):
 # -- checks ----------------------------------------------------------------
 
 def _check_unfilled(pptx_path, blockers):
-    """A visible {{tag}} in the file the client opens is the worst outcome."""
+    """A visible {{tag}} in the file the client opens is the worst outcome.
+
+    This is the one thing the browser twin does not have to stop, because
+    it does not have the fault: an unfilled value prints there as empty
+    space. Here it prints as itself.
+    """
     found = set()
     with zipfile.ZipFile(pptx_path) as z:
         for name in z.namelist():
@@ -117,28 +133,34 @@ def _check_unfilled(pptx_path, blockers):
         blockers.append(f'{{{{{tag}}}}} is still showing on slide {slide}')
 
 
-def _check_placeholders(ctx, blockers):
+def _check_placeholders(ctx, warnings):
     """Stand-in values look exactly like real ones, which is the danger.
 
     A job may fill a field with something plausible so the page can be
     reviewed before the real value arrives. Every such field must be named
-    in the job's `placeholders` list, and every one of them blocks. A page
-    that reads correctly is not the same as a page that is correct.
+    in the job's `placeholders` list. A page that reads correctly is not
+    the same as a page that is correct.
+
+    These warn rather than block. A proposal goes out while a بلدي number
+    is still being chased, the screen calls these تقديري and asks before it
+    prints one, and this has to let out what that lets out.
     """
     if not ctx.job.get('map') and 'map' not in ctx.placeholders:
-        blockers.append('slide 4 is using the stand-in site map. Add '
+        warnings.append('slide 4 is using the stand-in site map. Add '
                         '"map": "<file>" to the job, or list "map" under '
                         '"placeholders" to say you know.')
     for name in ctx.placeholders:
         shown = ctx.job.get(name) if name in ctx.job else ctx.field(name)
         if name == 'map':
             shown = ctx.job.get('map') or 'map-placeholder.png'
-        blockers.append(f'{name} holds a placeholder: {shown!r}. '
+        warnings.append(f'{name} holds a placeholder: {shown!r}. '
                         f'Replace it and take it out of the job\'s '
                         f'"placeholders" list.')
 
 
-def _check_payments(ctx, blockers):
+def _check_payments(ctx, blockers, warnings):
+    """A split that is not a number is a broken file. A split that misses
+    100 is a decision, so it reads the same way it does on the screen."""
     total, parts = 0.0, []
     for key in ('p1', 'p2', 'p3', 'p4'):
         raw = str(ctx.field(key)).strip().rstrip('%')
@@ -153,7 +175,7 @@ def _check_payments(ctx, blockers):
         parts.append(v)
         total += v
     if abs(total - 100.0) > 0.01:
-        blockers.append('payments total {:.0f}% ({}), they must total 100%'
+        warnings.append('payments total {:.0f}% ({}), they should total 100%'
                         .format(total, ' + '.join(f'{p:.0f}' for p in parts)))
 
 
@@ -198,7 +220,7 @@ def _check_money(ctx, blockers, warnings):
     expected = numwords.spell(amount)
     written = str(ctx.field('costwritten')).strip()
     if not written.startswith('{{') and written != expected:
-        blockers.append(f'the written price does not match the figure.\n'
+        warnings.append(f'the written price does not match the figure.\n'
                         f'       figure says: {amount:,.0f}\n'
                         f'       words say:   {written}\n'
                         f'       should be:   {expected}')
@@ -249,7 +271,7 @@ SCOPE_MARKERS = {
 }
 
 
-def _check_scope(ctx, blockers, warnings):
+def _check_scope(ctx, warnings):
     """Does the scope text agree with what is being sold?
 
     The scope pages are boilerplate that a human edits. Slide 8 is a list
@@ -258,9 +280,11 @@ def _check_scope(ctx, blockers, warnings):
     الإشراف on a job where supervision is marked N/A is a contract saying
     two different things. The client will read the one that favours them.
 
-    This flags both directions. Promising something unsold blocks, because
-    it is the expensive mistake. Selling something the scope never mentions
-    is a warning, because the deliverables table on slide 9 may cover it.
+    This flags both directions. Promising something unsold is the
+    expensive mistake and is named as one, but the scope pages are a human
+    edit and a human settles them, so it warns rather than stops. Selling
+    something the scope never mentions warns too, because the deliverables
+    table on slide 9 may already cover it.
     """
     text = ' '.join(ln.get('t', '') for ln in ctx.c('scope')['lines'])
     for svc in ctx.services():
@@ -269,9 +293,11 @@ def _check_scope(ctx, blockers, warnings):
             continue
         mentioned = any(m in text for m in markers)
         if mentioned and not svc['included']:
-            blockers.append(
+            warnings.append(
                 f"the scope promises {svc['ar'].strip()} but slide 8 marks it "
-                f"N/A. Either sell it or take it out of the scope text.")
+                f"N/A. That is a contract saying two things, and the client "
+                f"reads the one that favours them. Either sell it or take it "
+                f"out of the scope text.")
         elif svc['included'] and not mentioned:
             warnings.append(
                 f"{svc['ar'].strip()} is sold but the scope pages never "
