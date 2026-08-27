@@ -55,12 +55,35 @@ export function ready() {
  * from an environment variable, so a preview deployment issues tokens for
  * itself and not for production. */
 export function originOf(request) {
+  /* In production the answer is a fact about the project, not a claim in a
+   * header. Every token audience, the issuer, and the link `proposal_finish`
+   * hands an employee are built from this: read it off a request and a
+   * spoofed `x-forwarded-host` would send somebody to a page of somebody
+   * else's choosing wearing this server's name. */
+  if (process.env.VERCEL_ENV === 'production' &&
+      process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return 'https://' + process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  }
   const url = new URL(request.url);
   const host = request.headers.get('x-forwarded-host') || url.host;
   const proto = request.headers.get('x-forwarded-proto') ||
                 (host.startsWith('localhost') || host.startsWith('127.') ?
                  'http' : 'https');
   return `${proto}://${host}`;
+}
+
+/* The one resource this server will mint a token for.
+ *
+ * A client names the audience it wants in `resource`, and RFC 8707 says to
+ * honour it. Honouring one that is not this server would mean signing a
+ * token for somebody else's audience, which is a favour no authorization
+ * server should do: our own verifier would refuse it, and any other server
+ * that trusted this issuer would not. */
+export function resourceFor(origin, asked) {
+  if (!asked) return mcpUrl(origin);
+  const clean = String(asked).replace(/\/+$/, '');
+  if (clean === mcpUrl(origin) || clean === origin) return mcpUrl(origin);
+  return null;
 }
 
 export const mcpUrl = origin => `${origin}/mcp`;
@@ -138,6 +161,14 @@ export async function registerClient(origin, metadata) {
   if (!Array.isArray(uris) || !uris.length) {
     throw new Error('redirect_uris is required');
   }
+  /* The client_id handed back is these URIs, signed. Unbounded in means
+   * unbounded out, and a client_id nothing can carry. */
+  if (uris.length > 10) throw new Error('too many redirect_uris');
+  for (const uri of uris) {
+    if (typeof uri !== 'string' || uri.length > 512) {
+      throw new Error('a redirect_uri is not a short string');
+    }
+  }
   for (const uri of uris) assertRedirect(uri);
   const client_id = await sign(
     { use: 'client', redirect_uris: uris,
@@ -171,18 +202,56 @@ function assertRedirect(uri) {
   throw new Error('redirect_uri must be https, loopback, or a private scheme');
 }
 
+/* A client_id is a URL this server is about to fetch, chosen by whoever is
+ * asking. That is a request forgery unless it is fenced.
+ *
+ * The fence is deliberately crude, because the only thing a real Client ID
+ * Metadata Document ever is, is a public HTTPS page on a named host: no IP
+ * literals, no private or loopback address, no `.local`, no port other than
+ * the default, no credentials in the URL, and no redirect followed (that is
+ * `redirect: 'error'` at the call). Everything a scan would want is on the
+ * other side of one of those.
+ */
+const PRIVATE_HOST = /^(localhost$|.*\.local$|.*\.internal$|.*\.localhost$)/i;
+const IP_LITERAL = /^\[|^\d{1,3}(\.\d{1,3}){3}$/;
+
+function assertFetchable(clientId) {
+  let url;
+  try { url = new URL(clientId); } catch (e) { throw new Error('bad client_id'); }
+  if (url.protocol !== 'https:') throw new Error('client_id must be https');
+  if (url.username || url.password) {
+    throw new Error('client_id must carry no credentials');
+  }
+  if (url.port && url.port !== '443') {
+    throw new Error('client_id must be on the default port');
+  }
+  if (IP_LITERAL.test(url.hostname) || PRIVATE_HOST.test(url.hostname) ||
+      url.hostname.indexOf('.') < 0) {
+    throw new Error('client_id must be a public host name');
+  }
+}
+
 /* Resolve whatever arrived in `client_id` to the redirect URIs it may use. */
 export async function clientRedirects(origin, clientId) {
   if (!clientId) throw new Error('client_id is required');
 
   if (/^https:\/\//i.test(clientId)) {
+    assertFetchable(clientId);
     const res = await fetch(clientId, {
       headers: { accept: 'application/json' },
       redirect: 'error',
       signal: AbortSignal.timeout(5000),
     });
     if (!res.ok) throw new Error('client_id document could not be read');
-    const doc = await res.json();
+    /* Read a bounded amount and parse it here, rather than handing an
+     * unknown host an open pipe into this function's memory. */
+    const body = await res.text();
+    if (body.length > 64 * 1024) {
+      throw new Error('client_id document is too large');
+    }
+    let doc;
+    try { doc = JSON.parse(body); }
+    catch (e) { throw new Error('client_id document is not JSON'); }
     /* The document must claim the identity it is served from, or any page
      * on any host could nominate itself as somebody else's client. */
     if (String(doc.client_id) !== clientId) {

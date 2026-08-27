@@ -193,6 +193,54 @@ try { await auth.verifier(ORIGIN).verifyAccessToken(CODE); }
 catch (e) { notAToken = e.message; }
 ok('a code cannot be spent as an access token', notAToken !== null, String(notAToken));
 
+/* ---- the two the security review found --------------------------------- */
+
+/* A wrong password used to be written back into the page as a hidden input,
+ * where it sat in the view source and in any proxy log on the way. */
+const retry = await (await post(authorize, ORIGIN + '/oauth/authorize',
+  { ...Object.fromEntries(base), password: 'a wrong password' })).text();
+ok('a wrong password is not written back into the page',
+   !retry.includes('a wrong password'),
+   retry.split('\n').filter(l => l.includes('wrong')).join(' '));
+ok('the request itself still survives the retry',
+   retry.includes(CHALLENGE) && retry.includes('name="client_id"'));
+
+/* client_id is a URL this server fetches, chosen by whoever is asking. */
+for (const bad of ['https://localhost/cimd.json',
+                   'https://127.0.0.1/cimd.json',
+                   'https://[::1]/cimd.json',
+                   'https://169.254.169.254/latest/meta-data',
+                   'https://intranet/cimd.json',
+                   'https://box.local/cimd.json',
+                   'https://user:pw@example.com/cimd.json',
+                   'https://example.com:8080/cimd.json',
+                   'http://example.com/cimd.json']) {
+  let stopped = false;
+  try { await auth.clientRedirects(ORIGIN, bad); }
+  catch (e) { stopped = true; }
+  ok('a client_id pointing at ' + bad.replace(/\/cimd.*|\/latest.*/, '') +
+     ' is refused', stopped);
+}
+
+/* This server signs for one audience and no other. */
+const elsewhere = await get(authorize, authorizeUrl({ resource: 'https://evil.test/mcp' }));
+const elseBody = await elsewhere.json();
+ok('a token for another audience is refused, not quietly retargeted',
+   elsewhere.status === 400 && elseBody.error === 'invalid_target',
+   JSON.stringify(elseBody));
+
+const noResource = await post(authorize, ORIGIN + '/oauth/authorize',
+  { ...Object.fromEntries(base), resource: '', password: 'the office password' });
+ok('naming no resource still gets a token for this server',
+   noResource.status === 303, String(noResource.status));
+
+const manyReg = await register.fetch(new Request(ORIGIN + '/oauth/register', {
+  method: 'POST', headers: { ...headers, 'content-type': 'application/json' },
+  body: JSON.stringify({ redirect_uris: Array(50).fill(REDIRECT) }),
+}));
+ok('a registration with fifty callbacks is refused', manyReg.status === 400,
+   String(manyReg.status));
+
 /* ---- the front door ----------------------------------------------------- */
 
 /* The middleware now lets four path families past the office password. This

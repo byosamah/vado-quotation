@@ -92,6 +92,29 @@ It fails closed. With no `TFP_MCP_SECRET` set there is nothing to verify a
 token against, and `/mcp` answers 503 rather than serving the office's bank
 details to whoever finds the URL.
 
+Four things there are worth knowing, because each is a way this kind of
+server is normally got wrong:
+
+**The login page carries the request forward, never the body.** It used to
+build its hidden fields from everything it had parsed, and a POST body holds
+the password, so a wrong password was written back into the page as a hidden
+input. It now copies only the eight parameters of the authorization request.
+
+**`client_id` may be a URL this server fetches.** That is what Client ID
+Metadata Documents are, and it is a request forgery unless it is fenced. The
+fence is crude on purpose: HTTPS, default port, a public host name, no IP
+literal, no credentials in the URL, no redirect followed, and at most 64 kB
+read. A real client metadata document is never anything else.
+
+**The origin is a fact, not a header.** In production it comes from the
+project, not from `x-forwarded-host`. Every token audience, the issuer, and
+the link handed to an employee are built from it, and a spoofed host would
+send somebody to a page of somebody else's choosing wearing this name.
+
+**It signs for one audience.** A client naming any other `resource` is
+refused before the password page is drawn, rather than quietly handed a
+token for here.
+
 ## Two environment variables
 
     TFP_PASSWORD     the office password, already set; the login page uses it

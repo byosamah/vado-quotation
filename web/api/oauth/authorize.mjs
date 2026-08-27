@@ -11,7 +11,7 @@
  */
 import {
   originOf, ready, clientRedirects, mintCode, samePassword, oauthError,
-  AuthNotConfigured,
+  resourceFor, AuthNotConfigured,
 } from '../_mcp/auth.mjs';
 
 const NOT_SET =
@@ -19,13 +19,24 @@ const NOT_SET =
   'Set TFP_PASSWORD and TFP_MCP_SECRET in the Vercel project settings and ' +
   'redeploy.\n';
 
+/* The parameters that must survive the password page and reach the code. */
+const CARRY = ['client_id', 'redirect_uri', 'state', 'scope', 'resource',
+               'code_challenge', 'code_challenge_method', 'response_type'];
+
 const esc = s => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;');
 
+/* Only the request is carried forward, never the whole parsed body.
+ *
+ * It used to build the hidden fields from every key it had, and a POST body
+ * holds the password. So a wrong password was written back into the page as
+ * `<input type="hidden" name="password" value="…">`: on screen, in the view
+ * source, and in any proxy log between here and the browser. */
 function page(params, { name, error }) {
-  const hidden = Object.entries(params)
-    .map(([k, v]) => `<input type="hidden" name="${esc(k)}" value="${esc(v)}">`)
+  const hidden = CARRY
+    .filter(k => params[k] != null)
+    .map(k => `<input type="hidden" name="${esc(k)}" value="${esc(params[k])}">`)
     .join('\n      ');
   return `<!doctype html>
 <html lang="ar" dir="rtl">
@@ -75,10 +86,6 @@ const html = (body, status = 200) => new Response(body, {
              'x-robots-tag': 'noindex, nofollow' },
 });
 
-/* The parameters that must survive the password page and reach the code. */
-const CARRY = ['client_id', 'redirect_uri', 'state', 'scope', 'resource',
-               'code_challenge', 'code_challenge_method', 'response_type'];
-
 async function params(request) {
   const url = new URL(request.url);
   const out = {};
@@ -123,11 +130,29 @@ export default {
       if (e instanceof AuthNotConfigured) {
         return new Response(NOT_SET, { status: 503 });
       }
-      return oauthError('invalid_client', e.message);
+      /* One sentence out, the detail to the log. `client_id` may be a URL
+       * this server just fetched, and handing its error text back would let
+       * whoever chose that URL read what happened on this side of it. */
+      console.error('[oauth] client_id rejected:', e && e.message);
+      return oauthError('invalid_client',
+        'this client_id could not be resolved to a registered client');
     }
     if (!p.redirect_uri || !client.redirects.includes(p.redirect_uri)) {
       return oauthError('invalid_request',
         'redirect_uri is not one this client registered');
+    }
+
+    /* The audience the token will carry. A client that names no resource
+     * gets one for this server, and a client that names somewhere else is
+     * refused rather than quietly given a token for here.
+     *
+     * Checked before the page is drawn, not after the password is typed.
+     * Asking somebody for the office password and then refusing the request
+     * anyway is the wrong order to find out in. */
+    const resource = resourceFor(origin, p.resource);
+    if (!resource) {
+      return oauthError('invalid_target',
+        'this authorization server only issues tokens for ' + origin + '/mcp');
     }
 
     if (request.method === 'GET') {
@@ -138,13 +163,14 @@ export default {
     }
 
     if (!samePassword(p.password)) {
+      /* A speed bump, not a lockout. There is nowhere to remember attempts
+       * (see the note in `_mcp/auth.mjs`), so the honest thing is to make
+       * each guess cost a second rather than to pretend to count them. */
+      await new Promise(r => setTimeout(r, 1000));
       return html(page(p, { name: client.name,
                             error: 'كلمة المرور غير صحيحة.' }), 401);
     }
 
-    /* The audience the token will carry. A client that names no resource
-     * gets one for this server, never one that would work anywhere. */
-    const resource = p.resource || `${origin}/mcp`;
     const code = await mintCode(origin, {
       client_id: p.client_id,
       redirect_uri: p.redirect_uri,
