@@ -72,6 +72,21 @@ narrower than Cairo. `s09_phases.adjust()` read a table twenty points short
 and parked the legend on the last two rows. `document.fonts.ready` re-runs
 `show()`; `beforeprint` re-runs every page's `adjust()`.
 
+## A silent grep means a NUL byte, not an absent match
+
+A scripted write can leave a NUL in a source file: `' other'` reached
+`editor.js` as `'\0other'`. `grep` then treats the whole file as binary and
+prints nothing and exits 1, which reads exactly like "no matches", so a
+search for code that is plainly there comes back empty. `grep -a` sees it
+and `python3` never stopped seeing it. To find the file:
+
+    for f in html/src/*.js; do tr -d '\0' < "$f" | cmp -s - "$f" || echo "$f"; done
+
+Neither `file` nor `grep -c` will tell you. `file` still calls a UTF-8
+source with a NUL in it "Unicode text", and `grep -c $'\0'` counts every
+line in the file, because the shell truncates that pattern to the empty
+string. Take the byte out; do not work around it.
+
 ## The self-check needs a port you have never used
 
 `python3 html/tests/prepare.py`, then serve `out/` on a fresh port.
@@ -80,6 +95,10 @@ into the blank build and the check reports ~115 phantom "missing {{tag}} /
 extra <value>" failures that read exactly like a regression. Do not clear
 that storage to fix it: it is someone's saved work.
 
+The check burns its own port. Its second half loads the filled job and
+commits it, so that origin now holds a job and the blank half fails there
+ever after. One run, one port, and never a port the team might have used.
+
 ## Deploying: the build is not copied for you
 
 `python3 html/build_html.py` writes `out/VADO-TFP.html` only. Copy it to
@@ -87,3 +106,12 @@ that storage to fix it: it is someone's saved work.
 Read `DEPLOY.md` before changing any Vercel setting. The root directory is
 `web`, and pointing it at the repository root publishes the office bank
 details with no password.
+
+`PYTHON=python3 tools/smoke.sh` builds and checks every job file, and is
+what `deploy.sh` gates on. Run it before committing; no document names it.
+
+The push takes longer than a two-minute foreground timeout, because every
+commit carries a fresh 1.8 MB `web/index.html`. Run it in the background.
+A timed-out push is not a failed one: `git ls-remote --heads origin main`
+answers in under a second, and `vercel inspect --logs <deployment>` names
+the commit Vercel actually cloned.
