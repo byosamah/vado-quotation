@@ -376,13 +376,40 @@ ok('an expired cookie does not',
 ok('somebody else\'s cookie does not',
    await asks('/', { cookie: 'vado_session=9999999999.notasignature' }) === 401);
 
-/* `next` decides where a browser lands after typing the office password. */
-for (const [given, want] of [['//evil.example/', '/'],
-                             ['/\\evil.example', '/'],
-                             ['https://evil.example', '/'],
+/* `next` decides where a browser lands after typing the office password, so
+ * a target that leaves this site is a phishing bounce off the real login
+ * page, on the real domain, straight after the real password was typed.
+ *
+ * The ones that matter are the ones a browser reads differently from a
+ * person. It removes tab, newline and carriage return BEFORE parsing, so a
+ * target that starts with one slash here is `//evil.example` by the time it
+ * is followed. Built from character codes rather than typed, so they
+ * survive being read, copied and edited. */
+const CH = n => String.fromCharCode(n);
+const nextCases = [
+  ['a tab that becomes a second slash', '/' + CH(9) + '/evil.example'],
+  ['a newline', '/' + CH(10) + '/evil.example'],
+  ['a carriage return', '/' + CH(13) + '/evil.example'],
+  ['a null', '/' + CH(0) + '/evil.example'],
+  ['a tab before a backslash', '/' + CH(9) + '\\evil.example'],
+  ['protocol relative', '//evil.example'],
+  ['a backslash', '/\\evil.example'],
+  ['slash backslash', '/\\/evil.example'],
+  ['three slashes', '///evil.example'],
+  ['an absolute url', 'https://evil.example'],
+  ['a script url', 'javascript:alert(1)'],
+  ['nothing at all', null],
+];
+for (const [what, given] of nextCases) {
+  const out = session.safeNext(given);
+  ok('after signing in, ' + what + ' cannot leave the site',
+     new URL(out, ORIGIN).origin === ORIGIN, JSON.stringify(out));
+}
+for (const [given, want] of [['/', '/'],
                              ['/?job=abc', '/?job=abc'],
-                             ['/index.html', '/index.html']]) {
-  ok('next ' + JSON.stringify(given) + ' lands on ' + want,
+                             ['/index.html', '/index.html'],
+                             ['/a/b?x=1&y=2', '/a/b?x=1&y=2']]) {
+  ok('and a real page still survives: ' + given,
      session.safeNext(given) === want, session.safeNext(given));
 }
 

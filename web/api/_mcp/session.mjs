@@ -80,15 +80,37 @@ export function setCookie(value) {
   return `${NAME}=${value}; Path=/; Max-Age=${TTL}; HttpOnly; Secure; SameSite=Lax`;
 }
 
-/* Where to go after signing in.
+/* Where to go after signing in. Only ever a path on this site.
  *
- * Only ever a path on this site. `//evil.example` and `/\evil.example` are
- * both read as another origin by a browser, so both are refused, and so is
- * anything that is not plainly a path. */
+ * Not decided by reading the string, because a browser does not read it the
+ * way a person does. It removes tab, newline and carriage return BEFORE it
+ * parses a URL, so a target that starts with one slash here can be
+ * `//evil.example` by the time it is followed: a protocol-relative URL to
+ * somewhere else entirely. That turns the office's own login page into a
+ * phishing bounce, on the real domain, straight after the real password was
+ * typed into it.
+ *
+ * So the answer comes from the same parser the browser uses. Resolve the
+ * target against a base that cannot be reached any other way, and keep it
+ * only if it stayed there. Whatever the parser does with whitespace, with
+ * backslashes, or with anything nobody has thought of yet, this sees what
+ * the browser will see.
+ *
+ * Rejected rather than cleaned up. Stripping the characters a parser
+ * ignores means answering a question nobody asked, and it only ever covers
+ * the characters somebody remembered to list.
+ *
+ * The path and the query come back. A host never does, and neither does a
+ * fragment. */
+const NOWHERE = 'https://next.invalid';
+const CONTROL = /[\u0000-\u001F\u007F]/;
+
 export function safeNext(next) {
-  const want = String(next || '/');
-  if (!want.startsWith('/')) return '/';
-  if (want.startsWith('//') || want.startsWith('/\\')) return '/';
-  if (want.includes('\\')) return '/';
-  return want;
+  const raw = String(next == null ? '' : next);
+  if (CONTROL.test(raw)) return '/';
+  if (!raw.startsWith('/')) return '/';
+  let url;
+  try { url = new URL(raw, NOWHERE); } catch (e) { return '/'; }
+  if (url.origin !== NOWHERE) return '/';
+  return url.pathname + url.search;
 }
