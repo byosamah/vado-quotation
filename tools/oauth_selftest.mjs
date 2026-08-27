@@ -125,8 +125,15 @@ ok('the login page refuses to be framed',
    page.headers.get('x-frame-options') === 'DENY' &&
    /frame-ancestors 'none'/.test(page.headers.get('content-security-policy') || ''),
    page.headers.get('content-security-policy'));
-ok('the login page may only post back to itself',
-   /form-action 'self'/.test(page.headers.get('content-security-policy') || ''));
+/* The redirect a correct password causes is part of what `form-action`
+ * governs, so the callback's origin has to be named or the browser refuses
+ * to send the form at all. That is what broke signing in to Claude. */
+ok('the callback the connector proved is allowed to receive the form',
+   /form-action 'self' http:\/\/127\.0\.0\.1:47821;/
+     .test(page.headers.get('content-security-policy') || ''),
+   page.headers.get('content-security-policy'));
+ok('and nothing else is',
+   !/form-action[^;]*\*/.test(page.headers.get('content-security-policy') || ''));
 ok('the login page is never cached',
    page.headers.get('cache-control') === 'no-store');
 

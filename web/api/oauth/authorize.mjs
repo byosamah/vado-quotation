@@ -86,7 +86,19 @@ function page(params, { name, error }) {
  * The policy is as small as the page: it has no scripts, no images and no
  * fonts, so everything is denied except the one inline stylesheet, and the
  * form may only post back here. */
-const html = (body, status = 200) => new Response(body, {
+/* `form-action` needs one more source than you would think, and it is the
+ * whole reason this endpoint exists. A browser enforces the directive across
+ * the redirect a submission causes, not only the address the form posts to,
+ * and a correct password here is answered with a redirect to the connector's
+ * callback on another origin. With `'self'` alone Chrome refused to send the
+ * form at all, naming this page's own URL, and signing in to Claude failed
+ * with nothing on screen to explain it. `/login` carries the same policy and
+ * never showed it, because its redirect comes back to this site.
+ *
+ * So the callback's origin is named, and only after it has been proved to
+ * belong to the client that asked for it. An injected form still cannot post
+ * anywhere but here and there. */
+const html = (body, status = 200, callback = null) => new Response(body, {
   status,
   headers: {
     'content-type': 'text/html; charset=utf-8',
@@ -95,10 +107,23 @@ const html = (body, status = 200) => new Response(body, {
     'x-frame-options': 'DENY',
     'referrer-policy': 'no-referrer',
     'content-security-policy':
-      "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; " +
+      "default-src 'none'; style-src 'unsafe-inline'; " +
+      "form-action 'self'" + (callback ? ' ' + callback : '') + '; ' +
       "frame-ancestors 'none'; base-uri 'none'",
   },
 });
+
+/* The origin the code will be handed back to, for the policy above. Only
+ * ever called with a redirect_uri the client has already proved is theirs. */
+function callbackOrigin(redirectUri) {
+  try {
+    const { origin } = new URL(redirectUri);
+    /* An installed application registers a private scheme, and `new URL`
+     * gives those an opaque origin. There is no host to name in a policy,
+     * and no browser form submission to protect either. */
+    return origin && origin !== 'null' ? origin : null;
+  } catch (e) { return null; }
+}
 
 async function params(request) {
   const url = new URL(request.url);
@@ -169,8 +194,10 @@ export default {
         'this authorization server only issues tokens for ' + origin + '/mcp');
     }
 
+    const callback = callbackOrigin(p.redirect_uri);
+
     if (request.method === 'GET' || request.method === 'HEAD') {
-      const res = html(page(p, { name: client.name }));
+      const res = html(page(p, { name: client.name }), 200, callback);
       /* A HEAD is a GET that stops at the headers. Answering 405 to one
        * meant every header on this page, the framing rules included, was
        * unreadable by anything that asks politely first. */
@@ -188,7 +215,7 @@ export default {
        * each guess cost a second rather than to pretend to count them. */
       await new Promise(r => setTimeout(r, 1000));
       return html(page(p, { name: client.name,
-                            error: 'كلمة المرور غير صحيحة.' }), 401);
+                            error: 'كلمة المرور غير صحيحة.' }), 401, callback);
     }
 
     const code = await mintCode(origin, {
