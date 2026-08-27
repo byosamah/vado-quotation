@@ -57,9 +57,28 @@ The work saves itself as you type. **احفظ نسخة** downloads the job file 
 another machine or for whoever builds the PowerPoint; **افتح ملف** resumes
 from one.
 
+A third way in is `?job=<id>`, which is what the MCP connector hands an
+employee: the deck fetches that proposal and opens on it. The parameter is
+taken out of the address bar at once, because a reload would otherwise fetch
+the saved copy again and throw away everything typed since, and whatever was
+already in the browser is stashed rather than overwritten.
+
 All fifteen pages stay in the document even though one is on screen, so
 printing gives the whole proposal with no re-render, and the screen zoom is
 forced back to 1 for the PDF.
+
+## قبل الإرسال is shared with the connector
+
+The rules the review sheet draws are `src/checks.js`, not `editor.js`, so an
+assistant filling a proposal through `mcp/` gets the same five lists and the
+same sentence before the PDF. Only two things are passed in rather than
+worked out there: which values are really on a page, read off the rendered
+spans, and which pages the content ran off, which needs the deck laid out.
+
+`tools/presend.py` is the third caller and stays separate, because it reads a
+built .pptx and can see a `{{tag}}` the PowerPoint really printed.
+`tools/check_parity.py` runs the two over every job file and fails when they
+disagree about what stops a send.
 
 ## Why it is not a screenshot of the PowerPoint
 

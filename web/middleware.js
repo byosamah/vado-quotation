@@ -43,7 +43,27 @@ const ask = () => new Response('Password required. Ask the office.\n', {
   },
 });
 
+/* The paths the MCP connector uses, which cannot carry this password.
+ *
+ * No MCP client offers a Basic Auth box, so these four families are let
+ * past the front door and prove themselves their own way: the OAuth
+ * endpoints ask for the same office password on a page of their own, and
+ * `/mcp` refuses anything without a token it issued. Both fail closed with
+ * no TFP_MCP_SECRET set, so letting them past cannot publish anything.
+ *
+ * Matched here rather than in `config.matcher`, because a negative
+ * lookahead in a matcher is easy to get subtly wrong and the cost of
+ * getting it wrong is the office IBAN with no password on it.
+ */
+function forConnector(pathname) {
+  return pathname === '/mcp' || pathname === '/api/mcp' ||
+         pathname.startsWith('/oauth/') || pathname.startsWith('/api/oauth/') ||
+         pathname.startsWith('/.well-known/oauth-');
+}
+
 export default function middleware(request) {
+  if (forConnector(new URL(request.url).pathname)) return;
+
   const expected = process.env.TFP_PASSWORD;
 
   if (!expected) {

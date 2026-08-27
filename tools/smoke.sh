@@ -42,5 +42,18 @@ for job in jobs/*.json; do
 done
 
 rm -f out/_smoke-*.pptx out/_smoke-*.pptx.manifest.json
+
+# The connector. It is generated from the deck's own files, so a change to
+# content.json or to the skill's fields.md reaches it here rather than at
+# the moment somebody's assistant asks for a field that no longer exists.
+run "build: the MCP bundles"       0 "$PY" tools/build_mcp.py
+if [ -d web/node_modules/@modelcontextprotocol ]; then
+  run "mcp: the server end to end"   0 node tools/mcp_selftest.mjs
+  run "mcp: the login and the door"  0 node tools/oauth_selftest.mjs
+  run "mcp: both checks agree"       0 "$PY" tools/check_parity.py
+else
+  echo "skip  mcp: run 'npm install' in web/ to check the connector"
+fi
+
 [ "$fail" = 0 ] && echo "all good" || echo "SOMETHING IS BROKEN"
 exit $fail

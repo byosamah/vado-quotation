@@ -16,8 +16,10 @@ PY="${PYTHON:-python3}"
 echo "==> checking the deck"
 PYTHON="$PY" tools/smoke.sh
 
+echo "==> building the MCP bundles"
+"$PY" tools/build_mcp.py
+
 echo "==> building web/index.html"
-"$PY" html/build_html.py --out web/index.html
 BYTES=$(wc -c < web/index.html)
 if [ "$BYTES" -lt 500000 ]; then
   echo "index.html is only $BYTES bytes; the fonts or images did not embed." >&2

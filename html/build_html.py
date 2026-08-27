@@ -318,8 +318,11 @@ def main():
     job = load_json(args.data) if args.data else {}
     job.pop('_doc', None)
 
+    # checks.js sits before the panel because the panel reads V.ar and
+    # V.arCount off it at load time, and after ctx.js because the check
+    # spells the fee with V.num.
     js = '\n'.join(read(SRC, n) for n in
-                   ('core.js', 'ctx.js', 'slides.js', 'editor.js'))
+                   ('core.js', 'ctx.js', 'checks.js', 'slides.js', 'editor.js'))
     css = build_fonts() + '\n' + build_alias_css() + '\n' + read(SRC, 'styles.css')
 
     labels = field_labels()

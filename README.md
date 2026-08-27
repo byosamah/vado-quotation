@@ -43,6 +43,19 @@ The only dependency is `python-pptx`.
 | `ref/` | The unpacked original and the evidence used to verify the rebuild |
 | `tools/show.sh` | Rebuild and reopen in PowerPoint, one command |
 | `tools/` | The checkers described below |
+| `mcp/` | The connector an employee points their own Claude or ChatGPT at |
+| `web/` | The deployment: the browser twin, its password, and the connector |
+
+## Three ways to fill one in
+
+The job file is the master. Every route reads and writes the same file, so a
+proposal started one way can be finished another.
+
+| Route | For |
+|---|---|
+| `build.py --data jobs/x.json` | a .pptx, on a machine with the brand fonts |
+| `html/build_html.py` | a browser, no install and no network. See `html/README.md` |
+| `https://vado-tfp.vercel.app/mcp` | an employee's own Claude or ChatGPT. See `mcp/README.md` |
 
 ## Rules that matter
 

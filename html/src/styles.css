@@ -953,6 +953,22 @@ body.menu-open #scrim { opacity: 1; }
   .chk:has(input:checked):hover { border-color: #DCC3C7; background: var(--ui-brand-tint); }
 }
 
+/* ---- a proposal opened from a link ----------------------------------- */
+
+/* One line, said once, when the deck arrives already filled from the MCP
+ * server. It is never printed: the print block below hides everything that
+ * is not a page. */
+.linknote {
+  position: fixed; inset-block-start: 12px; inset-inline: 12px;
+  z-index: 40; margin-inline: auto; max-width: 34rem;
+  padding: .6rem .9rem; border-radius: 8px;
+  background: var(--ui-card); color: var(--ui-ink);
+  border: 1px solid var(--ui-line);
+  box-shadow: 0 6px 24px rgba(0,0,0,.28);
+  font-size: .9rem; text-align: center; cursor: pointer;
+}
+.linknote.bad { border-color: #a8564c; }
+
 /* ---- someone who asked for less movement ----------------------------- */
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -981,7 +997,7 @@ body.menu-open #scrim { opacity: 1; }
    * offset inside a narrower box, and anything far enough across fell off
    * the paper. That is where the fee and the amount in words went missing
    * from page 12. */
-  #panel, #rail, #review { display: none !important; }
+  #panel, #rail, #review, .linknote { display: none !important; }
   #top { display: block; }
   /* every page prints, whichever one is on screen */
   #stage {

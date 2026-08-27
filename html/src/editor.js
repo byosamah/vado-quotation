@@ -98,18 +98,11 @@ const GROUPS = [
  * though jobs arrive with exactly those flagged. */
 const ESTIMATABLE = new Set([3, 4, 5, 6]);
 
-const AR_DIGITS = '٠١٢٣٤٥٦٧٨٩';
-const ar = n => String(n).replace(/[0-9]/g, d => AR_DIGITS[+d]);
-
-/* Arabic counts a thing four different ways: one, two, three to ten, and
- * eleven up. «٣ قيمة» is wrong in the same way «3 value» is, and this
- * screen says these numbers to somebody who reads Arabic. The caller gives
- * the whole phrase for one and for two, because the words after the noun
- * have to agree with it as well. */
-const arCount = (n, one, two, few, many) =>
-  n === 1 ? one :
-  n === 2 ? two :
-  n <= 10 ? ar(n) + ' ' + few : ar(n) + ' ' + many;
+/* Arabic digits and Arabic counting both live in `checks.js`, because the
+ * check writes the same sentences and the server has no editor to read
+ * them from. Same two functions, one file. */
+const ar = V.ar;
+const arCount = V.arCount;
 
 V.App = class {
   constructor(data) {
@@ -1885,107 +1878,24 @@ V.App = class {
   review() {
     const host = document.getElementById('review-body');
     host.textContent = '';
-    /* `notes` sit beside the estimates under the same ⚠, because they are
+    /* The rules are in `checks.js`, so the MCP server answers "is this
+     * ready to send" with the same five lists this sheet draws. Only the
+     * two things a browser knows and a server cannot are passed in: which
+     * values are really on a page, read off the rendered spans, and which
+     * pages the content ran off, which needs the deck laid out.
+     *
+     * `notes` sit beside the estimates under the same ⚠, because they are
      * the same kind of thing to look at. They are counted apart because
      * they are not values: «مراحل بلا مدة» is one row about the whole
      * programme, and counting it as «قيمة تقريبية واحدة» said something
      * that is not true. */
-    const missing = [], estimates = [], problems = [], notes = [], ok = [];
-
-    this.onAPage().forEach(name => {
-      if (String(this.ctx.field(name)).indexOf('{{') !== 0) return;
-      missing.push({ what: V.label(name).ar, where: this.pageOf[name] });
+    const found = V.checks(this.ctx, {
+      fields: this.onAPage(),
+      pageOf: this.pageOf,
+      label: V.label,
+      spill: this.adjustAll(),
     });
-
-    this.ctx.estimates.forEach(name => {
-      if (name === 'map') {
-        estimates.push({ what: 'صورة الموقع', where: this.pageOf.coordinates,
-                         detail: 'الصفحة تعرض صورة مؤقتة' });
-        return;
-      }
-      const v = String(this.ctx.field(name));
-      estimates.push({ what: V.label(name).ar, where: this.pageOf[name],
-                       detail: v.indexOf('{{') === 0 ? '' : v });
-    });
-
-    /* Read off the schedule itself, not off p1 to p4. Those are the first
-     * four shares and nothing more, so a job carrying five payments would
-     * have had its fifth checked by nobody. */
-    const pays = this.ctx.payments();
-    const totals = this.ctx.paymentTotals();
-    const noShare = pays.filter(p => p.share == null);
-    const noEvent = pays.filter(p => !p.event_ar && !p.when);
-    if (noShare.length)
-      problems.push({ what: 'دفعات بلا نسبة: ' +
-                        noShare.map(p => ar(parseInt(p.no, 10))).join('، '),
-                      detail: 'تظهر في الجدول بلا مبلغ' });
-    if (noEvent.length)
-      problems.push({ what: 'دفعات بلا حدث: ' +
-                        noEvent.map(p => ar(parseInt(p.no, 10))).join('، '),
-                      detail: 'الصف يُطبع بلا عنوان' });
-    if (!noShare.length && Math.abs(totals.raw - 100) > 0.01)
-      problems.push({ what: 'مجموع الدفعات ' + ar(Math.round(totals.raw * 10) / 10) + '٪',
-                      detail: 'يجب أن يكون ١٠٠٪' });
-
-    const fee = String(this.ctx.fields.costnumber || '');
-    if (fee && fee.indexOf('{{') < 0) {
-      const spelled = V.num.spell(fee);
-      const shown = String(this.ctx.fields.costwritten || '');
-      if (shown && shown.indexOf('{{') < 0 && shown.trim() !== spelled)
-        problems.push({ what: 'المبلغ بالحروف لا يطابق الرقم',
-                        detail: 'الرقم يقول: ' + spelled });
-    }
-
-    /* Nothing may run off the paper. Every page stretches to hold what a
-     * job puts on it and page 9 shrinks its table to fit, but there is a
-     * floor below which type stops being readable. Past that the page
-     * really is too full, and the answer is a phase fewer or a shorter
-     * paragraph, not smaller type. */
-    const spill = this.adjustAll();
-    if (spill.length)
-      problems.push({ what: 'المحتوى يتجاوز حدود ' + arCount(spill.length,
-                        'صفحة واحدة', 'صفحتين', 'صفحات', 'صفحة'),
-                      detail: 'صفحة ' + spill.map(ar).join('، ') +
-                        ' · اختصر النص أو أنقص مرحلة' });
-
-    /* A warning, not a blocker, because presend.py treats it as one. The
-     * two paths must not disagree about what stops a proposal: a job the
-     * PowerPoint would let out cannot be one this refuses to print. */
-    const noDuration = this.ctx.phases()
-      .filter(r => r.no != null && !r.duration_days).map(r => (r.code || '').trim());
-    if (noDuration.length)
-      notes.push({ what: 'مراحل بلا مدة: ' + noDuration.join('، '),
-                   detail: 'العميل يقرأها كعمل بلا تاريخ انتهاء' });
-
-    /* A scope still promising something slide 8 marks N/A is a contract
-     * that says two different things, and it gets read the other way. */
-    const sold = new Set(this.ctx.services().filter(s => s.included).map(s => s.id));
-    const scopeText = this.ctx.c('scope').lines.map(l => l.t).join(' ');
-    this.ctx.services().forEach(s => {
-      if (!sold.has(s.id) && s.ar && scopeText.indexOf(s.ar) >= 0)
-        problems.push({ what: 'نطاق العمل ما زال يعد بـ «' + s.ar + '»',
-                        detail: 'وصفحة ٨ تضعها غير مشمولة' });
-    });
-
-    if (fee && fee.indexOf('{{') < 0)
-      ok.push({ what: 'الأتعاب  ' + fee + ' ريال',
-                detail: this.ctx.fields.costwritten || '' });
-    /* Every payment read back, because a schedule the client signs is not
-     * something a total alone can vouch for. */
-    pays.forEach(p => ok.push({
-      what: 'دفعة ' + ar(parseInt(p.no, 10)) + '  ' + (p.title_ar || '—'),
-      detail: [p.pct, p.amount].filter(Boolean).join('  ·  ') }));
-    ok.push({ what: 'الخدمات  ' + ar(sold.size) + ' من ' +
-                    ar(this.ctx.services().length) });
-    ok.push({ what: 'المدة  ' + arCount(
-      Math.round(this.ctx.timelinePlan().total_days),
-      'يوم واحد', 'يومان', 'أيام', 'يوماً') });
-    const client = [this.ctx.field('name_title_ar'), this.ctx.field('firstname_ar'),
-                    this.ctx.field('lastname_ar')].join(' ');
-    if (client.indexOf('{{') < 0) ok.push({ what: 'العميل  ' + client });
-    const proj = String(this.ctx.field('project_type_ar'));
-    if (proj.indexOf('{{') < 0)
-      ok.push({ what: 'المشروع  ' + proj + ' · ' + this.ctx.field('city_ar') });
+    const { missing, estimates, problems, notes, ok } = found;
 
     const section = (title, rows, cls, mark) => {
       if (!rows.length) return;
@@ -2034,22 +1944,7 @@ V.App = class {
      * An estimate that reads correctly is indistinguishable from a real
      * value three days later, so it is still a decision. It is taken in
      * the same breath as the rest instead of in a checkbox of its own. */
-    this.pdfWarnings = [];
-    if (missing.length)
-      this.pdfWarnings.push('ناقص ' +
-        arCount(missing.length, 'قيمة واحدة', 'قيمتان', 'قيم', 'قيمة') +
-        '. تظهر فارغة في الملف.');
-    problems.forEach(p => {
-      const line = p.what + (p.detail ? '. ' + p.detail : '');
-      this.pdfWarnings.push(/[.؟]$/.test(line) ? line : line + '.');
-    });
-    notes.forEach(n => this.pdfWarnings.push(n.what + '.'));
-    if (estimates.length)
-      this.pdfWarnings.push(arCount(estimates.length,
-        'قيمة تقريبية واحدة غير مؤكدة',
-        'قيمتان تقريبيتان غير مؤكدتين',
-        'قيم تقريبية غير مؤكدة',
-        'قيمة تقريبية غير مؤكدة') + '.');
+    this.pdfWarnings = V.checkWarnings(found);
 
     const note = document.getElementById('pdf-note');
     note.style.color = '';
@@ -2366,6 +2261,60 @@ V.PAGE_CONTROLS = {
   s12_financial: 'money',
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+/* A proposal filled somewhere else, opened here.
+ *
+ * The MCP server hands an employee a link like `/?job=<id>`. The deck is
+ * the same file everyone opens and is already cached; this fetches the few
+ * kilobytes of job on top of it. `restore()` then stands aside, because a
+ * job that arrived with the file already wins over the browser's own copy.
+ */
+const BACKUP = 'vado-tfp-job-backup-v1';
+
+function linkNote(text, bad) {
+  const el = V.el('div', 'linknote' + (bad ? ' bad' : ''));
+  el.textContent = text;
+  el.title = 'اضغط للإخفاء';
+  el.addEventListener('click', () => el.remove());
+  document.body.appendChild(el);
+  if (!bad) setTimeout(() => el.remove(), 6000);
+}
+
+async function jobFromLink() {
+  const url = new URL(location.href);
+  const id = url.searchParams.get('job');
+  if (!id) return null;
+
+  /* Out of the address bar before anything else. A reload would otherwise
+   * fetch the saved copy again and throw away everything typed since. */
+  url.searchParams.delete('job');
+  history.replaceState(null, '', url.pathname + url.search + url.hash);
+
+  try {
+    const res = await fetch('api/job?id=' + encodeURIComponent(id),
+                            { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const body = await res.json();
+    if (!body.job) throw new Error('empty');
+    /* Whatever was in this browser is somebody's unsaved work. It is not
+     * the job being opened, so it is put aside rather than overwritten. */
+    try {
+      const had = localStorage.getItem(STORE);
+      if (had && had !== '{}') localStorage.setItem(BACKUP, had);
+    } catch (e) { /* a full or blocked store must not stop the file opening */ }
+    return body.job;
+  } catch (e) {
+    linkNote('تعذّر فتح العرض من الرابط (' + e.message + '). ' +
+             'الملف مفتوح على ما كان محفوظاً في هذا المتصفح.', true);
+    return null;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const fromLink = await jobFromLink();
+  if (fromLink) {
+    window.VADO.job = fromLink;
+    const ref = (fromLink.fields || {}).tfp_number;
+    linkNote('فُتح العرض' + (ref ? ' ' + ref : '') + '. راجع الصفحات ثم حمّل الـ PDF.');
+  }
   window.VADO_APP = new V.App(window.VADO);
 });

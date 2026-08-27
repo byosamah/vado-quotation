@@ -1,7 +1,8 @@
 # VADO TFP
 
 `README.md` covers the PowerPoint build, `html/README.md` the HTML twin,
-`DEPLOY.md` the hosting. This file holds only what those do not say.
+`mcp/README.md` the connector, `DEPLOY.md` the hosting. This file holds only
+what those do not say.
 
 ## html/src/styles.css is two stylesheets in one file
 
@@ -99,6 +100,36 @@ The check burns its own port. Its second half loads the filled job and
 commits it, so that origin now holds a job and the blank half fails there
 ever after. One run, one port, and never a port the team might have used.
 
+## The connector is generated, then committed
+
+`web/api/_mcp/_data.mjs`, `_engine.mjs` and `_knowledge.mjs` are written by
+`tools/build_mcp.py`. Never edit them: the next build wins. Edit the file
+each one is copied from, then rebuild.
+
+- `_engine.mjs` is `html/src/ctx.js` and `html/src/checks.js`, verbatim, in
+  a module that exports `V`. `ctx.js` needs nothing but a bare `V` object,
+  which is why this works at all. Keep it that way: a DOM reference in
+  `ctx.js` would take the connector down and the browser would not notice.
+- `_data.mjs` reads four constants **out of `editor.js`** by regular
+  expression: `DERIVED`, `OPTIONAL`, `BY_CONTROL` and `V.PAGE_FIELDS`. They
+  decide which values count as missing. Rename one and the build stops with
+  a message rather than quietly counting the wrong list.
+- Which page prints which value comes from a blank build of the PowerPoint,
+  where every unfilled value prints as its own `{{tag}}`.
+
+## Three pre-send checks, one referee
+
+`html/src/checks.js` is the rules. The browser draws them, the MCP server
+returns them. `tools/presend.py` is separate and has to be: it reads a
+built .pptx and can see a `{{tag}}` the PowerPoint really printed.
+
+`tools/check_parity.py` runs both over every job file and fails when they
+disagree. Add a rule to one, add it to the other, or the referee stops you.
+
+The browser passes two things `checks.js` cannot work out: `fields`, read
+off the rendered spans, and `spill`, which needs the deck laid out. The
+server passes the generated map and no spill.
+
 ## Deploying: the build is not copied for you
 
 `python3 html/build_html.py` writes `out/VADO-TFP.html` only. Copy it to
@@ -107,8 +138,17 @@ Read `DEPLOY.md` before changing any Vercel setting. The root directory is
 `web`, and pointing it at the repository root publishes the office bank
 details with no password.
 
-`PYTHON=python3 tools/smoke.sh` builds and checks every job file, and is
-what `deploy.sh` gates on. Run it before committing; no document names it.
+`PYTHON=python3 tools/smoke.sh` builds and checks every job file, generates
+the connector bundles, runs the MCP self-test and the parity referee, and is
+what `deploy.sh` gates on. Run it before committing.
+
+It skips the two MCP steps when `web/node_modules` is missing and says so.
+`cd web && npm install` once.
+
+`tools/mcp_live.sh <url>` is the other half and needs a deployment: Vercel's
+routing, the login page, and the whole OAuth flow. It also re-proves that
+the site is still password-protected, because the middleware now lets four
+path families past the front door.
 
 The push takes longer than a two-minute foreground timeout, because every
 commit carries a fresh 1.8 MB `web/index.html`. Run it in the background.

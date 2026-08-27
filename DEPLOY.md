@@ -21,8 +21,45 @@ be published with no password at all.
     cd web && vercel deploy --prod --yes      # the old way, still works
 
 `web/` is the whole deployment: `index.html` built by `html/build_html.py`,
-`middleware.js` guarding it, and `api/templates.js` holding the office's
-shared templates.
+`middleware.js` guarding it, `api/templates.js` holding the office's shared
+templates, and `api/mcp.mjs` plus `api/oauth/` serving the connector an
+employee points their own Claude or ChatGPT at. See `mcp/README.md`.
+
+## The connector
+
+    https://vado-tfp.vercel.app/mcp
+
+It needs one more environment variable, `TFP_MCP_SECRET`, at least 24
+characters. It signs the tokens the connector holds, so changing it logs
+every connector out at once, which is the only revocation there is.
+
+    vercel env add TFP_MCP_SECRET production
+    vercel env add TFP_MCP_SECRET preview
+
+**The MCP paths are outside the password.** `middleware.js` lets `/mcp`,
+`/oauth/*` and `/.well-known/oauth-*` past the front door, because no MCP
+client offers a Basic Auth box. They prove themselves their own way: the
+OAuth endpoints ask for the same office password on a page of their own, and
+`/mcp` refuses anything without a token it issued. Both answer 503 with no
+`TFP_MCP_SECRET` set, so letting them past cannot publish anything.
+
+That is a change to the file this whole document was written around, so it
+gets re-proved on every deployment:
+
+    TFP_PASSWORD=… tools/mcp_live.sh https://vado-tfp.vercel.app
+
+Its first check is the one from twenty minutes of a public IBAN: fetch the
+site with no credentials and grep for something secret. Then it walks the
+whole login flow the way a connector does, including the two attacks that
+matter: a code redeemed without its proof key, and a redirect the client
+never registered.
+
+`web/api/_mcp/` holds the server. Vercel does not turn a file whose path
+starts with an underscore into a route, so those modules are imported and
+never served. `_data.mjs`, `_engine.mjs` and `_knowledge.mjs` are generated
+by `tools/build_mcp.py` and committed, the way `index.html` is, because
+Vercel builds only the `web` directory and cannot reach the rest of the
+repository.
 
 ## The password
 
@@ -77,4 +114,11 @@ Also: `@vercel/blob` needs v2 or later for private stores, and passing
 
 There is no identity. One shared password means anyone who can add a
 template can delete one, and nothing records who did either. That was a
-deliberate choice, made knowing the cost.
+deliberate choice, made knowing the cost. The connector inherits it: every
+employee's token says the same thing about who they are, which is nothing,
+and any of them can read every proposal in the store.
+
+There are no refresh tokens either. OAuth 2.1 wants a public client's
+refresh token rotated, and rotation needs somewhere to remember the last
+one, which this deliberately does not have. An access token lasts thirty
+days and then the connector asks for the password again.
