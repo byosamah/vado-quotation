@@ -121,6 +121,15 @@ ok('the login page names the connector asking',
 ok('the login page carries the request forward',
    html.includes('name="code_challenge"') && html.includes(CHALLENGE));
 
+ok('the login page refuses to be framed',
+   page.headers.get('x-frame-options') === 'DENY' &&
+   /frame-ancestors 'none'/.test(page.headers.get('content-security-policy') || ''),
+   page.headers.get('content-security-policy'));
+ok('the login page may only post back to itself',
+   /form-action 'self'/.test(page.headers.get('content-security-policy') || ''));
+ok('the login page is never cached',
+   page.headers.get('cache-control') === 'no-store');
+
 const wrong = await post(authorize, ORIGIN + '/oauth/authorize',
   { ...Object.fromEntries(base), password: 'the office passwore' });
 ok('a password that is one letter out is refused', wrong.status === 401,
@@ -281,9 +290,21 @@ for (const path of ['/mcp', '/api/mcp', '/oauth/authorize', '/oauth/token',
      asks(path) === 'let through', String(asks(path)));
 }
 
+/* Everything else, including every shape of "nearly a connector path" a
+ * prefix match used to let through. */
 for (const path of ['/', '/index.html', '/api/job?id=x', '/api/templates',
                     '/.well-known/other', '/oauthsomething',
-                    '/mcp/../index.html']) {
+                    '/mcp/../index.html',
+                    '/oauth/%2e%2e/index.html',
+                    '/oauth/../index.html',
+                    '/oauth/anything-else',
+                    '/api/oauth/../templates',
+                    '/.well-known/oauth-anything',
+                    '/%6dcp',
+                    '/mcp/',
+                    '/mcp/../../index.html',
+                    '/MCP',
+                    '//mcp']) {
   ok('the password is still asked for ' + path, asks(path) === 401,
      String(asks(path)));
 }

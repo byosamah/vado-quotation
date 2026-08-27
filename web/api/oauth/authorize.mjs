@@ -79,11 +79,25 @@ function page(params, { name, error }) {
 </html>`;
 }
 
+/* A login page that can be framed is a login page somebody can put an
+ * invisible layer over. The office password would be typed into a box the
+ * person cannot see the edges of, on a page they think is something else.
+ *
+ * The policy is as small as the page: it has no scripts, no images and no
+ * fonts, so everything is denied except the one inline stylesheet, and the
+ * form may only post back here. */
 const html = (body, status = 200) => new Response(body, {
   status,
-  headers: { 'content-type': 'text/html; charset=utf-8',
-             'cache-control': 'no-store',
-             'x-robots-tag': 'noindex, nofollow' },
+  headers: {
+    'content-type': 'text/html; charset=utf-8',
+    'cache-control': 'no-store',
+    'x-robots-tag': 'noindex, nofollow',
+    'x-frame-options': 'DENY',
+    'referrer-policy': 'no-referrer',
+    'content-security-policy':
+      "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; " +
+      "frame-ancestors 'none'; base-uri 'none'",
+  },
 });
 
 async function params(request) {

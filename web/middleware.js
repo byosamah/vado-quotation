@@ -55,10 +55,39 @@ const ask = () => new Response('Password required. Ask the office.\n', {
  * lookahead in a matcher is easy to get subtly wrong and the cost of
  * getting it wrong is the office IBAN with no password on it.
  */
+const CONNECTOR_PATHS = new Set([
+  '/mcp',
+  '/api/mcp',
+  '/oauth/authorize',
+  '/oauth/token',
+  '/oauth/register',
+  '/api/oauth/authorize',
+  '/api/oauth/token',
+  '/api/oauth/register',
+  '/api/oauth/protected-resource',
+  '/api/oauth/authorization-server',
+  '/.well-known/oauth-protected-resource',
+  '/.well-known/oauth-protected-resource/mcp',
+  '/.well-known/oauth-authorization-server',
+  '/.well-known/oauth-authorization-server/mcp',
+]);
+
+/* Named in full, never by prefix.
+ *
+ * It used to say `pathname.startsWith('/oauth/')`, and a prefix is a hole
+ * the moment somebody hangs something else off it. `/oauth/%2e%2e/index.html`
+ * carries a `..` the URL parser does not collapse, because it is still
+ * percent-encoded, so it passed the prefix and went on to whatever the
+ * router made of it afterwards. There are fourteen connector paths and they
+ * are all known, so they are all written down.
+ *
+ * Matched raw. Decoding first could only ever widen this: `/%6dcp` decodes
+ * to `/mcp`, and a path that has to be decoded before it looks like a
+ * connector path is not one. Anything with a `%` in it wants the password.
+ */
 function forConnector(pathname) {
-  return pathname === '/mcp' || pathname === '/api/mcp' ||
-         pathname.startsWith('/oauth/') || pathname.startsWith('/api/oauth/') ||
-         pathname.startsWith('/.well-known/oauth-');
+  if (pathname.indexOf('%') >= 0) return false;
+  return CONNECTOR_PATHS.has(pathname);
 }
 
 export default function middleware(request) {
