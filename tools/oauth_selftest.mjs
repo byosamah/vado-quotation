@@ -406,6 +406,14 @@ const nextCases = [
   ['an absolute url', 'https://evil.example'],
   ['a script url', 'javascript:alert(1)'],
   ['nothing at all', null],
+  /* These begin with ONE slash and resolve to this site, and the parser
+   * then removes the dot segment and leaves a path of `//evil.example`.
+   * Checking the input and returning something else is how that got out. */
+  ['a dot segment that rebuilds two slashes', '/.//evil.example'],
+  ['a dot dot segment that does the same', '/..//evil.example'],
+  ['one buried further in', '/a/..//evil.example'],
+  ['several of them', '/./././/evil.example'],
+  ['and one with a path after it', '/..//evil.example/steal'],
 ];
 for (const [what, given] of nextCases) {
   const out = session.safeNext(given);

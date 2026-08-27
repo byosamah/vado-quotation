@@ -109,8 +109,27 @@ export function safeNext(next) {
   const raw = String(next == null ? '' : next);
   if (CONTROL.test(raw)) return '/';
   if (!raw.startsWith('/')) return '/';
+
   let url;
   try { url = new URL(raw, NOWHERE); } catch (e) { return '/'; }
   if (url.origin !== NOWHERE) return '/';
-  return url.pathname + url.search;
+
+  /* Check what is handed back, not what came in.
+   *
+   * Checking the input and then returning something else was the first
+   * version's mistake, and it was worth an open redirect on its own:
+   * `/.//evil.example` begins with one slash and resolves to this base, but
+   * the parser removes the `.` segment, so the PATH it produces is
+   * `//evil.example`. Put that in a Location header and a browser reads it
+   * as protocol-relative and leaves for another site. `/..//evil.example`
+   * and `/a/..//evil.example` do the same.
+   *
+   * So the answer is resolved a second time, exactly as written, and kept
+   * only if it still goes nowhere. The string the browser is given is the
+   * string that has to be safe. */
+  const out = url.pathname + url.search;
+  try {
+    if (new URL(out, NOWHERE).origin !== NOWHERE) return '/';
+  } catch (e) { return '/'; }
+  return out;
 }
