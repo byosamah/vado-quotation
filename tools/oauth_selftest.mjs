@@ -241,6 +241,18 @@ const manyReg = await register.fetch(new Request(ORIGIN + '/oauth/register', {
 ok('a registration with fifty callbacks is refused', manyReg.status === 400,
    String(manyReg.status));
 
+/* A name is not an address. Refusing IP literals in the URL leaves the
+ * ordinary-looking name that resolves to somewhere private. */
+for (const bad of ['https://localtest.me/cimd.json',        /* resolves to 127.0.0.1 */
+                   'https://no-such-host.invalid/cimd.json']) {
+  let stopped = null;
+  try { await auth.clientRedirects(ORIGIN, bad); }
+  catch (e) { stopped = e.message; }
+  ok('a name resolving badly is refused: ' + bad.split('/')[2],
+     stopped !== null && /private address|does not resolve/.test(stopped),
+     String(stopped));
+}
+
 /* ---- the front door ----------------------------------------------------- */
 
 /* The middleware now lets four path families past the office password. This

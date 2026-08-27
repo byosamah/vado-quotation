@@ -215,6 +215,59 @@ function assertRedirect(uri) {
 const PRIVATE_HOST = /^(localhost$|.*\.local$|.*\.internal$|.*\.localhost$)/i;
 const IP_LITERAL = /^\[|^\d{1,3}(\.\d{1,3}){3}$/;
 
+/* Every address a request must never be sent to.
+ *
+ * Refusing IP literals in the URL is not enough on its own: nothing stops
+ * somebody registering a perfectly ordinary name that resolves to 127.0.0.1
+ * or to a cloud metadata address. So the name is resolved first and every
+ * address it answers with is checked.
+ *
+ * This narrows the window rather than closing it: the name could resolve
+ * again, differently, between this check and the fetch. Doing better needs
+ * a fetch that can be pinned to an address, which the platform does not
+ * offer. What is left is a race an attacker has to win, against a fence
+ * they have to get past first.
+ */
+function isPrivateAddress(address, family) {
+  if (family === 6) {
+    const v6 = address.toLowerCase();
+    if (v6 === '::' || v6 === '::1') return true;
+    if (/^(fc|fd)/.test(v6)) return true;              /* unique local */
+    if (/^fe[89ab]/.test(v6)) return true;             /* link local */
+    const mapped = v6.match(/^::ffff:(\d+\.\d+\.\d+\.\d+)$/);
+    if (mapped) return isPrivateAddress(mapped[1], 4);
+    return false;
+  }
+  const p = address.split('.').map(Number);
+  if (p.length !== 4 || p.some(n => !Number.isInteger(n) || n < 0 || n > 255)) {
+    return true;                                       /* unparsable is private */
+  }
+  const [a, b] = p;
+  return a === 0 || a === 10 || a === 127 ||
+         (a === 169 && b === 254) ||                    /* link local, metadata */
+         (a === 172 && b >= 16 && b <= 31) ||
+         (a === 192 && b === 168) ||
+         (a === 100 && b >= 64 && b <= 127) ||          /* carrier grade NAT */
+         (a === 192 && b === 0) ||
+         a >= 224;                                      /* multicast, reserved */
+}
+
+async function assertPublicHost(hostname) {
+  const { lookup } = await import('node:dns/promises');
+  let addresses;
+  try {
+    addresses = await lookup(hostname, { all: true });
+  } catch (e) {
+    throw new Error('client_id host does not resolve');
+  }
+  if (!addresses.length) throw new Error('client_id host does not resolve');
+  for (const { address, family } of addresses) {
+    if (isPrivateAddress(address, family)) {
+      throw new Error('client_id host resolves to a private address');
+    }
+  }
+}
+
 function assertFetchable(clientId) {
   let url;
   try { url = new URL(clientId); } catch (e) { throw new Error('bad client_id'); }
@@ -237,6 +290,7 @@ export async function clientRedirects(origin, clientId) {
 
   if (/^https:\/\//i.test(clientId)) {
     assertFetchable(clientId);
+    await assertPublicHost(new URL(clientId).hostname);
     const res = await fetch(clientId, {
       headers: { accept: 'application/json' },
       redirect: 'error',

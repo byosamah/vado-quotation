@@ -106,6 +106,14 @@ fence is crude on purpose: HTTPS, default port, a public host name, no IP
 literal, no credentials in the URL, no redirect followed, and at most 64 kB
 read. A real client metadata document is never anything else.
 
+Then the name is resolved and every address it answers with is checked,
+because nothing stops somebody registering an ordinary name that points at
+127.0.0.1 or at a cloud metadata address. That narrows the window rather
+than closing it: the name could resolve differently between the check and
+the fetch. Closing it needs a fetch pinned to an address, which the platform
+does not offer. What is left is a race an attacker has to win, after getting
+past the fence.
+
 **The origin is a fact, not a header.** In production it comes from the
 project, not from `x-forwarded-host`. Every token audience, the issuer, and
 the link handed to an employee are built from it, and a spoofed host would
