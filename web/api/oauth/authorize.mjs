@@ -169,8 +169,14 @@ export default {
         'this authorization server only issues tokens for ' + origin + '/mcp');
     }
 
-    if (request.method === 'GET') {
-      return html(page(p, { name: client.name }));
+    if (request.method === 'GET' || request.method === 'HEAD') {
+      const res = html(page(p, { name: client.name }));
+      /* A HEAD is a GET that stops at the headers. Answering 405 to one
+       * meant every header on this page, the framing rules included, was
+       * unreadable by anything that asks politely first. */
+      return request.method === 'HEAD'
+        ? new Response(null, { status: res.status, headers: res.headers })
+        : res;
     }
     if (request.method !== 'POST') {
       return oauthError('invalid_request', 'GET or POST', 405);

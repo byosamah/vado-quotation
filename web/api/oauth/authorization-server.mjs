@@ -8,8 +8,8 @@ import { originOf, authorizationServerMetadata, json } from '../_mcp/auth.mjs';
 export default {
   async fetch(request) {
     if (request.method === 'OPTIONS') return json({}, 204);
-    if (request.method !== 'GET') {
-      return json({ error: 'method not allowed' }, 405, { allow: 'GET' });
+    if (request.method !== 'GET' && request.method !== 'HEAD') {
+      return json({ error: 'method not allowed' }, 405, { allow: 'GET, HEAD' });
     }
     return json(authorizationServerMetadata(originOf(request)));
   },

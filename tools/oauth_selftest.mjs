@@ -130,6 +130,12 @@ ok('the login page may only post back to itself',
 ok('the login page is never cached',
    page.headers.get('cache-control') === 'no-store');
 
+const head = await authorize.fetch(new Request(authorizeUrl({}),
+  { method: 'HEAD', headers }));
+ok('a HEAD reaches the same headers as a GET',
+   head.status === 200 && head.headers.get('x-frame-options') === 'DENY',
+   String(head.status));
+
 const wrong = await post(authorize, ORIGIN + '/oauth/authorize',
   { ...Object.fromEntries(base), password: 'the office passwore' });
 ok('a password that is one letter out is refused', wrong.status === 401,
