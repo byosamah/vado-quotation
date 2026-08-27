@@ -34,7 +34,11 @@ characters. It signs the tokens the connector holds, so changing it logs
 every connector out at once, which is the only revocation there is.
 
     vercel env add TFP_MCP_SECRET production
-    vercel env add TFP_MCP_SECRET preview
+
+Production only, because `TFP_PASSWORD` is production only. A preview
+deployment therefore has neither, and both the login page and `/mcp` answer
+503 there. That is the intended answer, not a gap: a preview URL is not
+somewhere the office's proposals should be reachable from.
 
 **The MCP paths are outside the password.** `middleware.js` lets `/mcp`,
 `/oauth/*` and `/.well-known/oauth-*` past the front door, because no MCP
