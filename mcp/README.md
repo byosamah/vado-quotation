@@ -120,8 +120,10 @@ token for here.
     TFP_PASSWORD     the office password, already set; the login page uses it
     TFP_MCP_SECRET   at least 24 characters, for signing tokens
 
-Set both in the Vercel project, for production and preview, then redeploy.
-A blob store must be connected too, which it already is for the templates.
+Both are set for production only, because `TFP_PASSWORD` always has been. A
+preview deployment therefore has neither and answers 503 from the login page
+and from `/mcp`, which is the intended answer rather than a gap. A blob store
+must be connected too, which it already is for the templates.
 
 ## Checking it
 
