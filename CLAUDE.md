@@ -162,7 +162,9 @@ policy and never showed it, because its redirect comes back here.
 checked the input's origin and handed back the parsed path, and the parser
 removes dot segments while it resolves: `/.//evil.example` arrives with one
 slash and leaves as `//evil.example`, which a browser reads as another site.
-Two rounds of review to get right.
+Two rounds of review to get right. Testing it needs tabs and newlines inside
+strings, and a Bash command carrying a literal one is refused. Build them
+with `String.fromCharCode`.
 
 **`z.record` with an enum key makes every key required.** A caller setting one
 phase duration was told the other eight were missing. `z.partialRecord`.
@@ -191,6 +193,10 @@ An environment variable needs a new deployment before it takes effect.
 `vercel env add NAME production --force --sensitive` overwrites in place, so
 `vercel env rm` is never needed, and it is refused by the permission
 classifier anyway. Then `vercel redeploy <url>`, which takes no `--yes`.
+
+`vercel env ls` will not confirm it. `--force` keeps the original creation
+date, so a value overwritten three times in an hour still reads `2d ago`.
+The only proof is the deployed behaviour: ask the site.
 
 **Do not poll `vercel list ... | sed -n '6p'` for Ready.** The line offset
 moves as deployments age, and the loop then runs until something kills it;
