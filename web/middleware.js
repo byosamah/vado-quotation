@@ -16,6 +16,8 @@
  *   Name: TFP_PASSWORD    Value: <whatever you choose>    All environments
  * Then redeploy. Changing it later needs a redeploy too.
  */
+import { read, valid, safeNext } from './api/_mcp/session.mjs';
+
 export const config = { matcher: '/(.*)' };
 
 /* Compare without leaking how much of the password was right. */
@@ -43,19 +45,23 @@ const ask = () => new Response('Password required. Ask the office.\n', {
   },
 });
 
-/* The paths the MCP connector uses, which cannot carry this password.
+/* The paths that are outside this password, and prove themselves elsewhere.
  *
- * No MCP client offers a Basic Auth box, so these four families are let
+ * No MCP client offers a Basic Auth box, so the connector paths are let
  * past the front door and prove themselves their own way: the OAuth
  * endpoints ask for the same office password on a page of their own, and
- * `/mcp` refuses anything without a token it issued. Both fail closed with
- * no TFP_MCP_SECRET set, so letting them past cannot publish anything.
+ * `/mcp` refuses anything without a token it issued. `/login` is the same
+ * password on a page, for the browsers that will not draw the dialog. All
+ * of them fail closed with no TFP_MCP_SECRET set, so letting them past
+ * cannot publish anything.
  *
  * Matched here rather than in `config.matcher`, because a negative
  * lookahead in a matcher is easy to get subtly wrong and the cost of
  * getting it wrong is the office IBAN with no password on it.
  */
 const CONNECTOR_PATHS = new Set([
+  '/login',
+  '/api/login',
   '/mcp',
   '/api/mcp',
   '/oauth/authorize',
@@ -90,8 +96,24 @@ function forConnector(pathname) {
   return CONNECTOR_PATHS.has(pathname);
 }
 
-export default function middleware(request) {
-  if (forConnector(new URL(request.url).pathname)) return;
+/* A browser that is opening a page is sent to one it can use. Anything else
+ * gets the header it asked for.
+ *
+ * The test is what the request says it wants back. A navigation asks for
+ * `text/html`; curl, the deck's own fetch of `/api/job` and every script
+ * ever written do not. So a person meets a password box and a program meets
+ * a 401, which is what each of them can do something with. */
+const wantsPage = request =>
+  request.method === 'GET' &&
+  (request.headers.get('accept') || '').includes('text/html');
+
+const toLogin = (request, url) => Response.redirect(
+  new URL('/login?next=' + encodeURIComponent(safeNext(url.pathname + url.search)),
+          url.origin), 303);
+
+export default async function middleware(request) {
+  const url = new URL(request.url);
+  if (forConnector(url.pathname)) return;
 
   const expected = process.env.TFP_PASSWORD;
 
@@ -102,14 +124,18 @@ export default function middleware(request) {
       { status: 503, headers: { 'Cache-Control': 'no-store' } });
   }
 
+  /* Somebody who typed the password on `/login` already. */
+  if (await valid(read(request.headers.get('cookie')))) return;
+
+  /* And beside it, the way it has always worked: curl, saved credentials,
+   * `tools/mcp_live.sh`, and any browser that does draw the dialog. */
   const header = request.headers.get('authorization') || '';
   const [scheme, encoded] = header.split(' ');
-  if (scheme !== 'Basic' || !encoded) return ask();
+  if (scheme === 'Basic' && encoded) {
+    let decoded = '';
+    try { decoded = atob(encoded); } catch (e) { decoded = ''; }
+    if (same(decoded.slice(decoded.indexOf(':') + 1), expected)) return;
+  }
 
-  let decoded;
-  try { decoded = atob(encoded); } catch (e) { return ask(); }
-  const given = decoded.slice(decoded.indexOf(':') + 1);
-
-  if (!same(given, expected)) return ask();
-  /* nothing returned: the request carries on to the file */
+  return wantsPage(request) ? toLogin(request, url) : ask();
 }

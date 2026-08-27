@@ -2,6 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "rewrites": [
+    { "source": "/login", "destination": "/api/login" },
     { "source": "/mcp", "destination": "/api/mcp" },
     { "source": "/oauth/authorize", "destination": "/api/oauth/authorize" },
     { "source": "/oauth/token", "destination": "/api/oauth/token" },

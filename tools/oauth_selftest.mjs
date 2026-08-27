@@ -279,21 +279,28 @@ for (const bad of ['https://localtest.me/cimd.json',        /* resolves to 127.0
  * is ESM in a folder Node reads as CommonJS. Vercel always treats it as ESM;
  * this reads the same bytes. */
 const { readFileSync } = await import('node:fs');
-const mwSrc = readFileSync(new URL('../web/middleware.js', import.meta.url), 'utf8');
+const sessionUrl = new URL('../web/api/_mcp/session.mjs', import.meta.url).href;
+const mwSrc = readFileSync(new URL('../web/middleware.js', import.meta.url), 'utf8')
+  /* One specifier rewritten to an absolute URL, because a data: module has
+   * no folder to resolve a relative import from. Every other byte is the
+   * file Vercel runs. */
+  .replace("'./api/_mcp/session.mjs'", JSON.stringify(sessionUrl));
 const middleware = (await import('data:text/javascript;base64,' +
   Buffer.from(mwSrc).toString('base64'))).default;
 
-const asks = path => {
-  const res = middleware(new Request(ORIGIN + path, { headers }));
+/* The middleware is async now: it may have a cookie to verify. */
+const asks = async (path, extra = {}) => {
+  const res = await middleware(new Request(ORIGIN + path,
+    { headers: { ...headers, ...extra } }));
   return res === undefined ? 'let through' : res.status;
 };
 
 for (const path of ['/mcp', '/api/mcp', '/oauth/authorize', '/oauth/token',
-                    '/api/oauth/token',
+                    '/api/oauth/token', '/login', '/api/login',
                     '/.well-known/oauth-protected-resource/mcp',
                     '/.well-known/oauth-authorization-server']) {
   ok('the connector path ' + path + ' is let past the password',
-     asks(path) === 'let through', String(asks(path)));
+     await asks(path) === 'let through', String(await asks(path)));
 }
 
 /* Everything else, including every shape of "nearly a connector path" a
@@ -311,8 +318,72 @@ for (const path of ['/', '/index.html', '/api/job?id=x', '/api/templates',
                     '/mcp/../../index.html',
                     '/MCP',
                     '//mcp']) {
-  ok('the password is still asked for ' + path, asks(path) === 401,
-     String(asks(path)));
+  ok('the password is still asked for ' + path, await asks(path) === 401,
+     String(await asks(path)));
+}
+
+/* ---- the link an assistant hands over ----------------------------------- */
+
+const login = (await import(at('login.mjs'))).default;
+const session = await import(at('_mcp/session.mjs'));
+
+/* A browser opening a page must meet somewhere to type, not a bare 401. The
+ * panel inside Claude does not draw the dialog Basic Auth asks for, and a
+ * link nobody can open is not a link. */
+ok('a browser opening the deck is sent to the password page',
+   await asks('/?job=4d64h5pv68', { accept: 'text/html' }) === 303,
+   String(await asks('/?job=4d64h5pv68', { accept: 'text/html' })));
+ok('a program still gets the header it asked for',
+   await asks('/api/job?id=x') === 401);
+
+const form = await login.fetch(new Request(ORIGIN + '/login?next=/?job=abc',
+  { headers }));
+const formHtml = await form.text();
+ok('the password page has a box and remembers where you were going',
+   form.status === 200 && formHtml.includes('name="password"') &&
+   formHtml.includes('value="/?job=abc"'));
+ok('the password page cannot be framed either',
+   form.headers.get('x-frame-options') === 'DENY');
+
+const badTry = await login.fetch(new Request(ORIGIN + '/login', {
+  method: 'POST', headers,
+  body: new URLSearchParams({ password: 'CANARY', next: '/?job=abc' }),
+}));
+const badHtml = await badTry.text();
+ok('a wrong password is refused and not written back into the page',
+   badTry.status === 401 && !badHtml.includes('CANARY'));
+
+const goodTry = await login.fetch(new Request(ORIGIN + '/login', {
+  method: 'POST', headers,
+  body: new URLSearchParams({ password: 'the office password', next: '/?job=abc' }),
+}));
+ok('the right password sends you where you were going',
+   goodTry.status === 303 && goodTry.headers.get('location') === '/?job=abc',
+   goodTry.headers.get('location'));
+
+const cookie = goodTry.headers.get('set-cookie') || '';
+ok('the cookie is not readable by a script and not sent across sites',
+   /HttpOnly/i.test(cookie) && /Secure/i.test(cookie) && /SameSite=Lax/i.test(cookie),
+   cookie.replace(/=[^;]+/, '=…'));
+
+const value = cookie.slice(cookie.indexOf('=') + 1, cookie.indexOf(';'));
+ok('the cookie opens the deck', await asks('/', { cookie: 'vado_session=' + value })
+   === 'let through');
+ok('a cookie with a bent signature does not',
+   await asks('/', { cookie: 'vado_session=' + value.slice(0, -2) + 'xy' }) === 401);
+ok('an expired cookie does not',
+   await session.valid('1000000000.' + value.split('.')[1]) === false);
+ok('somebody else\'s cookie does not',
+   await asks('/', { cookie: 'vado_session=9999999999.notasignature' }) === 401);
+
+/* `next` decides where a browser lands after typing the office password. */
+for (const [given, want] of [['//evil.example/', '/'],
+                             ['/\\evil.example', '/'],
+                             ['https://evil.example', '/'],
+                             ['/?job=abc', '/?job=abc'],
+                             ['/index.html', '/index.html']]) {
+  ok('next ' + JSON.stringify(given) + ' lands on ' + want,
+     session.safeNext(given) === want, session.safeNext(given));
 }
 
 /* ---- with nothing configured ------------------------------------------- */

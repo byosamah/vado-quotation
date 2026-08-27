@@ -51,6 +51,24 @@ code="$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' "$BASE/api/job?id=
 [ "$code" = 401 ] && ok "a saved proposal asks for the password ($code)" \
                   || bad "/api/job answered $code, not 401"
 
+# The link an assistant hands over is most often clicked inside that same
+# assistant, and the browser panel there does not draw the dialog Basic Auth
+# asks for. A person opening a page has to meet somewhere to type.
+code="$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' \
+        -H 'accept: text/html' "$BASE/?job=example")"
+[ "$code" = 303 ] && ok "a browser is sent to the password page ($code)" \
+                  || bad "opening the deck answered $code, not a redirect to /login"
+
+page="$(curl -sS --max-time 20 "$BASE/login?next=%2F%3Fjob%3Dexample")"
+printf '%s' "$page" | grep -q 'name="password"' \
+  && ok "the password page has a box to type in" \
+  || bad "no password box on /login" "$(printf '%s' "$page" | head -2)"
+
+hdr="$(curl -sS --max-time 20 -D - -o /dev/null "$BASE/login")"
+printf '%s' "$hdr" | grep -qi 'x-frame-options: *deny' \
+  && ok "the password page cannot be framed" \
+  || bad "no X-Frame-Options on /login" "$(printf '%s' "$hdr" | grep -i frame)"
+
 # ------------------------------------------------------------- discovery
 
 say "what a connector reads first"
